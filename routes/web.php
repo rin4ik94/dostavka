@@ -11,7 +11,7 @@ Route::group([
 ], function () {
     Route::get('/dashboard', 'DashboardController@index');
     Route::resource('roles', 'RoleController');
-    Route::resource('employees/group', 'awdawdEmployeegroupController', ['as' => 'employees']);
+    Route::resource('employees/group', 'EmployeegroupController', ['as' => 'employees']);
     Route::resource('employees', 'UserController');
     Route::namespace('Managers')->group(function () {
         Route::resource('managers/group', 'ManagerGroupController', ['as' => 'managers']);
