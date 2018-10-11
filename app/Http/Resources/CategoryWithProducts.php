@@ -21,7 +21,7 @@ class CategoryWithProducts extends JsonResource
                 'name' => $this->name_uz,
                 'position' => $this->position,
                 'parent_id' => $this->parent_id,
-                'manager_id' => $this->manager_id
+                'manager_id' => $this->manager_id,
                 'products'=>Product::collection($this->whenLoaded('products'))
             ];
         }
@@ -30,7 +30,7 @@ class CategoryWithProducts extends JsonResource
             'name' => $this->name_uz,
             'position' => $this->position,
             'parent_id' => $this->parent_id,
-            'manager_id' => $this->manager_id
+            'manager_id' => $this->manager_id,
             'products'=>Product::collection($this->whenLoaded('products')) 
             ];
     }

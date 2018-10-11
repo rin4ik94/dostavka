@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        return route('home')
+        return route('home');
     }
 
     public function register(Request $request)
