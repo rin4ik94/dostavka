@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Exceptions;
-
-use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+    use Exception;
+    use Request;
+    use Illuminate\Auth\AuthenticationException;
+    use Response;
+    use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -46,14 +48,26 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        //   if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
-        // return response()->json(['User have not permission for this page access.']);
-        // }
         if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
               return redirect('/admin/dashboard');
+            // return response()->json(['User have not permission for this page access.']);
         }
-
- 
     return parent::render($request, $exception);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+     {
+        if($request->expectsJson()){
+            response()->json(['message' => 'Unauthenticated.'], 401);
+        }
+        $guards = array_get($exception->guards(),0);
+        switch ($guards) {
+        case 'admin':
+            return redirect()->guest(route('admin.login'));
+            break;
+        default:
+            return redirect()->guest(route('login'));
+            break;
+        }
     }
 }

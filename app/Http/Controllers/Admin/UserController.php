@@ -12,7 +12,7 @@ use Hash;
 class UserController extends Controller
 {
     public function __construct(){
-        // $this->middleware('permission:Сотрудники');
+        $this->middleware('permission:Сотрудники');
     }
 
     public function index(Request $request)
@@ -22,18 +22,6 @@ class UserController extends Controller
         $emoloyees = Employee::with('manager','role')->paginate(10);
         return view('admin.employees.index',compact('emoloyees', 'roles','managers'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // $roles = Role::pluck('name','name')->all();
-        // return view('admin.employees.create',compact('roles'));
-    }
-    
     /**
      * Store a newly created resource in storage.
      *
@@ -57,20 +45,6 @@ class UserController extends Controller
         return redirect()->route('employees.index')
                         ->with('success','Employee created successfully');
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = Employee::find($id);
-        return view('admin.employees.show',compact('user'));
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -82,12 +56,8 @@ class UserController extends Controller
         $user = Employee::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-
-
         return view('admin.employees.edit',compact('user','roles','userRole'));
     }
-
-
     /**
      * Update the specified resource in storage.
      *
@@ -104,7 +74,6 @@ class UserController extends Controller
             // 'password' => 'same:confirm-password',
             'role_id' => 'required'
         ]);
-  
 
         $input = $request->all();
         if(!empty($input['password'])){ 
@@ -119,8 +88,6 @@ class UserController extends Controller
         return redirect()->route('employees.index')
                         ->with('success','Employee updated successfully');
     }
-
-
     /**
      * Remove the specified resource from storage.
      *

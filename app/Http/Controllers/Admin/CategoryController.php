@@ -38,15 +38,6 @@ class CategoryController extends Controller
         return view('admin.categories.index', compact('categories','managers'));
     }
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -62,16 +53,6 @@ class CategoryController extends Controller
     $category = Category::create($request->all());
     // return response($category, 200);
     return redirect()->back()->with('success', "Категория успешно добавлены!");
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

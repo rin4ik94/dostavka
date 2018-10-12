@@ -70,16 +70,7 @@ class BranchController extends Controller
       $regions = Region::all();
       $workingModes = WorkingMode::all();
       $workingTimes = WorkingTime::all();
-      return view('admin/branchs.index',compact('regions','workingModes','branches','workingTimes','managers'));
-  }
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-      //
+      return view('admin.branchs.index',compact('regions','workingModes','branches','workingTimes','managers'));
   }
   /**
    * Store a newly created resource in storage.
@@ -98,16 +89,6 @@ class BranchController extends Controller
       $branchs->workingModes()->attach($value, ['time_start' => $time_start[$key], 'time_finish' => $time_finish[$key]]);
     }
       return redirect()->back()->with('success', "Филиалов успешно добавлены!");
-  }
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-      //
   }
   /**
    * Show the form for editing the specified resource.

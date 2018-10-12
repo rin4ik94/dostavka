@@ -4,16 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
 use App\Models\ManagerCategory;
-use App\Models\Menu;
 
 class ManagerGroupController extends Controller
 {
     public function __construct(){
         $this->middleware('permission:Магазины');
-        
-        // View::share([
-        //     'managerCategories' => $managerCategories
-        // ]);
     }
     /**
      * Display a listing of the resource.
@@ -25,18 +20,6 @@ class ManagerGroupController extends Controller
         $managerCategories = ManagerCategory::where('id', '!=', 1)->paginate(10);
         return view('admin.groupmanagers.index',compact('managerCategories'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -56,31 +39,6 @@ class ManagerGroupController extends Controller
         return redirect()->route('managers.group.index')
                         ->with('success','Category created successfully');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $managerCategorie = ManagerCategory::find($id);
-        return response()->json($managerCategorie);
-        // return view('admin.groupmanagers.edit', compact('managerCategories'));
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -98,8 +56,6 @@ class ManagerGroupController extends Controller
             $manager->update($request->all());  
         return redirect()->route('managers.group.index')
                         ->with('success','Category updated successfully');
-
-
     }
 
     /**

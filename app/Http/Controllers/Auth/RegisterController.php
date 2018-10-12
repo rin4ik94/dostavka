@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Employee;
+use App\Models\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -41,6 +41,17 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('front.auth.register');
+    }
+
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -50,7 +61,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'mobile' => 'required|string|max:255|unique:users',
+            'mobile' => 'required|string|max:255|unique:clients',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -63,10 +74,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Employee::create([
-            'name' => $data['name'],
+        // dd($data);
+        return Client::create([
+            'first_name' => $data['name'],
+            'last_name' => $data['name'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
+            'jender' => '1',
+            'region_id' => '1',
+            'group_id' => '1',
+            'status' => '1',
+            'birth_date' => now()
         ]);
     }
 }

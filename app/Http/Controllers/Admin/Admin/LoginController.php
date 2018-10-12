@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Admin\Admin;
 
+use App\Models\Employee;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +28,7 @@ class AdminController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/dashboard';
+    protected $redirectTo = 'admin/dashboard';
 
     /**
      * Create a new controller instance.
@@ -34,6 +37,21 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        // $this->middleware('auth:admin');
+    }
+
+    public function showLoginForm()
+    {
+        return view('admin.auth.login');
+    }
+
+   public function username()
+    {
+        return 'mobile';
+    }
+    
+    protected function guard()
+    {
+        return Auth::guard('admin');
     }
 }

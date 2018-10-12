@@ -1,4 +1,4 @@
-@extends('layouts.admin.dashboard')
+@extends('admin.layouts.dashboard')
 @section('content')
     <div class="main-top d-flex align-items-center">
       <h1 class="main-title">Продукты</h1>
@@ -75,7 +75,7 @@
 						@endif
 					<td>
 						<div class="btn-group btn-group-sm product_action">
-							<a href="{{ route('products.edit',$product->id) }}" data-toggle="modal" data-target="#editProduct" class="btn btn-light" data="{{$product->id}}">
+							<a href="#" data-toggle="modal" data-target="#editProduct" class="btn btn-light" data="{{$product->id}}">
 								<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
 							</a>
 						</div>
