@@ -18,8 +18,8 @@
 </head>
 
 <body>
-    {{-- @desktop --}}
-    @include('front.desktop.layouts.svg')
+    {{-- @desktop --}} {{--
+    @include('front.desktop.layouts.svg') --}}
 
     <div id="desktop" class="desktop">
 

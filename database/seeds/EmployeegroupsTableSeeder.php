@@ -11,16 +11,17 @@ class EmployeegroupsTableSeeder extends Seeder
      */
     public function run()
     {
-         DB::table('employee_groups')->insert(
-      	[
-      		[
-	            'name' => "Direktor",
-	            'manager_id' => 1,
-         	],
-      		[
-	            'name' => "Direktor",
-	            'manager_id' => 2,
-         	],
-      ]);
-  	}
-  }
+        DB::table('employee_groups')->insert(
+            [
+                [
+                    'name' => "Direktor",
+                    'manager_id' => 1,
+                ],
+                [
+                    'name' => "Direktor",
+                    'manager_id' => 2,
+                ],
+            ]
+        );
+    }
+}

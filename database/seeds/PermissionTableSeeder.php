@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+
 class PermissionTableSeeder extends Seeder
 {
     /**
@@ -24,13 +25,13 @@ class PermissionTableSeeder extends Seeder
             'Клиенты',
             'Сотрудники',
             'Настройки',
-         ];
-         
-         foreach ($permissions as $permission) {
-              Permission::create([
+        ];
+
+        foreach ($permissions as $permission) {
+            Permission::create([
                 'name' => $permission,
                 'guard_name' => 'admin',
             ]);
-         }
+        }
     }
 }

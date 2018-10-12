@@ -1,9 +1,5 @@
-<?php
-Route::get('/', function () {
-    return view('welcome');
-});
+<?php 
 Auth::routes();
-Route::get('/{any?}', 'Front\HomeController@index')->where('any', '^(?!api).*$');
 
 Route::get('cp', 'Admin\Admin\LoginController@showLoginForm')->name('admin.login');
 Route::post('cp', 'Admin\Admin\LoginController@login');
@@ -30,3 +26,4 @@ Route::group([
     Route::resource('products', 'ProductController')->except(['show', 'create', 'edit']);
     Route::get('settings', 'SettingController@index')->name('settings');
 });
+Route::get('/{any?}', 'Front\HomeController@index')->where('any', '^(?!api).*$');
