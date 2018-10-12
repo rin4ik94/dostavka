@@ -1,14 +1,19 @@
 
 
 window.Vue = require('vue');
+
+
+
+
 import router from './router'
 import store from './vuex'
 import localforage from 'localforage'
+require('../../bootstrap')
 localforage.config({
     driver: localforage.LOCALSTORAGE,
     storeName: 'delivery'
 })
-require('../../bootstrap')
+
 
 Vue.filter('toCurrency', function (value) {
     if (typeof value !== "number") {

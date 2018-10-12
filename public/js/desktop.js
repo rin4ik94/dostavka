@@ -47283,11 +47283,12 @@ window.Vue = __webpack_require__(11);
 
 
 
+
+__webpack_require__(12);
 __WEBPACK_IMPORTED_MODULE_2_localforage___default.a.config({
     driver: __WEBPACK_IMPORTED_MODULE_2_localforage___default.a.LOCALSTORAGE,
     storeName: 'delivery'
 });
-__webpack_require__(12);
 
 Vue.filter('toCurrency', function (value) {
     if (typeof value !== "number") {
@@ -51230,10 +51231,22 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__layouts_Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__layouts_Dashboard__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_Home__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_Home___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__pages_Home__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_NotFound__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__pages_NotFound__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_Profile__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_Profile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__pages_Profile__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Orders__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Orders___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__pages_Orders__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Delivery__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Delivery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__pages_Delivery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Catalog__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Catalog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__pages_Catalog__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_NotFound__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__pages_NotFound__);
 // import App from '../App.vue'
 // import Public from '../layouts/Public'
+
+
+
+
 
 
 // import Settings from '../pages/settings/Settings'
@@ -51257,6 +51270,22 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
         //     guest: true,
         //     needsAuth: false
         // }
+    }, {
+        path: '/profile',
+        name: 'profile',
+        component: __WEBPACK_IMPORTED_MODULE_2__pages_Profile___default.a
+    }, {
+        path: '/orders',
+        name: 'orders',
+        component: __WEBPACK_IMPORTED_MODULE_3__pages_Orders___default.a
+    }, {
+        path: '/delivery',
+        name: 'delivery',
+        component: __WEBPACK_IMPORTED_MODULE_4__pages_Delivery___default.a
+    }, {
+        path: '/catalog',
+        name: 'catalog',
+        component: __WEBPACK_IMPORTED_MODULE_5__pages_Catalog___default.a
     }]
     // {
     //     path: '/settings',
@@ -51323,7 +51352,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 }, {
     path: '*',
     name: 'NotFound',
-    component: __WEBPACK_IMPORTED_MODULE_2__pages_NotFound___default.a
+    component: __WEBPACK_IMPORTED_MODULE_6__pages_NotFound___default.a
 }]);
 
 /***/ }),
@@ -51488,73 +51517,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "partners-intro" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("h1", { staticClass: "title intro-title" }, [
-            _vm._v("Быстрая доставка продуктов")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-4 intro-item" }, [
-              _c("div", { staticClass: "intro-item-icon" }, [
-                _c("img", {
-                  staticClass: "p-cashbacks__tutorial-img",
-                  attrs: {
-                    src:
-                      "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "intro-item-text" }, [
-                _vm._v("Выбирайте свой любимый магазин в своем регионе")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-4 intro-item" }, [
-              _c("div", { staticClass: "intro-item-icon" }, [
-                _c("img", {
-                  staticClass: "p-cashbacks__tutorial-img",
-                  attrs: {
-                    src:
-                      "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "intro-item-text" }, [
-                _vm._v("Собирайте нужные продукты в корзину и оформляйте заказ")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-4 intro-item" }, [
-              _c("div", { staticClass: "intro-item-icon" }, [
-                _c("img", {
-                  staticClass: "p-cashbacks__tutorial-img",
-                  attrs: {
-                    src:
-                      "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "intro-item-text" }, [
-                _vm._v(
-                  "Наш курьер доставит Ваш заказ по указанному адресу и времени"
-                )
-              ])
-            ])
-          ])
-        ])
-      ]),
+  return _c(
+    "div",
+    { staticClass: "content" },
+    [
+      _c("InnerHeader"),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("h1", { staticClass: "main-title" }, [
@@ -51563,249 +51530,285 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "content-inner" }, [
           _c("main", { staticClass: "main" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "main-sorter btn-group btn-group-sm btn-group-toggle"
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-outline-light active",
-                    attrs: { href: "/?partner-category=all" }
-                  },
-                  [_vm._v("Все")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-outline-light",
-                    attrs: { href: "/?partner-category=1" }
-                  },
-                  [_vm._v("Супермаркети")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-outline-light",
-                    attrs: { href: "/?partner-category=2" }
-                  },
-                  [_vm._v("Косметика")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-outline-light",
-                    attrs: { href: "/?partner-category=3" }
-                  },
-                  [_vm._v("Алкогольные магазины")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-outline-light",
-                    attrs: { href: "/?partner-category=4" }
-                  },
-                  [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "options",
-                        id: "option3",
-                        autocomplete: "off"
-                      }
-                    }),
-                    _vm._v("Бытовая техника")
-                  ]
-                )
-              ]
-            ),
+            _vm._m(0),
             _vm._v(" "),
             _c("ul", { staticClass: "partners" }, [
-              _c("li", { staticClass: "partner" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "partner-inner",
-                    attrs: { href: "/catalog.php" }
-                  },
-                  [
-                    _c("div", { staticClass: "partner-logo" }, [
-                      _c("img", { attrs: { src: "/desktop/img/ret_3.png" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "partner-info" }, [
-                      _c("div", { staticClass: "partner-name" }, [
-                        _vm._v("Перекресток")
+              _c(
+                "li",
+                { staticClass: "partner" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "partner-inner",
+                      attrs: { to: { name: "catalog" } }
+                    },
+                    [
+                      _c("div", { staticClass: "partner-logo" }, [
+                        _c("img", { attrs: { src: "/desktop/img/ret_3.png" } })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "partner-category" }, [
-                        _vm._v("Супермаркети")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "partner-adress" }, [
-                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      _c("div", { staticClass: "partner-info" }, [
+                        _c("div", { staticClass: "partner-name" }, [
+                          _vm._v("Перекресток")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-category" }, [
+                          _vm._v("Супермаркети")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-adress" }, [
+                          _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                        ])
                       ])
-                    ])
-                  ]
-                )
-              ]),
+                    ]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("li", { staticClass: "partner" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "partner-inner",
-                    attrs: { href: "/catalog.php" }
-                  },
-                  [
-                    _c("div", { staticClass: "partner-logo" }, [
-                      _c("img", { attrs: { src: "/desktop/img/ret_2.png" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "partner-info" }, [
-                      _c("div", { staticClass: "partner-name" }, [
-                        _vm._v("Пятерчка")
+              _c(
+                "li",
+                { staticClass: "partner" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "partner-inner",
+                      attrs: { to: { name: "catalog" } }
+                    },
+                    [
+                      _c("div", { staticClass: "partner-logo" }, [
+                        _c("img", { attrs: { src: "/desktop/img/ret_2.png" } })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "partner-category" }, [
-                        _vm._v("Супермаркети")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "partner-adress" }, [
-                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      _c("div", { staticClass: "partner-info" }, [
+                        _c("div", { staticClass: "partner-name" }, [
+                          _vm._v("Пятерчка")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-category" }, [
+                          _vm._v("Супермаркети")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-adress" }, [
+                          _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                        ])
                       ])
-                    ])
-                  ]
-                )
-              ]),
+                    ]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("li", { staticClass: "partner" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "partner-inner",
-                    attrs: { href: "/catalog.php" }
-                  },
-                  [
-                    _c("div", { staticClass: "partner-logo" }, [
-                      _c("img", { attrs: { src: "/desktop/img/ret_10.png" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "partner-info" }, [
-                      _c("div", { staticClass: "partner-name" }, [
-                        _vm._v("Диски")
+              _c(
+                "li",
+                { staticClass: "partner" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "partner-inner",
+                      attrs: { to: { name: "catalog" } }
+                    },
+                    [
+                      _c("div", { staticClass: "partner-logo" }, [
+                        _c("img", { attrs: { src: "/desktop/img/ret_10.png" } })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "partner-category" }, [
-                        _vm._v("Супермаркети")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "partner-adress" }, [
-                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      _c("div", { staticClass: "partner-info" }, [
+                        _c("div", { staticClass: "partner-name" }, [
+                          _vm._v("Диски")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-category" }, [
+                          _vm._v("Супермаркети")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-adress" }, [
+                          _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                        ])
                       ])
-                    ])
-                  ]
-                )
-              ]),
+                    ]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("li", { staticClass: "partner" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "partner-inner",
-                    attrs: { href: "/catalog.php" }
-                  },
-                  [
-                    _c("div", { staticClass: "partner-logo" }, [
-                      _c("img", { attrs: { src: "/desktop/img/ret_44.png" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "partner-info" }, [
-                      _c("div", { staticClass: "partner-name" }, [
-                        _vm._v("Euro Spar")
+              _c(
+                "li",
+                { staticClass: "partner" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "partner-inner",
+                      attrs: { to: { name: "catalog" } }
+                    },
+                    [
+                      _c("div", { staticClass: "partner-logo" }, [
+                        _c("img", { attrs: { src: "/desktop/img/ret_44.png" } })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "partner-category" }, [
-                        _vm._v("Супермаркети")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "partner-adress" }, [
-                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      _c("div", { staticClass: "partner-info" }, [
+                        _c("div", { staticClass: "partner-name" }, [
+                          _vm._v("Euro Spar")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-category" }, [
+                          _vm._v("Супермаркети")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-adress" }, [
+                          _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                        ])
                       ])
-                    ])
-                  ]
-                )
-              ]),
+                    ]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("li", { staticClass: "partner" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "partner-inner",
-                    attrs: { href: "/catalog.php" }
-                  },
-                  [
-                    _c("div", { staticClass: "partner-logo" }, [
-                      _c("img", { attrs: { src: "/desktop/img/ret_35.png" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "partner-info" }, [
-                      _c("div", { staticClass: "partner-name" }, [
-                        _vm._v("Ашан")
+              _c(
+                "li",
+                { staticClass: "partner" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "partner-inner",
+                      attrs: { to: { name: "catalog" } }
+                    },
+                    [
+                      _c("div", { staticClass: "partner-logo" }, [
+                        _c("img", { attrs: { src: "/desktop/img/ret_35.png" } })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "partner-category" }, [
-                        _vm._v("Супермаркети")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "partner-adress" }, [
-                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      _c("div", { staticClass: "partner-info" }, [
+                        _c("div", { staticClass: "partner-name" }, [
+                          _vm._v("Ашан")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-category" }, [
+                          _vm._v("Супермаркети")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-adress" }, [
+                          _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                        ])
                       ])
-                    ])
-                  ]
-                )
-              ]),
+                    ]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("li", { staticClass: "partner" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "partner-inner",
-                    attrs: { href: "/catalog.php" }
-                  },
-                  [
-                    _c("div", { staticClass: "partner-logo" }, [
-                      _c("img", { attrs: { src: "/desktop/img/ret_18.png" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "partner-info" }, [
-                      _c("div", { staticClass: "partner-name" }, [
-                        _vm._v("Metro")
+              _c(
+                "li",
+                { staticClass: "partner" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "partner-inner",
+                      attrs: { to: { name: "catalog" } }
+                    },
+                    [
+                      _c("div", { staticClass: "partner-logo" }, [
+                        _c("img", { attrs: { src: "/desktop/img/ret_18.png" } })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "partner-category" }, [
-                        _vm._v("Супермаркети")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "partner-adress" }, [
-                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      _c("div", { staticClass: "partner-info" }, [
+                        _c("div", { staticClass: "partner-name" }, [
+                          _vm._v("Metro")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-category" }, [
+                          _vm._v("Супермаркети")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "partner-adress" }, [
+                          _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                        ])
                       ])
-                    ])
-                  ]
-                )
-              ])
+                    ]
+                  )
+                ],
+                1
+              )
             ])
           ])
         ])
       ])
-    ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "main-sorter btn-group btn-group-sm btn-group-toggle" },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-outline-light active",
+            attrs: { href: "/?partner-category=all" }
+          },
+          [_vm._v("Все")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-outline-light",
+            attrs: { href: "/?partner-category=1" }
+          },
+          [_vm._v("Супермаркети")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-outline-light",
+            attrs: { href: "/?partner-category=2" }
+          },
+          [_vm._v("Косметика")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-outline-light",
+            attrs: { href: "/?partner-category=3" }
+          },
+          [_vm._v("Алкогольные магазины")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-outline-light",
+            attrs: { href: "/?partner-category=4" }
+          },
+          [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "options",
+                id: "option3",
+                autocomplete: "off"
+              }
+            }),
+            _vm._v("Бытовая техника")
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -54873,24 +54876,8 @@ if (inBrowser && window.Vue) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_InnerHeader__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_InnerHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_InnerHeader__);
 //
 //
 //
@@ -54975,7 +54962,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: { InnerHeader: __WEBPACK_IMPORTED_MODULE_0__components_InnerHeader___default.a }
+});
 
 /***/ }),
 /* 74 */
@@ -55032,156 +55022,198 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("header", { staticClass: "header" }, [
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "header-inner" },
+        [
+          _c("router-link", {
+            staticClass: "header-logo",
+            attrs: { to: { name: "home" }, exact: "" }
+          }),
+          _vm._v(" "),
+          _c("ul", { staticClass: "nav header-nav" }, [
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "home" }, exact: "" }
+                  },
+                  [_vm._v("Магазины")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "delivery" } }
+                  },
+                  [_vm._v("Доставка")]
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "header-controls" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "dropdown-menu dropdown-menu-right" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "dropdown-item",
+                      attrs: { to: { name: "profile" } }
+                    },
+                    [_vm._v("Мои данные")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "dropdown-item",
+                      attrs: { to: { name: "orders" } }
+                    },
+                    [_vm._v("Мои Заказы")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "dropdown-divider" }),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-item",
+                      attrs: { href: "/logout" }
+                    },
+                    [_vm._v("Выйти")]
+                  )
+                ],
+                1
+              )
+            ])
+          ])
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "header" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "header-inner" }, [
-          _c("a", { staticClass: "header-logo", attrs: { href: "/" } }),
-          _vm._v(" "),
-          _c("ul", { staticClass: "nav header-nav" }, [
-            _c("li", { staticClass: "nav-item" }, [
-              _c("a", { staticClass: "nav-link", attrs: { href: "/" } }, [
-                _vm._v("Магазины")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link", attrs: { href: "/delivery.php" } },
-                [_vm._v("Доставка")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("form", { staticClass: "input-group header-search" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "search", name: "s", placeholder: "Поиск товаров" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-green",
-                  attrs: { type: "submit" }
-                },
-                [_vm._v("Найти")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "header-controls" }, [
-            _c("div", { staticClass: "dropdown" }, [
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "btn btn-link header-lang-toggle dropdown-toggle",
-                  attrs: {
-                    type: "button",
-                    "data-toggle": "dropdown",
-                    "aria-haspopup": "true",
-                    "aria-expanded": "false"
-                  }
-                },
-                [_vm._v("Русский")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "dropdown-menu" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "dropdown-item acitve",
-                    attrs: { href: "/?lang=ru" }
-                  },
-                  [_vm._v("Русский")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { href: "/?lang=uz" }
-                  },
-                  [_vm._v("O`zbekcha")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-link header-profile-toggle",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#Regions"
-                }
-              },
-              [
-                _c("i", { staticClass: "icon" }, [_vm._v("place")]),
-                _c("span", { staticClass: "text" }, [_vm._v("Город Фергана")])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-link header-profile-toggle",
-                  attrs: {
-                    type: "button",
-                    "data-toggle": "dropdown",
-                    "aria-haspopup": "true",
-                    "aria-expanded": "false"
-                  }
-                },
-                [
-                  _c("i", { staticClass: "icon" }, [_vm._v("person")]),
-                  _c("span", { staticClass: "text" }, [_vm._v("Вход")])
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { href: "/profile.php" }
-                  },
-                  [_vm._v("Мои данные")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { href: "/orders.php" }
-                  },
-                  [_vm._v("Мои заказы")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "dropdown-divider" }),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "/logout" } },
-                  [_vm._v("Выйти")]
-                )
-              ])
-            ])
-          ])
-        ])
+    return _c("form", { staticClass: "input-group header-search" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "search", name: "s", placeholder: "Поиск товаров" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group-append" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-outline-green", attrs: { type: "submit" } },
+          [_vm._v("Найти")]
+        )
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dropdown" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-link header-lang-toggle dropdown-toggle",
+          attrs: {
+            type: "button",
+            "data-toggle": "dropdown",
+            "aria-haspopup": "true",
+            "aria-expanded": "false"
+          }
+        },
+        [_vm._v("Русский")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "dropdown-menu" }, [
+        _c(
+          "a",
+          { staticClass: "dropdown-item acitve", attrs: { href: "/?lang=ru" } },
+          [_vm._v("Русский")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "dropdown-item", attrs: { href: "/?lang=uz" } },
+          [_vm._v("O`zbekcha")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-link header-profile-toggle",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#Regions"
+        }
+      },
+      [
+        _c("i", { staticClass: "icon" }, [_vm._v("place")]),
+        _c("span", { staticClass: "text" }, [_vm._v("Город Фергана")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-link header-profile-toggle",
+        attrs: {
+          type: "button",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _c("i", { staticClass: "icon" }, [_vm._v("person")]),
+        _c("span", { staticClass: "text" }, [_vm._v("Вход")])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -55441,6 +55473,1326 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-579cb379", module.exports)
+  }
+}
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(81)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/components/InnerHeader.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-697d3895", Component.options)
+  } else {
+    hotAPI.reload("data-v-697d3895", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "partners-intro" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "title intro-title" }, [
+          _vm._v("Быстрая доставка продуктов")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-4 intro-item" }, [
+            _c("div", { staticClass: "intro-item-icon" }, [
+              _c("img", {
+                staticClass: "p-cashbacks__tutorial-img",
+                attrs: {
+                  src:
+                    "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "intro-item-text" }, [
+              _vm._v("Выбирайте свой любимый магазин в своем регионе")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4 intro-item" }, [
+            _c("div", { staticClass: "intro-item-icon" }, [
+              _c("img", {
+                staticClass: "p-cashbacks__tutorial-img",
+                attrs: {
+                  src:
+                    "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "intro-item-text" }, [
+              _vm._v("Собирайте нужные продукты в корзину и оформляйте заказ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4 intro-item" }, [
+            _c("div", { staticClass: "intro-item-icon" }, [
+              _c("img", {
+                staticClass: "p-cashbacks__tutorial-img",
+                attrs: {
+                  src:
+                    "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "intro-item-text" }, [
+              _vm._v(
+                "Наш курьер доставит Ваш заказ по указанному адресу и времени"
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-697d3895", module.exports)
+  }
+}
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(83)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/pages/Profile.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3a32673a", Component.options)
+  } else {
+    hotAPI.reload("data-v-3a32673a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "content-inner" }, [
+          _c("main", { staticClass: "main" }, [
+            _c("h1", { staticClass: "main-title" }, [_vm._v("Мои данние")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "form",
+                {
+                  staticClass: "card-body needs-validation",
+                  attrs: { novalidate: "" }
+                },
+                [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-3 col-form-label",
+                        attrs: { for: "profile_firstname" }
+                      },
+                      [_vm._v("Имя")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-9" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "profile_firstname",
+                          name: "profile_firstname",
+                          type: "text",
+                          value: "Jaloliddin",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v("Пожалуйста заполните поле")
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-3 col-form-label",
+                        attrs: { for: "profile_lastname" }
+                      },
+                      [_vm._v("Фамилия")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-9" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "profile_lastname",
+                          name: "profile_lastname",
+                          type: "text",
+                          value: "Kholmatov",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v("Пожалуйста заполните поле")
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-3 col-form-label",
+                        attrs: { for: "profile_birthday" }
+                      },
+                      [_vm._v("Дата рождения")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-9" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "profile_birthday",
+                          name: "profile_birthday",
+                          type: "date",
+                          value: "1993-09-01",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v("Пожалуйста заполните поле")
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-3",
+                        attrs: { for: "profile_gender" }
+                      },
+                      [_vm._v("Пол")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-9" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "custom-control custom-radio custom-control-inline"
+                        },
+                        [
+                          _c("input", {
+                            staticClass: "custom-control-input",
+                            attrs: {
+                              type: "radio",
+                              id: "profile_gender1",
+                              name: "profile_gender",
+                              value: "1",
+                              checked: "",
+                              required: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "profile_gender1" }
+                            },
+                            [_vm._v("Мужской")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "custom-control custom-radio custom-control-inline"
+                        },
+                        [
+                          _c("input", {
+                            staticClass: "custom-control-input",
+                            attrs: {
+                              type: "radio",
+                              id: "profile_gender2",
+                              name: "profile_gender",
+                              value: "2",
+                              required: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "profile_gender2" }
+                            },
+                            [_vm._v("Женский")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v("Пожалуйста заполните поле")
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-3 col-form-label",
+                        attrs: { for: "profile_phone" }
+                      },
+                      [_vm._v("Телефон")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-9" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "profile_phone",
+                          name: "profile_phone",
+                          type: "text",
+                          value: "+998903003363",
+                          disabled: "",
+                          required: ""
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-9 offset-3" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-green",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Редактировать")]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("aside", { staticClass: "aside" })
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3a32673a", module.exports)
+  }
+}
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(85)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/pages/Orders.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1a0b1bca", Component.options)
+  } else {
+    hotAPI.reload("data-v-1a0b1bca", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "main-title" }, [_vm._v("Мои заказы")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "content-inner" }, [
+          _c("main", { staticClass: "main" }, [
+            _c("ul", { staticClass: "orders" }, [
+              _c("li", { staticClass: "order" }, [
+                _c("div", { staticClass: "order-inner" }, [
+                  _c("div", { staticClass: "order-column order-store" }, [
+                    _c("img", { attrs: { src: "/desktop/img/makrologo.jpg" } })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "order-column order-info" }, [
+                    _c("div", [_vm._v("Номер заказа")]),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Дата и время заказа")]),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Статус заказа")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "order-column order-products" }, [
+                    _c("a", { attrs: { href: "/order.php" } }, [
+                      _c("div", [_vm._v("15")]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v("Товаров")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "order-column order-sum" }, [
+                    _c("div", { staticClass: "order-sum-number" }, [
+                      _vm._v("5 2000 сум")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "order-sum-text" }, [
+                      _vm._v("Общая сумма")
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("aside", { staticClass: "aside" })
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1a0b1bca", module.exports)
+  }
+}
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = __webpack_require__(88)
+/* template */
+var __vue_template__ = __webpack_require__(87)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/pages/Catalog.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c7722a5a", Component.options)
+  } else {
+    hotAPI.reload("data-v-c7722a5a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "main-actions" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-outline-green",
+            on: {
+              click: function($event) {
+                _vm.$router.go(-1)
+              }
+            }
+          },
+          [_vm._v("← Назад к список магазинов")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("h1", { staticClass: "main-title" }, [
+        _vm._v("Каталог продуктов магазина «Makro» в Городе Ферганы")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "content-inner" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("aside", { staticClass: "aside" }, [_c("Categories")], 1)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("main", { staticClass: "main" }, [
+      _c(
+        "div",
+        {
+          staticClass: "btn-group btn-group-sm btn-group-toggle main-sorter",
+          attrs: { "data-toggle": "buttons" }
+        },
+        [
+          _c("span", { staticClass: "main-sorter-title" }, [
+            _vm._v("Сортировать:")
+          ]),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "btn btn-outline-light active",
+              attrs: { for: "option1" }
+            },
+            [
+              _c("input", {
+                attrs: {
+                  type: "radio",
+                  name: "options",
+                  id: "option1",
+                  autocomplete: "off",
+                  checked: ""
+                }
+              }),
+              _vm._v("По популярности\n          ")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "btn btn-outline-light", attrs: { for: "option2" } },
+            [
+              _c("input", {
+                attrs: {
+                  type: "radio",
+                  name: "options",
+                  id: "option2",
+                  autocomplete: "off"
+                }
+              }),
+              _vm._v("По цене\n          ")
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("ul", { staticClass: "products" }, [
+        _c("li", { staticClass: "product selected" }, [
+          _c("div", { staticClass: "product-inner" }, [
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "/storename/products/id",
+                  "data-toggle": "modal",
+                  "data-target": "#product"
+                }
+              },
+              [
+                _c("div", { staticClass: "product-image" }, [
+                  _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "product-title" }, [
+                  _vm._v(
+                    "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "product-footer" }, [
+              _c("div", { staticClass: "counter-widget input-group" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-red",
+                      attrs: { type: "button" }
+                    },
+                    [_c("i", { staticClass: "icon" }, [_vm._v("clear")])]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", value: "1 шт", disabled: "" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-green",
+                      attrs: { type: "button" }
+                    },
+                    [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "product selected" }, [
+          _c("div", { staticClass: "product-inner" }, [
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "/storename/products/id",
+                  "data-toggle": "modal",
+                  "data-target": "#product"
+                }
+              },
+              [
+                _c("div", { staticClass: "product-image" }, [
+                  _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "product-title" }, [
+                  _vm._v(
+                    "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "product-footer" }, [
+              _c("div", { staticClass: "counter-widget input-group" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-red",
+                      attrs: { type: "button" }
+                    },
+                    [_c("i", { staticClass: "icon" }, [_vm._v("remove")])]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", value: "2 шт", disabled: "" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-green",
+                      attrs: { type: "button" }
+                    },
+                    [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "product" }, [
+          _c("div", { staticClass: "product-inner" }, [
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "/storename/products/id",
+                  "data-toggle": "modal",
+                  "data-target": "#product"
+                }
+              },
+              [
+                _c("div", { staticClass: "product-discount" }, [
+                  _vm._v("-10%")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "product-image" }, [
+                  _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "product-title" }, [
+                  _vm._v(
+                    "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "product-footer" }, [
+              _c("div", { staticClass: "product-price" }, [
+                _c("div", { staticClass: "product-price-new" }, [
+                  _vm._v("3 200 сум")
+                ]),
+                _c("div", { staticClass: "product-quantity" }, [
+                  _vm._v("за 1 кг.")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-green product-add-button",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("В корзину")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "product" }, [
+          _c("div", { staticClass: "product-inner" }, [
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "/storename/products/id",
+                  "data-toggle": "modal",
+                  "data-target": "#product"
+                }
+              },
+              [
+                _c("div", { staticClass: "product-image" }, [
+                  _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "product-title" }, [
+                  _vm._v(
+                    "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "product-footer" }, [
+              _c("div", { staticClass: "product-price" }, [
+                _c("div", { staticClass: "product-price-new" }, [
+                  _vm._v("3 200 сум")
+                ]),
+                _c("div", { staticClass: "product-quantity" }, [
+                  _vm._v("за 1 шт.")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-green product-add-button",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("В корзину")]
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("nav", [
+        _c("ul", { staticClass: "pagination" }, [
+          _c("li", { staticClass: "page-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                attrs: { href: "#", tabindex: "-1" }
+              },
+              [_vm._v("← Назад")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+              _vm._v("1")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item active" }, [
+            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+              _vm._v("2 "),
+              _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+              _vm._v("3")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+              _vm._v("Вперед →")
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c7722a5a", module.exports)
+  }
+}
+
+/***/ }),
+/* 88 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AsideCategories__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AsideCategories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_AsideCategories__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: { Categories: __WEBPACK_IMPORTED_MODULE_0__components_AsideCategories___default.a },
+  methods: {}
+});
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(90)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/components/AsideCategories.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3c0ceff4", Component.options)
+  } else {
+    hotAPI.reload("data-v-3c0ceff4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { staticClass: "categories" }, [
+      _c("ul", { staticClass: "nav" }, [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link active", attrs: { href: "/catalog.php" } },
+            [_vm._v("Все категории")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
+            [_vm._v("Фрукты, овощи")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
+            [_vm._v("Напитки")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
+            [_vm._v("Мясо")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
+            [_vm._v("Хлеб")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
+            [_vm._v("Яйцо")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
+            [_vm._v("Кофе и чай")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link selected",
+              attrs: { href: "/catalog.php" }
+            },
+            [_vm._v("Замороженные продукты")]
+          ),
+          _vm._v(" "),
+          _c("ul", { staticClass: "nav" }, [
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
+                [_vm._v("Яйцо")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link active",
+                  attrs: { href: "/catalog.php" }
+                },
+                [_vm._v("Яйцо")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
+                [_vm._v("Яйцо")]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3c0ceff4", module.exports)
+  }
+}
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(92)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/pages/Delivery.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5c45bc2a", Component.options)
+  } else {
+    hotAPI.reload("data-v-5c45bc2a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "main-title" }, [_vm._v("Доставка и оплата")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "content-inner" }, [
+          _c("main", { staticClass: "main" }),
+          _vm._v(" "),
+          _c("aside", { staticClass: "aside" })
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5c45bc2a", module.exports)
   }
 }
 

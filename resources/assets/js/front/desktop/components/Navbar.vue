@@ -1,11 +1,12 @@
 <template>
     <header class="header">
   <div class="container">
-    <div class="header-inner">
-      <a class="header-logo" href="/"></a>
+    <div class="header-inner" > 
+      <router-link class="header-logo" :to="{name: 'home'}" exact></router-link>
+
       <ul class="nav header-nav">
-        <li class="nav-item"><a class="nav-link" href="/">Магазины</a></li>
-        <li class="nav-item"><a class="nav-link" href="/delivery.php">Доставка</a></li>
+        <li class="nav-item"><router-link class="nav-link" :to="{name: 'home'}" exact>Магазины</router-link></li>
+        <li class="nav-item"><router-link class="nav-link" :to="{name: 'delivery'}">Доставка</router-link></li>
       </ul>
       <form class="input-group header-search">
         <input class="form-control" type="search" name="s" placeholder="Поиск товаров">
@@ -28,9 +29,9 @@
             <i class="icon">person</i><span class="text">Вход</span>
           </button>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="/profile.php">Мои данные</a>
-            <a class="dropdown-item" href="/orders.php">Мои заказы</a>
-            <div class="dropdown-divider"></div>
+              <router-link class="dropdown-item" :to="{name: 'profile'}">Мои данные</router-link> 
+              <router-link class="dropdown-item" :to="{name: 'orders'}">Мои Заказы</router-link> 
+              <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout">Выйти</a>
           </div>
         </div>

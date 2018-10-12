@@ -2,6 +2,10 @@
 // import Public from '../layouts/Public'
 import Dashboard from '../layouts/Dashboard'
 import Home from '../pages/Home'
+import Profile from '../pages/Profile'
+import Orders from '../pages/Orders'
+import Delivery from '../pages/Delivery'
+import Catalog from '../pages/Catalog'
 // import Settings from '../pages/settings/Settings'
 // import Orders from '../pages/orders/Orders'
 // import Cart from '../pages/carts/Cart'
@@ -24,7 +28,28 @@ export default [
             //     guest: true,
             //     needsAuth: false
             // }
-        }],
+        },
+        {
+            path: '/profile',
+            name: 'profile',
+            component: Profile
+        },
+        {
+            path: '/orders',
+            name: 'orders',
+            component: Orders
+        },
+        {
+            path: '/delivery',
+            name: 'delivery',
+            component: Delivery
+        },
+        {
+            path: '/catalog',
+            name: 'catalog',
+            component: Catalog
+        }
+        ],
         // {
         //     path: '/settings',
         //     name: 'settings',
