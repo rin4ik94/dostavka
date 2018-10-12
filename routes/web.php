@@ -3,6 +3,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+Route::get('/{any?}', 'Front\HomeController@index')->where('any', '^(?!api).*$');
 
 Route::group([
     'namespace' => 'Admin',
