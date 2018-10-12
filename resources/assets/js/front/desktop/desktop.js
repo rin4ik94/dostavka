@@ -8,7 +8,7 @@ window.Vue = require('vue');
 import router from './router'
 import store from './vuex'
 import localforage from 'localforage'
-require('../../bootstrap')
+// require('../../bootstrap')
 localforage.config({
     driver: localforage.LOCALSTORAGE,
     storeName: 'delivery'
