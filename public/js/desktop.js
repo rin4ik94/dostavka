@@ -15631,10 +15631,13 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Delivery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__pages_Delivery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Catalog__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Catalog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__pages_Catalog__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_NotFound__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__pages_NotFound__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Cart__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Cart___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__pages_Cart__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_NotFound__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__pages_NotFound__);
 // import App from '../App.vue'
 // import Public from '../layouts/Public'
+
 
 
 
@@ -15670,6 +15673,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
         path: '/orders',
         name: 'orders',
         component: __WEBPACK_IMPORTED_MODULE_3__pages_Orders___default.a
+    }, {
+        path: '/cart',
+        name: 'cart',
+        component: __WEBPACK_IMPORTED_MODULE_6__pages_Cart___default.a
     }, {
         path: '/delivery',
         name: 'delivery',
@@ -15744,7 +15751,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 }, {
     path: '*',
     name: 'NotFound',
-    component: __WEBPACK_IMPORTED_MODULE_6__pages_NotFound___default.a
+    component: __WEBPACK_IMPORTED_MODULE_7__pages_NotFound___default.a
 }]);
 
 /***/ }),
@@ -16304,7 +16311,7 @@ exports = module.exports = __webpack_require__(50)(false);
 
 
 // module
-exports.push([module.i, "\n#notfound[data-v-4655b325] {\n  padding-top: -70px;\n\n  width: 100%;\n  background: #fff;\n\n  position: relative;\n  height: 100vh;\n}\n#notfound .notfound[data-v-4655b325] {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound[data-v-4655b325] {\n  max-width: 520px;\n  width: 100%;\n  line-height: 1.4;\n  text-align: center;\n}\n.notfound .notfound-404[data-v-4655b325] {\n  position: relative;\n  height: 200px;\n  margin: 0px auto 20px;\n  z-index: -1;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 236px !important;\n  font-weight: 100 !important;\n  margin: 0px;\n  color: #211b19;\n  text-transform: uppercase;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 28px;\n  font-weight: 400 !important;\n  text-transform: uppercase;\n  color: #211b19;\n  background: #fff;\n  padding: 10px 5px;\n  margin: auto;\n  display: inline-block;\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  right: 0;\n}\n.notfound a[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  display: inline-block;\n  font-weight: 700;\n  text-decoration: none;\n  color: #fff;\n  text-transform: uppercase;\n  padding: 13px 23px;\n  background: #ff6300;\n  font-size: 18px;\n  -webkit-transition: 0.2s all;\n  transition: 0.2s all;\n}\n.notfound a[data-v-4655b325]:hover {\n  color: #ff6300;\n  background: #211b19;\n}\n@media only screen and (max-width: 767px) {\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 148px;\n}\n}\n@media only screen and (max-width: 480px) {\n.notfound .notfound-404[data-v-4655b325] {\n    height: 148px;\n    margin: 0px auto 10px;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 86px;\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n    font-size: 16px;\n}\n.notfound a[data-v-4655b325] {\n    padding: 7px 15px;\n    font-size: 14px;\n}\n}\n", ""]);
+exports.push([module.i, "\n#notfound[data-v-4655b325] {\n  padding-top: -70px;\n\n  width: 100%;\n  background: #fff;\n\n  position: relative;\n  height: 100vh;\n}\n#notfound .notfound[data-v-4655b325] {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound[data-v-4655b325] {\n  max-width: 520px;\n  width: 100%;\n  line-height: 1.4;\n  text-align: center;\n}\n.notfound .notfound-404[data-v-4655b325] {\n  position: relative;\n  height: 200px;\n  margin: 0px auto 20px;\n  z-index: -1;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 236px !important;\n  font-weight: 100 !important;\n  margin: 0px;\n  color: #211b19;\n  text-transform: uppercase;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 28px;\n  font-weight: 400 !important;\n  text-transform: uppercase;\n  color: #211b19;\n  background: #fff;\n  padding: 10px 5px;\n  margin: auto;\n  display: inline-block;\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  right: 0;\n}\n.notfound a[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  display: inline-block;\n  font-weight: 700;\n  text-decoration: none;\n  color: #fff;\n  text-transform: uppercase;\n  padding: 13px 23px;\n  background: #27ae61;\n  font-size: 18px;\n  -webkit-transition: 0.2s all;\n  transition: 0.2s all;\n}\n.notfound a[data-v-4655b325]:hover {\n  color: #27ae61;\n  background: #211b19;\n}\n@media only screen and (max-width: 767px) {\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 148px;\n}\n}\n@media only screen and (max-width: 480px) {\n.notfound .notfound-404[data-v-4655b325] {\n    height: 148px;\n    margin: 0px auto 10px;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 86px;\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n    font-size: 16px;\n}\n.notfound a[data-v-4655b325] {\n    padding: 7px 15px;\n    font-size: 14px;\n}\n}\n", ""]);
 
 // exports
 
@@ -19465,7 +19472,20 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _vm.$route.name == "catalog"
+            ? _c("form", { staticClass: "input-group header-search" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "search",
+                    name: "s",
+                    placeholder: "Поиск товаров"
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "header-controls" }, [
             _vm._m(1),
@@ -19523,19 +19543,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "input-group header-search" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "search", name: "s", placeholder: "Поиск товаров" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-group-append" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-outline-green", attrs: { type: "submit" } },
-          [_vm._v("Найти")]
-        )
-      ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-outline-green", attrs: { type: "submit" } },
+        [_vm._v("Найти")]
+      )
     ])
   },
   function() {
@@ -19678,50 +19691,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "cart-card" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-auto" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "btn btn-green", attrs: { to: { name: "cart" } } },
+              [_vm._v("Оформить заказ")]
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cart-card" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-auto" }, [
-            _c(
-              "a",
-              { staticClass: "btn btn-link", attrs: { href: "/cart.php" } },
-              [
-                _c("i", { staticClass: "icon" }, [_vm._v("shopping_cart")]),
-                _vm._v(" "),
-                _c("span", { staticClass: "text" }, [_vm._v("Корзина")]),
-                _vm._v(" "),
-                _c("span", { staticClass: "badge badge-danger" }, [_vm._v("1")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col cart-card-center" }, [
-            _c("div", { staticClass: "item" }, [
-              _vm._v("Магазин: "),
-              _c("a", { attrs: { href: "/" } }, [_vm._v("Makro")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "item" }, [_vm._v("Товаров в корзине 3")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "item" }, [_vm._v("На сумму 2 500 сум")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-auto" }, [
-            _c(
-              "a",
-              { staticClass: "btn btn-green", attrs: { href: "/cart.php" } },
-              [_vm._v("Оформить заказ")]
-            )
-          ])
-        ])
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("a", { staticClass: "btn btn-link", attrs: { href: "/cart.php" } }, [
+        _c("i", { staticClass: "icon" }, [_vm._v("shopping_cart")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "text" }, [_vm._v("Корзина")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "badge badge-danger" }, [_vm._v("1")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col cart-card-center" }, [
+      _c("div", { staticClass: "item" }, [
+        _vm._v("Магазин: "),
+        _c("a", { attrs: { href: "/" } }, [_vm._v("Makro")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item" }, [_vm._v("Товаров в корзине 3")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item" }, [_vm._v("На сумму 2 500 сум")])
     ])
   }
 ]
@@ -21613,6 +21633,541 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-a4490878", module.exports)
+  }
+}
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(96)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/pages/Cart.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-68f7b754", Component.options)
+  } else {
+    hotAPI.reload("data-v-68f7b754", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "main-actions" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-outline-green",
+              attrs: { href: "/catalog.php" }
+            },
+            [_vm._v("← Назад к магазин")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("h1", { staticClass: "main-title" }, [
+          _vm._v("Ваша корзина из магазина «Makro» в Фергане")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "content-inner" }, [
+          _c("main", { staticClass: "main" }, [
+            _c("ul", { staticClass: "cart-items" }, [
+              _c("li", { staticClass: "cart-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "cart-item-column cart-item-image",
+                    attrs: { href: "/" }
+                  },
+                  [_c("img", { attrs: { src: "/desktop/img/001.jpg" } })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "cart-item-column cart-item-desc" }, [
+                  _c("a", { attrs: { href: "/" } }, [
+                    _vm._v("Напиток молочно-кофейный Grand Cafe, 2,6%")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "cart-item-column cart-item-counter" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "counter-widget input-group input-group-sm"
+                      },
+                      [
+                        _c("div", { staticClass: "input-group-prepend" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-red",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("i", { staticClass: "icon" }, [
+                                _vm._v("clear")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", value: "1 шт", disabled: "" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group-append" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-green",
+                              attrs: { type: "button" }
+                            },
+                            [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
+                          )
+                        ])
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "cart-item-column cart-item-price" }, [
+                  _c("div", { staticClass: "cart-item-price-new" }, [
+                    _vm._v("52 000 сум")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "cart-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "cart-item-column cart-item-image",
+                    attrs: { href: "/" }
+                  },
+                  [_c("img", { attrs: { src: "/desktop/img/001.jpg" } })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "cart-item-column cart-item-desc" }, [
+                  _c("a", { attrs: { href: "/" } }, [
+                    _vm._v("Напиток молочно-кофейный Grand Cafe, 2,6%")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "cart-item-column cart-item-counter" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "counter-widget input-group input-group-sm"
+                      },
+                      [
+                        _c("div", { staticClass: "input-group-prepend" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-red",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("i", { staticClass: "icon" }, [
+                                _vm._v("clear")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", value: "1 шт", disabled: "" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group-append" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-green",
+                              attrs: { type: "button" }
+                            },
+                            [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
+                          )
+                        ])
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "cart-item-column cart-item-price" }, [
+                  _c("div", { staticClass: "cart-item-price-new" }, [
+                    _vm._v("52 000 сум")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "cart-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "cart-item-column cart-item-image",
+                    attrs: { href: "/" }
+                  },
+                  [_c("img", { attrs: { src: "/desktop/img/001.jpg" } })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "cart-item-column cart-item-desc" }, [
+                  _c("a", { attrs: { href: "/" } }, [
+                    _vm._v("Напиток молочно-кофейный Grand Cafe, 2,6%")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "cart-item-column cart-item-counter" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "counter-widget input-group input-group-sm"
+                      },
+                      [
+                        _c("div", { staticClass: "input-group-prepend" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-red",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("i", { staticClass: "icon" }, [
+                                _vm._v("clear")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", value: "1 шт", disabled: "" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group-append" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-green",
+                              attrs: { type: "button" }
+                            },
+                            [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
+                          )
+                        ])
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "cart-item-column cart-item-price" }, [
+                  _c("div", { staticClass: "cart-item-price-new" }, [
+                    _vm._v("52 000 сум")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "cart-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "cart-item-column cart-item-image",
+                    attrs: { href: "/" }
+                  },
+                  [_c("img", { attrs: { src: "/desktop/img/001.jpg" } })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "cart-item-column cart-item-desc" }, [
+                  _c("a", { attrs: { href: "/" } }, [
+                    _vm._v(
+                      "Напиток молочно-кофейн dasdasd asd asd asd asd as das dasd asd asd asdasg dasjdjkasdhjasdhajksdhasjdkdhasjkdhasdjkhый Grand Cafe, 2,6%"
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "cart-item-column cart-item-counter" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "counter-widget input-group input-group-sm"
+                      },
+                      [
+                        _c("div", { staticClass: "input-group-prepend" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-red",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("i", { staticClass: "icon" }, [
+                                _vm._v("remove")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", value: "2 шт", disabled: "" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group-append" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-green",
+                              attrs: { type: "button" }
+                            },
+                            [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v("\n              52 000 сум/шт.\n            ")
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "cart-item-column cart-item-price" }, [
+                  _c("div", { staticClass: "cart-item-price-new" }, [
+                    _vm._v("102 000 сум")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "cart-item-price-old" }, [
+                    _vm._v("102 000 сум")
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("aside", { staticClass: "aside" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("form", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("div", { staticClass: "card-title" }, [
+                    _vm._v("Оформление")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Имя" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("div", { staticClass: "input-group-prepend" }, [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "input-group-text",
+                          attrs: { id: "basic-addon1" }
+                        },
+                        [_vm._v("+998")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Телефон" }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("select", { staticClass: "custom-select" }, [
+                    _c(
+                      "option",
+                      { attrs: { value: "0", disabled: "", selected: "" } },
+                      [_vm._v("Регион")]
+                    ),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("Город Фергана")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("Город Маргилан")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("Город Киргули")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Улица" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group form-row" }, [
+                  _c("div", { staticClass: "col" }, [
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Дом" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }, [
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Корп." }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }, [
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Кв." }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "cart_payment_1",
+                          name: "cart_payment",
+                          value: "1",
+                          checked: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "cart_payment_1" }
+                        },
+                        [_vm._v("Наличными")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "cart_payment_2",
+                          name: "cart_payment",
+                          value: "2"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "cart_payment_2" }
+                        },
+                        [_vm._v("Картой")]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-block btn-green",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Заказать")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-68f7b754", module.exports)
   }
 }
 

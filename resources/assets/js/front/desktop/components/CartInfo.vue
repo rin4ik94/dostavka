@@ -15,7 +15,7 @@
         <div class="item">На сумму 2 500 сум</div>
       </div>
       <div class="col-auto">
-        <a class="btn btn-green" href="/cart.php">Оформить заказ</a>
+        <router-link class="btn btn-green" :to="{name:'cart'}">Оформить заказ</router-link>
       </div>
     </div>
   </div>

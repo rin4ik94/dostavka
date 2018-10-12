@@ -6,6 +6,7 @@ import Profile from '../pages/Profile'
 import Orders from '../pages/Orders'
 import Delivery from '../pages/Delivery'
 import Catalog from '../pages/Catalog'
+import Cart from '../pages/Cart'
 // import Settings from '../pages/settings/Settings'
 // import Orders from '../pages/orders/Orders'
 // import Cart from '../pages/carts/Cart'
@@ -38,6 +39,11 @@ export default [
             path: '/orders',
             name: 'orders',
             component: Orders
+        },
+        {
+            path: '/cart',
+            name: 'cart',
+            component: Cart
         },
         {
             path: '/delivery',
