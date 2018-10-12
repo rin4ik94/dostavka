@@ -44,13 +44,13 @@ class ProductController extends Controller
       ->when(!is_null($status) , function ($query) use($status){
         $query->whereStatus($status);
       })
-      ->when(!is_null($manager) , function ($query) use($manager){
-        $query->whereManagerManagerId($manager);
+      ->when(!is_null($manager), function ($query) use($manager){
+        $query->whereManagerId($manager);
       })
-      ->when(!is_null($withDiscount) , function ($query) use($withDiscount){
+      ->when(!is_null($withDiscount), function ($query) use($withDiscount){
         $query->whereNotNull('old_price');
       })
-      ->when(!is_null($search) , function ($query) use($search){
+      ->when(!is_null($search), function ($query) use($search){
         $query->where('name_ru', 'like',  '%' . $search .'%');
         $query->orwhere('name_uz', 'like',  '%' . $search .'%');
       })
