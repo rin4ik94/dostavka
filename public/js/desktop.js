@@ -51375,13 +51375,31 @@ module.exports = Component.exports
 
 /***/ }),
 /* 61 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Footer__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Footer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Navbar__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Navbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Navbar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_CartInfo__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_CartInfo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_CartInfo__);
 //
 //
 //
 //
 //
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: { CartInfo: __WEBPACK_IMPORTED_MODULE_2__components_CartInfo___default.a, Navbar: __WEBPACK_IMPORTED_MODULE_1__components_Navbar___default.a, Footer: __WEBPACK_IMPORTED_MODULE_0__components_Footer___default.a }
+});
 
 /***/ }),
 /* 62 */
@@ -51391,7 +51409,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("router-view")], 1)
+  return _c(
+    "div",
+    [
+      _c("Navbar"),
+      _vm._v(" "),
+      _c("router-view"),
+      _vm._v(" "),
+      _c("CartInfo"),
+      _vm._v(" "),
+      _c("Footer")
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -51410,7 +51440,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(40)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(73)
 /* template */
 var __vue_template__ = __webpack_require__(64)
 /* template functional */
@@ -51458,9 +51488,326 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    Home\n")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "partners-intro" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("h1", { staticClass: "title intro-title" }, [
+            _vm._v("Быстрая доставка продуктов")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-4 intro-item" }, [
+              _c("div", { staticClass: "intro-item-icon" }, [
+                _c("img", {
+                  staticClass: "p-cashbacks__tutorial-img",
+                  attrs: {
+                    src:
+                      "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "intro-item-text" }, [
+                _vm._v("Выбирайте свой любимый магазин в своем регионе")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-4 intro-item" }, [
+              _c("div", { staticClass: "intro-item-icon" }, [
+                _c("img", {
+                  staticClass: "p-cashbacks__tutorial-img",
+                  attrs: {
+                    src:
+                      "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "intro-item-text" }, [
+                _vm._v("Собирайте нужные продукты в корзину и оформляйте заказ")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-4 intro-item" }, [
+              _c("div", { staticClass: "intro-item-icon" }, [
+                _c("img", {
+                  staticClass: "p-cashbacks__tutorial-img",
+                  attrs: {
+                    src:
+                      "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "intro-item-text" }, [
+                _vm._v(
+                  "Наш курьер доставит Ваш заказ по указанному адресу и времени"
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "main-title" }, [
+          _vm._v("Магазины и сети в Городе Фергане")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "content-inner" }, [
+          _c("main", { staticClass: "main" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "main-sorter btn-group btn-group-sm btn-group-toggle"
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-outline-light active",
+                    attrs: { href: "/?partner-category=all" }
+                  },
+                  [_vm._v("Все")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-outline-light",
+                    attrs: { href: "/?partner-category=1" }
+                  },
+                  [_vm._v("Супермаркети")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-outline-light",
+                    attrs: { href: "/?partner-category=2" }
+                  },
+                  [_vm._v("Косметика")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-outline-light",
+                    attrs: { href: "/?partner-category=3" }
+                  },
+                  [_vm._v("Алкогольные магазины")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-outline-light",
+                    attrs: { href: "/?partner-category=4" }
+                  },
+                  [
+                    _c("input", {
+                      attrs: {
+                        type: "radio",
+                        name: "options",
+                        id: "option3",
+                        autocomplete: "off"
+                      }
+                    }),
+                    _vm._v("Бытовая техника")
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("ul", { staticClass: "partners" }, [
+              _c("li", { staticClass: "partner" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "partner-inner",
+                    attrs: { href: "/catalog.php" }
+                  },
+                  [
+                    _c("div", { staticClass: "partner-logo" }, [
+                      _c("img", { attrs: { src: "/desktop/img/ret_3.png" } })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "partner-info" }, [
+                      _c("div", { staticClass: "partner-name" }, [
+                        _vm._v("Перекресток")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-category" }, [
+                        _vm._v("Супермаркети")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-adress" }, [
+                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "partner" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "partner-inner",
+                    attrs: { href: "/catalog.php" }
+                  },
+                  [
+                    _c("div", { staticClass: "partner-logo" }, [
+                      _c("img", { attrs: { src: "/desktop/img/ret_2.png" } })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "partner-info" }, [
+                      _c("div", { staticClass: "partner-name" }, [
+                        _vm._v("Пятерчка")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-category" }, [
+                        _vm._v("Супермаркети")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-adress" }, [
+                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "partner" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "partner-inner",
+                    attrs: { href: "/catalog.php" }
+                  },
+                  [
+                    _c("div", { staticClass: "partner-logo" }, [
+                      _c("img", { attrs: { src: "/desktop/img/ret_10.png" } })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "partner-info" }, [
+                      _c("div", { staticClass: "partner-name" }, [
+                        _vm._v("Диски")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-category" }, [
+                        _vm._v("Супермаркети")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-adress" }, [
+                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "partner" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "partner-inner",
+                    attrs: { href: "/catalog.php" }
+                  },
+                  [
+                    _c("div", { staticClass: "partner-logo" }, [
+                      _c("img", { attrs: { src: "/desktop/img/ret_44.png" } })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "partner-info" }, [
+                      _c("div", { staticClass: "partner-name" }, [
+                        _vm._v("Euro Spar")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-category" }, [
+                        _vm._v("Супермаркети")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-adress" }, [
+                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "partner" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "partner-inner",
+                    attrs: { href: "/catalog.php" }
+                  },
+                  [
+                    _c("div", { staticClass: "partner-logo" }, [
+                      _c("img", { attrs: { src: "/desktop/img/ret_35.png" } })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "partner-info" }, [
+                      _c("div", { staticClass: "partner-name" }, [
+                        _vm._v("Ашан")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-category" }, [
+                        _vm._v("Супермаркети")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-adress" }, [
+                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "partner" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "partner-inner",
+                    attrs: { href: "/catalog.php" }
+                  },
+                  [
+                    _c("div", { staticClass: "partner-logo" }, [
+                      _c("img", { attrs: { src: "/desktop/img/ret_18.png" } })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "partner-info" }, [
+                      _c("div", { staticClass: "partner-name" }, [
+                        _vm._v("Metro")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-category" }, [
+                        _vm._v("Супермаркети")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "partner-adress" }, [
+                        _vm._v("Ферганская область, г.Фергана, ул.Сайлгох 16")
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54519,6 +54866,583 @@ if (inBrowser && window.Vue) {
 
 /* harmony default export */ __webpack_exports__["a"] = (VueRouter);
 
+
+/***/ }),
+/* 73 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(75)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/components/Navbar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-13625124", Component.options)
+  } else {
+    hotAPI.reload("data-v-13625124", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("header", { staticClass: "header" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "header-inner" }, [
+          _c("a", { staticClass: "header-logo", attrs: { href: "/" } }),
+          _vm._v(" "),
+          _c("ul", { staticClass: "nav header-nav" }, [
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link", attrs: { href: "/" } }, [
+                _vm._v("Магазины")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link", attrs: { href: "/delivery.php" } },
+                [_vm._v("Доставка")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("form", { staticClass: "input-group header-search" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "search", name: "s", placeholder: "Поиск товаров" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-green",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("Найти")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "header-controls" }, [
+            _c("div", { staticClass: "dropdown" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "btn btn-link header-lang-toggle dropdown-toggle",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [_vm._v("Русский")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "dropdown-menu" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item acitve",
+                    attrs: { href: "/?lang=ru" }
+                  },
+                  [_vm._v("Русский")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "/?lang=uz" }
+                  },
+                  [_vm._v("O`zbekcha")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-link header-profile-toggle",
+                attrs: {
+                  type: "button",
+                  "data-toggle": "modal",
+                  "data-target": "#Regions"
+                }
+              },
+              [
+                _c("i", { staticClass: "icon" }, [_vm._v("place")]),
+                _c("span", { staticClass: "text" }, [_vm._v("Город Фергана")])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-link header-profile-toggle",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [
+                  _c("i", { staticClass: "icon" }, [_vm._v("person")]),
+                  _c("span", { staticClass: "text" }, [_vm._v("Вход")])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "/profile.php" }
+                  },
+                  [_vm._v("Мои данные")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "/orders.php" }
+                  },
+                  [_vm._v("Мои заказы")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "dropdown-divider" }),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "/logout" } },
+                  [_vm._v("Выйти")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-13625124", module.exports)
+  }
+}
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(77)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/components/CartInfo.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-99537268", Component.options)
+  } else {
+    hotAPI.reload("data-v-99537268", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cart-card" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-auto" }, [
+            _c(
+              "a",
+              { staticClass: "btn btn-link", attrs: { href: "/cart.php" } },
+              [
+                _c("i", { staticClass: "icon" }, [_vm._v("shopping_cart")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "text" }, [_vm._v("Корзина")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-danger" }, [_vm._v("1")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col cart-card-center" }, [
+            _c("div", { staticClass: "item" }, [
+              _vm._v("Магазин: "),
+              _c("a", { attrs: { href: "/" } }, [_vm._v("Makro")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [_vm._v("Товаров в корзине 3")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [_vm._v("На сумму 2 500 сум")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-auto" }, [
+            _c(
+              "a",
+              { staticClass: "btn btn-green", attrs: { href: "/cart.php" } },
+              [_vm._v("Оформить заказ")]
+            )
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-99537268", module.exports)
+  }
+}
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(79)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/components/Footer.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-579cb379", Component.options)
+  } else {
+    hotAPI.reload("data-v-579cb379", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "footer" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-3" }, [
+            _c("h5", { staticClass: "title" }, [_vm._v("Покупателям")]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "nav footer-nav" }, [
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: "/conditions.php" }
+                  },
+                  [_vm._v("Доставка и оплата")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  { staticClass: "nav-link", attrs: { href: "/return.php" } },
+                  [_vm._v("Возврат")]
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-3" }, [
+            _c("h5", { staticClass: "title" }, [_vm._v("Магазинам")]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "nav footer-nav" }, [
+              _c("li", { staticClass: "nav-item" }, [
+                _c("a", { staticClass: "nav-link", attrs: { href: "/" } }, [
+                  _vm._v("Как начать сотрудничество")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c("a", { staticClass: "nav-link", attrs: { href: "/" } }, [
+                  _vm._v("Войти в личный кабинет")
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 text-right" }, [
+            _c("h5", { staticClass: "footer-phone" }, [
+              _c("a", { attrs: { href: "/" } }, [_vm._v("+998 (91) 7778811")])
+            ]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "nav footer-nav" }, [
+              _c("li", { staticClass: "nav-item footer-dev" }, [
+                _vm._v("Дизайн и разработка"),
+                _c("a", { staticClass: "nav-link", attrs: { href: "/" } }, [
+                  _vm._v("Prisma")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item footer-copy" }, [
+                _vm._v("© 2018 Dostavka")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-579cb379", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

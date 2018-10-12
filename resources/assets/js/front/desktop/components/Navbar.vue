@@ -1,0 +1,42 @@
+<template>
+    <header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a class="header-logo" href="/"></a>
+      <ul class="nav header-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Магазины</a></li>
+        <li class="nav-item"><a class="nav-link" href="/delivery.php">Доставка</a></li>
+      </ul>
+      <form class="input-group header-search">
+        <input class="form-control" type="search" name="s" placeholder="Поиск товаров">
+        <div class="input-group-append"><button class="btn btn-outline-green" type="submit">Найти</button></div>
+      </form>
+       <div class="header-controls">
+        <div class="dropdown">
+          <button class="btn btn-link header-lang-toggle dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Русский</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item acitve" href="/?lang=ru">Русский</a>
+            <a class="dropdown-item" href="/?lang=uz">O`zbekcha</a>
+          </div>
+        </div>
+         
+          <button class="btn btn-link header-profile-toggle" type="button" data-toggle="modal" data-target="#Regions">
+            <i class="icon">place</i><span class="text">Город Фергана</span>
+          </button>
+        <div class="dropdown">
+          <button class="btn btn-link header-profile-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icon">person</i><span class="text">Вход</span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/profile.php">Мои данные</a>
+            <a class="dropdown-item" href="/orders.php">Мои заказы</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout">Выйти</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+</template>
