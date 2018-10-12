@@ -1,7 +1,7 @@
 
 
 window.Vue = require('vue');
-import router from '.router'
+import router from './router'
 import store from './vuex'
 import localforage from 'localforage'
 localforage.config({
