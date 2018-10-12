@@ -1,4 +1,4 @@
-@extends('layouts.admin.dashboard')
+@extends('admin.layouts.dashboard')
 @section('content')
 <div class="main-top d-flex align-items-center">
     <h1 class="main-title">Список магазинов</h1>
@@ -49,7 +49,7 @@
         <td data-category="{{ $manager->manager_category_id }}" >{{$manager->managerCategory->name_ru}}</td>
         <td data-status="{{ $manager->status }}">
         <div class="btn-group btn-group-sm managers_action">
-            <a href="{{ route('managers.edit',$manager->id) }}" data-toggle="modal" data-target="#editManager" class="btn btn-light">
+            <a href="#" data-toggle="modal" data-target="#editManager" class="btn btn-light">
               <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
             </a>
           </div>

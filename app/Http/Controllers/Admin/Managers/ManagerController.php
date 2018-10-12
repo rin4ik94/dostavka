@@ -92,17 +92,6 @@ class ManagerController extends Controller
                         ->with('success','Manager created successfully');
     }
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $managers = Manager::find($id);
-        return response()->json($managers);
-    }
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

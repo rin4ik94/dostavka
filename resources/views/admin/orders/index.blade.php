@@ -1,4 +1,4 @@
-@extends('layouts.admin.dashboard')
+@extends('admin.layouts.dashboard')
 @section('content')
 <div class="toolbar d-flex">
       <div class="form-row">

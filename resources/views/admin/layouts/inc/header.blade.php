@@ -56,7 +56,7 @@
     </a>
     </li>
    <li class="nav-item" data-toggle="modal" data-target="#confirm">
-    <a class="nav-link" data-toggle="tooltip" href="{{ route('logout') }}" data-placement="bottom" title="Выйти" onclick="event.preventDefault();
+    <a class="nav-link" data-toggle="tooltip" href="#" data-placement="bottom" title="Выйти" onclick="event.preventDefault();
     document.getElementById('logout-form').submit();">
        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
          @csrf

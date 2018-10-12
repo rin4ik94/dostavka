@@ -1,4 +1,4 @@
-@extends('layouts.admin.dashboard')
+@extends('admin.layouts.dashboard')
 @section('content')
  <div class="main-top d-flex align-items-center">
       <h1 class="main-title">Категории магазинов</h1>

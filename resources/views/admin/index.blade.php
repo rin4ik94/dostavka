@@ -1,4 +1,4 @@
-@extends('layouts.admin.dashboard')
+@extends('admin.layouts.dashboard')
 @section('content')
  <div class="main-top">
     <h1 class="main-title">Добро пожаловать в панель управления Dostavka</h1>

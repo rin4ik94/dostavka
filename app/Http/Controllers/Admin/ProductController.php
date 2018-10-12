@@ -108,8 +108,6 @@ class ProductController extends Controller
      */
     public function update(StoreProductRequest $request, $id)
     {
-
-
        $filenametostore = '';
         if ($request->hasFile('image')) {
             $file = $request->file('image');
