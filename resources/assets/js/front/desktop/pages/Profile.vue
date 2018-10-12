@@ -23,7 +23,7 @@
               <div class="form-group row">
                 <label class="col-3 col-form-label" for="profile_birthday">Дата рождения</label>
                 <div class="col-9">
-                  <input class="form-control" id="profile_birthday" name="profile_birthday" type="date" value="1993-09-01" required>
+                    <DatePicker placeholder="YYYY-MM-DD" class="form-control" />
                   <div class="invalid-feedback">Пожалуйста заполните поле</div>
                 </div>
               </div>
@@ -63,3 +63,9 @@
       </div>
     </div>
 </template>
+<script>
+import DatePicker from "../components/DatePicker";
+export default {
+  components: { DatePicker }
+};
+</script>
