@@ -15,7 +15,7 @@
             <select class="custom-select" name="status">
                 <option value="all">Все статуси</option>
                 <option value="1">Активен</option>
-                <option value="2">Неактивен</option>
+                <option value="0">Неактивен</option>
             </select>
         </div>
     </div>
