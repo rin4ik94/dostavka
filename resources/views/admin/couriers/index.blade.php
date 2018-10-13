@@ -4,7 +4,7 @@
 	<h1 class="main-title">Список курьеров</h1>
 	<button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
 		<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#plus"></use></svg>
-		<span class="text">Добавить магазин</span>
+		<span class="text">Добавить курьер</span>
 	</button>
 </div>
 <div class="toolbar d-flex">
@@ -32,7 +32,6 @@
       <th class="col-auto">№</th>
       <th class="col-6">ФИО</th>
       <th class="col-2">Телефон</th>
-      <th class="col-2">Номер ТС</th>
       <th class="col-2">Статус</th>
       <th class="col-auto"></th>
     </tr>
@@ -42,7 +41,7 @@
       <td>1</td>
       <td>Холматов Джалолиддин Рахматжон угли</td>
       <td>+998916720193</td>
-      <td>40A777AA</td>
+
       <td class="text-green">Активен</td>
       <td>
         <form class="btn-group btn-group-sm" role="group">

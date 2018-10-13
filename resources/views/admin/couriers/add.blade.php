@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Новый магазин</h5>
+        <h5 class="modal-title">Новый курьер</h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,10 +15,13 @@
         <div class="form-row">
           <div class="col">
             <div class="form-group">
-              <label class="form-label" for="store_region">Группа</label>
-              <select class="custom-select" name="store_region">
-                <option value="0" selected disabled>Не выбран</option>
-              </select>
+              <label class="form-label" for="store_region">Телефон</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">+998</span>
+                </div>
+                <input class="form-control" placeholder="Телефон" type="text">
+              </div>
             </div>
           </div>
           <div class="col">
