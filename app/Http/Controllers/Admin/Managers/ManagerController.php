@@ -64,6 +64,7 @@ class ManagerController extends Controller
       'file' => 'image|mimes:jpeg,png,jpg|max:2048',
       'store_status' => 'required',
     ]);
+
     $filenametostore = '';
     if ($request->hasFile('file')) {
       $file = $request->file('file');
@@ -85,6 +86,15 @@ class ManagerController extends Controller
       });
       $mainImage->save($mainimagepath);
     }
+  
+  $manager = Manager::create([
+    'name' => $request->input('name'),
+    'logo' => $filenametostore,
+    'manager_category_id' => $request->input('store_managerCatId'),
+    'status' => $request->input('store_status'),
+    ]);
+    return redirect()->route('managers.index')
+                    ->with('success','Manager created successfully');
   }
     /**
      * Update the specified resource in storage.
@@ -101,6 +111,7 @@ class ManagerController extends Controller
         'manager_category_id' => 'required',
         'status' => 'required',
       ]);
+
       $filenametostore = '';
       if ($request->hasFile('file')) {
         $file = $request->file('file');

@@ -25,7 +25,7 @@
           <div class="col-5">
             <label class="form-label" for="editManagerImage">Логотип *</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input file" id="editManagerImage" name="file" accept="image/jpeg" required>
+              <input type="file" class="custom-file-input file" id="editManagerImage" name="file" accept="image/jpeg">
               <label class="custom-file-label" for="editManagerImage">Загрузить</label>
               <div class="custom-image">
                 <img src="#" id="image_show" alt="dostavka">
