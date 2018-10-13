@@ -7,7 +7,6 @@
 		<span class="text">Добавить филиал</span>
 	</button>
 </div>
-@if(count($branches) > 0)
 <div class="toolbar d-flex">
 <form method="GET">
 <div class="form-row">
@@ -38,6 +37,7 @@
 </form>
 @include('admin.components.search')
 </div>
+@if(count($branches) > 0)
 <table class="table table-bordered table-hover">
 	<thead>
 		<tr>
