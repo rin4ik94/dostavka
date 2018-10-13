@@ -11,6 +11,6 @@ class CouriersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\Models\Courier', 25)->create();
     }
 }
