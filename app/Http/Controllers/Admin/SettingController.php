@@ -16,4 +16,19 @@ class SettingController extends Controller
     {
         return view('admin.settings.index');
     }
+
+    public function orders()
+    {
+        return view('admin.settings.orders');
+    }
+
+    public function goto()
+    {
+        return view('admin.settings.goto');
+    }
+
+    public function payment()
+    {
+        return view('admin.settings.payment');
+    }
 }

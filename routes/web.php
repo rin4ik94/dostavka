@@ -25,5 +25,8 @@ Route::group([
     Route::resource('clients', 'ClientController')->except(['show', 'create', 'edit']);
     Route::resource('products', 'ProductController')->except(['show', 'create', 'edit']);
     Route::get('settings', 'SettingController@index')->name('settings');
+    Route::get('settings/orders', 'SettingController@orders')->name('settings.orders');
+    Route::get('settings/goto', 'SettingController@goto')->name('settings.goto');
+    Route::get('settings/payment', 'SettingController@payment')->name('settings.payment');
 });
 Route::get('/{any?}', 'Front\HomeController@index')->where('any', '^(?!api).*$');

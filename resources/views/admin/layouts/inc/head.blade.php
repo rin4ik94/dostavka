@@ -14,3 +14,4 @@
 <script src="{{ asset('/js/popper.js') }}"></script>
 <script src="{{ asset('/js/bootstrap.js') }}"></script>
 <script src="{{ asset('admin/js/custom.js') }}"></script>
+<script src="{{ asset('admin/js/main.js') }}"></script>
