@@ -7,8 +7,8 @@
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{'Dostavka'}}</title>
-<link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet">
-<link href="{{ asset('/css/grid.css') }}" rel="stylesheet">
+<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('css/grid.css') }}" rel="stylesheet">
 <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 </head>
 <body>
