@@ -24,6 +24,7 @@
     <div id="desktop" class="desktop">
 
         <router-view></router-view>
+
         {{--
         <awesome-spinner v-show="!showPage"></awesome-spinner> --}}
     </div>

@@ -10,13 +10,6 @@
 <div class="toolbar d-flex">
 	<div class="form-row">
 		<div class="col-auto">
-			<select class="custom-select" name="group">
-				<option value="all">Все группи</option>
-				<option value="1">Администратори</option>
-				<option value="2">Менеджери</option>
-			</select>
-		</div>
-		<div class="col-auto">
 			<select class="custom-select" name="status">
 				<option value="all">Все статуси</option>
 				<option value="1">Активен</option>

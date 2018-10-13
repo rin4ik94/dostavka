@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
+<head>
 @include('admin.layouts.inc.head')
+</head>
 	<body>
 		<div class="app" id="app">
 		@include('admin.layouts.inc.symbol')
