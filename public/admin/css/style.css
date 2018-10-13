@@ -41,6 +41,20 @@ html, body {
   height: 100%;
 }
 
+.login {
+  display: flex;
+}
+.form-login {
+  width: 100%;
+  max-width: 360px;
+  margin: auto;
+}
+.form-login .title {
+  margin-bottom: 24px;
+  font-size: 24px;
+  text-align: center;
+}
+
 /* Header */
 .header {
   display: flex;

@@ -3054,7 +3054,6 @@ input[type="button"].btn-block {
   text-decoration: none;
   background-color: #27ae61;
   border-color: #27ae61;
-
 }
 .page-link:focus {
   outline: 0;
@@ -3073,7 +3072,6 @@ input[type="button"].btn-block {
   color: #999;
   pointer-events: none;
   cursor: auto;
-  background-color: #fff;
 }
 
 .pagination-lg .page-link {
