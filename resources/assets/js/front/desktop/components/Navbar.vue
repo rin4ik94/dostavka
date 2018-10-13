@@ -42,6 +42,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { EventBus } from "../bus.js";
 
 export default {
   props: ["regions"],
@@ -53,12 +54,15 @@ export default {
   },
   methods: {
     ...mapActions({
-      setRegion: "setRegionId"
+      setRegion: "setRegionId",
+      setRegionName: "setRegionName"
     }),
     regionData() {
       this.regions.map((value, key) => {
         if (value.id == this.regionId) {
           this.region = value;
+          this.setRegionName(value.name);
+          EventBus.$emit("changeRegion", this.region);
         }
       });
     }

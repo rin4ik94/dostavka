@@ -3,6 +3,7 @@ export default {
         authenticated: false,
         total: 0,
         region: '',
+        regionName: '',
         phone: '',
         lang: '',
         data: {

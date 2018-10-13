@@ -1,7 +1,7 @@
 // import App from '../App.vue'
 // import Public from '../layouts/Public'
 import Dashboard from '../layouts/Dashboard'
-import Home from '../pages/Home'
+import Home from '../pages/main/Home'
 import Profile from '../pages/Profile'
 import Orders from '../pages/Orders'
 import Delivery from '../pages/Delivery'
