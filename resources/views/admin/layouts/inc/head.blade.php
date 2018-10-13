@@ -6,8 +6,8 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Dostavka</title>
   <!-- Styles -->
-  <link rel="stylesheet" href="{{ asset('/css/bootstrap.css') }}">
-  <link rel="stylesheet" href="{{ asset('/css/grid.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/grid.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
   <!-- scripts -->

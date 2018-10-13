@@ -14,8 +14,8 @@ class Manager extends Model
     	return $this->belongsTo('App\Models\ManagerCategory');
     }
 
-  	public function employeeGroups() {
-	    return $this->hasMany('Spatie\Permission\Models\Role');
+  	public function employee_groups() {
+	    return $this->hasMany('App\Models\UserRole');
 	}
 
     public function employees() {
