@@ -14,12 +14,13 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Courier::class, function (Faker $faker) {
+$factory->define(App\Models\Courier::class, function (Faker $faker) {
     return [
         'fio' => $faker->name,
-        'phone' => '991234567',
+        'mobile' => '991234'.rand(100,999),
+        'password' => str_random(5),
         'status' => rand(0, 1),
-        'date_birth' => Carbon::today()->toDateString(),
-        'date_adoption' => Carbon::today()->toDateString(),
+        'created_at' => Carbon::today()->toDateString(),
+        'updated_at' => Carbon::today()->toDateString(),
     ];
 });

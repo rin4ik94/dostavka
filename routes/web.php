@@ -1,14 +1,13 @@
 <?php 
-Auth::routes();
-
 Route::get('cp', 'Admin\Admin\LoginController@showLoginForm')->name('admin.login');
 Route::post('cp', 'Admin\Admin\LoginController@login');
+Route::post('logout', 'Admin\Admin\LoginController@logout')->name('logout');
 Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
     'middleware' => 'auth:admin'
 ], function () {
-    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('roles', 'RoleController');
     Route::resource('employees/group', 'EmployeegroupController', ['as' => 'employees'])->except(['show', 'create']);
     Route::resource('employees', 'UserController')->except(['create']);
