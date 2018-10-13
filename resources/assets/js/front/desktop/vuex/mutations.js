@@ -20,6 +20,12 @@ export const setRegion = (state, regionId) => {
         return
     }
 }
+export const setRegionName = (state, region) => {
+    if (!isEmpty(region)) {
+        state.user.regionName = region;
+        return
+    }
+}
 // export const setAuthenticated = (state, trueOrFalse) => {
 //     state.user.authenticated = trueOrFalse;
 // }

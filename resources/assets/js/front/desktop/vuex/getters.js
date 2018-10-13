@@ -4,6 +4,9 @@
 export const regionId = (state) => {
     return state.user.region
 }
+export const regionName = (state) => {
+    return state.user.regionName
+}
 // export const lang = (state) => {
 //     return state.user.lang
 // }

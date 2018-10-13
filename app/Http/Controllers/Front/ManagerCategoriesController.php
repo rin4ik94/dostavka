@@ -15,6 +15,8 @@ class ManagerCategoriesController extends Controller
             $categories = ManagerCategory::get();
             return ManagerCategoriesResource::collection($categories->load(['managers' => function ($query) {
                 return $query->where('status', 1);
+            }, 'managers.branches' => function ($q) {
+                return $q->where('region_id', request()->region);
             }]));
         }
         $categories = ManagerCategory::get();
