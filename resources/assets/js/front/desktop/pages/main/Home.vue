@@ -16,7 +16,7 @@
                 <div class="partner-logo"><img :src="manager.logo"></div>
                 <div class="partner-info">
                   <div class="partner-name">{{manager.name}}</div>
-                  <div class="partner-category">{{category.name}}</div>
+                  <div class="partner-category">{{manager.cat}}</div>
                   <!-- <div class="partner-adress">Ферганская область, г.Фергана, ул.Сайлгох 16</div> -->
                 </div>
               </router-link>
@@ -54,6 +54,14 @@ export default {
             data.push(value);
           }
         });
+      } else {
+        this.categories.map((value, key) => {
+          value.managers.map((v, k) => {
+            if (v.branches.length > 0) {
+              data.push(v);
+            }
+          });
+        });
       }
 
       return data;
@@ -71,6 +79,8 @@ export default {
                 this.category = value;
               }
             });
+          } else {
+            this.category = [];
           }
         });
     },

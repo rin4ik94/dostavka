@@ -53299,6 +53299,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             data.push(value);
           }
         });
+      } else {
+        this.categories.map(function (value, key) {
+          value.managers.map(function (v, k) {
+            if (v.branches.length > 0) {
+              data.push(v);
+            }
+          });
+        });
       }
 
       return data;
@@ -53316,6 +53324,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
               _this.category = value;
             }
           });
+        } else {
+          _this.category = [];
         }
       });
     },
@@ -53558,7 +53568,7 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "partner-category" }, [
-                                _vm._v(_vm._s(_vm.category.name))
+                                _vm._v(_vm._s(manager.cat))
                               ])
                             ])
                           ]
