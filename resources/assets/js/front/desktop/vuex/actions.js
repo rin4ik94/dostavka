@@ -1,5 +1,5 @@
-// import { isEmpty } from 'lodash'
-// import localforage from 'localforage'
+import { isEmpty } from 'lodash'
+import localforage from 'localforage'
 // import { setHttpToken } from '../../../helpers/index'
 // // window.Vue = require('vue');
 
@@ -40,7 +40,22 @@
 //         dispatch('clearAuth')
 //     })
 // }
-
+// export const setRegion = ({ commit, dispatch }, regionId) => {
+//     if (isEmpty(regionId)) {
+//         return dispatch('checkRegionExists')
+//     }
+//     commit('setToken', token)
+// }
+export const setRegion = ({ commit, dispatch }, regionId) => {
+    return localforage.getItem('region').then((regionId) => {
+        if (isEmpty(regionId)) {
+            localforage.removeItem('region')
+            return Promise.reject('NO_REGION_CHOOSEN');
+        }
+        commit('setRegion', regionId)
+        return Promise.resolve(regionId)
+    })
+}
 // export const setToken = ({ commit, dispatch }, token) => {
 //     if (isEmpty(token)) {
 //         return dispatch('checkTokenExists').then((token) => {
@@ -88,6 +103,7 @@
 //         return Promise.resolve(token)
 //     })
 // }
+
 // export const checkPhoneExists = ({ commit, dispatch }, phone) => {
 //     return localforage.getItem('phone').then((phone) => {
 //         if (isEmpty(phone)) {

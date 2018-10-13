@@ -34,8 +34,10 @@ Vue.filter('toCurrency', function (value) {
     if (typeof value !== "number") {
         return value;
     }
-    // let val = (value / 1).toFixed(0).replace('.', ' ')
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+});
+store.dispatch('setRegion').then(() => {
+    console.log($("#regions").modal('show'))
 });
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 

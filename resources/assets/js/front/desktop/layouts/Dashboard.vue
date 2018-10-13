@@ -5,6 +5,8 @@
       <CartInfo />
       <Footer></Footer>
       <Modals></Modals>
+    <RegionModal />
+
   </div>
 </template>
 <script>
