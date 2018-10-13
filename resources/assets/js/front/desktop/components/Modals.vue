@@ -63,29 +63,7 @@
     </div>
   </div>
 </div>
-<div class="modal fade regions" id="Regions" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <h5 class="modal-title">Ваш регион</h5>
-        <ul class="nav regions-nav">
-          <li class="nav-item">
-            <a class="nav-link">Город Фергана</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Город Маргилан</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Киргули</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Ташлак</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+
 <div class="modal fade profile" id="profile" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

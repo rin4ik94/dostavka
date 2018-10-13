@@ -11,11 +11,12 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 Route::get('/products', 'Front\ProductController@index');
 Route::resource('/categories', 'Front\CategoryController');
 Route::post('/client/register', 'Front\Auth\AuthController@register');
+Route::get('/regions', 'Front\RegionController@index');
 // Route::group(['middleware' => 'jwt.generate'], function () {
 //     Route::get('/me', 'Front\Auth\AuthController@user');
 //     Route::patch('/clients/{client}/settings', 'Front\Auth\AuthController@update');

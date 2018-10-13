@@ -1,6 +1,6 @@
 <template>
     <div class="cart-card">
-  <div class="container">
+    <div class="container">
     <div class="row">
       <div class="col-auto">
         <a class="btn btn-link" href="/cart.php">
