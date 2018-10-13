@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Models\Courier;
 use App\Http\Controllers\Controller;
 
 class CourierController extends Controller
@@ -14,7 +15,8 @@ class CourierController extends Controller
      */
     public function index()
     {
-     return view('admin.couriers.index');
+     $couriers = Courier::paginate(10);
+     return view('admin.couriers.index', compact('couriers'));
     }
     /**
      * Store a newly created resource in storage.
