@@ -6,7 +6,7 @@
         <h5 class="modal-title">Ваш регион</h5>
         <ul class="nav regions-nav">
           <li class="nav-item" :key="region.id" v-for="region in regions">
-            <a class="nav-link">{{region.name}}</a>
+            <a  @click.prevent="submitRegion(region.id)" class="nav-link">{{region.name}}</a> 
           </li>
         </ul>
       </div>
@@ -15,11 +15,23 @@
 </div>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       regions: []
     };
+  },
+  methods: {
+    ...mapActions({
+      setRegion: "setRegionId"
+    }),
+    submitRegion(id) {
+      this.setRegion(id).then(() => {
+        $("#Regions").modal("hide");
+      });
+    }
   },
   created() {
     axios.get("api/regions").then(response => {

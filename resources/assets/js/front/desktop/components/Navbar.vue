@@ -22,7 +22,7 @@
         </div>
          
           <button class="btn btn-link header-profile-toggle" type="button" data-toggle="modal" data-target="#Regions">
-            <i class="icon">place</i><span class="text">Город Фергана</span>
+            <i class="icon">place</i><span class="text">{{region.name}}</span>
           </button>
         <div class="dropdown">
           <button class="btn btn-link header-profile-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,9 +35,52 @@
             <a class="dropdown-item" href="/logout">Выйти</a>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </header>
 </template>
+<script>
+import { mapActions, mapGetters } from "vuex";
+
+export default {
+  props: ["regions"],
+  data() {
+    return {
+      region: "",
+      id: this.regionId
+    };
+  },
+  methods: {
+    ...mapActions({
+      setRegion: "setRegionId"
+    }),
+    regionData() {
+      this.regions.map((value, key) => {
+        if (value.id == this.regionId) {
+          this.region = value;
+        }
+      });
+    }
+  },
+  computed: mapGetters({
+    regionId: "regionId"
+  }),
+
+  watch: {
+    regionId: {
+      immediate: true,
+      handler: function(regionId) {
+        this.setRegion(regionId);
+        this.regionData();
+      }
+    },
+    regions: {
+      immediate: true,
+      handler: function(regions) {
+        this.regionData();
+      }
+    }
+  }
+};
+</script>

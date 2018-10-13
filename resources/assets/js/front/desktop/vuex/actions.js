@@ -40,12 +40,11 @@ import localforage from 'localforage'
 //         dispatch('clearAuth')
 //     })
 // }
-// export const setRegion = ({ commit, dispatch }, regionId) => {
-//     if (isEmpty(regionId)) {
-//         return dispatch('checkRegionExists')
-//     }
-//     commit('setToken', token)
-// }
+export const setRegionId = ({ commit, dispatch }, regionId) => {
+    commit('setRegion', regionId)
+    localforage.setItem('region', regionId)
+
+}
 export const setRegion = ({ commit, dispatch }, regionId) => {
     return localforage.getItem('region').then((regionId) => {
         if (isEmpty(regionId)) {
