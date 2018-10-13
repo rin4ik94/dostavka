@@ -34,11 +34,11 @@
     <li class="nav-item">
       <a class="nav-link {{ collect(request()->segments())->last()==='settings' ? 'active' : '' }}" href="/admin/settings">Общие настройки</a></li>
     <li class="nav-item">
-      <a class="nav-link {{ collect(request()->segments())->last()==='group' ? 'active' : '' }}" href="/admin/settings/orders">Заказы</a></li>
+      <a class="nav-link {{ collect(request()->segments())->last()==='orders' ? 'active' : '' }}" href="/admin/settings/orders">Заказы</a></li>
       <li class="nav-item">
-      <a class="nav-link {{ collect(request()->segments())->last()==='group' ? 'active' : '' }}" href="/admin/settings/goto">Доставка</a></li>
+      <a class="nav-link {{ collect(request()->segments())->last()==='goto' ? 'active' : '' }}" href="/admin/settings/goto">Доставка</a></li>
       <li class="nav-item">
-      <a class="nav-link {{ collect(request()->segments())->last()==='group' ? 'active' : '' }}" href="/admin/settings/payment">Оплата</a></li>
+      <a class="nav-link {{ collect(request()->segments())->last()==='payment' ? 'active' : '' }}" href="/admin/settings/payment">Оплата</a></li>
     @endif
   </ul>
   <ul class="nav header-profile-nav">
