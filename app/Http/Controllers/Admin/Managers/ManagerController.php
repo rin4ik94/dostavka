@@ -27,6 +27,7 @@ class ManagerController extends Controller
    */
   public function index(Request $request)
   {
+    
     $category = $request->category ?? null;
     if ($category == 'all') {
       $category = null;
@@ -36,7 +37,7 @@ class ManagerController extends Controller
       $status = null;
     }
     $search = $request->q ?? null;
-    $managers = Manager::with('employeeGroups.manager', 'managerCategory')
+    $managers = Manager::with('employee_groups.manager', 'managerCategory')
       ->when(!is_null($status), function ($query) use ($status) {
         $query->whereStatus($status);
       })

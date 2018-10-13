@@ -1,5 +1,5 @@
-// import localforage from 'localforage'
-// import { isEmpty } from 'lodash'
+import localforage from 'localforage'
+import { isEmpty } from 'lodash'
 // export const setToken = (state, token) => {
 //     if (isEmpty(token)) {
 //         localforage.removeItem('authtoken', token)
@@ -14,6 +14,12 @@
 //     }
 //     localforage.setItem('phone', phone)
 // }
+export const setRegion = (state, regionId) => {
+    if (!isEmpty(regionId)) {
+        state.user.region = regionId;
+        return
+    }
+}
 // export const setAuthenticated = (state, trueOrFalse) => {
 //     state.user.authenticated = trueOrFalse;
 // }

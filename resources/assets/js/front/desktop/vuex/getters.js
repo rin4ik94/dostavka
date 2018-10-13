@@ -1,9 +1,9 @@
 // export const user = (state) => {
 //     return state.user
 // }
-// export const authenticate = (state) => {
-//     return state.user.authenticated
-// }
+export const regionId = (state) => {
+    return state.user.region
+}
 // export const lang = (state) => {
 //     return state.user.lang
 // }
