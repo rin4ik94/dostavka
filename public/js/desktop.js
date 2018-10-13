@@ -30397,7 +30397,7 @@ Vue.filter('toCurrency', function (value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 });
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setRegion').then(function () {
-    console.log($("#regions").modal('show'));
+    $("#Regions").modal('show');
 });
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 
@@ -38628,7 +38628,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm.$route.name != "home"
+          _vm.$route.name == "catalog"
             ? _c("form", { staticClass: "input-group header-search" }, [
                 _c("input", {
                   staticClass: "form-control",
