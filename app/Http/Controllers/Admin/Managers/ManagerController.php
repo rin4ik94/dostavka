@@ -84,6 +84,7 @@ class ManagerController extends Controller
       });
       $mainImage->save($mainimagepath);
     }
+  }
     /**
      * Update the specified resource in storage.
      *
