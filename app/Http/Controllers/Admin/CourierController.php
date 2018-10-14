@@ -26,7 +26,15 @@ class CourierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'fio' => 'required',
+            'mobile' => 'required',
+            'password' => 'required'
+        ]);
+        $input = $request->all();
+        $courier = Courier::create($input); 
+        return redirect()->route('couriers.index')
+        ->with('success', 'Courier created successfully');
     }
     /**
      * Update the specified resource in storage.
@@ -37,7 +45,7 @@ class CourierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
     }
 
     /**

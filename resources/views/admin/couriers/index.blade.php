@@ -2,7 +2,7 @@
 @section('content')
 <div class="main-top d-flex align-items-center">
     <h1 class="main-title">Список курьеров</h1>
-    <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
+    <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newCourier">
         <svg class="icon" xmlns="http://www.w3.org/2000/svg">
             <use xlink:href="#plus"></use>
         </svg>

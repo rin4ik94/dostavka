@@ -1,16 +1,16 @@
-<div class="modal fade" id="newStore" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="editCourier" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Новый магазин</h5>
+        <h5 class="modal-title">Редактировать курьер</h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label" for="store_name">ФИО</label>
-          <input class="form-control" type="text" id="store_name" name="sotre_name">
+          <label class="form-label" for="fio">ФИО</label>
+          <input class="form-control" type="text" id="fio" name="fio">
         </div>
         <div class="form-row">
           <div class="col">
