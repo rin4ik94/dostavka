@@ -9,16 +9,19 @@
         <span class="text">Добавить курьер</span>
     </button>
 </div>
+
 <div class="toolbar d-flex">
+	<form method="GET">
     <div class="form-row">
         <div class="col-auto">
-            <select class="custom-select" name="status">
-                <option value="all">Все статуси</option>
-                <option value="1">Активен</option>
-                <option value="0">Неактивен</option>
+            <select class="custom-select" name="status" onchange="this.form.submit()">
+								<option value="all" @if(request()->get('status')=="all") selected @endif>Все статуси</option>
+								<option value="1" @if(request()->get('status')=="1") selected @endif>Активен</option>
+								<option value="0" @if(request()->get('status')=="0") selected @endif>Неактивен</option>
             </select>
         </div>
-    </div>
+		</div>
+	</form>
     @include('admin.components.search')
 </div>
 @if(count($couriers) > 0)

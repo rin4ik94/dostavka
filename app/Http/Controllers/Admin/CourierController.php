@@ -13,9 +13,21 @@ class CourierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-     $couriers = Courier::paginate(10);
+        $status = $request->status ?? null;
+        if ($status == 'all') {
+            $status = null;
+        }
+        $search = $request->q ?? null;
+        $couriers = Courier::when(!is_null($status), function ($query) use ($status) {
+        $query->whereStatus($status);
+      })
+      ->when(!is_null($search), function ($query) use ($search) {
+        $query->where('fio', 'like', '%' . $search . '%');
+        $query->orwhere('mobile', 'like', '%' . $search . '%');
+      })
+      ->paginate(10);
      return view('admin.couriers.index', compact('couriers'));
     }
     /**
@@ -45,7 +57,18 @@ class CourierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        $this->validate($request,[
+            'id' => 'required',
+            'fio' => 'required|max:25',
+            'mobile' => 'required|min:9|max:9',
+            'password' => 'required|min:5|max:10'
+        ]);
+        $uri = $request->redirect_uri;
+        $updateCourier = Courier::findOrFail($request->id);
+        $input = $request->only('fio','mobile','password','status');
+        $updateCourier->update($input);
+        return redirect(url()->previous())
+        ->with('success', 'Courier updated successfully');
     }
 
     /**
@@ -56,6 +79,8 @@ class CourierController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Courier::findOrFail($id)->delete();
+      return redirect()->route('couriers.index')
+        ->with('success', 'Courier deleted successfully');
     }
 }
