@@ -77,7 +77,7 @@
   </table>
     <div class="main-bottom d-flex align-items-center">
       @if($emoloyees->lastPage() > 1)
-        {{ $emoloyees->links() }}
+        {{ $emoloyees->appends(request()->query())->links() }}
       @else
         @include('admin.components.pagination')
       @endif

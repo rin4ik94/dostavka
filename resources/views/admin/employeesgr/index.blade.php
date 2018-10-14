@@ -59,7 +59,7 @@
 </table>
   <div class="main-bottom d-flex align-items-center"> 
     @if($roles->lastPage() > 1)
-    {{ $roles->links() }} 
+    {{ $roles->appends(request()->query())->links() }} 
     @else
       @include('admin.components.pagination')
     @endif

@@ -62,7 +62,7 @@
 </table>
 <div class="main-bottom d-flex align-items-center">
     @if($couriers->lastPage() > 1)
-    {{ $couriers->links() }}
+    {{ $couriers->appends(request()->query())->links() }}
     @else
     @include('admin.components.pagination')
     @endif

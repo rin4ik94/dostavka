@@ -37,7 +37,7 @@
   </table>
     <div class="main-bottom d-flex align-items-center">
       @if($clientgroups->lastPage() > 1)
-        {{ $clientgroups->links() }}
+        {{ $clientgroups->appends(request()->query())->links() }}
       @else
         @include('admin.components.pagination')
       @endif
