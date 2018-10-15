@@ -1,6 +1,7 @@
 window.Vue = require('vue');
 import router from './router'
 import store from './vuex'
+var SubCategories = require('./components/SubCategories.vue');
 import localforage from 'localforage'
 // require('../../bootstrap')
 import * as Modals from './components/modals/index'
@@ -38,6 +39,7 @@ Vue.filter('toCurrency', function (value) {
 store.dispatch('setRegion').catch(() => {
     $("#Regions").modal('show')
 });
+Vue.component('SubCategories', Vue.extend(SubCategories));
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 
 const app = new Vue({

@@ -6,7 +6,6 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Category as CategoryResource;
-use App\Http\Resources\CategoryWithProducts as CategoryProductsResource;
 
 class CategoryController extends Controller
 {
@@ -17,13 +16,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        if(request()->has('withProds')){
-            $categories = Category::active()->ordered()->get();
-            return CategoryProductsResource::collection($categories->load(['products'=> function($query){
-                return $query->where('status',1);
+        if (request()->has('withProds')) {
+            $categories = Category::with('children', 'children.products')->where('manager_id', request()->manager)->active()->parents()->ordered()->get();
+            return CategoryResource::collection($categories->load(['products' => function ($query) {
+                return $query->where('status', 1);
             }]));
         }
-        $categories = Category::active()->ordered()->get();
+        $categories = Category::with('children')->active()->parents()->ordered()->get();
         return CategoryResource::collection($categories);
     }
 

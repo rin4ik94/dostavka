@@ -51016,6 +51016,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 window.Vue = __webpack_require__(5);
 
 
+var SubCategories = __webpack_require__(238);
 
 // require('../../bootstrap')
 
@@ -51053,6 +51054,7 @@ Vue.filter('toCurrency', function (value) {
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setRegion').catch(function () {
     $("#Regions").modal('show');
 });
+Vue.component('SubCategories', Vue.extend(SubCategories));
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 
 var app = new Vue({
@@ -55926,8 +55928,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound__ = __webpack_require__(219);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotFound__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AsideCategories__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AsideCategories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_AsideCategories__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bus_js__ = __webpack_require__(40);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -56006,7 +56007,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-
+//
+//
+//
+//
+//
 
 
 
@@ -56014,14 +56019,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      active: 0,
       catalog: null,
       notFound: false,
       id: 0,
-      products: []
+      products: [],
+      categories: []
     };
   },
 
-  components: { Categories: __WEBPACK_IMPORTED_MODULE_2__components_AsideCategories___default.a, NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a },
+  components: { NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a },
   watch: {
     id: {
       immediate: true,
@@ -56032,44 +56039,112 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     catalog: {
       immediate: true,
       handler: function handler() {
-        this.filterProducts(this.id);
+        this.filterCats(this.id);
       }
     }
   },
   methods: {
     updateProducts: function updateProducts(id) {
+      this.active = id;
       this.id = id;
     },
-    filterProducts: function filterProducts(id) {
-      var _this = this;
-
-      setTimeout(function () {
-        if (id != 0 && _this.catalog) {
-          var category = _this.catalog.categories.find(function (category) {
-            return id == category.id;
-          });
-          return _this.products = category.products;
-        }
-        var data = [];
-        _this.catalog.categories.map(function (v, k) {
+    allProducts: function allProducts() {
+      var data = [];
+      console.log(this.categories);
+      this.categories.map(function (v, k) {
+        if (v.children.length == 0) {
           v.products.map(function (value, key) {
             data.push(value);
           });
-        });
-        _this.products = data;
+        } else {
+          v.children.map(function (ve, ke) {
+            if (ve.children.length == 0) {
+              ve.products.map(function (vu, ku) {
+                data.push(vu);
+              });
+            } else {
+              ve.children.map(function (vey, kep) {
+                data.push(vey.products);
+              });
+            }
+          });
+        }
       });
+      this.products = data;
+    },
+    filterProducts: function filterProducts(id) {
+      if (id == 0) {
+        this.allProducts();
+      }
+      if (this.active != 0) {
+        var category = this.categories.find(function (category) {
+          return category.id == id;
+        });
+        if (!category) {
+          this.categories.map(function (v, k) {
+            v.children.map(function (value, key) {
+              if (id == value.id) {
+                category = value;
+              }
+            });
+          });
+        }
+        if (category.children.length > 0) {
+          var data = [];
+
+          category.children.map(function (value, key) {
+            value.products.map(function (v, k) {
+              data.push(v);
+            });
+          });
+
+          this.products = data;
+          return;
+        }
+        this.products = category.products;
+      }
+    },
+    filterCats: function filterCats(id) {
+      var data = [];
+      this.categories.map(function (v, k) {
+        if (v.children.length == 0) {
+          v.products.map(function (value, key) {
+            data.push(value.products);
+          });
+        } else {
+          v.children.map(function (ve, ke) {
+            if (ve.children.length == 0) {
+              data.push(ve.products);
+            } else {
+              ve.children.map(function (vey, kep) {
+                data.push(vey.products);
+              });
+            }
+          });
+        }
+      });
+      this.categories = data;
     },
     getCatalog: function getCatalog() {
-      var _this2 = this;
+      var _this = this;
 
       setTimeout(function () {
-        var uri = "/api/managers/" + _this2.$route.params.id + "?withManagers&region=" + _this2.region;
+        var uri = "/api/managers/" + _this.$route.params.id + "?withManagers&region=" + _this.region;
         axios.get(uri).then(function (response) {
-          _this2.catalog = response.data.data;
+          _this.catalog = response.data.data;
+          _this.getCategories();
         }).catch(function () {
-          _this2.notFound = true;
+          _this.notFound = true;
         });
       }, 0);
+    },
+    getCategories: function getCategories() {
+      var _this2 = this;
+
+      axios.get("/api/categories?withProds&manager=" + this.catalog.id).then(function (response) {
+        _this2.categories = response.data.data;
+        _this2.allProducts();
+      });
     }
   },
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
@@ -56082,156 +56157,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(237)
-/* template */
-var __vue_template__ = __webpack_require__(215)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/front/desktop/components/AsideCategories.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3c0ceff4", Component.options)
-  } else {
-    hotAPI.reload("data-v-3c0ceff4", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("nav", { staticClass: "categories" }, [
-    _c(
-      "ul",
-      { staticClass: "nav" },
-      [
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              class: _vm.active == 0 ? "active" : "",
-              on: {
-                click: function($event) {
-                  _vm.updateActive(0)
-                }
-              }
-            },
-            [_vm._v("Все категории")]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.catalog.categories, function(category) {
-          return _c("li", { key: category.id, staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                class: _vm.active == category.id ? "active" : "",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.updateActive(category.id)
-                  }
-                }
-              },
-              [_vm._v(_vm._s(category.name))]
-            )
-          ])
-        }),
-        _vm._v(" "),
-        _vm._m(0)
-      ],
-      2
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c(
-        "a",
-        { staticClass: "nav-link selected", attrs: { href: "/catalog.php" } },
-        [_vm._v("Замороженные продукты")]
-      ),
-      _vm._v(" "),
-      _c("ul", { staticClass: "nav" }, [
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
-            [_vm._v("Яйцо")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link active", attrs: { href: "/catalog.php" } },
-            [_vm._v("Яйцо")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
-            [_vm._v("Яйцо")]
-          )
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3c0ceff4", module.exports)
-  }
-}
-
-/***/ }),
+/* 214 */,
+/* 215 */,
 /* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -56345,17 +56272,43 @@ var render = function() {
                   _vm._m(3)
                 ]),
                 _vm._v(" "),
-                _c(
-                  "aside",
-                  { staticClass: "aside" },
-                  [
-                    _c("Categories", {
-                      attrs: { catalog: _vm.catalog },
-                      on: { updateProducts: _vm.updateProducts }
-                    })
-                  ],
-                  1
-                )
+                _c("aside", { staticClass: "aside" }, [
+                  _c("nav", { staticClass: "categories" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "nav" },
+                      [
+                        _c("li", { staticClass: "nav-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link",
+                              class: _vm.active == 0 ? "active" : "",
+                              on: {
+                                click: function($event) {
+                                  _vm.updateProducts(0)
+                                }
+                              }
+                            },
+                            [_vm._v("Все категории")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.categories, function(category, index) {
+                          return _c("SubCategories", {
+                            key: index,
+                            attrs: {
+                              activeIndex: _vm.active,
+                              category: category
+                            },
+                            on: { updateProducts: _vm.updateProducts }
+                          })
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
               ])
             ])
           ])
@@ -60580,24 +60533,60 @@ if (false) {
 
 /***/ }),
 /* 236 */,
-/* 237 */
+/* 237 */,
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(239)
+/* template */
+var __vue_template__ = __webpack_require__(240)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/components/SubCategories.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7759498e", Component.options)
+  } else {
+    hotAPI.reload("data-v-7759498e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 239 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_js__ = __webpack_require__(40);
 //
 //
 //
@@ -60608,21 +60597,88 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["catalog"],
+  props: ["category", "activeIndex"],
   data: function data() {
     return {
-      active: 0
+      isVisible: false
     };
   },
 
   methods: {
     updateActive: function updateActive(id) {
-      this.active = id;
       this.$emit("updateProducts", id);
+      //   EventBus.$emit("updateProducts", id);
     }
   }
 });
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("li", { staticClass: "nav-item" }, [
+    _c(
+      "a",
+      {
+        staticClass: "nav-link",
+        class: [
+          _vm.activeIndex == _vm.category.id && _vm.category.children.length < 1
+            ? "active"
+            : "",
+          (_vm.category.children &&
+            _vm.category.children.length >= 1 &&
+            _vm.category.children[0].id == _vm.activeIndex) ||
+          (_vm.activeIndex == _vm.category.id &&
+            _vm.category.children.length >= 1)
+            ? "selected"
+            : ""
+        ],
+        on: {
+          click: [
+            function($event) {
+              $event.preventDefault()
+              _vm.updateActive(_vm.category.id)
+            },
+            function($event) {
+              _vm.isVisible = !_vm.isVisible
+            }
+          ]
+        }
+      },
+      [_vm._v("\n    " + _vm._s(_vm.category.name))]
+    ),
+    _vm._v(" "),
+    _vm.category.children.length && _vm.isVisible
+      ? _c(
+          "ul",
+          { staticClass: "nav" },
+          _vm._l(_vm.category.children, function(cat) {
+            return _c("SubCategories", {
+              key: cat.id,
+              attrs: { activeIndex: _vm.activeIndex, category: cat },
+              on: { updateProducts: _vm.updateActive }
+            })
+          })
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7759498e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

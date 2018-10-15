@@ -16,21 +16,23 @@ class Category extends JsonResource
     {
         if ($request->lang == 'uz') {
             return [
-                'id' => (string)$this->id,
+                'id' => $this->id,
                 'name' => $this->name_uz,
                 'position' => $this->position,
                 'parent_id' => $this->parent_id,
                 'manager_id' => $this->manager_id,
                 'products' => Product::collection($this->whenLoaded('products')),
+                'children' => Category::collection($this->children),
             ];
         }
         return [
-            'id' => (string)$this->id,
+            'id' => $this->id,
             'name' => $this->name_ru,
             'position' => $this->position,
             'parent_id' => $this->parent_id,
             'manager_id' => $this->manager_id,
             'products' => Product::collection($this->whenLoaded('products')),
+            'children' => Category::collection($this->children),
 
         ];
     }

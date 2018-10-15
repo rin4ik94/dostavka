@@ -9,7 +9,7 @@ class CreateCategoriesTable extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return void 
      */
     public function up()
     {
@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name_uz')->nullable();
             $table->string('name_ru')->nullable();
             $table->string('position')->nullable();
-            $table->integer('parent_id')->default(0);
+            $table->integer('parent_id')->nullable();
             $table->unsignedInteger('manager_id')->nullable();
             // $table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');
             $table->boolean('status')->default(1);
