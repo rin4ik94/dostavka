@@ -17,9 +17,11 @@
     @elseif(request()->segment(2) == 'orders')
     <li class="nav-item"><a class="nav-link active" href="/admin/orders">Список заказы</a></li>
     @elseif(request()->segment(2) == 'reports')
-    <li class="nav-item"><a class="nav-link active" href="/admin/reports">Список курьеров</a></li>
+    <li class="nav-item"><a class="nav-link active" href="/admin/reports">Список отчеты</a></li>
     @elseif(request()->segment(2) == 'orders')
-    <li class="nav-item"><a class="nav-link active" href="/admin/orders">Список Заказы</a></li>
+    <li class="nav-item"><a class="nav-link active" href="/admin/transactions">Список транзакции</a></li>
+    @elseif(request()->segment(2) == 'couriers')
+    <li class="nav-item"><a class="nav-link active" href="/admin/couriers">Список курьеров</a></li>
     @elseif(request()->segment(2) == 'clients')
     <li class="nav-item">
       <a class="nav-link {{ collect(request()->segments())->last()==='clients' ? 'active' : '' }}" href="/admin/clients">Список клиентов</a></li>

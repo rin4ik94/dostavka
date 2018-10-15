@@ -38,7 +38,7 @@
     </table>
     <div class="main-bottom d-flex align-items-center">
       @if($managerCategories->lastPage() > 1)
-        {{ $managerCategories->links() }} 
+        {{ $managerCategories->appends(request()->query())->links() }} 
       @else
         @include('admin.components.pagination')
       @endif

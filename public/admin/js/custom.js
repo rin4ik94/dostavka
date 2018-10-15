@@ -196,6 +196,23 @@ $('.product_action a').on('click',function(e){
     console.log(old_price);
   });
 });
+// actions for couriers
+$('.courier_action a').on('click',function(e){
+  e.preventDefault(e);
+    $(this).closest('tr').each(function(){
+    var id = $(this).data('id');
+    var fio = $(this).data('fio');
+    var mobile = $(this).data('mobile');
+    var status = $(this).data('status');
+    var pass = $(this).data('pass');
+    $('#editFio').val(fio);
+    $('#editId').val(id);
+    $('#editPass').val(pass); 
+    $('#editMobile').val(mobile); 
+    $('#editStatus').val(status); 
+  });
+});
+
 // checkbox button click disable input {working_time} select
 $('.custom-control-input').click(function() {
   if ($(this).is(':checked')) {

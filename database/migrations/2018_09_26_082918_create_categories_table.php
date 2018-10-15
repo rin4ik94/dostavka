@@ -19,8 +19,8 @@ class CreateCategoriesTable extends Migration
             $table->string('name_ru')->nullable();
             $table->string('position')->nullable();
             $table->integer('parent_id')->default(0);
-            $table->integer('manager_id')->unsigned();
-            $table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');
+            $table->unsignedInteger('manager_id')->nullable();
+            // $table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

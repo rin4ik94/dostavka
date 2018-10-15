@@ -45,6 +45,10 @@ export const setRegionId = ({ commit, dispatch }, regionId) => {
     localforage.setItem('region', regionId)
 
 }
+export const setRegionName = ({ commit, dispatch }, region) => {
+    commit('setRegionName', region)
+
+}
 export const setRegion = ({ commit, dispatch }, regionId) => {
     return localforage.getItem('region').then((regionId) => {
         if (isEmpty(regionId)) {

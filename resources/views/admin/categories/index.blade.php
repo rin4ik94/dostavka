@@ -26,7 +26,6 @@
   @if(count($categories) > 0)
   <ul class="categories">
     @foreach($categories as $category)
-    {{ $category->manager->name }}
     <li class="category">
         <div class="category-content" data="{{$category->manager_id}}">
           <div class="category-column category-move" data="{{$category->parent_id}}">

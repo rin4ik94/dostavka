@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Admin;
 
 use App\Models\Employee;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -37,11 +38,14 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth:admin');
+        // $this->middleware('guest');
     }
 
     public function showLoginForm()
     {
+        if(\Auth::guard('admin')->check()){
+            return redirect()->route('dashboard');
+        }
         return view('admin.auth.login');
     }
 
@@ -50,6 +54,15 @@ class LoginController extends Controller
         return 'mobile';
     }
     
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect('/cp');
+    }
+
     protected function guard()
     {
         return Auth::guard('admin');

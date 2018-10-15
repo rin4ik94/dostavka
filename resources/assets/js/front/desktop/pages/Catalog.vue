@@ -1,10 +1,11 @@
 <template>
-     <div class="content">
+<div>
+     <div class="content" v-if="catalog">
       <div class="container">
         <div class="main-actions">
           <a class="btn btn-outline-green" @click="$router.go(-1)">&#8592; Назад к список магазинов</a>
         </div>
-        <h1 class="main-title">Каталог продуктов магазина «Makro» в Городе Ферганы</h1>
+        <h1 class="main-title">Каталог продуктов магазина «{{catalog.name}}» {{catalog.branches[0].region_name}}</h1>
         <div class="content-inner">
           <main class="main">
             <div class="btn-group btn-group-sm btn-group-toggle main-sorter" data-toggle="buttons">
@@ -31,51 +32,22 @@
                     </div>
                   </div>
                 </div>
-              </li>
-              <li class="product selected">
-                <div class="product-inner">
-                <a href="/storename/products/id" data-toggle="modal" data-target="#product">
-                  <div class="product-image"><img src="/desktop/img/001.jpg"></div>
-                  <div class="product-title">Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
-                  </a>
-                  <div class="product-footer">
-                    <div class="counter-widget input-group">
-                      <div class="input-group-prepend"><button class="btn btn-outline-red" type="button"><i class="icon">remove</i></button></div>
-                      <input class="form-control" type="text" value="2 шт" disabled>
-                      <div class="input-group-append"><button class="btn btn-outline-green" type="button"><i class="icon">add</i></button></div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="product">
+              </li> 
+              <li class="product" v-for="product in products">
                 <div class="product-inner">
                 <a href="/storename/products/id" data-toggle="modal" data-target="#product">
                   <div class="product-discount">-10%</div>
                   <div class="product-image"><img src="/desktop/img/001.jpg"></div>
-                  <div class="product-title">Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
+                  <div class="product-title">{{product.name}} 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
                   </a>
                   <div class="product-footer">
                     <div class="product-price">
-                      <div class="product-price-new">3 200 сум</div><div class="product-quantity">за 1 кг.</div>
+                      <div class="product-price-new">{{product.new_price | toCurrency }} сум</div><div class="product-quantity">за 1 кг.</div>
                     </div>
                     <button class="btn btn-green product-add-button" type="submit">В корзину</button>
                   </div>
                 </div>
-              </li>
-              <li class="product">
-                <div class="product-inner">
-                <a href="/storename/products/id" data-toggle="modal" data-target="#product">
-                  <div class="product-image"><img src="/desktop/img/001.jpg"></div>
-                  <div class="product-title">Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
-                  </a>
-                  <div class="product-footer">
-                    <div class="product-price">
-                      <div class="product-price-new">3 200 сум</div><div class="product-quantity">за 1 шт.</div>
-                    </div>
-                    <button class="btn btn-green product-add-button" type="submit">В корзину</button>
-                  </div>
-                </div>
-              </li>
+              </li> 
             </ul>
             <nav>
               <ul class="pagination">
@@ -94,16 +66,69 @@
             </nav>
           </main>
           <aside class="aside">
-           <Categories />  
+           <Categories @updateProducts="updateProducts" :catalog="catalog"/>  
           </aside>
         </div>
       </div>
     </div>
+    <NotFound v-if="notFound"/>
+    </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+import NotFound from "./NotFound";
+
 import Categories from "../components/AsideCategories";
 export default {
-  components: { Categories },
-  methods: {}
+  data() {
+    return {
+      catalog: null,
+      notFound: false,
+      id: 0,
+      products: []
+    };
+  },
+  components: { Categories, NotFound },
+  watch: {
+    id() {
+      this.filterProducts(this.id);
+    }
+  },
+  methods: {
+    updateProducts(id) {
+      this.id = id;
+    },
+    filterProducts(id) {
+      console.log(id);
+      let category = this.catalog.categories.find(
+        category => id == category.id
+      );
+      this.products = category.products;
+    },
+    getCatalog() {
+      setTimeout(() => {
+        let uri = `/api/managers/${this.$route.params.id}?withManagers&region=${
+          this.region
+        }`;
+        axios
+          .get(uri)
+          .then(response => {
+            this.catalog = response.data.data;
+          })
+          .catch(() => {
+            this.notFound = true;
+          });
+      }, 0);
+    }
+  },
+  computed: {
+    ...mapGetters({
+      region: "regionId",
+      regionName: "regionName"
+    })
+  },
+  created() {
+    this.getCatalog();
+  }
 };
 </script>

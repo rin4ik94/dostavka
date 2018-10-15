@@ -23,10 +23,10 @@ class CreateProductsTable extends Migration
             $table->string('old_price')->nullable();
             $table->boolean('status')->default('1');
             $table->boolean('moderation')->default('0');
-            $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->integer('manager_id')->unsigned();
-            $table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');
+            $table->unsignedInteger('category_id')->nullable();
+            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedInteger('manager_id')->nullable();
+            // $table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');
             $table->timestamps();
         });
     }

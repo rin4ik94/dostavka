@@ -89,7 +89,7 @@
 		</table>
 		<div class="main-bottom d-flex align-items-center">
 			@if($products->lastPage() > 1)
-			{{ $products->links() }}
+			{{ $products->appends(request()->query())->links() }}
 			@else
 			@include('admin.components.pagination')
 			@endif

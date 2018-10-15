@@ -1,7 +1,7 @@
 // import App from '../App.vue'
 // import Public from '../layouts/Public'
 import Dashboard from '../layouts/Dashboard'
-import Home from '../pages/Home'
+import Home from '../pages/main/Home'
 import Profile from '../pages/Profile'
 import Orders from '../pages/Orders'
 import Delivery from '../pages/Delivery'
@@ -51,9 +51,14 @@ export default [
             component: Delivery
         },
         {
-            path: '/catalog',
+            path: '/catalogs/:id',
             name: 'catalog',
             component: Catalog
+        },
+        {
+            path: '*',
+            name: 'notFound',
+            component: NotFound
         }
         ],
         // {
@@ -118,9 +123,5 @@ export default [
         //         guest: false,
         //         needsAuth: true
         //     }
-    },
-    {
-        path: '*',
-        name: 'NotFound',
-        component: NotFound
-    }]
+    }
+]

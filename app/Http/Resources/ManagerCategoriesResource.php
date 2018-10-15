@@ -3,8 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Manager;
 
-class Category extends JsonResource
+class ManagerCategoriesResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,20 +19,13 @@ class Category extends JsonResource
             return [
                 'id' => (string)$this->id,
                 'name' => $this->name_uz,
-                'position' => $this->position,
-                'parent_id' => $this->parent_id,
-                'manager_id' => $this->manager_id,
-                'products' => Product::collection($this->whenLoaded('products')),
+                'managers' => Manager::collection($this->whenLoaded('managers'))
             ];
         }
         return [
             'id' => (string)$this->id,
             'name' => $this->name_ru,
-            'position' => $this->position,
-            'parent_id' => $this->parent_id,
-            'manager_id' => $this->manager_id,
-            'products' => Product::collection($this->whenLoaded('products')),
-
+            'managers' => Manager::collection($this->whenLoaded('managers'))
         ];
     }
 }
