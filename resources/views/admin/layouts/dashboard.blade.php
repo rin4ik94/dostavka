@@ -15,8 +15,6 @@
 				</main>
 			</div>
 			@include('admin.layouts.inc.modals')
-			@include('admin.layouts.inc.footer')
 		</div>
-		@include('admin.layouts.inc.scripts')
 	</body>
 </html>
