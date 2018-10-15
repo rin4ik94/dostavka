@@ -56023,8 +56023,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   components: { Categories: __WEBPACK_IMPORTED_MODULE_2__components_AsideCategories___default.a, NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a },
   watch: {
-    id: function id() {
-      this.filterProducts(this.id);
+    id: {
+      immediate: true,
+      handler: function handler(id) {
+        this.filterProducts(this.id);
+      }
+    },
+    catalog: {
+      immediate: true,
+      handler: function handler() {
+        this.filterProducts(this.id);
+      }
     }
   },
   methods: {
@@ -56032,21 +56041,33 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.id = id;
     },
     filterProducts: function filterProducts(id) {
-      console.log(id);
-      var category = this.catalog.categories.find(function (category) {
-        return id == category.id;
-      });
-      this.products = category.products;
-    },
-    getCatalog: function getCatalog() {
       var _this = this;
 
       setTimeout(function () {
-        var uri = "/api/managers/" + _this.$route.params.id + "?withManagers&region=" + _this.region;
+        if (id != 0 && _this.catalog) {
+          var category = _this.catalog.categories.find(function (category) {
+            return id == category.id;
+          });
+          return _this.products = category.products;
+        }
+        var data = [];
+        _this.catalog.categories.map(function (v, k) {
+          v.products.map(function (value, key) {
+            data.push(value);
+          });
+        });
+        _this.products = data;
+      });
+    },
+    getCatalog: function getCatalog() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        var uri = "/api/managers/" + _this2.$route.params.id + "?withManagers&region=" + _this2.region;
         axios.get(uri).then(function (response) {
-          _this.catalog = response.data.data;
+          _this2.catalog = response.data.data;
         }).catch(function () {
-          _this.notFound = true;
+          _this2.notFound = true;
         });
       }, 0);
     }

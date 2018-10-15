@@ -90,8 +90,17 @@ export default {
   },
   components: { Categories, NotFound },
   watch: {
-    id() {
-      this.filterProducts(this.id);
+    id: {
+      immediate: true,
+      handler: function(id) {
+        this.filterProducts(this.id);
+      }
+    },
+    catalog: {
+      immediate: true,
+      handler: function() {
+        this.filterProducts(this.id);
+      }
     }
   },
   methods: {
@@ -99,11 +108,21 @@ export default {
       this.id = id;
     },
     filterProducts(id) {
-      console.log(id);
-      let category = this.catalog.categories.find(
-        category => id == category.id
-      );
-      this.products = category.products;
+      setTimeout(() => {
+        if (id != 0 && this.catalog) {
+          let category = this.catalog.categories.find(
+            category => id == category.id
+          );
+          return (this.products = category.products);
+        }
+        let data = [];
+        this.catalog.categories.map((v, k) => {
+          v.products.map((value, key) => {
+            data.push(value);
+          });
+        });
+        this.products = data;
+      });
     },
     getCatalog() {
       setTimeout(() => {
