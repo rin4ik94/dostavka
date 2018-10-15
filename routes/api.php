@@ -20,6 +20,8 @@ Route::resource('/categories', 'Front\CategoryController');
 Route::post('/client/register', 'Front\Auth\AuthController@register');
 Route::get('/regions', 'Front\RegionController@index');
 Route::get('/managers', 'Front\ManagerController@index');
+Route::get('/managers/{manager}', 'Front\ManagerController@show');
+
 // Route::group(['middleware' => 'jwt.generate'], function () {
 //     Route::get('/me', 'Front\Auth\AuthController@user');
 //     Route::patch('/clients/{client}/settings', 'Front\Auth\AuthController@update');

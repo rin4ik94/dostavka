@@ -51,9 +51,14 @@ export default [
             component: Delivery
         },
         {
-            path: '/catalog',
+            path: '/catalogs/:id',
             name: 'catalog',
             component: Catalog
+        },
+        {
+            path: '*',
+            name: 'notFound',
+            component: NotFound
         }
         ],
         // {
@@ -118,9 +123,5 @@ export default [
         //         guest: false,
         //         needsAuth: true
         //     }
-    },
-    {
-        path: '*',
-        name: 'NotFound',
-        component: NotFound
-    }]
+    }
+]

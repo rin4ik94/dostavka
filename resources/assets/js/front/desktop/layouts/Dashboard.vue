@@ -5,7 +5,7 @@
       <CartInfo />
       <Footer></Footer>
       <Modals></Modals>
-        <RegionModal />
+      <RegionModal />
 
   </div>
 </template>
@@ -24,11 +24,11 @@ export default {
   },
   methods: {
     async getRegions() {
-      let response = await axios.get("api/regions");
+      let response = await axios.get("/api/regions");
       this.regions = response.data.data;
     }
   },
-  created() {
+  mounted() {
     this.getRegions();
     // this.setRegion().catch(() => {
     //   console.log("sad");

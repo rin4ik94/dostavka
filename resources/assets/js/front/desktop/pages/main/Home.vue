@@ -12,7 +12,7 @@
           </div>
           <ul class="partners" v-if="filtered.length > 0">
             <li class="partner" v-for="manager in filtered" :key="manager.id">
-              <router-link :to="{name: 'catalog'}" class="partner-inner">
+              <router-link :to="{name:'catalog', params: {id: manager.id}}" class="partner-inner">
                 <div class="partner-logo"><img :src="manager.logo"></div>
                 <div class="partner-info">
                   <div class="partner-name">{{manager.name}}</div>
