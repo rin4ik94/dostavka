@@ -29,7 +29,19 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'mobile' => 'required',
+            'birth_date' => 'required',
+            'jender' => 'required',
+            'password' => 'required',
+            'status' => 'required',
+            'group_id' => 'required',
+            'region_id' => 'required',
+        ]);
+        $client = Client::create($request->all());
+
     }
     /**
      * Update the specified resource in storage.

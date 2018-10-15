@@ -7,31 +7,42 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <form action="/admin/clients/1" method="POST" class="needs-validation" novalidate>
+        {{ method_field('PUT') }}
+        <div class="modal-body">
         <div class="form-group">
-          <label class="form-label" for="storeFirstName">Имя *</label>
-          <input class="form-control" type="text" id="storeFirstName" name="first_name">
+          <input type="hidden" name="id" id="editId">
+          <label class="form-label" for="editFirstName">Имя *</label>
+          <input class="form-control" type="text" id="editFirstName" name="first_name" required>
         </div>
         <div class="form-group">
-          <label class="form-label" for="storeLastName">Фамилия *</label>
-          <input class="form-control" type="text" id="storeLastName" name="last_name">
+          <label class="form-label" for="editLastName">Фамилия *</label>
+          <input class="form-control" type="text" id="editLastName" name="last_name" required>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="storeMobile">Телефон *</label>
-          <input class="form-control" type="text" id="storeMobile" name="mobile">
+        <div class="form-row">
+          <div class="col">
+            <label class="form-label" for="editMobile">Телефон *</label>
+            <input class="form-control" type="text" id="editMobile" name="mobile" required>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="form-label" for="editPassword">Пароль *</label>
+              <input class="form-control" type="text" id="editPassword" name="password" required>
+            </div>
+          </div>
         </div>
         <div class="form-row">
           <div class="col">
             <div class="form-group">
-              <label class="form-label" for="storeDate">Дата рождения *</label>
-              <input class="form-control" type="date" id="storeDate" name="birth_date">
+              <label class="form-label" for="editDate">Дата рождения *</label>
+              <input class="form-control" type="date" id="editDate" name="birth_date">
             </div>
           </div>
           <div class="col">
             <div class="form-group">
-              <label class="form-label" for="storeJender">Пол *</label>
-              <select class="custom-select" name="jender">
-                <option value="0" selected disabled>Не выбран</option>
+              <label class="form-label" for="editJender">Пол *</label>
+              <select class="custom-select" id="editJender" name="jender" required>
+                <option value="" selected disabled>Не выбран</option>
                 <option value="1">Мужской</option>
                 <option value="0">Женский</option>
               </select>
@@ -41,8 +52,8 @@
         <div class="form-row">
           <div class="col">
             <div class="form-group">
-              <label class="form-label" for="storeGroup">Группа</label>
-              <select class="custom-select" id="storeGroup" name="group_id">
+              <label class="form-label" for="editGroup">Группа</label>
+              <select class="custom-select" id="editGroup" name="group_id">
                 <option value="1" selected>Обычный покупатель</option>
                 <option value="2">Постоянный покупатель</option>
               </select>
@@ -50,9 +61,9 @@
           </div>
           <div class="col">
             <div class="form-group">
-              <label class="form-label" for="storeRegion">Регион *</label>
-              <select class="custom-select" id="storeRegion" name="region_id">
-                <option value="0" selected disabled>Не выбран</option>
+              <label class="form-label" for="editRegion">Регион *</label>
+              <select class="custom-select" id="editRegion" name="region_id" required>
+                <option value="" selected disabled>Не выбран</option>
                 @foreach($regions as $region)
                 <option value="{{ $region->id }}">{{ $region->name_ru }}</option>
                 @endforeach
@@ -61,8 +72,8 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label" for="storeStatus">Статус</label>
-          <select class="custom-select" id="storeStatus" name="status">
+          <label class="form-label" for="editStatus">Статус</label>
+          <select class="custom-select" id="editStatus" name="status">
             <option value="1" selected>Активный</option>
             <option value="0">Неактивен</option>
           </select>
@@ -72,6 +83,7 @@
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-green">OK</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

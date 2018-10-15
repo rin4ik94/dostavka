@@ -7,31 +7,41 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+    <form action="{{ route('clients.store') }}" method="POST" class="needs-validation" novalidate>
+      @csrf
       <div class="modal-body">
         <div class="form-group">
           <label class="form-label" for="storeFirstName">Имя *</label>
-          <input class="form-control" type="text" id="storeFirstName" name="first_name">
+          <input type="text" class="form-control" id="storeFirstName" name="first_name" value="{{old('first_name')}}" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="storeLastName">Фамилия *</label>
-          <input class="form-control" type="text" id="storeLastName" name="last_name">
+          <input type="text" class="form-control" id="storeLastName" name="last_name" value="{{old('last_name')}}" required>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="storeMobile">Телефон *</label>
-          <input class="form-control" type="text" id="storeMobile" name="mobile">
+        <div class="form-row">
+          <div class="col">
+            <label class="form-label" for="storeMobile">Телефон *</label>
+            <input class="form-control" type="text" id="storeMobile" name="mobile" value="{{old('mobile')}}" required>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="form-label" for="password">Пароль *</label>
+              <input class="form-control" type="text" id="password" name="password" required>
+            </div>
+          </div>
         </div>
         <div class="form-row">
           <div class="col">
             <div class="form-group">
               <label class="form-label" for="storeDate">Дата рождения *</label>
-              <input class="form-control" type="date" id="storeDate" name="birth_date">
+              <input type="date" class="form-control" id="storeDate" name="birth_date" value="{{old('birth_date')}}" required>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label class="form-label" for="storeJender">Пол *</label>
-              <select class="custom-select" name="jender">
-                <option value="0" selected disabled>Не выбран</option>
+              <select class="custom-select" name="jender" required>
+                <option value="" selected disabled>Не выбран</option>
                 <option value="1">Мужской</option>
                 <option value="0">Женский</option>
               </select>
@@ -51,8 +61,8 @@
           <div class="col">
             <div class="form-group">
               <label class="form-label" for="storeRegion">Регион *</label>
-              <select class="custom-select" id="storeRegion" name="region_id">
-                <option value="0" selected disabled>Не выбран</option>
+              <select class="custom-select" id="storeRegion" name="region_id" required>
+                <option value="" selected disabled>Не выбран</option>
                 @foreach($regions as $region)
                 <option value="{{ $region->id }}">{{ $region->name_ru }}</option>
                 @endforeach
@@ -72,6 +82,7 @@
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-green">OK</button>
       </div>
+    </form>
     </div>
   </div>
 </div>

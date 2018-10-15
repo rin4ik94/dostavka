@@ -48,13 +48,15 @@
   </thead>
   <tbody>
     @foreach ($clients as $client)
-    <tr>
+    <tr data-id="{{ $client->id }}" data-fname="{{ $client->first_name }}" data-lname="{{ $client->last_name }}" data-mobile="{{ $client->mobile }}" 
+      data-bdate={{ $client->birth_date }} data-jender="{{ $client->jender }}" data-status="{{ $client->status }}" data-group="{{ $client->client_group->id }}" 
+      data-region="{{ $client->region->id }}">
       <td>{{ $client->id }}</td>
       <td> {{ $client->first_name }} {{ $client->last_name }}</td>
-      <td>{{ $client->client_group->name ?? '' }}</td>
+      <td>{{ $client->client_group->name }}</td>
       <td> {{ $client->region->name_ru }} </td>
       <td>+998{{ $client->mobile }}</td>
-      <td>01/11</td>
+      <td>{{ $client->birth_date }}</td>
       <td>
       <div class="btn-group btn-group-sm client_action">
         <a href="#" data-toggle="modal" data-target="#editClient" class="btn btn-light">

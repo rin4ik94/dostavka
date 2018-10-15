@@ -17,7 +17,7 @@ class Client extends Authenticatable
     ];
 
     public function client_group(){
-      return $this->belongsTo('App\Models\ClientGroup');
+      return $this->belongsTo('App\Models\ClientGroup','id');
     }
 
     public function region(){

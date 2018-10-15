@@ -193,7 +193,6 @@ $('.product_action a').on('click',function(e){
     $('.category_id').val(category_id); 
     $('.measurement').val(measurement); 
     $('.status').val(status); 
-    console.log(old_price);
   });
 });
 // actions for couriers
@@ -212,7 +211,31 @@ $('.courier_action a').on('click',function(e){
     $('#editStatus').val(status); 
   });
 });
-
+// actions for clients
+$('.client_action a').on('click',function(e){
+  e.preventDefault(e);
+    $(this).closest('tr').each(function(){
+    var id = $(this).data('id');
+    var first_name = $(this).data('fname');
+    var last_name = $(this).data('lname');
+    var mobile = $(this).data('mobile');
+    var birth_date = $(this).data('bdate');
+    var group = $(this).data('group');
+    var jender = $(this).data('jender');
+    var region = $(this).data('region');
+    var status = $(this).data('status');
+    
+    $('#editId').val(id);
+    $('#editFirstName').val(first_name);
+    $('#editLastName').val(last_name);
+    $('#editMobile').val(mobile); 
+    $('#editDate').val(birth_date);
+    $('#editGroup').val(group);
+    $('#editJender').val(jender);
+    $('#editRegion').val(region);
+    $('#editStatus').val(status); 
+  });
+});
 // checkbox button click disable input {working_time} select
 $('.custom-control-input').click(function() {
   if ($(this).is(':checked')) {
