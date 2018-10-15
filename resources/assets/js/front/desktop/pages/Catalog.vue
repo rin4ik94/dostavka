@@ -116,7 +116,6 @@ export default {
     },
     allProducts() {
       let data = [];
-      console.log(this.categories);
       this.categories.map((v, k) => {
         if (v.children.length == 0) {
           v.products.map((value, key) => {

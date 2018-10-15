@@ -56050,7 +56050,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     allProducts: function allProducts() {
       var data = [];
-      console.log(this.categories);
       this.categories.map(function (v, k) {
         if (v.children.length == 0) {
           v.products.map(function (value, key) {
@@ -60610,7 +60609,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     updateActive: function updateActive(id) {
       this.$emit("updateProducts", id);
-      //   EventBus.$emit("updateProducts", id);
+    }
+  },
+  computed: {
+    fieldClasses: function fieldClasses() {
+      return {
+        active: this.activeIndex == this.category.id && this.category.children.length < 1,
+        selected: this.isParentSelected
+      };
+    },
+    isParentSelected: function isParentSelected() {
+      var _this = this;
+
+      var data = 0;
+      if (!this.category.children && !this.category.children.length >= 1) {
+        return false;
+      }
+      if (this.category.id == this.activeIndex && this.category.children.length >= 1) {
+        return true;
+      }
+      this.category.children.map(function (value, key) {
+        if (value.id == _this.activeIndex) {
+          data = 1;
+          return true;
+        }
+      });
+      if (data == 1) {
+        return true;
+      }
+
+      return false;
     }
   }
 });
@@ -60628,18 +60656,7 @@ var render = function() {
       "a",
       {
         staticClass: "nav-link",
-        class: [
-          _vm.activeIndex == _vm.category.id && _vm.category.children.length < 1
-            ? "active"
-            : "",
-          (_vm.category.children &&
-            _vm.category.children.length >= 1 &&
-            _vm.category.children[0].id == _vm.activeIndex) ||
-          (_vm.activeIndex == _vm.category.id &&
-            _vm.category.children.length >= 1)
-            ? "selected"
-            : ""
-        ],
+        class: [_vm.fieldClasses],
         on: {
           click: [
             function($event) {
