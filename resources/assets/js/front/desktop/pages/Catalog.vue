@@ -32,51 +32,22 @@
                     </div>
                   </div>
                 </div>
-              </li>
-              <li class="product selected">
-                <div class="product-inner">
-                <a href="/storename/products/id" data-toggle="modal" data-target="#product">
-                  <div class="product-image"><img src="/desktop/img/001.jpg"></div>
-                  <div class="product-title">Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
-                  </a>
-                  <div class="product-footer">
-                    <div class="counter-widget input-group">
-                      <div class="input-group-prepend"><button class="btn btn-outline-red" type="button"><i class="icon">remove</i></button></div>
-                      <input class="form-control" type="text" value="2 шт" disabled>
-                      <div class="input-group-append"><button class="btn btn-outline-green" type="button"><i class="icon">add</i></button></div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="product">
+              </li> 
+              <li class="product" v-for="product in products">
                 <div class="product-inner">
                 <a href="/storename/products/id" data-toggle="modal" data-target="#product">
                   <div class="product-discount">-10%</div>
                   <div class="product-image"><img src="/desktop/img/001.jpg"></div>
-                  <div class="product-title">Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
+                  <div class="product-title">{{product.name}} 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
                   </a>
                   <div class="product-footer">
                     <div class="product-price">
-                      <div class="product-price-new">3 200 сум</div><div class="product-quantity">за 1 кг.</div>
+                      <div class="product-price-new">{{product.new_price | toCurrency }} сум</div><div class="product-quantity">за 1 кг.</div>
                     </div>
                     <button class="btn btn-green product-add-button" type="submit">В корзину</button>
                   </div>
                 </div>
-              </li>
-              <li class="product">
-                <div class="product-inner">
-                <a href="/storename/products/id" data-toggle="modal" data-target="#product">
-                  <div class="product-image"><img src="/desktop/img/001.jpg"></div>
-                  <div class="product-title">Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
-                  </a>
-                  <div class="product-footer">
-                    <div class="product-price">
-                      <div class="product-price-new">3 200 сум</div><div class="product-quantity">за 1 шт.</div>
-                    </div>
-                    <button class="btn btn-green product-add-button" type="submit">В корзину</button>
-                  </div>
-                </div>
-              </li>
+              </li> 
             </ul>
             <nav>
               <ul class="pagination">
@@ -95,7 +66,7 @@
             </nav>
           </main>
           <aside class="aside">
-           <Categories />  
+           <Categories @updateProducts="updateProducts" :catalog="catalog"/>  
           </aside>
         </div>
       </div>
@@ -112,11 +83,28 @@ export default {
   data() {
     return {
       catalog: null,
-      notFound: false
+      notFound: false,
+      id: 0,
+      products: []
     };
   },
   components: { Categories, NotFound },
+  watch: {
+    id() {
+      this.filterProducts(this.id);
+    }
+  },
   methods: {
+    updateProducts(id) {
+      this.id = id;
+    },
+    filterProducts(id) {
+      console.log(id);
+      let category = this.catalog.categories.find(
+        category => id == category.id
+      );
+      this.products = category.products;
+    },
     getCatalog() {
       setTimeout(() => {
         let uri = `/api/managers/${this.$route.params.id}?withManagers&region=${

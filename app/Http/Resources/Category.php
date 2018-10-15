@@ -20,15 +20,18 @@ class Category extends JsonResource
                 'name' => $this->name_uz,
                 'position' => $this->position,
                 'parent_id' => $this->parent_id,
-                'manager_id' => $this->manager_id
+                'manager_id' => $this->manager_id,
+                'products' => Product::collection($this->whenLoaded('products')),
             ];
         }
         return [
-        'id' => (string)$this->id,
-        'name' => $this->name_ru,
-        'position' => $this->position,
-        'parent_id' => $this->parent_id,
-        'manager_id' => $this->manager_id
+            'id' => (string)$this->id,
+            'name' => $this->name_ru,
+            'position' => $this->position,
+            'parent_id' => $this->parent_id,
+            'manager_id' => $this->manager_id,
+            'products' => Product::collection($this->whenLoaded('products')),
+
         ];
     }
 }

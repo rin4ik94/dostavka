@@ -28,7 +28,7 @@ class ManagerController extends Controller
         if ($request->has('region')) {
             return new ManagerResource($manager->load(['branches' => function ($query) use ($request) {
                 return $query->where('region_id', $request->region)->where('status', 1);
-            }]));
+            }, 'categories.products']));
         } else {
             return new ManagerResource($manager);
         }

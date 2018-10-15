@@ -20,6 +20,7 @@ class Manager extends JsonResource
             'name' => $this->name,
             'logo' => '/storage/logos/' . $this->logo,
             'branches' => Branches::collection($this->branches),
+            'categories' => Category::collection($this->whenLoaded('categories')),
             'cat' => $this->managerCategory->name_ru
         ];
     }

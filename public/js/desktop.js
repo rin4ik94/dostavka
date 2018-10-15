@@ -56006,35 +56006,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -56044,12 +56015,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   data: function data() {
     return {
       catalog: null,
-      notFound: false
+      notFound: false,
+      id: 0,
+      products: []
     };
   },
 
   components: { Categories: __WEBPACK_IMPORTED_MODULE_2__components_AsideCategories___default.a, NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a },
+  watch: {
+    id: function id() {
+      this.filterProducts(this.id);
+    }
+  },
   methods: {
+    updateProducts: function updateProducts(id) {
+      this.id = id;
+    },
+    filterProducts: function filterProducts(id) {
+      console.log(id);
+      var category = this.catalog.categories.find(function (category) {
+        return id == category.id;
+      });
+      this.products = category.products;
+    },
     getCatalog: function getCatalog() {
       var _this = this;
 
@@ -56079,7 +56067,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(237)
 /* template */
 var __vue_template__ = __webpack_require__(215)
 /* template functional */
@@ -56127,55 +56115,65 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("nav", { staticClass: "categories" }, [
+    _c(
+      "ul",
+      { staticClass: "nav" },
+      [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              class: _vm.active == 0 ? "active" : "",
+              on: {
+                click: function($event) {
+                  _vm.updateActive(0)
+                }
+              }
+            },
+            [_vm._v("Все категории")]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.catalog.categories, function(category) {
+          return _c("li", { key: category.id, staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                class: _vm.active == category.id ? "active" : "",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.updateActive(category.id)
+                  }
+                }
+              },
+              [_vm._v(_vm._s(category.name))]
+            )
+          ])
+        }),
+        _vm._v(" "),
+        _vm._m(0)
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "categories" }, [
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        { staticClass: "nav-link selected", attrs: { href: "/catalog.php" } },
+        [_vm._v("Замороженные продукты")]
+      ),
+      _vm._v(" "),
       _c("ul", { staticClass: "nav" }, [
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link active", attrs: { href: "/catalog.php" } },
-            [_vm._v("Все категории")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
-            [_vm._v("Фрукты, овощи")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
-            [_vm._v("Напитки")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
-            [_vm._v("Мясо")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
-            [_vm._v("Хлеб")]
-          )
-        ]),
-        _vm._v(" "),
         _c("li", { staticClass: "nav-item" }, [
           _c(
             "a",
@@ -56187,49 +56185,17 @@ var staticRenderFns = [
         _c("li", { staticClass: "nav-item" }, [
           _c(
             "a",
-            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
-            [_vm._v("Кофе и чай")]
+            { staticClass: "nav-link active", attrs: { href: "/catalog.php" } },
+            [_vm._v("Яйцо")]
           )
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "nav-item" }, [
           _c(
             "a",
-            {
-              staticClass: "nav-link selected",
-              attrs: { href: "/catalog.php" }
-            },
-            [_vm._v("Замороженные продукты")]
-          ),
-          _vm._v(" "),
-          _c("ul", { staticClass: "nav" }, [
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
-                [_vm._v("Яйцо")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link active",
-                  attrs: { href: "/catalog.php" }
-                },
-                [_vm._v("Яйцо")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
-                [_vm._v("Яйцо")]
-              )
-            ])
-          ])
+            { staticClass: "nav-link", attrs: { href: "/catalog.php" } },
+            [_vm._v("Яйцо")]
+          )
         ])
       ])
     ])
@@ -56283,9 +56249,92 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "content-inner" }, [
-                _vm._m(0),
+                _c("main", { staticClass: "main" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    { staticClass: "products" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._l(_vm.products, function(product) {
+                        return _c("li", { staticClass: "product" }, [
+                          _c("div", { staticClass: "product-inner" }, [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "/storename/products/id",
+                                  "data-toggle": "modal",
+                                  "data-target": "#product"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "product-discount" }, [
+                                  _vm._v("-10%")
+                                ]),
+                                _vm._v(" "),
+                                _vm._m(2, true),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "product-title" }, [
+                                  _vm._v(
+                                    _vm._s(product.name) +
+                                      " 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
+                                  )
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "product-footer" }, [
+                              _c("div", { staticClass: "product-price" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "product-price-new" },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm._f("toCurrency")(product.new_price)
+                                      ) + " сум"
+                                    )
+                                  ]
+                                ),
+                                _c("div", { staticClass: "product-quantity" }, [
+                                  _vm._v("за 1 кг.")
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "btn btn-green product-add-button",
+                                  attrs: { type: "submit" }
+                                },
+                                [_vm._v("В корзину")]
+                              )
+                            ])
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ]),
                 _vm._v(" "),
-                _c("aside", { staticClass: "aside" }, [_c("Categories")], 1)
+                _c(
+                  "aside",
+                  { staticClass: "aside" },
+                  [
+                    _c("Categories", {
+                      attrs: { catalog: _vm.catalog },
+                      on: { updateProducts: _vm.updateProducts }
+                    })
+                  ],
+                  1
+                )
               ])
             ])
           ])
@@ -56301,304 +56350,160 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("main", { staticClass: "main" }, [
-      _c(
-        "div",
-        {
-          staticClass: "btn-group btn-group-sm btn-group-toggle main-sorter",
-          attrs: { "data-toggle": "buttons" }
-        },
-        [
-          _c("span", { staticClass: "main-sorter-title" }, [
-            _vm._v("Сортировать:")
-          ]),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "btn btn-outline-light active",
-              attrs: { for: "option1" }
-            },
-            [
-              _c("input", {
-                attrs: {
-                  type: "radio",
-                  name: "options",
-                  id: "option1",
-                  autocomplete: "off",
-                  checked: ""
-                }
-              }),
-              _vm._v("По популярности\n              ")
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "btn btn-outline-light", attrs: { for: "option2" } },
-            [
-              _c("input", {
-                attrs: {
-                  type: "radio",
-                  name: "options",
-                  id: "option2",
-                  autocomplete: "off"
-                }
-              }),
-              _vm._v("По цене\n              ")
-            ]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("ul", { staticClass: "products" }, [
-        _c("li", { staticClass: "product selected" }, [
-          _c("div", { staticClass: "product-inner" }, [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: "/storename/products/id",
-                  "data-toggle": "modal",
-                  "data-target": "#product"
-                }
-              },
-              [
-                _c("div", { staticClass: "product-image" }, [
-                  _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-title" }, [
-                  _vm._v(
-                    "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "product-footer" }, [
-              _c("div", { staticClass: "counter-widget input-group" }, [
-                _c("div", { staticClass: "input-group-prepend" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-red",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "icon" }, [_vm._v("clear")])]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", value: "1 шт", disabled: "" }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-green",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
-                  )
-                ])
-              ])
-            ])
-          ])
+    return _c(
+      "div",
+      {
+        staticClass: "btn-group btn-group-sm btn-group-toggle main-sorter",
+        attrs: { "data-toggle": "buttons" }
+      },
+      [
+        _c("span", { staticClass: "main-sorter-title" }, [
+          _vm._v("Сортировать:")
         ]),
         _vm._v(" "),
-        _c("li", { staticClass: "product selected" }, [
-          _c("div", { staticClass: "product-inner" }, [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: "/storename/products/id",
-                  "data-toggle": "modal",
-                  "data-target": "#product"
-                }
-              },
-              [
-                _c("div", { staticClass: "product-image" }, [
-                  _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-title" }, [
-                  _vm._v(
-                    "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "product-footer" }, [
-              _c("div", { staticClass: "counter-widget input-group" }, [
-                _c("div", { staticClass: "input-group-prepend" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-red",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "icon" }, [_vm._v("remove")])]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", value: "2 шт", disabled: "" }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-green",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ]),
+        _c(
+          "label",
+          {
+            staticClass: "btn btn-outline-light active",
+            attrs: { for: "option1" }
+          },
+          [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "options",
+                id: "option1",
+                autocomplete: "off",
+                checked: ""
+              }
+            }),
+            _vm._v("По популярности\n              ")
+          ]
+        ),
         _vm._v(" "),
-        _c("li", { staticClass: "product" }, [
-          _c("div", { staticClass: "product-inner" }, [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: "/storename/products/id",
-                  "data-toggle": "modal",
-                  "data-target": "#product"
-                }
-              },
-              [
-                _c("div", { staticClass: "product-discount" }, [
-                  _vm._v("-10%")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-image" }, [
-                  _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-title" }, [
-                  _vm._v(
-                    "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
-                  )
-                ])
-              ]
-            ),
+        _c(
+          "label",
+          { staticClass: "btn btn-outline-light", attrs: { for: "option2" } },
+          [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "options",
+                id: "option2",
+                autocomplete: "off"
+              }
+            }),
+            _vm._v("По цене\n              ")
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "product selected" }, [
+      _c("div", { staticClass: "product-inner" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "/storename/products/id",
+              "data-toggle": "modal",
+              "data-target": "#product"
+            }
+          },
+          [
+            _c("div", { staticClass: "product-image" }, [
+              _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "product-footer" }, [
-              _c("div", { staticClass: "product-price" }, [
-                _c("div", { staticClass: "product-price-new" }, [
-                  _vm._v("3 200 сум")
-                ]),
-                _c("div", { staticClass: "product-quantity" }, [
-                  _vm._v("за 1 кг.")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-green product-add-button",
-                  attrs: { type: "submit" }
-                },
-                [_vm._v("В корзину")]
+            _c("div", { staticClass: "product-title" }, [
+              _vm._v(
+                "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
               )
             ])
-          ])
-        ]),
+          ]
+        ),
         _vm._v(" "),
-        _c("li", { staticClass: "product" }, [
-          _c("div", { staticClass: "product-inner" }, [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: "/storename/products/id",
-                  "data-toggle": "modal",
-                  "data-target": "#product"
-                }
-              },
-              [
-                _c("div", { staticClass: "product-image" }, [
-                  _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-title" }, [
-                  _vm._v(
-                    "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "product-footer" }, [
-              _c("div", { staticClass: "product-price" }, [
-                _c("div", { staticClass: "product-price-new" }, [
-                  _vm._v("3 200 сум")
-                ]),
-                _c("div", { staticClass: "product-quantity" }, [
-                  _vm._v("за 1 шт.")
-                ])
-              ]),
-              _vm._v(" "),
+        _c("div", { staticClass: "product-footer" }, [
+          _c("div", { staticClass: "counter-widget input-group" }, [
+            _c("div", { staticClass: "input-group-prepend" }, [
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-green product-add-button",
-                  attrs: { type: "submit" }
+                  staticClass: "btn btn-outline-red",
+                  attrs: { type: "button" }
                 },
-                [_vm._v("В корзину")]
+                [_c("i", { staticClass: "icon" }, [_vm._v("clear")])]
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", value: "1 шт", disabled: "" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-green",
+                  attrs: { type: "button" }
+                },
+                [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
               )
             ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("nav", [
-        _c("ul", { staticClass: "pagination" }, [
-          _c("li", { staticClass: "page-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "page-link",
-                attrs: { href: "#", tabindex: "-1" }
-              },
-              [_vm._v("← Назад")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-              _vm._v("1")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item active" }, [
-            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-              _vm._v("2 "),
-              _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-              _vm._v("3")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-              _vm._v("Вперед →")
-            ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-image" }, [
+      _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", [
+      _c("ul", { staticClass: "pagination" }, [
+        _c("li", { staticClass: "page-item" }, [
+          _c(
+            "a",
+            { staticClass: "page-link", attrs: { href: "#", tabindex: "-1" } },
+            [_vm._v("← Назад")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("1")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item active" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("2 "),
+            _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("3")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("Вперед →")
           ])
         ])
       ])
@@ -60651,6 +60556,52 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-1fff7a8f", module.exports)
   }
 }
+
+/***/ }),
+/* 236 */,
+/* 237 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["catalog"],
+  data: function data() {
+    return {
+      active: 0
+    };
+  },
+
+  methods: {
+    updateActive: function updateActive(id) {
+      this.active = id;
+      this.$emit("updateProducts", id);
+    }
+  }
+});
 
 /***/ })
 /******/ ]);
