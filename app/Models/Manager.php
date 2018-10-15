@@ -2,13 +2,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Manager extends Model
 {
+    use Sluggable;
+
     protected $table = 'managers';
     protected $fillable = [
         'name', 'logo', 'status', 'manager_category_id',
     ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function managerCategory(){
     	return $this->belongsTo('App\Models\ManagerCategory');
