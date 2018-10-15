@@ -20,7 +20,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      regions: []
+      regions: null
     };
   },
   methods: {
@@ -34,7 +34,7 @@ export default {
     }
   },
   created() {
-    axios.get("api/regions").then(response => {
+    axios.get("/api/regions").then(response => {
       this.regions = response.data.data;
     });
   }

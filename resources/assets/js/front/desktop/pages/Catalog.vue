@@ -1,10 +1,11 @@
 <template>
-     <div class="content">
+<div>
+     <div class="content" v-if="catalog">
       <div class="container">
         <div class="main-actions">
           <a class="btn btn-outline-green" @click="$router.go(-1)">&#8592; Назад к список магазинов</a>
         </div>
-        <h1 class="main-title">Каталог продуктов магазина «Makro» в Городе Ферганы</h1>
+        <h1 class="main-title">Каталог продуктов магазина «{{catalog.name}}» {{catalog.branches[0].region_name}}</h1>
         <div class="content-inner">
           <main class="main">
             <div class="btn-group btn-group-sm btn-group-toggle main-sorter" data-toggle="buttons">
@@ -99,11 +100,55 @@
         </div>
       </div>
     </div>
+    <NotFound v-if="notFound"/>
+    </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+import NotFound from "./NotFound";
+
 import Categories from "../components/AsideCategories";
 export default {
-  components: { Categories },
-  methods: {}
+  data() {
+    return {
+      catalog: null,
+      notFound: false
+    };
+  },
+  // watch: {
+  //   region() {
+  //     this.getCatalog();
+  //   }
+  // },
+  components: { Categories, NotFound },
+  methods: {
+    getCatalog() {
+      setTimeout(() => {
+        // this.$nextTick(() => {
+        let uri = `/api/managers/${this.$route.params.id}?withManagers&region=${
+          this.region
+        }`;
+        axios
+          .get(uri)
+          .then(response => {
+            this.catalog = response.data.data;
+          })
+          .catch(() => {
+            this.notFound = true;
+            // this.$router.push({ name: "notFound" });
+          });
+        // });
+      }, 0);
+    }
+  },
+  computed: {
+    ...mapGetters({
+      region: "regionId",
+      regionName: "regionName"
+    })
+  },
+  created() {
+    this.getCatalog();
+  }
 };
 </script>

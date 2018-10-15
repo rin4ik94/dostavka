@@ -51169,9 +51169,13 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
         name: 'delivery',
         component: __WEBPACK_IMPORTED_MODULE_4__pages_Delivery___default.a
     }, {
-        path: '/catalog',
+        path: '/catalogs/:id',
         name: 'catalog',
         component: __WEBPACK_IMPORTED_MODULE_5__pages_Catalog___default.a
+    }, {
+        path: '*',
+        name: 'notFound',
+        component: __WEBPACK_IMPORTED_MODULE_7__pages_NotFound___default.a
     }]
     // {
     //     path: '/settings',
@@ -51235,10 +51239,6 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
     //         guest: false,
     //         needsAuth: true
     //     }
-}, {
-    path: '*',
-    name: 'NotFound',
-    component: __WEBPACK_IMPORTED_MODULE_7__pages_NotFound___default.a
 }]);
 
 /***/ }),
@@ -51342,7 +51342,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("api/regions");
+                return axios.get("/api/regions");
 
               case 2:
                 response = _context.sent;
@@ -51364,7 +51364,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return getRegions;
     }()
   },
-  created: function created() {
+  mounted: function mounted() {
     this.getRegions();
     // this.setRegion().catch(() => {
     //   console.log("sad");
@@ -53085,28 +53085,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "cart-card" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-auto" },
-          [
+  return 1 < 0
+    ? _c("div", { staticClass: "cart-card" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
             _c(
-              "router-link",
-              { staticClass: "btn btn-green", attrs: { to: { name: "cart" } } },
-              [_vm._v("Оформить заказ")]
+              "div",
+              { staticClass: "col-auto" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-green",
+                    attrs: { to: { name: "cart" } }
+                  },
+                  [_vm._v("Оформить заказ")]
+                )
+              ],
+              1
             )
-          ],
-          1
-        )
+          ])
+        ])
       ])
-    ])
-  ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
@@ -53555,7 +53560,12 @@ var render = function() {
                           "router-link",
                           {
                             staticClass: "partner-inner",
-                            attrs: { to: { name: "catalog" } }
+                            attrs: {
+                              to: {
+                                name: "catalog",
+                                params: { id: manager.id }
+                              }
+                            }
                           },
                           [
                             _c("div", { staticClass: "partner-logo" }, [
@@ -55913,8 +55923,13 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AsideCategories__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AsideCategories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_AsideCategories__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotFound__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AsideCategories__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AsideCategories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_AsideCategories__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -56017,11 +56032,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: { Categories: __WEBPACK_IMPORTED_MODULE_0__components_AsideCategories___default.a },
-  methods: {}
+  data: function data() {
+    return {
+      catalog: null,
+      notFound: false
+    };
+  },
+
+  // watch: {
+  //   region() {
+  //     this.getCatalog();
+  //   }
+  // },
+  components: { Categories: __WEBPACK_IMPORTED_MODULE_2__components_AsideCategories___default.a, NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a },
+  methods: {
+    getCatalog: function getCatalog() {
+      var _this = this;
+
+      setTimeout(function () {
+        // this.$nextTick(() => {
+        var uri = "/api/managers/" + _this.$route.params.id + "?withManagers&region=" + _this.region;
+        axios.get(uri).then(function (response) {
+          _this.catalog = response.data.data;
+        }).catch(function () {
+          _this.notFound = true;
+          // this.$router.push({ name: "notFound" });
+        });
+        // });
+      }, 0);
+    }
+  },
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
+    region: "regionId",
+    regionName: "regionName"
+  })),
+  created: function created() {
+    this.getCatalog();
+  }
 });
 
 /***/ }),
@@ -56204,34 +56260,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "main-actions" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-outline-green",
-            on: {
-              click: function($event) {
-                _vm.$router.go(-1)
-              }
-            }
-          },
-          [_vm._v("← Назад к список магазинов")]
-        )
-      ]),
+  return _c(
+    "div",
+    [
+      _vm.catalog
+        ? _c("div", { staticClass: "content" }, [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "main-actions" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-outline-green",
+                    on: {
+                      click: function($event) {
+                        _vm.$router.go(-1)
+                      }
+                    }
+                  },
+                  [_vm._v("← Назад к список магазинов")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("h1", { staticClass: "main-title" }, [
+                _vm._v(
+                  "Каталог продуктов магазина «" +
+                    _vm._s(_vm.catalog.name) +
+                    "» " +
+                    _vm._s(_vm.catalog.branches[0].region_name)
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "content-inner" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("aside", { staticClass: "aside" }, [_c("Categories")], 1)
+              ])
+            ])
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("h1", { staticClass: "main-title" }, [
-        _vm._v("Каталог продуктов магазина «Makro» в Городе Ферганы")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content-inner" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("aside", { staticClass: "aside" }, [_c("Categories")], 1)
-      ])
-    ])
-  ])
+      _vm.notFound ? _c("NotFound") : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -56266,7 +56337,7 @@ var staticRenderFns = [
                   checked: ""
                 }
               }),
-              _vm._v("По популярности\n          ")
+              _vm._v("По популярности\n              ")
             ]
           ),
           _vm._v(" "),
@@ -56282,7 +56353,7 @@ var staticRenderFns = [
                   autocomplete: "off"
                 }
               }),
-              _vm._v("По цене\n          ")
+              _vm._v("По цене\n              ")
             ]
           )
         ]
@@ -60505,7 +60576,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      regions: []
+      regions: null
     };
   },
 
@@ -60521,7 +60592,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   created: function created() {
     var _this = this;
 
-    axios.get("api/regions").then(function (response) {
+    axios.get("/api/regions").then(function (response) {
       _this.regions = response.data.data;
     });
   }
