@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Region;
+use App\Models\Client;
 
 class ClientController extends Controller
 {
@@ -16,7 +17,8 @@ class ClientController extends Controller
     public function index()
     {
        $regions = Region::all();
-       return view('admin.clients.index',compact('regions'));
+       $clients = Client::with('client_group','region')->get();
+       return view('admin.clients.index',compact('regions','clients'));
     }
 
     /**

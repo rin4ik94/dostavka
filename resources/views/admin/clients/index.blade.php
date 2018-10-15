@@ -47,12 +47,13 @@
     </tr>
   </thead>
   <tbody>
+    @foreach ($clients as $client)
     <tr>
-      <td>1</td>
-      <td>Холматов Джалолиддин</td>
-      <td>Нет</td>
-      <td>Фергана</td>
-      <td>+998916720193</td>
+      <td>{{ $client->id }}</td>
+      <td> {{ $client->first_name }} {{ $client->last_name }}</td>
+      <td>{{ $client->client_group->name ?? '' }}</td>
+      <td> {{ $client->region->name_ru }} </td>
+      <td>+998{{ $client->mobile }}</td>
       <td>01/11</td>
       <td>
       <div class="btn-group btn-group-sm client_action">
@@ -65,6 +66,7 @@
       {!! Form::close() !!}
       </td>
     </tr>
+    @endforeach
   </tbody>
 </table>
 <div class="main-bottom d-flex align-items-center">
