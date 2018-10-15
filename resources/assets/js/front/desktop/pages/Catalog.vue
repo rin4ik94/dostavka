@@ -1,6 +1,6 @@
 <template>
 <div>
-     <div class="content" v-if="catalog">
+    <div class="content" v-if="catalog">
       <div class="container">
         <div class="main-actions">
           <a class="btn btn-outline-green" @click="$router.go(-1)">&#8592; Назад к список магазинов</a>
@@ -66,7 +66,12 @@
             </nav>
           </main>
           <aside class="aside">
-           <Categories @updateProducts="updateProducts" :catalog="catalog"/>  
+          <nav class="categories">
+            <ul class="nav">
+              <li class="nav-item"><a class="nav-link" :class="active == 0 ? 'active' : ''" @click="updateProducts(0)">Все категории</a></li>
+              <SubCategories @updateProducts="updateProducts" :activeIndex="active"  :key="index" v-for="(category,index) in categories" :category="category" />
+            </ul>
+          </nav> 
           </aside>
         </div>
       </div>
@@ -77,33 +82,111 @@
 <script>
 import { mapGetters } from "vuex";
 import NotFound from "./NotFound";
-
-import Categories from "../components/AsideCategories";
+import { EventBus } from "../bus.js";
 export default {
   data() {
     return {
+      active: 0,
       catalog: null,
       notFound: false,
       id: 0,
-      products: []
+      products: [],
+      categories: []
     };
   },
-  components: { Categories, NotFound },
+  components: { NotFound },
   watch: {
-    id() {
-      this.filterProducts(this.id);
+    id: {
+      immediate: true,
+      handler: function(id) {
+        this.filterProducts(this.id);
+      }
+    },
+    catalog: {
+      immediate: true,
+      handler: function() {
+        this.filterCats(this.id);
+      }
     }
   },
   methods: {
     updateProducts(id) {
+      this.active = id;
       this.id = id;
     },
+    allProducts() {
+      let data = [];
+      this.categories.map((v, k) => {
+        if (v.children.length == 0) {
+          v.products.map((value, key) => {
+            data.push(value);
+          });
+        } else {
+          v.children.map((ve, ke) => {
+            if (ve.children.length == 0) {
+              ve.products.map((vu, ku) => {
+                data.push(vu);
+              });
+            } else {
+              ve.children.map((vey, kep) => {
+                data.push(vey.products);
+              });
+            }
+          });
+        }
+      });
+      this.products = data;
+    },
     filterProducts(id) {
-      console.log(id);
-      let category = this.catalog.categories.find(
-        category => id == category.id
-      );
-      this.products = category.products;
+      if (id == 0) {
+        this.allProducts();
+      }
+      if (this.active != 0) {
+        let category = this.categories.find(category => category.id == id);
+        if (!category) {
+          this.categories.map((v, k) => {
+            v.children.map((value, key) => {
+              if (id == value.id) {
+                category = value;
+              }
+            });
+          });
+        }
+        if (category.children.length > 0) {
+          let data = [];
+
+          category.children.map((value, key) => {
+            value.products.map((v, k) => {
+              data.push(v);
+            });
+          });
+
+          this.products = data;
+          return;
+        }
+        this.products = category.products;
+      }
+    },
+    filterCats(id) {
+      let data = [];
+      this.categories.map((v, k) => {
+        if (v.children.length == 0) {
+          v.products.map((value, key) => {
+            data.push(value.products);
+          });
+        } else {
+          v.children.map((ve, ke) => {
+            if (ve.children.length == 0) {
+              data.push(ve.products);
+            } else {
+              ve.children.map((vey, kep) => {
+                data.push(vey.products);
+              });
+            }
+          });
+        }
+      });
+      this.categories = data;
     },
     getCatalog() {
       setTimeout(() => {
@@ -114,11 +197,20 @@ export default {
           .get(uri)
           .then(response => {
             this.catalog = response.data.data;
+            this.getCategories();
           })
           .catch(() => {
             this.notFound = true;
           });
       }, 0);
+    },
+    getCategories() {
+      axios
+        .get(`/api/categories?withProds&manager=${this.catalog.id}`)
+        .then(response => {
+          this.categories = response.data.data;
+          this.allProducts();
+        });
     }
   },
   computed: {
