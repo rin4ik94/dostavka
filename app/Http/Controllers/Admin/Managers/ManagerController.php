@@ -14,7 +14,7 @@ class ManagerController extends Controller
 {
   public function __construct()
   {
-    $managerCategories = ManagerCategory::where('id', '!=', 1)->get();
+    $managerCategories = ManagerCategory::all();
     View::share([
       'managerCategories' => $managerCategories
     ]);
