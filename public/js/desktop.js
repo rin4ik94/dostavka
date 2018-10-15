@@ -56048,26 +56048,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  // watch: {
-  //   region() {
-  //     this.getCatalog();
-  //   }
-  // },
   components: { Categories: __WEBPACK_IMPORTED_MODULE_2__components_AsideCategories___default.a, NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a },
   methods: {
     getCatalog: function getCatalog() {
       var _this = this;
 
       setTimeout(function () {
-        // this.$nextTick(() => {
         var uri = "/api/managers/" + _this.$route.params.id + "?withManagers&region=" + _this.region;
         axios.get(uri).then(function (response) {
           _this.catalog = response.data.data;
         }).catch(function () {
           _this.notFound = true;
-          // this.$router.push({ name: "notFound" });
         });
-        // });
       }, 0);
     }
   },

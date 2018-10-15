@@ -115,16 +115,10 @@ export default {
       notFound: false
     };
   },
-  // watch: {
-  //   region() {
-  //     this.getCatalog();
-  //   }
-  // },
   components: { Categories, NotFound },
   methods: {
     getCatalog() {
       setTimeout(() => {
-        // this.$nextTick(() => {
         let uri = `/api/managers/${this.$route.params.id}?withManagers&region=${
           this.region
         }`;
@@ -135,9 +129,7 @@ export default {
           })
           .catch(() => {
             this.notFound = true;
-            // this.$router.push({ name: "notFound" });
           });
-        // });
       }, 0);
     }
   },
