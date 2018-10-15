@@ -17,11 +17,11 @@ class ManagerGroupController extends Controller
      */
     public function index()
     {
-        $managerCategories = ManagerCategory::where('id', '!=', 1)->paginate(10);
+        $managerCategories = ManagerCategory::paginate(10);
         return view('admin.groupmanagers.index',compact('managerCategories'));
     }
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage.Group
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -32,12 +32,9 @@ class ManagerGroupController extends Controller
             'name_uz' => 'required',
             'name_ru' => 'required',
         ]);
-         $manager = ManagerCategory::create([
-            'name_uz' => $request->input('name_uz'),
-            'name_ru' => $request->input('name_ru'),
-        ]);
+         $manager = ManagerCategory::create($request->all());
         return redirect()->route('managers.group.index')
-                        ->with('success','Category created successfully');
+                        ->with('success','Группа категорий успешно создана.');
     }
     /**
      * Update the specified resource in storage.
@@ -55,7 +52,7 @@ class ManagerGroupController extends Controller
         ]); 
             $manager->update($request->all());  
         return redirect()->route('managers.group.index')
-                        ->with('success','Category updated successfully');
+                        ->with('success','Группа категорий успешно обновлена.');
     }
 
     /**
@@ -66,12 +63,17 @@ class ManagerGroupController extends Controller
      */
     public function destroy($id)
     {
-       $manager = ManagerCategory::where('id',$id)->delete();
-       if($manager)
+        $manager = ManagerCategory::whereHas('managers',function($query) use($id){
+            $query->where('manager_category_id',$id);
+        })
+        ->first();
+        if($manager){
         return redirect()->route('managers.group.index')
-                        ->with('success','Category deleted successfully');
-        else
+                        ->with('warning','В этой категории есть магазин!');
+        }else{
+            ManagerCategory::findOrFail($id)->delete();
             return redirect()->route('managers.group.index')
-                        ->with('success','Categoty has child');
+                        ->with('success','Группа категорий удалена успешно.');
+        }   
     }
 }

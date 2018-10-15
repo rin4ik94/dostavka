@@ -1,6 +1,6 @@
 <div class="modal fade" id="newStore" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <form class="modal-content" action="{{route('managers.store')}}" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+    <form class="modal-content needs-validation" action="{{route('managers.store')}}" method="POST" enctype="multipart/form-data" novalidate>
       <div class="modal-header">
         <h5 class="modal-title">Новый магазин</h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
