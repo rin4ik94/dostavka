@@ -17,7 +17,7 @@
                 <input type="radio" name="options" id="option2" autocomplete="off">По цене
               </label>
             </div>
-              <router-view v-show="active != 0" @setActive="setActive"></router-view>
+              <router-view @setActive="setActive"></router-view>
               <Products v-if="active == 0" :products="products" /> 
             <nav>
               <ul class="pagination">
@@ -41,7 +41,7 @@
               <li class="nav-item">
                 <router-link class="nav-link" :to="{name: 'catalog', params:{slug : catalog.slug}}" exact>Все категории</router-link>
               </li>
-              <SubCategories :activeIndex="active"  :key="index" v-for="(category,index) in categories" :category="category" />
+              <SubCategories :activeIndex="active" :key="category.id"  @updateActive="setActive" :index="category.id" v-for="(category,index) in categories" :category="category" />
               
             </ul>
           </nav> 
@@ -49,6 +49,7 @@
         </div>
       </div>
     </div>
+
     <NotFound v-if="notFound"/>
     </div>
 </template>
@@ -100,27 +101,32 @@ export default {
     //   this.id = id;
     // },
     allProducts() {
-      let data = [];
-      this.categories.map((v, k) => {
-        if (v.children.length == 0) {
-          v.products.map((value, key) => {
-            data.push(value);
-          });
-        } else {
-          v.children.map((ve, ke) => {
-            if (ve.children.length == 0) {
-              ve.products.map((vu, ku) => {
-                data.push(vu);
-              });
-            } else {
-              ve.children.map((vey, kep) => {
-                data.push(vey.products);
-              });
-            }
-          });
-        }
-      });
-      this.products = data;
+      // let data = [];
+      axios
+        .get(`/api/products?manager=${this.$route.params.slug}`)
+        .then(response => {
+          this.products = response.data.data;
+        });
+      // this.categories.map((v, k) => {
+      //   if (v.children.length == 0) {
+      //     v.products.map((value, key) => {
+      //       data.push(value);
+      //     });
+      //   } else {
+      //     v.children.map((ve, ke) => {
+      //       if (ve.children.length == 0) {
+      //         ve.products.map((vu, ku) => {
+      //           data.push(vu);
+      //         });
+      //       } else {
+      //         ve.children.map((vey, kep) => {
+      //           data.push(vey.products);
+      //         });
+      //       }
+      //     });
+      //   }
+      // });
+      // this.products = data;
     },
     // filterProducts(id) {
     //   if (id == 0) {
@@ -153,27 +159,27 @@ export default {
     //     this.products = category.products;
     //   }
     // },
-    filterCats(id) {
-      let data = [];
-      this.categories.map((v, k) => {
-        if (v.children.length == 0) {
-          v.products.map((value, key) => {
-            data.push(value.products);
-          });
-        } else {
-          v.children.map((ve, ke) => {
-            if (ve.children.length == 0) {
-              data.push(ve.products);
-            } else {
-              ve.children.map((vey, kep) => {
-                data.push(vey.products);
-              });
-            }
-          });
-        }
-      });
-      this.categories = data;
-    },
+    // filterCats(id) {
+    //   let data = [];
+    //   this.categories.map((v, k) => {
+    //     if (v.children.length == 0) {
+    //       v.products.map((value, key) => {
+    //         data.push(value.products);
+    //       });
+    //     } else {
+    //       v.children.map((ve, ke) => {
+    //         if (ve.children.length == 0) {
+    //           data.push(ve.products);
+    //         } else {
+    //           ve.children.map((vey, kep) => {
+    //             data.push(vey.products);
+    //           });
+    //         }
+    //       });
+    //     }
+    //   });
+    //   this.categories = data;
+    // },
     getCatalog() {
       setTimeout(() => {
         let uri = `/api/managers/${
@@ -183,6 +189,7 @@ export default {
           .get(uri)
           .then(response => {
             this.catalog = response.data.data;
+            this.allProducts();
             this.getCategories();
           })
           .catch(() => {
@@ -192,11 +199,22 @@ export default {
     },
     getCategories() {
       axios
-        .get(`/api/categories?withProds&manager=${this.catalog.id}`)
+        .get(`/api/categories?withManager&manager=${this.catalog.id}`)
         .then(response => {
           this.categories = response.data.data;
-
-          this.allProducts();
+          this.categories.map((v, k) => {
+            if (v.children.length == 0) {
+              if (this.$route.params.sluged == v.slug) {
+                this.setActive(v.id);
+              }
+            } else {
+              v.children.map((ve, ke) => {
+                if (this.$route.params.sluged == ve.slug) {
+                  this.setActive(ve.id);
+                }
+              });
+            }
+          });
         });
     }
   },

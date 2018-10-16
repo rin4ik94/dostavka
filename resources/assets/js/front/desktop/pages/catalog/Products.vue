@@ -17,9 +17,9 @@
               </li>  -->
               <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
-        <a href="/storename/products/id" data-toggle="modal" data-target="#product">
+        <a href="/storename/products/id" @click="showModal(product)" data-toggle="modal" data-target="#product">
             <div class="product-discount">-10%</div>
-            <div class="product-image"><img src="/desktop/img/001.jpg"></div>
+            <div class="product-image"><img :src="product.image"></div>
             <div class="product-title">{{product.name}} 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
             </a>
             <div class="product-footer">
@@ -29,11 +29,22 @@
             <button class="btn btn-green product-add-button" type="submit">В корзину</button>
             </div>
         </div>
-    </li> 
-              </ul>
+        </li> 
+      <ProductModal :product="product"/>
+    </ul>
 </template>
 <script>
 export default {
-  props: ["products"]
+  props: ["products"],
+  data() {
+    return {
+      product: ""
+    };
+  },
+  methods: {
+    showModal(product) {
+      this.product = product;
+    }
+  }
 };
 </script>

@@ -1,26 +1,28 @@
-<template> 
-
+<template>
     <li class="nav-item"  >
       <a  @click.prevent="updateActive(category.id)"  :class="[fieldClasses]" class="nav-link" >
         {{category.name}}</a> 
-        <ul class="nav"  v-if="category.children.length && isVisible" >
-            <SubCategories @updateProducts="updateActive" :activeIndex="activeIndex" v-for="cat in category.children" :key="cat.id" :category="cat" />
+        <ul class="nav"  v-if="category.children.length && isOpen" >
+          <SubCategories  :index="cat.id"  @updateActive="updateActive(cat.id)" :activeIndex="activeIndex" v-for="cat in category.children" :key="cat.id" :category="cat" />
         </ul>
     </li> 
-
 </template>
 <script>
 export default {
-  props: ["category", "activeIndex"],
+  props: ["category", "activeIndex", "index"],
   data() {
     return {
-      isVisible: false
+      isOpen: false
     };
   },
   methods: {
     updateActive(id) {
-      this.$emit("updateProducts", id);
-      this.isVisible = !this.isVisible;
+      console.log(id);
+      if (this.category.id == id) {
+        this.isOpen = !this.isOpen;
+      }
+      this.$emit("updateActive", id);
+
       this.$router.push({ name: "ct", params: { sluged: this.category.slug } });
     }
   },
@@ -53,9 +55,18 @@ export default {
       if (data == 1) {
         return true;
       }
-
+      if (this.category.slug == this.$route.params.sluged) {
+        return true;
+      }
       return false;
     }
+  },
+  mounted() {
+    this.category.children.map((v, k) => {
+      if (v.slug == this.$route.params.sluged) {
+        this.isOpen = true;
+      }
+    });
   }
 };
 </script>

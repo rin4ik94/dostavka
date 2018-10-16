@@ -17,9 +17,9 @@
               </li>  -->
               <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
-        <a href="/storename/products/id" data-toggle="modal" data-target="#product">
+        <a href="/storename/products/id" @click="showModal(product)" data-toggle="modal" data-target="#product">
             <div class="product-discount">-10%</div>
-            <div class="product-image"><img src="/desktop/img/001.jpg"></div>
+            <div class="product-image"><img :src="product.image"></div>
             <div class="product-title">{{product.name}} 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
             </a>
             <div class="product-footer">
@@ -30,6 +30,8 @@
             </div>
         </div>
     </li> 
+      <ProductModal :product="product"/>
+
               </ul>
  
 
@@ -38,15 +40,21 @@
 export default {
   data() {
     return {
-      products: []
+      products: [],
+      product: ""
     };
   },
   watch: {
     $route() {
-      this.updateProducts();
+      if (this.$route.name == "ct") {
+        this.updateProducts();
+      }
     }
   },
   methods: {
+    showModal(product) {
+      this.product = product;
+    },
     updateProducts() {
       axios
         .get(
@@ -56,7 +64,6 @@ export default {
         )
         .then(response => {
           this.products = response.data.data;
-          this.$emit("setActive", this.products[0].category_id);
         });
     }
   },
