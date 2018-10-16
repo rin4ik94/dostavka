@@ -25,7 +25,7 @@ class Category extends Model
 
     public function getRouteKeyName()
     {
-        return $this->slug;
+        return slug;
     }
 
     public function manager()

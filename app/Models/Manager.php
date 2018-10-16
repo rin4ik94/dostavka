@@ -8,7 +8,6 @@ class Manager extends Model
 {
     use Sluggable;
 
-    protected $table = 'managers';
     protected $fillable = [
         'name', 'logo', 'slug', 'status', 'manager_category_id',
     ];
@@ -23,7 +22,7 @@ class Manager extends Model
     }
     public function getRouteKeyName()
     {
-        return $this->slug;
+        return 'slug';
     }
     public function managerCategory()
     {

@@ -51,7 +51,7 @@ export default [
             component: Delivery
         },
         {
-            path: '/catalogs/:id',
+            path: '/catalogs/:slug+',
             name: 'catalog',
             component: Catalog
         },

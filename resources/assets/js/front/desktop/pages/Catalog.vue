@@ -82,7 +82,6 @@
 <script>
 import { mapGetters } from "vuex";
 import NotFound from "./NotFound";
-import { EventBus } from "../bus.js";
 export default {
   data() {
     return {
@@ -190,9 +189,9 @@ export default {
     },
     getCatalog() {
       setTimeout(() => {
-        let uri = `/api/managers/${this.$route.params.id}?withManagers&region=${
-          this.region
-        }`;
+        let uri = `/api/managers/${
+          this.$route.params.slug
+        }?withManagers&region=${this.region}`;
         axios
           .get(uri)
           .then(response => {

@@ -25,6 +25,7 @@ class ManagerController extends Controller
     }
     public function show(Request $request, Manager $manager)
     {
+        return $manager;
         if ($request->has('region')) {
             return new ManagerResource($manager->load(['branches' => function ($query) use ($request) {
                 return $query->where('region_id', $request->region)->where('status', 1);
