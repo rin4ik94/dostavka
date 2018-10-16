@@ -11,14 +11,14 @@
             <div class="btn-group btn-group-sm btn-group-toggle main-sorter" data-toggle="buttons">
               <span class="main-sorter-title">Сортировать:</span>
               <label class="btn btn-outline-light active" for="option1">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked>По популярности
+                <div @click.prevent="sortByPrice = false" type="radio" name="options" id="option1" autocomplete="off" checked>По популярности</div>
               </label>
-              <label class="btn btn-outline-light" for="option2">
-                <input type="radio" name="options" id="option2" autocomplete="off">По цене
+              <label class="btn btn-outline-light" for="option2"> 
+                <div @click.prevent="sortByPrice = true" type="radio" name="options" id="option2" autocomplete="off">По цене</div>
               </label>
             </div>
-              <router-view @setActive="setActive"></router-view>
-              <Products v-if="active == 0" :products="products" /> 
+              <router-view :sortBy="sortByPrice" @setActive="setActive"></router-view>
+              <Products  v-if="active == 0" :products="products" /> 
             <nav>
               <ul class="pagination">
                 <li class="page-item">
@@ -66,7 +66,8 @@ export default {
       notFound: false,
       id: 0,
       products: [],
-      categories: []
+      categories: [],
+      sortByPrice: false
     };
   },
   components: { NotFound, Products },
@@ -78,16 +79,9 @@ export default {
         this.allProducts(0);
       }
     },
-    id: {
-      immediate: true,
-      handler: function(id) {
-        // this.filterProducts(this.id);
-      }
-    },
-    catalog: {
-      immediate: true,
-      handler: function() {
-        // this.filterCats(this.id);
+    sortByPrice() {
+      if (this.active == 0) {
+        this.allProducts();
       }
     }
   },
@@ -102,8 +96,14 @@ export default {
     // },
     allProducts() {
       // let data = [];
+      let params = {};
+      if (this.sortByPrice) {
+        params["price"] = this.sortByPrice;
+      }
       axios
-        .get(`/api/products?manager=${this.$route.params.slug}`)
+        .get(`/api/products?manager=${this.$route.params.slug}`, {
+          params: params
+        })
         .then(response => {
           this.products = response.data.data;
         });
@@ -208,6 +208,9 @@ export default {
                 this.setActive(v.id);
               }
             } else {
+              if (this.$route.params.sluged == v.slug) {
+                this.setActive(v.id);
+              }
               v.children.map((ve, ke) => {
                 if (this.$route.params.sluged == ve.slug) {
                   this.setActive(ve.id);

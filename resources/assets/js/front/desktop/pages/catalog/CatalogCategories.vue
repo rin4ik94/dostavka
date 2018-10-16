@@ -41,14 +41,20 @@ export default {
   data() {
     return {
       products: [],
-      product: ""
+      product: "",
+      price: false
     };
   },
+  props: ["sortBy"],
   watch: {
     $route() {
       if (this.$route.name == "ct") {
         this.updateProducts();
       }
+    },
+    sortBy(sortBy) {
+      this.price = sortBy;
+      this.updateProducts();
     }
   },
   methods: {
@@ -56,11 +62,16 @@ export default {
       this.product = product;
     },
     updateProducts() {
+      let params = {};
+      if (this.price) {
+        params["price"] = this.sortBy;
+      }
       axios
         .get(
           `/api/products?manager=${this.$route.params.slug}&category=${
             this.$route.params.sluged
-          }`
+          }`,
+          { params: params }
         )
         .then(response => {
           this.products = response.data.data;

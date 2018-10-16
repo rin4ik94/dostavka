@@ -59904,7 +59904,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       notFound: false,
       id: 0,
       products: [],
-      categories: []
+      categories: [],
+      sortByPrice: false
     };
   },
 
@@ -59917,17 +59918,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         this.allProducts(0);
       }
     },
-
-    id: {
-      immediate: true,
-      handler: function handler(id) {
-        // this.filterProducts(this.id);
-      }
-    },
-    catalog: {
-      immediate: true,
-      handler: function handler() {
-        // this.filterCats(this.id);
+    sortByPrice: function sortByPrice() {
+      if (this.active == 0) {
+        this.allProducts();
       }
     }
   },
@@ -59945,7 +59938,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this = this;
 
       // let data = [];
-      axios.get("/api/products?manager=" + this.$route.params.slug).then(function (response) {
+      var params = {};
+      if (this.sortByPrice) {
+        params["price"] = this.sortByPrice;
+      }
+      axios.get("/api/products?manager=" + this.$route.params.slug, {
+        params: params
+      }).then(function (response) {
         _this.products = response.data.data;
       });
       // this.categories.map((v, k) => {
@@ -60047,6 +60046,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
               _this3.setActive(v.id);
             }
           } else {
+            if (_this3.$route.params.sluged == v.slug) {
+              _this3.setActive(v.id);
+            }
             v.children.map(function (ve, ke) {
               if (_this3.$route.params.sluged == ve.slug) {
                 _this3.setActive(ve.id);
@@ -60109,15 +60111,87 @@ var render = function() {
                   "main",
                   { staticClass: "main" },
                   [
-                    _vm._m(0),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "btn-group btn-group-sm btn-group-toggle main-sorter",
+                        attrs: { "data-toggle": "buttons" }
+                      },
+                      [
+                        _c("span", { staticClass: "main-sorter-title" }, [
+                          _vm._v("Сортировать:")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "btn btn-outline-light active",
+                            attrs: { for: "option1" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                attrs: {
+                                  type: "radio",
+                                  name: "options",
+                                  id: "option1",
+                                  autocomplete: "off",
+                                  checked: ""
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.sortByPrice = false
+                                  }
+                                }
+                              },
+                              [_vm._v("По популярности")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "btn btn-outline-light",
+                            attrs: { for: "option2" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                attrs: {
+                                  type: "radio",
+                                  name: "options",
+                                  id: "option2",
+                                  autocomplete: "off"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.sortByPrice = true
+                                  }
+                                }
+                              },
+                              [_vm._v("По цене")]
+                            )
+                          ]
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("router-view", { on: { setActive: _vm.setActive } }),
+                    _c("router-view", {
+                      attrs: { sortBy: _vm.sortByPrice },
+                      on: { setActive: _vm.setActive }
+                    }),
                     _vm._v(" "),
                     _vm.active == 0
                       ? _c("Products", { attrs: { products: _vm.products } })
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm._m(1)
+                    _vm._m(0)
                   ],
                   1
                 ),
@@ -60177,59 +60251,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "btn-group btn-group-sm btn-group-toggle main-sorter",
-        attrs: { "data-toggle": "buttons" }
-      },
-      [
-        _c("span", { staticClass: "main-sorter-title" }, [
-          _vm._v("Сортировать:")
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "btn btn-outline-light active",
-            attrs: { for: "option1" }
-          },
-          [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "options",
-                id: "option1",
-                autocomplete: "off",
-                checked: ""
-              }
-            }),
-            _vm._v("По популярности\n              ")
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "btn btn-outline-light", attrs: { for: "option2" } },
-          [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "options",
-                id: "option2",
-                autocomplete: "off"
-              }
-            }),
-            _vm._v("По цене\n              ")
-          ]
-        )
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -60354,24 +60375,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     updateActive: function updateActive(id) {
-      console.log(id);
       if (this.category.id == id) {
-        this.isOpen = !this.isOpen;
+        this.isOpen = true;
       }
       this.$emit("updateActive", id);
-
       this.$router.push({ name: "ct", params: { sluged: this.category.slug } });
     }
   },
   computed: {
     fieldClasses: function fieldClasses() {
       return {
-        active: this.activeIndex == this.category.id && this.category.children.length < 1,
+        active: this.activeIndex == this.category.id,
         selected: this.isParentSelected
       };
     },
-    isParentSelected: function isParentSelected() {
+    childSelected: function childSelected() {
       var _this = this;
+
+      var data = 0;
+      if (this.category.children.length) {
+        this.category.children.map(function (v, k) {
+          if (v.slug == _this.$route.params.sluged || _this.category.slug == _this.$route.params.sluged) {
+            _this.isOpen = true;
+            data = 1;
+          }
+        });
+      }
+
+      if (this.activeIndex == this.category.id) {
+        return true;
+      }
+      if (data == 1) {
+        return true;
+      }
+    },
+    isParentSelected: function isParentSelected() {
+      var _this2 = this;
 
       var data = 0;
       if (!this.category.children && !this.category.children.length >= 1) {
@@ -60381,7 +60420,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return true;
       }
       this.category.children.map(function (value, key) {
-        if (value.id == _this.activeIndex) {
+        if (value.id == _this2.activeIndex) {
           data = 1;
           return true;
         }
@@ -60395,15 +60434,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return false;
     }
   },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    this.category.children.map(function (v, k) {
-      if (v.slug == _this2.$route.params.sluged) {
-        _this2.isOpen = true;
-      }
-    });
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -60430,7 +60461,7 @@ var render = function() {
       [_vm._v("\n    " + _vm._s(_vm.category.name))]
     ),
     _vm._v(" "),
-    _vm.category.children.length && _vm.isOpen
+    _vm.childSelected && _vm.isOpen
       ? _c(
           "ul",
           { staticClass: "nav" },
@@ -60646,15 +60677,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       products: [],
-      product: ""
+      product: "",
+      price: false
     };
   },
 
+  props: ["sortBy"],
   watch: {
     $route: function $route() {
       if (this.$route.name == "ct") {
         this.updateProducts();
       }
+    },
+    sortBy: function sortBy(_sortBy) {
+      this.price = _sortBy;
+      this.updateProducts();
     }
   },
   methods: {
@@ -60664,7 +60701,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     updateProducts: function updateProducts() {
       var _this = this;
 
-      axios.get("/api/products?manager=" + this.$route.params.slug + "&category=" + this.$route.params.sluged).then(function (response) {
+      var params = {};
+      if (this.price) {
+        params["price"] = this.sortBy;
+      }
+      axios.get("/api/products?manager=" + this.$route.params.slug + "&category=" + this.$route.params.sluged, { params: params }).then(function (response) {
         _this.products = response.data.data;
       });
     }
@@ -60851,13 +60892,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["products"],
+  props: ["products", "sortBy"],
   data: function data() {
     return {
       product: ""
     };
   },
 
+  watch: {
+    sortBy: function sortBy(_sortBy) {}
+  },
   methods: {
     showModal: function showModal(product) {
       this.product = product;

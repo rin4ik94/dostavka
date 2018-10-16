@@ -35,11 +35,16 @@
 </template>
 <script>
 export default {
-  props: ["products"],
+  props: ["products", "sortBy"],
   data() {
     return {
       product: ""
     };
+  },
+  watch: {
+    sortBy(sortBy) {
+        
+    }
   },
   methods: {
     showModal(product) {

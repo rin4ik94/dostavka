@@ -39,7 +39,12 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\Category', 'parent_id');
     }
-
+    public function childProducts()
+    {
+        return $this->children->flatMap(function ($cat) {
+            return $cat->products;
+        });
+    }
     public function children()
     {
         return $this->hasMany('App\Models\Category', 'parent_id');

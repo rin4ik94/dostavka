@@ -22,6 +22,14 @@ class Product extends Model
             return '/desktop/img/001.jpg';
         }
     }
+    public function scopeSortByPrice(Builder $builder, $price)
+    {
+
+        if (!$price) {
+            return;
+        }
+        $builder->orderBy('new_price');
+    }
     public function scopeActive(Builder $builder)
     {
         $builder->where('status', 1);
