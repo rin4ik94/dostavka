@@ -52560,7 +52560,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm.$route.name == "catalog"
+          _vm.$route.name == "catalog" || _vm.$route.name == "ct"
             ? _c("form", { staticClass: "input-group header-search" }, [
                 _c("input", {
                   staticClass: "form-control",
@@ -60040,7 +60040,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -60071,13 +60070,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     id: {
       immediate: true,
       handler: function handler(id) {
-        this.filterProducts(this.id);
+        // this.filterProducts(this.id);
       }
     },
     catalog: {
       immediate: true,
       handler: function handler() {
-        this.filterCats(this.id);
+        // this.filterCats(this.id);
       }
     }
   },
@@ -60086,10 +60085,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.active = id;
       this.id = id;
     },
-    updateProducts: function updateProducts(id) {
-      this.active = id;
-      this.id = id;
-    },
+
+    // updateProducts(id) {
+    //   this.active = id;
+    //   this.id = id;
+    // },
     allProducts: function allProducts() {
       var data = [];
       this.categories.map(function (v, k) {
@@ -60113,39 +60113,38 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       });
       this.products = data;
     },
-    filterProducts: function filterProducts(id) {
-      if (id == 0) {
-        this.allProducts();
-      }
-      if (this.active != 0) {
-        var category = this.categories.find(function (category) {
-          return category.id == id;
-        });
-        if (!category) {
-          console.log("ds");
-          this.categories.map(function (v, k) {
-            v.children.map(function (value, key) {
-              if (id == value.id) {
-                category = value;
-              }
-            });
-          });
-        }
-        if (category.children.length > 0) {
-          var data = [];
 
-          category.children.map(function (value, key) {
-            value.products.map(function (v, k) {
-              data.push(v);
-            });
-          });
+    // filterProducts(id) {
+    //   if (id == 0) {
+    //     this.allProducts();
+    //   }
+    //   if (this.active != 0) {
+    //     let category = this.categories.find(category => category.id == id);
+    //     if (!category) {
+    //       console.log("ds");
+    //       this.categories.map((v, k) => {
+    //         v.children.map((value, key) => {
+    //           if (id == value.id) {
+    //             category = value;
+    //           }
+    //         });
+    //       });
+    //     }
+    //     if (category.children.length > 0) {
+    //       let data = [];
 
-          this.products = data;
-          return;
-        }
-        this.products = category.products;
-      }
-    },
+    //       category.children.map((value, key) => {
+    //         value.products.map((v, k) => {
+    //           data.push(v);
+    //         });
+    //       });
+
+    //       this.products = data;
+    //       return;
+    //     }
+    //     this.products = category.products;
+    //   }
+    // },
     filterCats: function filterCats(id) {
       var data = [];
       this.categories.map(function (v, k) {
@@ -60220,7 +60219,7 @@ var render = function() {
                     staticClass: "btn btn-outline-green",
                     on: {
                       click: function($event) {
-                        _vm.$router.go(-1)
+                        _vm.$router.push({ name: "home" })
                       }
                     }
                   },
@@ -60299,8 +60298,7 @@ var render = function() {
                             attrs: {
                               activeIndex: _vm.active,
                               category: category
-                            },
-                            on: { updateProducts: _vm.updateProducts }
+                            }
                           })
                         })
                       ],

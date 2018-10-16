@@ -3,7 +3,7 @@
     <div class="content" v-if="catalog">
       <div class="container">
         <div class="main-actions">
-          <a class="btn btn-outline-green" @click="$router.go(-1)">&#8592; Назад к список магазинов</a>
+          <a class="btn btn-outline-green" @click="$router.push({name:'home'})">&#8592; Назад к список магазинов</a>
         </div>
         <h1 class="main-title">Каталог продуктов магазина «{{catalog.name}}» {{catalog.branches[0].region_name}}</h1>
         <div class="content-inner">
@@ -17,7 +17,6 @@
                 <input type="radio" name="options" id="option2" autocomplete="off">По цене
               </label>
             </div>
-            
               <router-view v-show="active != 0" @setActive="setActive"></router-view>
               <Products v-if="active == 0" :products="products" /> 
             <nav>
@@ -42,7 +41,7 @@
               <li class="nav-item">
                 <router-link class="nav-link" :to="{name: 'catalog', params:{slug : catalog.slug}}" exact>Все категории</router-link>
               </li>
-              <SubCategories @updateProducts="updateProducts" :activeIndex="active"  :key="index" v-for="(category,index) in categories" :category="category" />
+              <SubCategories :activeIndex="active"  :key="index" v-for="(category,index) in categories" :category="category" />
               
             </ul>
           </nav> 
@@ -81,13 +80,13 @@ export default {
     id: {
       immediate: true,
       handler: function(id) {
-        this.filterProducts(this.id);
+        // this.filterProducts(this.id);
       }
     },
     catalog: {
       immediate: true,
       handler: function() {
-        this.filterCats(this.id);
+        // this.filterCats(this.id);
       }
     }
   },
@@ -96,10 +95,10 @@ export default {
       this.active = id;
       this.id = id;
     },
-    updateProducts(id) {
-      this.active = id;
-      this.id = id;
-    },
+    // updateProducts(id) {
+    //   this.active = id;
+    //   this.id = id;
+    // },
     allProducts() {
       let data = [];
       this.categories.map((v, k) => {
@@ -123,37 +122,37 @@ export default {
       });
       this.products = data;
     },
-    filterProducts(id) {
-      if (id == 0) {
-        this.allProducts();
-      }
-      if (this.active != 0) {
-        let category = this.categories.find(category => category.id == id);
-        if (!category) {
-          console.log("ds");
-          this.categories.map((v, k) => {
-            v.children.map((value, key) => {
-              if (id == value.id) {
-                category = value;
-              }
-            });
-          });
-        }
-        if (category.children.length > 0) {
-          let data = [];
+    // filterProducts(id) {
+    //   if (id == 0) {
+    //     this.allProducts();
+    //   }
+    //   if (this.active != 0) {
+    //     let category = this.categories.find(category => category.id == id);
+    //     if (!category) {
+    //       console.log("ds");
+    //       this.categories.map((v, k) => {
+    //         v.children.map((value, key) => {
+    //           if (id == value.id) {
+    //             category = value;
+    //           }
+    //         });
+    //       });
+    //     }
+    //     if (category.children.length > 0) {
+    //       let data = [];
 
-          category.children.map((value, key) => {
-            value.products.map((v, k) => {
-              data.push(v);
-            });
-          });
+    //       category.children.map((value, key) => {
+    //         value.products.map((v, k) => {
+    //           data.push(v);
+    //         });
+    //       });
 
-          this.products = data;
-          return;
-        }
-        this.products = category.products;
-      }
-    },
+    //       this.products = data;
+    //       return;
+    //     }
+    //     this.products = category.products;
+    //   }
+    // },
     filterCats(id) {
       let data = [];
       this.categories.map((v, k) => {
