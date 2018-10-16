@@ -34,7 +34,7 @@ class CategoryController extends Controller
             if ($manager != 'all') {
                 $query->where('manager_id', $manager);
             }
-            $query->where('parent_id', '0');
+            $query->where('parent_id', null);
         })->get();
         return view('admin.categories.index', compact('categories', 'managers'));
     }
