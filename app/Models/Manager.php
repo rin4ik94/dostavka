@@ -10,7 +10,7 @@ class Manager extends Model
 
     protected $table = 'managers';
     protected $fillable = [
-        'name', 'logo', 'status', 'manager_category_id',
+        'name', 'logo', 'slug', 'status', 'manager_category_id',
     ];
 
     public function sluggable()

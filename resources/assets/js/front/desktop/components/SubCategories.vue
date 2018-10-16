@@ -7,9 +7,7 @@
         </ul>
     </li> 
 </template>
-<script>
-import { EventBus } from "../bus.js";
-
+<script> 
 export default {
   props: ["category", "activeIndex"],
   data() {
