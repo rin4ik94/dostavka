@@ -18,6 +18,7 @@ class Manager extends JsonResource
         return [
             'id' => (string)$this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
             'logo' => '/storage/logos/' . $this->logo,
             'branches' => Branches::collection($this->branches),
             'categories' => Category::collection($this->whenLoaded('categories')),

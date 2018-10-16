@@ -18,6 +18,7 @@ class Category extends JsonResource
             return [
                 'id' => $this->id,
                 'name' => $this->name_uz,
+                'slug' => $this->slug,
                 'position' => $this->position,
                 'parent_id' => $this->parent_id,
                 'manager_id' => $this->manager_id,
@@ -28,6 +29,7 @@ class Category extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name_ru,
+            'slug' => $this->slug,
             'position' => $this->position,
             'parent_id' => $this->parent_id,
             'manager_id' => $this->manager_id,

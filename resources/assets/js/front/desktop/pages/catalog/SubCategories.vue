@@ -1,15 +1,15 @@
-<template>
+<template> 
+
     <li class="nav-item"  >
-      <a @click.prevent="updateActive(category.id)" @click="isVisible = !isVisible"  :class="[fieldClasses]" class="nav-link" >
+      <a  @click.prevent="updateActive(category.id)"  :class="[fieldClasses]" class="nav-link" >
         {{category.name}}</a> 
-        <ul  class="nav"  v-if="category.children.length && isVisible" >
+        <ul class="nav"  v-if="category.children.length && isVisible" >
             <SubCategories @updateProducts="updateActive" :activeIndex="activeIndex" v-for="cat in category.children" :key="cat.id" :category="cat" />
         </ul>
     </li> 
+
 </template>
 <script>
-import { EventBus } from "../bus.js";
-
 export default {
   props: ["category", "activeIndex"],
   data() {
@@ -20,6 +20,8 @@ export default {
   methods: {
     updateActive(id) {
       this.$emit("updateProducts", id);
+      this.isVisible = !this.isVisible;
+      this.$router.push({ name: "ct", params: { sluged: this.category.slug } });
     }
   },
   computed: {

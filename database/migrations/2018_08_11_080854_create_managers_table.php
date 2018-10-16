@@ -16,7 +16,7 @@ class CreateManagersTable extends Migration
         Schema::create('managers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->string('logo')->nullable();
             $table->boolean('status')->defaault(1);
             $table->integer('manager_category_id')->unsigned()->index();

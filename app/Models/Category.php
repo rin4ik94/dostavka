@@ -4,13 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends Model
 {
+    use Sluggable;
+
   // protected $guarded = ['id'];
     protected $table = 'categories';
     protected $fillable = ['name_uz', 'name_ru', 'manager_id', 'parent_id', 'status'];
 
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name_ru'
+            ]
+        ];
+    }
+
+    public function getRouteKeyName()
+    {
+        return slug;
+    }
 
     public function manager()
     {

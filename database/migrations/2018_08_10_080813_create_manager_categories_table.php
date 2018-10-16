@@ -17,7 +17,6 @@ class CreateManagerCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name_uz');
             $table->string('name_ru');
-            $table->string('slug');
             $table->timestamps();
         });
     }

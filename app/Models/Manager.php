@@ -8,9 +8,8 @@ class Manager extends Model
 {
     use Sluggable;
 
-    protected $table = 'managers';
     protected $fillable = [
-        'name', 'logo', 'status', 'manager_category_id',
+        'name', 'logo', 'slug', 'status', 'manager_category_id',
     ];
 
     public function sluggable()
@@ -21,28 +20,37 @@ class Manager extends Model
             ]
         ];
     }
-
-    public function managerCategory(){
-    	return $this->belongsTo('App\Models\ManagerCategory');
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+    public function managerCategory()
+    {
+        return $this->belongsTo('App\Models\ManagerCategory');
     }
 
-  	public function employee_groups() {
-	    return $this->hasMany('App\Models\UserRole');
-	}
+    public function employee_groups()
+    {
+        return $this->hasMany('App\Models\UserRole');
+    }
 
-    public function employees() {
+    public function employees()
+    {
         return $this->hasMany('App\Models\Employee');
     }
 
-    public function branches() {
+    public function branches()
+    {
         return $this->hasMany('App\Models\Branch');
     }
 
-    public function categories() {
+    public function categories()
+    {
         return $this->hasMany('App\Models\Category');
     }
 
-    public function products() {
+    public function products()
+    {
         return $this->hasMany('App\Models\Product');
     }
 }
