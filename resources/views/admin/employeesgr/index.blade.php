@@ -7,27 +7,23 @@
     <span class="text">Добавить группа сотрудников</span>
   </button>
 </div>
-@if($roles)
+<form method="GET">
   <div class="toolbar d-flex">
     <div class="form-row">
       <div class="col-auto">
-        <div class="dropdown dropdown-select">
-          <button class="btn btn-light dropdown-toggle" data-name="manager" type="button" data-toggle="dropdown">
-          Магазин
-          </button>
-          <ul class="dropdown-menu">
-            <div class="dropdown-header">
-              <input type="search" class="form-control filter" name="search">
-            </div>
-            <li class="dropdown-item" data-value="all">Магазин</li>
-            @foreach($managers as $manager)
-            <li class="dropdown-item" data-value="{{ $manager->id }}">{{ $manager->name }}</li>
-            @endforeach
-          </ul>
-        </div>
+        <select class="custom-select" name="manager" onchange="this.form.submit()">
+          <option value="all">Все магазины</option>
+          @foreach($managers as $manager)
+          <option value="{{ $manager->id }}"
+            @if(request()->get('manager') == $manager->id) selected
+          @endif>{{ $manager->name }}</option>
+          @endforeach
+        </select>
       </div>
     </div>
   </div>
+</form>
+@if(count($roles) > 0)
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -42,7 +38,7 @@
     <tr>
       <td>{{ $employeegroup->id }}</td>
         <td><a href="/" target="_blank">{{ $employeegroup->name }}</a></td>
-        <td>{{ $employeegroup->manager->name }}</td>
+        <td>{{ $employeegroup->manager->name}}</td>
       <td>
         <div class="btn-group btn-group-sm editEmployeGroup">
           <a href="{{ route('employees.group.edit',$employeegroup->id) }}" data-toggle="modal" data-target="#editEmployeGroup" class="btn btn-light" data="{{$employeegroup->id}}">

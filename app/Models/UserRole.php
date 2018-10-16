@@ -9,6 +9,6 @@ class UserRole extends SpatieRole
     protected $table = 'roles';
     
     public function manager(){
-        return $this->belongsTo('App\Models\Manager','id');
+        return $this->belongsTo('App\Models\Manager');
     }
 }

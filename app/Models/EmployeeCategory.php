@@ -15,6 +15,6 @@ class EmployeeCategory extends Model
     }
 
     public function manager(){
-    	return $this->belongsTo('App\Models\Manager');
+    	return $this->belongsTo('App\Models\Manager','id');
     }
 }
