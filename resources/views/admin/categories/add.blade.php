@@ -1,19 +1,6 @@
 <div class="modal fade" id="newCategory" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      @if (session('success_message'))
-      <div class="alert alert-success">
-        {{ session('success_message') }}
-      </div>
-      @endif @if(count($errors) > 0)
-      <div class="alert alert-danger">
-        <ul>
-          @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-          @endforeach
-        </ul>
-      </div>
-      @endif
       <form action="{{ route('categories.store') }}" method="POST" class="needs-validation" novalidate>
         @csrf
         <div class="modal-header">

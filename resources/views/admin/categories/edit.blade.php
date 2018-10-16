@@ -32,7 +32,7 @@
         <div class="form-group">
           <label class="form-label" for="editCatParent">Основная категория</label>
           <select class="custom-select editCatParent" name="parent_id">
-            <option value="0">Не выбран</option>
+            <option value="">Не выбран</option>
               @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name_ru }}</option>
               @endforeach

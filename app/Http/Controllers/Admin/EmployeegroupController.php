@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\View;
 use App\Models\ManagerCategory;
 use App\Models\Manager;
 use App\Models\Employee;
-use App\Models\Menu;
 use DB;
 use Auth;
+use App\Models\UserRole;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -22,15 +22,25 @@ class EmployeegroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = \Auth::user();
-        $permission = $user->getPermissionsViaRoles();
-        $roles = Role::orderBy('id','ASC')
-        ->where('id', '!=', $user->role_id)
-        ->paginate(10);
-        $managers = Manager::where('manager_category_id',$user->role_id)->get();
-        return view('admin.employeesgr.index',compact('roles','permission','managers'));
+        $manager = $request->manager ?? null;
+        if ($manager == 'all') {
+            $manager = null;
+        }
+				$user = \Auth::user();
+				$id = $user->role_id;
+				$permission = $user->getPermissionsViaRoles();
+				$roles = UserRole::with('manager')
+				->when(!is_null($manager),function($query) use($manager){
+						$query->whereManagerId($manager);
+				})
+				->where('manager_id', '=', $user->manager_id)
+				->paginate(10);
+				$managers = Manager::whereHas('employee_groups',function($query) use($id){
+						$query->whereManagerId($id);
+				})->get();
+				return view('admin.employeesgr.index',compact('roles','permission','managers'));
      }
 
     /**
@@ -41,15 +51,16 @@ class EmployeegroupController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request, [
-            'name' => 'required|unique:roles,name',
-            'permission' => 'required',
-        ]);
-        $role = Role::create([
+			   $this->validate($request, [
+						'name' => 'required',
+						'manager_id' => 'required',
+						'permission' => 'required',
+				]);
+			  $role = Role::create([
             'name' => $request->input('name'),
-            'manager_id' => $request->input('manager_id') ?? \Auth::user()->manager_id,
-        ]);
-        $role->syncPermissions($request->input('permission'));
+            'manager_id' => $request->input('manager_id'),
+				]);
+				$role->givePermissionTo($request->input('permission'));
         return redirect()->route('employees.group.index')
                         ->with('success','Manager group created successfully');
     }
@@ -83,17 +94,17 @@ class EmployeegroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employeerId = $request->id;
-          $this->validate($request, [
+				$this->validate($request, [
             'name' => 'required',
             'permission' => 'required',
-        ]);
-        $role = Role::find($employeerId);
-        $role->name = $request->input('name');
-        $role->manager_id = $request->input('manager_id') ?? \Auth::user()->manager_id;
-        $role->save();
-
-        $role->syncPermissions($request->input('permission'));
+				]);
+				$employeerId = $request->id;
+				$role = Role::findOrFail($employeerId);
+				$role->update([
+					'name' => $request->input('name'),
+					'manager_id' => $request->input('manager_id') ?? \Auth::user()->manager_id,
+				]);
+				$role->syncPermissions($request->input('permission'));
         return redirect()->route('employees.group.index')
                         ->with('success','employeer category updated successfully');
     }
@@ -106,12 +117,10 @@ class EmployeegroupController extends Controller
      */
     public function destroy($id)
     {
-        $user = Employee::where('role_id',$id)->get();
-        if(!$user)
-        {$role = Role::where('id',$id)->delete();
-                return redirect()->route('employees.group.index')
-                ->with('success','Employee Category deleted successfully');}
-        else
-        {return redirect()->route('employees.group.index')->with('error','этом группе есть сотрудники!!');}
+			$role = Role::find($id);
+			$role->revokePermissionTo(Permission::all());
+			$role->delete();
+				return redirect()->route('employees.group.index')
+                ->with('success','Employee Category deleted successfully');
     }
 }

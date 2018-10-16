@@ -7,16 +7,17 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      {!! Form::open(array('route' => 'employees.group.store','method'=>'POST')) !!}
+      <form action="{{ route('employees.group.store') }}" method="POST" class="needs-validation" novalidate>
+      @csrf
       <div class="modal-body">
         <div class="form-group">
           <label class="form-label" for="name">Название *</label>
-          <input class="form-control" type="text" id="name" name="name">
+          <input class="form-control" type="text" id="name" name="name" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="store_name">Магазин *</label>
-              <select name="manager_id" class="form-control">
-                    <option value="0" selected disabled>Невыбран</option>
+              <select name="manager_id" class="form-control" required>
+                    <option value="" selected disabled>Невыбран</option>
                     @foreach($managers as $manager)
                     <option value="{{$manager->id}}">
                         {{$manager->name}}
@@ -36,7 +37,7 @@
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-green">OK</button>
       </div>
-      {!! Form::close() !!}
+      </form>
     </div>
   </div>
 </div>

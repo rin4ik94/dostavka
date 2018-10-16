@@ -16,7 +16,7 @@
             @foreach($managers as $manager)
               <option value="{{$manager->id}}" 
                 @if(request()->get('manager') == $manager->id) selected 
-                @endif>{{ $manager->name }}</option>
+                @endif>{{ $manager->manager->name }}</option>
             @endforeach
           </select>
         </div>
