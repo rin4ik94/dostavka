@@ -30,7 +30,7 @@ class ManagerController extends Controller
                 return $query->where('region_id', $request->region)->where('status', 1);
             }, 'categories' => function ($query) use ($request) {
                 return $query->orderBy('position');
-            }, 'categories.products']));
+            }]));
         } else {
             return new ManagerResource($manager);
         }

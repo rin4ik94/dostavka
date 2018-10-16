@@ -15,27 +15,19 @@ class Category extends JsonResource
     public function toArray($request)
     {
         if ($request->lang == 'uz') {
-            return [
-                'id' => $this->id,
-                'name' => $this->name_uz,
-                'slug' => $this->slug,
-                'position' => $this->position,
-                'parent_id' => $this->parent_id,
-                'manager_id' => $this->manager_id,
-                'products' => Product::collection($this->whenLoaded('products')),
-                'children' => Category::collection($this->children),
-            ];
+            $name = $this->name_uz;
+        } else {
+            $name = $this->name_ru;
         }
         return [
             'id' => $this->id,
-            'name' => $this->name_ru,
+            'name' => $name,
             'slug' => $this->slug,
             'position' => $this->position,
             'parent_id' => $this->parent_id,
             'manager_id' => $this->manager_id,
             'products' => Product::collection($this->whenLoaded('products')),
             'children' => Category::collection($this->children),
-
         ];
     }
 }

@@ -6,25 +6,32 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
-	protected $table = 'products';
-  protected $fillable = [
-    'name_uz', 'name_ru', 'image', 'measurement', 'new_price', 'old_price', 'status','category_id','manager_id'
-  ];
-  protected $casts = [
-    'price' => 'integer',
-    'old_price' => 'integer'
+    protected $table = 'products';
+    protected $fillable = [
+        'name_uz', 'name_ru', 'image', 'measurement', 'new_price', 'old_price', 'status', 'category_id', 'manager_id'
     ];
-
-	public function scopeActive(Builder $builder)
+    protected $casts = [
+        'price' => 'integer',
+        'old_price' => 'integer'
+    ];
+    public function getImage()
+    {
+        if ($this->image) {
+            return '/storage/products/' . $this->image;
+        } else {
+            return '/desktop/img/001.jpg';
+        }
+    }
+    public function scopeActive(Builder $builder)
     {
         $builder->where('status', 1);
     }
- public function category()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-        public function scopeOfStatus($query, $status)
+    public function scopeOfStatus($query, $status)
     {
         if (!$status) {
             return;
@@ -35,10 +42,11 @@ class Product extends Model
         $query->where('status', $status);
     }
 
-	public function manager(){
-    return $this->belongsTo('App\Models\Manager');
-  }
-  public function scopeOfCategory($query, $category)
+    public function manager()
+    {
+        return $this->belongsTo('App\Models\Manager');
+    }
+    public function scopeOfCategory($query, $category)
     {
         if (!$category) {
             return;

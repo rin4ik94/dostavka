@@ -16,15 +16,13 @@ class ManagerCategoriesResource extends JsonResource
     public function toArray($request)
     {
         if ($request->lang == 'uz') {
-            return [
-                'id' => (string)$this->id,
-                'name' => $this->name_uz,
-                'managers' => Manager::collection($this->whenLoaded('managers'))
-            ];
+            $name = $this->name_uz;
+        } else {
+            $name = $this->name_ru;
         }
         return [
             'id' => (string)$this->id,
-            'name' => $this->name_ru,
+            'name' => $name,
             'managers' => Manager::collection($this->whenLoaded('managers'))
         ];
     }

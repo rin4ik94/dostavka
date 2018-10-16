@@ -20,6 +20,13 @@ class Manager extends Model
             ]
         ];
     }
+    public function getLogo()
+    {
+        if ($this->logo) {
+            return '/storage/logos/' . $this->logo;
+        }
+        return '/desktop/img/ret_2.png';
+    }
     public function getRouteKeyName()
     {
         return 'slug';

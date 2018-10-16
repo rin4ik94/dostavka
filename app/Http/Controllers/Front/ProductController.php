@@ -21,12 +21,14 @@ class ProductController extends Controller
         if (request()->has('count')) {
             $products = Product::active()->paginate(request()->count);
             return ProductResource::collection($products);
-
         } else if (request()->has('manager') && request()->has('category')) {
             $manager = Manager::where('slug', request()->manager)->first();
             $category = Category::where('slug', request()->category)->first();
-
-            $products = Product::where('manager_id', $manager->id)->where('category_id', $category->id)->active()->get();
+            $products = Product::where('manager_id', $manager->id)->where('category_id', $category->id)->active()->paginate(20);
+            return ProductResource::collection($products);
+        } else if (request()->has('manager')) {
+            $manager = Manager::where('slug', request()->manager)->first();
+            $products = Product::where('manager_id', $manager->id)->active()->paginate(20);
             return ProductResource::collection($products);
         } else {
             $products = Product::active()->get();
