@@ -25,22 +25,22 @@ class CategoryController extends Controller
         $user = auth()->user();
         $manager = $request->manager ?? null;
         if ($user->id == 1) {
-						$managers = Employee::with('manager')->get();
-						$categories = Category::with('manager','children')->where(function ($query) use ($manager) {
-							if ($manager != 'all') {
-									$query->whereManagerId($manager);
-							}
-							$query->whereNull('parent_id');
-					})->get();
+            $managers = Employee::with('manager')->get();
+            $categories = Category::with('manager', 'children')->where(function ($query) use ($manager) {
+                if ($manager != 'all') {
+                    $query->whereManagerId($manager);
+                }
+                $query->whereNull('parent_id');
+            })->get();
         } else {
-						$managers = Employee::with('manager')->whereManagerId($user->id)->get();
-						$manager = $user->manager_id;
-						$categories = Category::with('manager','children')->where(function ($query) use ($manager) {
-							$query->whereManagerId($manager);
-							$query->whereNull('parent_id');
-					})->get();
-				}
-				return view('admin.categories.index', compact('categories', 'managers'));
+            $managers = Employee::with('manager')->whereManagerId($user->id)->get();
+            $manager = $user->manager_id;
+            $categories = Category::with('manager', 'children')->where(function ($query) use ($manager) {
+                $query->whereManagerId($manager);
+                $query->whereNull('parent_id');
+            })->get();
+        }
+        return view('admin.categories.index', compact('categories', 'managers'));
     }
     /**
      * Store a newly created resource in storage.
@@ -99,14 +99,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-			$category = Category::whereHas('products',function($query) use($id){
-				$query->where('category_id',$id);
-			})->get();
-			if($category->count() > 0){
-					return back()->with('warning','В этой категории есть продукт!');
-			}else{
-					Category::findOrFail($id)->delete();
-					return back()->with('success', 'Категория удалена.');
-			}   
+        $category = Category::whereHas('products', function ($query) use ($id) {
+            $query->where('category_id', $id);
+        })->get();
+        if ($category->count() > 0) {
+            return back()->with('warning', 'В этой категории есть продукт!');
+        } else {
+            Category::findOrFail($id)->delete();
+            return back()->with('success', 'Категория удалена.');
+        }
     }
 }

@@ -60386,7 +60386,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     fieldClasses: function fieldClasses() {
       return {
         active: this.activeIndex == this.category.id,
-        selected: this.isParentSelected
+        selected: this.childSelected
       };
     },
     childSelected: function childSelected() {
@@ -60408,31 +60408,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (data == 1) {
         return true;
       }
-    },
-    isParentSelected: function isParentSelected() {
-      var _this2 = this;
-
-      var data = 0;
-      if (!this.category.children && !this.category.children.length >= 1) {
-        return false;
-      }
-      if (this.category.id == this.activeIndex && this.category.children.length >= 1) {
-        return true;
-      }
-      this.category.children.map(function (value, key) {
-        if (value.id == _this2.activeIndex) {
-          data = 1;
-          return true;
-        }
-      });
-      if (data == 1) {
-        return true;
-      }
-      if (this.category.slug == this.$route.params.sluged) {
-        return true;
-      }
-      return false;
     }
+    // isParentSelected() {
+    //   let data = 0;
+    //   if (!this.category.children && !this.category.children.length >= 1) {
+    //     return false;
+    //   }
+    //   if (
+    //     this.category.id == this.activeIndex &&
+    //     this.category.children.length >= 1
+    //   ) {
+    //     return true;
+    //   }
+    //   this.category.children.map((value, key) => {
+    //     if (value.id == this.activeIndex) {
+    //       data = 1;
+    //       return true;
+    //     }
+    //   });
+    //   if (data == 1) {
+    //     return true;
+    //   }
+    //   if (this.category.slug == this.$route.params.sluged) {
+    //     return true;
+    //   }
+    //   return false;
+    // }
+
   },
   mounted: function mounted() {}
 });
@@ -60985,7 +60987,14 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _vm._m(1),
+                _c("div", { staticClass: "col-auto f-product-image" }, [
+                  _c("div", { staticClass: "f-product-image-inner" }, [
+                    _c("img", {
+                      staticClass: "f-product-img",
+                      attrs: { src: _vm.product.image, alt: "" }
+                    })
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col f-product-content" }, [
                   _c("div", { staticClass: "f-product-content-inner" }, [
@@ -60993,7 +61002,7 @@ var render = function() {
                       _vm._v(_vm._s(_vm.product.name) + ", 2,6%")
                     ]),
                     _vm._v(" "),
-                    _vm._m(2),
+                    _vm._m(1),
                     _vm._v(" "),
                     _c("div", { staticClass: "f-product-quantity" }, [
                       _vm._v(_vm._s(_vm.product.new_price) + " сум за 1 шт")
@@ -61007,7 +61016,7 @@ var render = function() {
                       _c("div", { staticClass: "f-product-price-old" })
                     ]),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _vm._m(2)
                   ])
                 ])
               ])
@@ -61035,19 +61044,6 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-auto f-product-image" }, [
-      _c("div", { staticClass: "f-product-image-inner" }, [
-        _c("img", {
-          staticClass: "f-product-img",
-          attrs: { src: "http://dostavka.loc/img/001.jpg", alt: "" }
-        })
-      ])
-    ])
   },
   function() {
     var _vm = this

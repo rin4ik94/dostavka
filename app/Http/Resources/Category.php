@@ -27,7 +27,7 @@ class Category extends JsonResource
             'parent_id' => $this->parent_id,
             'manager_id' => $this->manager_id,
             'products' => Product::collection($this->whenLoaded('products')),
-            'children' => Category::collection($this->children),
+            'children' => Category::collection($this->whenLoaded('children')),
         ];
     }
 }

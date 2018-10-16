@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-auto f-product-image">
             <div class="f-product-image-inner">
-              <img class="f-product-img" src="http://dostavka.loc/img/001.jpg" alt="">
+              <img class="f-product-img" :src="product.image" alt="">
             </div>
           </div>
           <div class="col f-product-content">

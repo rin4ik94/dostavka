@@ -28,7 +28,7 @@ export default {
     fieldClasses() {
       return {
         active: this.activeIndex == this.category.id,
-        selected: this.isParentSelected
+        selected: this.childSelected
       };
     },
     childSelected() {
@@ -51,32 +51,32 @@ export default {
       if (data == 1) {
         return true;
       }
-    },
-    isParentSelected() {
-      let data = 0;
-      if (!this.category.children && !this.category.children.length >= 1) {
-        return false;
-      }
-      if (
-        this.category.id == this.activeIndex &&
-        this.category.children.length >= 1
-      ) {
-        return true;
-      }
-      this.category.children.map((value, key) => {
-        if (value.id == this.activeIndex) {
-          data = 1;
-          return true;
-        }
-      });
-      if (data == 1) {
-        return true;
-      }
-      if (this.category.slug == this.$route.params.sluged) {
-        return true;
-      }
-      return false;
     }
+    // isParentSelected() {
+    //   let data = 0;
+    //   if (!this.category.children && !this.category.children.length >= 1) {
+    //     return false;
+    //   }
+    //   if (
+    //     this.category.id == this.activeIndex &&
+    //     this.category.children.length >= 1
+    //   ) {
+    //     return true;
+    //   }
+    //   this.category.children.map((value, key) => {
+    //     if (value.id == this.activeIndex) {
+    //       data = 1;
+    //       return true;
+    //     }
+    //   });
+    //   if (data == 1) {
+    //     return true;
+    //   }
+    //   if (this.category.slug == this.$route.params.sluged) {
+    //     return true;
+    //   }
+    //   return false;
+    // }
   },
   mounted() {}
 };
