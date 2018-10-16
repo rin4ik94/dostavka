@@ -2,27 +2,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 
 class ManagerCategory extends Model
 {
-	use Sluggable;
-	protected $table = 'manager_categories';
+    protected $table = 'manager_categories';
 
-  protected $fillable = [
-      'name_uz', 'name_ru', 'is_supperadmin',
-  ];
+    protected $fillable = [
+        'name_uz', 'name_ru', 'is_supperadmin',
+    ];
 
-	public function sluggable()
+
+
+    public function managers()
     {
-        return [
-            'slug' => [
-                'source' => 'name_ru'
-            ]
-        ];
+        return $this->hasMany('App\Models\Manager');
     }
-	
-	public function managers() {
-  	return $this->hasMany('App\Models\Manager');
-	}
 }
