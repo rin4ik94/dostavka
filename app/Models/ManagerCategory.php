@@ -11,8 +11,6 @@ class ManagerCategory extends Model
         'name_uz', 'name_ru', 'is_supperadmin',
     ];
 
-
-
     public function managers()
     {
         return $this->hasMany('App\Models\Manager');
