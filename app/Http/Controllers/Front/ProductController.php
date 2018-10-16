@@ -6,6 +6,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Product as ProductResource;
+use App\Models\Manager;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -16,12 +18,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if(request()->has('count')){
+        if (request()->has('count')) {
             $products = Product::active()->paginate(request()->count);
-        }else {  
-            $products = Product::active()->get();            
+            return ProductResource::collection($products);
+
+        } else if (request()->has('manager') && request()->has('category')) {
+            $manager = Manager::where('slug', request()->manager)->first();
+            $category = Category::where('slug', request()->category)->first();
+
+            $products = Product::where('manager_id', $manager->id)->where('category_id', $category->id)->active()->get();
+            return ProductResource::collection($products);
+        } else {
+            $products = Product::active()->get();
+            return ProductResource::collection($products);
         }
-        return ProductResource::collection($products);
     }
 
     /**

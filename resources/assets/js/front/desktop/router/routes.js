@@ -5,7 +5,8 @@ import Home from '../pages/main/Home'
 import Profile from '../pages/Profile'
 import Orders from '../pages/Orders'
 import Delivery from '../pages/Delivery'
-import Catalog from '../pages/Catalog'
+import Catalog from '../pages/catalog/Catalog'
+import CatalogCategories from '../pages/catalog/CatalogCategories'
 import Cart from '../pages/Cart'
 // import Settings from '../pages/settings/Settings'
 // import Orders from '../pages/orders/Orders'
@@ -51,9 +52,16 @@ export default [
             component: Delivery
         },
         {
-            path: '/catalogs/:slug+',
+            path: '/catalogs/:slug',
             name: 'catalog',
-            component: Catalog
+            component: Catalog,
+            children: [
+                {
+                    path: ':sluged',
+                    name: 'ct',
+                    component: CatalogCategories
+                }
+            ]
         },
         {
             path: '*',

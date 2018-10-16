@@ -10,21 +10,21 @@ const router = new VueRouter({
     linkActiveClass: "active",
     mode: 'history',
     routes,
-    scrollBehavior(to, from, savedPosition) {
-        //https://router.vuejs.org/guide/advanced/scroll-behavior.html
-        if (to.hash) {
-            return { selector: to.hash }
-        } else if (savedPosition) {
+    // scrollBehavior(to, from, savedPosition) {
+    //     //https://router.vuejs.org/guide/advanced/scroll-behavior.html
+    //     if (to.hash) {
+    //         return { selector: to.hash }
+    //     } else if (savedPosition) {
 
-            return savedPosition;
-        } else {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve({ x: 0, y: 0 })
-                }, 500)
-            })
-        }
-    }
+    //         return savedPosition;
+    //     } else {
+    //         return new Promise((resolve, reject) => {
+    //             setTimeout(() => {
+    //                 resolve({ x: 0, y: 0 })
+    //             }, 500)
+    //         })
+    //     }
+    // }
 
 })
 // router.beforeEach(beforeEach)

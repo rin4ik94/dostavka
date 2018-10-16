@@ -1,7 +1,7 @@
 window.Vue = require('vue');
 import router from './router'
 import store from './vuex'
-var SubCategories = require('./components/SubCategories.vue');
+var SubCategories = require('./pages/catalog/SubCategories.vue');
 import localforage from 'localforage'
 // require('../../bootstrap')
 import * as Modals from './components/modals/index'
