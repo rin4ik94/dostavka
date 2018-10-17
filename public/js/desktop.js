@@ -52993,33 +52993,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return 1 < 0
-    ? _c("div", { staticClass: "cart-card" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
+  return _c("div", { staticClass: "cart-card" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-auto" },
+          [
             _c(
-              "div",
-              { staticClass: "col-auto" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-green",
-                    attrs: { to: { name: "cart" } }
-                  },
-                  [_vm._v("Оформить заказ")]
-                )
-              ],
-              1
+              "router-link",
+              { staticClass: "btn btn-green", attrs: { to: { name: "cart" } } },
+              [_vm._v("Оформить заказ")]
             )
-          ])
-        ])
+          ],
+          1
+        )
       ])
-    : _vm._e()
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -53714,7 +53709,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   props: {
     value: { required: true },
-    format: { default: "YYYY-MM-DD" },
+    format: { default: "DD.MM.YYYY" },
     options: { default: {} }
   },
 
@@ -55361,7 +55356,7 @@ var render = function() {
                     [
                       _c("DatePicker", {
                         staticClass: "form-control",
-                        attrs: { placeholder: "YYYY-MM-DD" }
+                        attrs: { placeholder: "DD.MM.YYYY" }
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
@@ -56558,6 +56553,8 @@ var render = function() {
       "ul",
       { staticClass: "products" },
       [
+        _vm._m(0),
+        _vm._v(" "),
         _vm._l(_vm.products, function(product) {
           return _c("li", { key: product.id, staticClass: "product" }, [
             _c("div", { staticClass: "product-inner" }, [
@@ -56624,7 +56621,69 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "product selected" }, [
+      _c("div", { staticClass: "product-inner" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "/storename/products/id",
+              "data-toggle": "modal",
+              "data-target": "#product"
+            }
+          },
+          [
+            _c("div", { staticClass: "product-image" }, [
+              _c("img", { attrs: { src: "/desktop/img/001.jpg" } })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "product-title" }, [
+              _vm._v(
+                "Carefree Large ежедневки 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "product-footer" }, [
+          _c("div", { staticClass: "counter-widget input-group" }, [
+            _c("div", { staticClass: "input-group-prepend" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-red",
+                  attrs: { type: "button" }
+                },
+                [_c("i", { staticClass: "icon" }, [_vm._v("clear")])]
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", value: "1 шт", disabled: "" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-green",
+                  attrs: { type: "button" }
+                },
+                [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -56690,60 +56749,37 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c(
-                          "label",
+                          "div",
                           {
-                            staticClass: "btn btn-outline-light active",
-                            attrs: { for: "option1" }
+                            staticClass: "btn btn-outline-light",
+                            class: { active: !_vm.sortByPrice },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.sortByPrice = false
+                              }
+                            }
                           },
                           [
-                            _c(
-                              "div",
-                              {
-                                attrs: {
-                                  type: "radio",
-                                  name: "options",
-                                  id: "option1",
-                                  autocomplete: "off",
-                                  checked: ""
-                                },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.sortByPrice = false
-                                  }
-                                }
-                              },
-                              [_vm._v("По популярности")]
+                            _vm._v(
+                              "\n                По популярности \n              "
                             )
                           ]
                         ),
                         _vm._v(" "),
                         _c(
-                          "label",
+                          "div",
                           {
                             staticClass: "btn btn-outline-light",
-                            attrs: { for: "option2" }
+                            class: { active: _vm.sortByPrice },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.sortByPrice = true
+                              }
+                            }
                           },
-                          [
-                            _c(
-                              "div",
-                              {
-                                attrs: {
-                                  type: "radio",
-                                  name: "options",
-                                  id: "option2",
-                                  autocomplete: "off"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.sortByPrice = true
-                                  }
-                                }
-                              },
-                              [_vm._v("По цене")]
-                            )
-                          ]
+                          [_vm._v(" \n                По цене\n              ")]
                         )
                       ]
                     ),

@@ -10,12 +10,12 @@
           <main class="main">
             <div class="btn-group btn-group-sm btn-group-toggle main-sorter" data-toggle="buttons">
               <span class="main-sorter-title">Сортировать:</span>
-              <label class="btn btn-outline-light active" for="option1">
-                <div @click.prevent="sortByPrice = false" type="radio" name="options" id="option1" autocomplete="off" checked>По популярности</div>
-              </label>
-              <label class="btn btn-outline-light" for="option2"> 
-                <div @click.prevent="sortByPrice = true" type="radio" name="options" id="option2" autocomplete="off">По цене</div>
-              </label>
+              <div @click.prevent="sortByPrice = false" :class="{'active' : !sortByPrice}" class="btn btn-outline-light">
+                По популярности 
+              </div>
+              <div @click.prevent="sortByPrice = true" :class="{'active' : sortByPrice}" class="btn btn-outline-light"> 
+                По цене
+              </div>
             </div>
               <router-view @updatePagination="updatePagination" :sortBy="sortByPrice" @setActive="setActive"></router-view>
               <Products  v-if="active == 0" :products="products" /> 

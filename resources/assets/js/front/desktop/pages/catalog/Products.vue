@@ -1,7 +1,7 @@
 <template>
 <div>
     <ul class="products">
-              <!-- <li class="product selected">
+              <li class="product selected">
                 <div class="product-inner">
                 <a href="/storename/products/id" data-toggle="modal" data-target="#product">
                   <div class="product-image"><img src="/desktop/img/001.jpg"></div>
@@ -15,7 +15,7 @@
                     </div>
                   </div>
                 </div>
-              </li>  -->
+              </li> 
               <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
         <a href="/storename/products/id" @click="showModal(product)" data-toggle="modal" data-target="#product">
