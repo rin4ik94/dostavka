@@ -12,7 +12,7 @@ export default {
   },
   props: {
     value: { required: true },
-    format: { default: "YYYY-MM-DD" },
+    format: { default: "DD.MM.YYYY" },
     options: { default: {} }
   },
 
