@@ -55880,7 +55880,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -56761,7 +56760,7 @@ var render = function() {
                       ? _c("Products", { attrs: { products: _vm.products } })
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.products.length > 19 && _vm.active == 0
+                    _vm.active == 0
                       ? _c("Pagination", {
                           attrs: { pagination: _vm.pagination, offset: 3 },
                           on: { paginate: _vm.allProducts }

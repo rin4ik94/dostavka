@@ -19,7 +19,7 @@
             </div>
               <router-view @updatePagination="updatePagination" :sortBy="sortByPrice" @setActive="setActive"></router-view>
               <Products  v-if="active == 0" :products="products" /> 
-              <Pagination v-if="products.length > 19 && active == 0" :pagination="pagination" :offset="3" @paginate="allProducts"/>
+              <Pagination v-if="active == 0" :pagination="pagination" :offset="3" @paginate="allProducts"/>
           </main>
           <aside class="aside">
           <nav class="categories">
@@ -35,7 +35,6 @@
         </div>
       </div>
     </div>
-
     <NotFound v-if="notFound"/>
     </div>
 </template>
