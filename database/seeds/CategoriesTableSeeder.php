@@ -819,12 +819,16 @@ class CategoriesTableSeeder extends Seeder
                 'manager_id' => '3',
             ],
         ])->each(function ($cat) {
-            factory(Category::class)->create([
+            $category = factory(Category::class)->create([
                 'name_uz' => $cat['name_uz'],
                 'name_ru' => $cat['name_ru'],
                 'position' => $cat['position'],
                 'parent_id' => $cat['parent_id'],
                 'manager_id' => $cat['manager_id']
+            ]);
+            factory(Product::class, 5)->create([
+                'manager_id' => $category->manager_id,
+                'category_id' => $category->id,
             ]);
         });
     }
