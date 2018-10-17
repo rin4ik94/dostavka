@@ -47,6 +47,31 @@
 </template>
 <script>
 export default {
-  props: ["product"]
+  data() {
+    return {
+      product: ""
+    };
+  },
+  watch: {
+    $route() {
+      if (this.$route.params.product) {
+        this.fetchProduct();
+      }
+    }
+  },
+  methods: {
+    fetchProduct() {
+      axios
+        .get(`/api/products/${this.$route.params.product}`)
+        .then(response => {
+          this.product = response.data.data;
+        });
+    }
+  },
+  mounted() {
+    if (this.$route.params.product) {
+      this.fetchProduct();
+    }
+  }
 };
 </script>

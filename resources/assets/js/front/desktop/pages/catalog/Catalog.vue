@@ -59,11 +59,21 @@ export default {
   },
   components: { NotFound, Products, Pagination },
   watch: {
-    $route() {
-      if (this.$route.name == "catalog") {
-        this.id = 0;
-        this.active = 0;
-        this.allProducts(0);
+    $route: {
+      immediate: true,
+      handler($route) {
+        if ($route.name == "catalog") {
+          this.id = 0;
+          this.active = 0;
+          this.allProducts(0);
+        }
+        Vue.nextTick(() => {
+          if ($route.params.product) {
+            $("#product").modal("show");
+          }
+
+          console.log("asdasadas");
+        });
       }
     },
     sortByPrice() {

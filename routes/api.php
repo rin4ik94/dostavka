@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
  */
 
 Route::get('/products', 'Front\ProductController@index');
+Route::get('/products/{product}', 'Front\ProductController@show');
 Route::get('/categories_managers', 'Front\ManagerCategoriesController@index');
 
 Route::resource('/categories', 'Front\CategoryController');

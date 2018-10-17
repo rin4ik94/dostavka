@@ -3,15 +3,14 @@
       <Navbar :regions='regions'></Navbar>
       <router-view></router-view>
       <CartInfo />
-      <Footer></Footer>
-      <Modals></Modals>
+      <Footer></Footer> 
       <RegionModal />
+      <ProductModal/>
   </div>
 </template>
 <script>
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Modals from "../components/Modals";
 import CartInfo from "../components/CartInfo";
 // import { mapActions, mapGetters } from "vuex";
 
@@ -34,7 +33,7 @@ export default {
     //   $("#Regions").modal("show");
     // });
   },
-  components: { CartInfo, Navbar, Footer, Modals }
+  components: { CartInfo, Navbar, Footer }
 };
 </script>
 
