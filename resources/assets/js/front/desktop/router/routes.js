@@ -6,6 +6,7 @@ import Profile from '../pages/Profile'
 import Orders from '../pages/Orders'
 import Delivery from '../pages/Delivery'
 import Catalog from '../pages/catalog/Catalog'
+import ProductModal from '../components/modals/Product'
 import CatalogCategories from '../pages/catalog/CatalogCategories'
 import Cart from '../pages/Cart'
 // import Settings from '../pages/settings/Settings'
@@ -59,7 +60,14 @@ export default [
                 {
                     path: ':sluged',
                     name: 'ct',
-                    component: CatalogCategories
+                    component: CatalogCategories,
+                    children: [
+                        {
+                            path: ':product',
+                            name: 'pp',
+                            component: ProductModal,
+                        }
+                    ]
                 }
             ]
         },
