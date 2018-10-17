@@ -1,4 +1,5 @@
-<template>  
+<template>   
+<div>
 <ul class="products">
               <!-- <li class="product selected">
                 <div class="product-inner">
@@ -15,7 +16,7 @@
                   </div>
                 </div>
               </li>  -->
-              <li class="product" :key="product.id" v-for="product in products">
+      <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
         <a href="/storename/products/id" @click="showModal(product)" data-toggle="modal" data-target="#product">
             <div class="product-discount">-10%</div>
@@ -30,25 +31,32 @@
             </div>
         </div>
     </li> 
-      <ProductModal :product="product"/>
+      <ProductModal  :product="product"/>
+              </ul> 
 
-              </ul>
- 
+<Pagination :pagination="pagination" :offset="3" @paginate="updateProducts"/>
+</div>
 
 </template>
 <script>
+import Pagination from "../../components/Pagination";
+
 export default {
   data() {
     return {
+      pagination: {},
       products: [],
       product: "",
       price: false
     };
   },
+  components: { Pagination },
   props: ["sortBy"],
   watch: {
     $route() {
       if (this.$route.name == "ct") {
+        this.pagination.current_page = 1;
+
         this.updateProducts();
       }
     },
@@ -66,6 +74,9 @@ export default {
       if (this.price) {
         params["price"] = this.sortBy;
       }
+      if (this.pagination) {
+        params["page"] = this.pagination.current_page;
+      }
       axios
         .get(
           `/api/products?manager=${this.$route.params.slug}&category=${
@@ -75,6 +86,7 @@ export default {
         )
         .then(response => {
           this.products = response.data.data;
+          this.pagination = response.data.meta;
         });
     }
   },
