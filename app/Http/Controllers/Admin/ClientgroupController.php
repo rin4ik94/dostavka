@@ -14,7 +14,7 @@ class ClientgroupController extends Controller
      */
     public function index()
     {
-        $clientgroups = ClientGroup::orderBy('name','ASC')->paginate(10);
+        $clientgroups = ClientGroup::paginate(10);
         return view('admin.clientsgr.index',compact('clientgroups'));
     }
     /**

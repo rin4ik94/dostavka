@@ -7,20 +7,16 @@ use App\Models\Category;
 use App\Models\Manager;
 use App\Models\ManagerCategory;
 use App\Models\Product;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
+use DB;
 use Image;
 
 class ProductController extends Controller
 {
    public function __construct(){
     $this->middleware('permission:Продукты');
-    // $managerCategories = ManagerCategory::where('id', '!=' ,1)->get();
-    //     View::share([
-    //         'managerCategories' => $managerCategories
-    //     ]);
     }
 
     /**
@@ -56,8 +52,10 @@ class ProductController extends Controller
       })
       ->paginate(10);
       $managers = Manager::all();
-      $categories = Category::where(function($query){
-      $query->where('parent_id','>','0');
+      $manager_id = \Auth::user()->manager_id;
+      $categories = Category::where(function($query) use($manager_id){
+      $query->whereNotNull('parent_id');
+      $query->whereManagerId($manager_id);
       })->get();
       return view('admin.products.index',compact('products','managers','categories'));
     }
@@ -95,7 +93,7 @@ class ProductController extends Controller
             $input['image'] = $filenametostore;
             $products = Product::create($input);
         return redirect()->route('products.index')
-                        ->with('success','Product created successfully');
+                        ->with('success','Продукт успешно создан.');
 
     }
 
@@ -133,8 +131,8 @@ class ProductController extends Controller
             $input['image'] = $filenametostore;
             $products = Product::findOrFail($input['id']);
             $products->update($input);
-        return redirect()->route('products.index')
-                        ->with('success','Product updated successfully'); 
+            return redirect()->route('products.index')
+                        ->with('success','Продукт успешно обновлен.'); 
     }
 
     /**
