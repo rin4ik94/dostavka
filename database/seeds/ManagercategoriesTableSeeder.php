@@ -21,14 +21,14 @@ class ManagercategoriesTableSeeder extends Seeder
 					'updated_at' => new DateTime,
 				],
 				[
-					'name_uz' => "Kosmetika",
-					'name_ru' => "Косметика",
+					'name_uz' => "Spirtli ichimlik do'konlari",
+					'name_ru' => "Алкагольные магазины",
 					'created_at' => new DateTime,
 					'updated_at' => new DateTime,
 				],
 				[
-					'name_uz' => "Spirtli ichimlik do'konlari",
-					'name_ru' => "Алкагольные магазины",
+					'name_uz' => "Kosmetika",
+					'name_ru' => "Косметика",
 					'created_at' => new DateTime,
 					'updated_at' => new DateTime,
 				],

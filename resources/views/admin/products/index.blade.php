@@ -58,7 +58,7 @@
 				<tr>
 					<td data-image="{{ $product->image }}">{{ $product->id }}</td>
 					<td data-name="{{ $product->name_uz }}"><a href="/" target="_blank">{{ $product->name_ru }}</a></td>
-					<td data-manager="{{ $product->manager_id }}">{{ $product->manager->name }}</td>
+					<td data-manager="{{ $product->manager_id }}">{{ optional($product->manager)->name}}</td>
 					<td data-category="{{ $product->category_id }}">{{ $product->category->name_ru }}</td>
 					<td data-newprice="{{ $product->new_price }}">{{ number_format($product->new_price, 0,' ',' ') }}</td>
 					<td class="text-through" data-oldprice="{{ $product->old_price }}">{{ number_format($product->old_price, 0, ' ',' ') }}</td>

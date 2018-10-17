@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(WorkingModeTableSeeder::class);
         $this->call(ManagercategoriesTableSeeder::class);
         $this->call(ManagersTableSeeder::class);
+        $this->call(BranchesTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(EmployeeTableSeeder::class);
         // $this->call(RoleHasPermissionTableSeeder::class);
