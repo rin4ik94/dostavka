@@ -25,10 +25,10 @@ class ProductController extends Controller
             $manager = Manager::where('slug', request()->manager)->first();
             $category = Category::where('slug', request()->category)->first();
             if (count($category->children) < 1) {
-                $products = Product::sortByPrice(request()->price)->ofCategory($category->id)->ofManager($manager->id)->active()->paginate(2);
+                $products = Product::sortByPrice(request()->price)->ofCategory($category->id)->ofManager($manager->id)->active()->paginate(20);
                 return ProductResource::collection($products);
             } else {
-                return ProductResource::collection($category->childProducts($manager->id, request()->price)->paginate(2));
+                return ProductResource::collection($category->childProducts($manager->id, request()->price)->paginate(20));
             }
         } else if (request()->has('manager')) {
             $manager = Manager::where('slug', request()->manager)->first();
