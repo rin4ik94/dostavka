@@ -34,49 +34,6 @@
 					<label class="custom-control-label" for="customCheck1">Со скидкой</label>
 				</div>
 			</div>
-<<<<<<< HEAD
-		</form>
-      @include('admin.components.search')
-    </div>
-    @if(count($products) > 0)
-		<table class="table table-bordered table-hover">
-			<thead>
-				<tr>
-					<th class="col-auto">№</th>
-					<th class="col-4">Название</th>
-					<th class="col-2">Магазин</th>
-					<th class="col-4">Категория</th>
-					<th class="col-2">Ценна</th>
-					<th class="col-2">Старая цена</th>
-					<th class="col-auto">Ед. изм.</th>
-					<th class="col-2">Состояние</th>
-					<th class="col-auto"></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($products as $product)
-				<tr>
-					<td data-image="{{ $product->image }}">{{ $product->id }}</td>
-					<td data-name="{{ $product->name_uz }}"><a href="/" target="_blank">{{ $product->name_ru }}</a></td>
-					<td data-manager="{{ $product->manager_id }}">{{ optional($product->manager)->name}}</td>
-					<td data-category="{{ $product->category_id }}">{{ $product->category->name_ru }}</td>
-					<td data-newprice="{{ $product->new_price }}">{{ number_format($product->new_price, 0,' ',' ') }}</td>
-					<td class="text-through" data-oldprice="{{ $product->old_price }}">{{ number_format($product->old_price, 0, ' ',' ') }}</td>
-						@if($product->measurement == '2')
-					<td data-measurement="{{ $product->measurement }}">КГ</td> 
-						@else 
-					<td data-measurement="{{ $product->measurement }}">ШТ</td>
-						@endif
-						
-						@if($product->status == '1')
-					<td class="text-green" data-status="{{ $product->status }}">Активен</td>
-						@else
-							<td class="text-red" data-status="{{ $product->status }}">Нективен</td>
-						@endif
-					<td>
-						<div class="btn-group btn-group-sm product_action">
-							<a href="#" data-toggle="modal" data-target="#editProduct" class="btn btn-light" data="{{$product->id}}">
-=======
 		</div>
 	</form>
 	@include('admin.components.search')
@@ -117,7 +74,6 @@
 			<td>
 				<div class="btn-group btn-group-sm product_action">
 					<a href="#" data-toggle="modal" data-target="#editProduct" class="btn btn-light" data="{{$product->id}}">
->>>>>>> c0777ae89427d095218a8ddf2136b0b3c3a01221
 								<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
 							</a>
 				</div>
