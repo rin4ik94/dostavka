@@ -18,11 +18,12 @@
               </li> 
               <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
-        <a href="/storename/products/id" @click="showModal(product)" data-toggle="modal" data-target="#product">
-            <div class="product-discount">-10%</div>
+        <router-link :to="{name: 'tp', params:{product : product.id}}" data-toggle="modal" data-target="#product">
+       
+              <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
             <div class="product-image"><img :src="product.image"></div>
             <div class="product-title">{{product.name}} 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
-            </a>
+        </router-link>
             <div class="product-footer">
             <div class="product-price">
                 <div class="product-price-new">{{product.new_price | toCurrency }} сум</div><div class="product-quantity">за 1 кг.</div>
@@ -50,6 +51,11 @@ export default {
   methods: {
     showModal(product) {
       this.product = product;
+    },
+    getPersentage(product) {
+      console.log(product);
+      let value = product.old_price - product.new_price;
+      return Math.round((value / product.old_price) * 100);
     }
   }
 };

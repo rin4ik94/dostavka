@@ -51520,6 +51520,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
                 name: 'pp',
                 component: __WEBPACK_IMPORTED_MODULE_6__components_modals_Product___default.a
             }]
+        }, {
+            path: ':product',
+            name: 'tp',
+            component: __WEBPACK_IMPORTED_MODULE_6__components_modals_Product___default.a
         }]
     }, {
         path: '*',
@@ -56375,6 +56379,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["products", "sortBy"],
@@ -56390,6 +56395,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     showModal: function showModal(product) {
       this.product = product;
+    },
+    getPersentage: function getPersentage(product) {
+      console.log(product);
+      var value = product.old_price - product.new_price;
+      return Math.round(value / product.old_price * 100);
     }
   }
 });
@@ -56411,61 +56421,63 @@ var render = function() {
         _vm._v(" "),
         _vm._l(_vm.products, function(product) {
           return _c("li", { key: product.id, staticClass: "product" }, [
-            _c("div", { staticClass: "product-inner" }, [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "/storename/products/id",
-                    "data-toggle": "modal",
-                    "data-target": "#product"
-                  },
-                  on: {
-                    click: function($event) {
-                      _vm.showModal(product)
-                    }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "product-discount" }, [
-                    _vm._v("-10%")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-image" }, [
-                    _c("img", { attrs: { src: product.image } })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-title" }, [
-                    _vm._v(
-                      _vm._s(product.name) +
-                        " 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "product-footer" }, [
-                _c("div", { staticClass: "product-price" }, [
-                  _c("div", { staticClass: "product-price-new" }, [
-                    _vm._v(
-                      _vm._s(_vm._f("toCurrency")(product.new_price)) + " сум"
-                    )
-                  ]),
-                  _c("div", { staticClass: "product-quantity" }, [
-                    _vm._v("за 1 кг.")
-                  ])
-                ]),
-                _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "product-inner" },
+              [
                 _c(
-                  "button",
+                  "router-link",
                   {
-                    staticClass: "btn btn-green product-add-button",
-                    attrs: { type: "submit" }
+                    attrs: {
+                      to: { name: "tp", params: { product: product.id } },
+                      "data-toggle": "modal",
+                      "data-target": "#product"
+                    }
                   },
-                  [_vm._v("В корзину")]
-                )
-              ])
-            ])
+                  [
+                    product.new_price < product.old_price
+                      ? _c("div", { staticClass: "product-discount" }, [
+                          _vm._v("-" + _vm._s(_vm.getPersentage(product)) + "%")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "product-image" }, [
+                      _c("img", { attrs: { src: product.image } })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "product-title" }, [
+                      _vm._v(
+                        _vm._s(product.name) +
+                          " 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd"
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "product-footer" }, [
+                  _c("div", { staticClass: "product-price" }, [
+                    _c("div", { staticClass: "product-price-new" }, [
+                      _vm._v(
+                        _vm._s(_vm._f("toCurrency")(product.new_price)) + " сум"
+                      )
+                    ]),
+                    _c("div", { staticClass: "product-quantity" }, [
+                      _vm._v("за 1 кг.")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-green product-add-button",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("В корзину")]
+                  )
+                ])
+              ],
+              1
+            )
           ])
         }),
         _vm._v(" "),
@@ -57098,6 +57110,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.products = response.data.data;
         _this.pagination = response.data.meta;
       });
+    },
+    getPersentage: function getPersentage(product) {
+      var value = product.old_price - product.new_price;
+      return Math.round(value / product.old_price * 100);
     }
   },
   mounted: function mounted() {
@@ -57135,9 +57151,11 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", { staticClass: "product-discount" }, [
-                      _vm._v("-10%")
-                    ]),
+                    product.new_price < product.old_price
+                      ? _c("div", { staticClass: "product-discount" }, [
+                          _vm._v("-" + _vm._s(_vm.getPersentage(product)) + "%")
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "product-image" }, [
                       _c("img", { attrs: { src: product.image } })

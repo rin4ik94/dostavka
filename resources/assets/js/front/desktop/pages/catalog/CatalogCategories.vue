@@ -19,7 +19,7 @@
       <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
         <router-link :to="{name: 'pp', params:{product : product.id}}" data-toggle="modal" data-target="#product">
-            <div class="product-discount">-10%</div>
+            <div v-if="product.new_price < product.old_price" class="product-discount">-{{getPersentage(product)}}%</div>
             <div class="product-image"><img :src="product.image"></div>
             <div class="product-title">{{product.name}} 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
         </router-link>
@@ -89,6 +89,10 @@ export default {
           this.products = response.data.data;
           this.pagination = response.data.meta;
         });
+    },
+    getPersentage(product) {
+      let value = product.old_price - product.new_price;
+      return Math.round((value / product.old_price) * 100);
     }
   },
   mounted() {

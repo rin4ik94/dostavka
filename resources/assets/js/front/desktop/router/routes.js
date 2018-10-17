@@ -68,6 +68,11 @@ export default [
                             component: ProductModal,
                         }
                     ]
+                },
+                {
+                    path: ':product',
+                    name: 'tp',
+                    component: ProductModal,
                 }
             ]
         },

@@ -10,10 +10,10 @@ class Product extends Model
     protected $fillable = [
         'name_uz', 'name_ru', 'image', 'measurement', 'new_price', 'old_price', 'status', 'category_id', 'manager_id'
     ];
-    protected $casts = [
-        'price' => 'integer',
-        'old_price' => 'integer'
-    ];
+    // protected $casts = [
+    //     'price' => 'integer',
+    //     'old_price' => 'integer'
+    // ];
     public function getImage()
     {
         if ($this->image) {
