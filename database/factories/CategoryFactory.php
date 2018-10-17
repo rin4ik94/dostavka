@@ -7,6 +7,7 @@ $factory->define(App\Models\Category::class, function (Faker $faker) {
         'name_uz' => $faker->name,
         'name_ru' => $faker->name,
         'position' => rand(1, 100),
-        'manager_id' => rand(1, 4)
+        'created_at' => new DateTime,
+        'updated_at' => new DateTime
     ];
 });

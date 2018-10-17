@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Manager;
+
 class ManagersTableSeeder extends Seeder
 {
 	/**
@@ -12,6 +13,7 @@ class ManagersTableSeeder extends Seeder
 	public function run()
 	{
 		collect(
+			[
 				[
 					'name' => "Ishonch",
 					'logo' => "ishonch.jpg",
@@ -46,29 +48,28 @@ class ManagersTableSeeder extends Seeder
 					'name' => "Пятёрочка",
 					'logo' => "ret_2.png",
 					'status' => 1,
-					'manager_category_id' => 1 
+					'manager_category_id' => 1
 				],
 				[
 					'name' => "Перекресток",
 					'logo' => "ret_3.png",
 					'status' => 1,
-					'manager_category_id' => 1 
+					'manager_category_id' => 1
 				],
 				[
 					'name' => "Ашан",
 					'logo' => "ret_3.png",
 					'status' => 1,
-					'manager_category_id' => 2 
+					'manager_category_id' => 2
 				]
-			)->each(function($manager){
-				factory(Manager::class)->create([
-					'name' => $manager['name'],
-					'logo' => $manager['logo'],
-					'status' => $manager['status'],
-					'manager_category_id' => $manager['manager_category_id'], 
-					'created_at' => new DateTime,
-					'updated_at' => new DateTime,
-				]);
-			});
+			]
+		)->each(function ($manager) {
+			factory(Manager::class)->create([
+				'name' => $manager['name'],
+				'logo' => $manager['logo'],
+				'status' => $manager['status'],
+				'manager_category_id' => $manager['manager_category_id']
+			]);
+		});
 	}
 }
