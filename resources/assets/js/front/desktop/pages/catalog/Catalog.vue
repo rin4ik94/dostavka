@@ -17,23 +17,9 @@
                 <div @click.prevent="sortByPrice = true" type="radio" name="options" id="option2" autocomplete="off">По цене</div>
               </label>
             </div>
-              <router-view :sortBy="sortByPrice" @setActive="setActive"></router-view>
+              <router-view @updatePagination="updatePagination" :sortBy="sortByPrice" @setActive="setActive"></router-view>
               <Products  v-if="active == 0" :products="products" /> 
-            <nav>
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" href="#" tabindex="-1">&#8592; Назад</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Вперед &#8594;</a>
-                </li>
-              </ul>
-            </nav>
+              <Pagination v-if="products.length > 19 && active == 0" :pagination="pagination" :offset="3" @paginate="allProducts"/>
           </main>
           <aside class="aside">
           <nav class="categories">
@@ -57,6 +43,7 @@
 import { mapGetters } from "vuex";
 import NotFound from "../NotFound";
 import Products from "./Products";
+import Pagination from "../../components/Pagination";
 
 export default {
   data() {
@@ -65,12 +52,13 @@ export default {
       catalog: null,
       notFound: false,
       id: 0,
+      pagination: {},
       products: [],
       categories: [],
       sortByPrice: false
     };
   },
-  components: { NotFound, Products },
+  components: { NotFound, Products, Pagination },
   watch: {
     $route() {
       if (this.$route.name == "catalog") {
@@ -86,6 +74,9 @@ export default {
     }
   },
   methods: {
+    updatePagination(pagination) {
+      this.pagination = pagination;
+    },
     setActive(id) {
       this.active = id;
       this.id = id;
@@ -100,12 +91,16 @@ export default {
       if (this.sortByPrice) {
         params["price"] = this.sortByPrice;
       }
+      if (this.pagination) {
+        params["page"] = this.pagination.current_page;
+      }
       axios
         .get(`/api/products?manager=${this.$route.params.slug}`, {
           params: params
         })
         .then(response => {
           this.products = response.data.data;
+          this.pagination = response.data.meta;
         });
       // this.categories.map((v, k) => {
       //   if (v.children.length == 0) {

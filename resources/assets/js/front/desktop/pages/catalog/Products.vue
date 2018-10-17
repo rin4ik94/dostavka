@@ -1,4 +1,5 @@
 <template>
+<div>
     <ul class="products">
               <!-- <li class="product selected">
                 <div class="product-inner">
@@ -31,7 +32,9 @@
         </div>
         </li> 
       <ProductModal :product="product"/>
-    </ul>
+    </ul> 
+    </div>
+
 </template>
 <script>
 export default {
@@ -42,9 +45,7 @@ export default {
     };
   },
   watch: {
-    sortBy(sortBy) {
-        
-    }
+    sortBy(sortBy) {}
   },
   methods: {
     showModal(product) {
