@@ -22,6 +22,20 @@ class Product extends Model
             return '/desktop/img/001.jpg';
         }
     }
+    public function scopeOfManager(Builder $builder, $managerId)
+    {
+        if (!$managerId) {
+            return;
+        }
+        $builder->where('manager_id', $managerId);
+    }
+    public function scopeOfCategory(Builder $builder, $categoryId)
+    {
+        if (!$categoryId) {
+            return;
+        }
+        $builder->where('category_id', $categoryId);
+    }
     public function scopeSortByPrice(Builder $builder, $price)
     {
 
@@ -53,12 +67,5 @@ class Product extends Model
     public function manager()
     {
         return $this->belongsTo('App\Models\Manager');
-    }
-    public function scopeOfCategory($query, $category)
-    {
-        if (!$category) {
-            return;
-        }
-        $query->where('category_id', $category);
     }
 }

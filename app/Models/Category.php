@@ -39,11 +39,16 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\Category', 'parent_id');
     }
-    public function childProducts()
+    public function childProducts($managerId)
     {
-        return $this->children->flatMap(function ($cat) {
-            return $cat->products;
-        });
+        if (!$managerId) {
+            return;
+        }
+        return $this->children->map(function ($cat) use ($managerId) {
+            return $cat->products->filter(function ($product) use ($managerId) {
+                return $product->manager_id == $managerId;
+            });
+        })->flatten();
     }
     public function children()
     {
