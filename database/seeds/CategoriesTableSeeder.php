@@ -823,7 +823,12 @@ class CategoriesTableSeeder extends Seeder
                 'position' => $cat['position'],
                 'parent_id' => $cat['parent_id'],
                 'manager_id' => $cat['manager_id']
-            ]);
+            ])->each(function ($cat) {
+                factory(Product::class, 5)->create([
+                    'manager_id' => $cat->manager_id,
+                    'category_id' => $cat->id,
+                ]);
+            });
         });
     }
 }
