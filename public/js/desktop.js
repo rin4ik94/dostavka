@@ -51711,10 +51711,25 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
 
       return getRegions;
-    }()
+    }(),
+    replaceC: function replaceC() {
+      var url = this.$route.path;
+      var str = url.substr(url.lastIndexOf("/") + 1);
+      if (str == this.$route.params.slug) {
+        this.$router.replace({ name: "catalog" });
+      } else {
+        this.$router.replace({
+          name: "ct",
+          params: { sluged: this.$route.params.sluged }
+        });
+      }
+    }
   },
   mounted: function mounted() {
     this.getRegions();
+    var self = this;
+
+    $("#product").on("hide.bs.modal", this.replaceC);
     // this.setRegion().catch(() => {
     //   console.log("sad");
     //   $("#Regions").modal("show");

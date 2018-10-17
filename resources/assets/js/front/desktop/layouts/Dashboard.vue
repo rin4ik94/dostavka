@@ -24,10 +24,25 @@ export default {
     async getRegions() {
       let response = await axios.get("/api/regions");
       this.regions = response.data.data;
+    },
+    replaceC() {
+      let url = this.$route.path;
+      var str = url.substr(url.lastIndexOf("/") + 1);
+      if (str == this.$route.params.slug) {
+        this.$router.replace({ name: "catalog" });
+      } else {
+        this.$router.replace({
+          name: "ct",
+          params: { sluged: this.$route.params.sluged }
+        });
+      }
     }
   },
   mounted() {
     this.getRegions();
+    let self = this;
+
+    $("#product").on("hide.bs.modal", this.replaceC);
     // this.setRegion().catch(() => {
     //   console.log("sad");
     //   $("#Regions").modal("show");
