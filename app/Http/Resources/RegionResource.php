@@ -15,14 +15,13 @@ class RegionResource extends JsonResource
     public function toArray($request)
     {
         if ($request->lang == 'uz') {
-            return [
-                'id' => (string)$this->id,
-                'name' => $this->name_uz
-            ];
+            $name = $this->name_uz;
+        } else {
+            $name = $this->name_ru;
         }
         return [
             'id' => (string)$this->id,
-            'name' => $this->name_ru
+            'name' => $name
         ];
     }
 }
