@@ -480,18 +480,16 @@ html, body {
 }
 
 
-.counter-widget .btn {
-  padding: 7px 9px;
-}
+
 .counter-widget.input-group-sm .btn {
-  padding: 3px 5px;
+  padding: 3px 3px;
+  line-height: 16px;
 }
 .counter-widget .btn .icon {
- font-size: 20px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+ font-size: 16px;
 }
 .counter-widget .form-control {
+  line-height: 16px;
   text-align: center;
   background-color: #fff;
 }
