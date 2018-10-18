@@ -26,15 +26,20 @@ export const setRegionName = (state, region) => {
         return
     }
 }
-// export const setAuthenticated = (state, trueOrFalse) => {
-//     state.user.authenticated = trueOrFalse;
-// }
-// export const setLang = (state, lang) => {
-//     state.user.lang = lang;
-// }
-// export const setTotal = (state, total) => {
-//     state.user.total = total;
-// }
-// export const setUserData = (state, user) => {
-//     state.user.data = user
-// }  
+export const setCart = (state, cart) => {
+    if (!isEmpty(cart)) {
+        let d = 0
+        cart.map((v, k) => {
+            d = d + v.quantity
+        })
+        state.cart.prods = cart;
+        state.cart.quantity = d;
+        return
+    }
+}
+export const setTotal = (state, total) => {
+    if (!isEmpty(total)) {
+        state.cart.total = total;
+        return
+    }
+}

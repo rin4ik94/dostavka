@@ -45,6 +45,25 @@ export const setRegionId = ({ commit, dispatch }, regionId) => {
     localforage.setItem('region', regionId)
 
 }
+export const setCart = ({ commit, dispatch }, cart) => {
+    // commit('setRegion', regionId)
+    // localforage.setItem('region', regionId)
+    console.log(cart)
+    return localforage.getItem('cart').then((cart) => {
+        commit('setCart', cart)
+    })
+
+
+}
+export const setTotal = ({ commit, dispatch }, total) => {
+    // commit('setRegion', regionId)
+    // localforage.setItem('region', regionId)    console.log(cart)
+
+    commit('setTotal', total)
+
+
+
+}
 export const setRegionName = ({ commit, dispatch }, region) => {
     commit('setRegionName', region)
 

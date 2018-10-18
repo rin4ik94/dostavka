@@ -18,14 +18,14 @@
               </div>
             </div>
               <router-view @updatePagination="updatePagination" :sortBy="sortByPrice" @setActive="setActive"></router-view>
-              <Products  v-if="active == 0" :products="products" /> 
+              <Products  v-if="active == 0" :prods="products" /> 
               <Pagination v-if="active == 0" :pagination="pagination" :offset="3" @paginate="allProducts"/>
           </main>
           <aside class="aside">
           <nav class="categories">
             <ul class="nav">
               <li class="nav-item">
-                <router-link class="nav-link" :to="{name: 'catalog', params:{slug : catalog.slug}}" exact>Все категории</router-link>
+                <router-link class="nav-link" :to="{name: 'catalog', params:{slug : catalog.slug}}" exact :class="{'active': $route.name == 'tp'}">Все категории</router-link>
               </li>
               <SubCategories :activeIndex="active" :key="category.id"  @updateActive="setActive" :index="category.id" v-for="(category,index) in categories" :category="category" />
               
@@ -43,7 +43,6 @@ import { mapGetters } from "vuex";
 import NotFound from "../NotFound";
 import Products from "./Products";
 import Pagination from "../../components/Pagination";
-
 export default {
   data() {
     return {
@@ -67,11 +66,11 @@ export default {
           this.active = 0;
           this.allProducts(0);
         }
-        Vue.nextTick(() => {
-          if ($route.params.product) {
-            $("#product").modal("show");
-          }
-        });
+        // Vue.nextTick(() => {
+        //   if ($route.params.product) {
+        //     $("#product").modal("show");
+        //   }
+        // });
       }
     },
     sortByPrice() {

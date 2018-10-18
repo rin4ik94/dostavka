@@ -1,5 +1,5 @@
 <template>
-    <li class="nav-item"  >
+    <li class="nav-item">
       <a  @click.prevent="updateActive(category.id)"  :class="[fieldClasses]" class="nav-link" >
         {{category.name}}</a> 
         <ul class="nav"  v-if="childSelected && isOpen" >

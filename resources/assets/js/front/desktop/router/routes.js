@@ -58,7 +58,7 @@ export default [
             component: Catalog,
             children: [
                 {
-                    path: ':sluged',
+                    path: 'cats/:sluged',
                     name: 'ct',
                     component: CatalogCategories,
                     children: [

@@ -8,7 +8,7 @@
         <li class="nav-item"><router-link class="nav-link" :to="{name: 'home'}" exact>Магазины</router-link></li>
         <li class="nav-item"><router-link class="nav-link" :to="{name: 'delivery'}">Доставка</router-link></li>
       </ul>
-      <form class="input-group header-search" v-if="$route.name == 'catalog' || $route.name == 'ct'">
+      <form class="input-group header-search" v-if="$route.name == 'catalog' || $route.name == 'ct' || $route.name == 'pp'|| $route.name == 'tp'">
         <input class="form-control" type="search" name="s" placeholder="Поиск товаров">
         <div class="input-group-append"><button class="btn btn-outline-green" type="submit">Найти</button></div>
       </form>
