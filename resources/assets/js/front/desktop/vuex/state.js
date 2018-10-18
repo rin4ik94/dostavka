@@ -10,4 +10,10 @@ export default {
 
         }
     },
+    cart: {
+        total: null,
+        quantity: null,
+        prods: {
+        }
+    }
 }

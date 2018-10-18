@@ -66,6 +66,9 @@ export default {
       this.updateProducts();
     }
   },
+  computed:{
+    
+  },
   methods: {
     showModal(product) {
       this.product = product;

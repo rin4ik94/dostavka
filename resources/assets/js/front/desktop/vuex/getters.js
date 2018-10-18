@@ -7,6 +7,9 @@ export const regionId = (state) => {
 export const regionName = (state) => {
     return state.user.regionName
 }
+export const cart = (state) => {
+    return state.cart
+}
 // export const lang = (state) => {
 //     return state.user.lang
 // }

@@ -227,8 +227,7 @@ html, body {
   text-align: center;
 }
 .main-empty .icon {
-  width: 96px;
-  height: 96px;
+  font-size: 96px;
   color: #999;
   margin-bottom: 14px;
 }
@@ -436,4 +435,61 @@ html, body {
 
 #chatBody{
   overflow: auto;
+}
+
+
+#editOrder .modal-dialog {
+  max-width: 1000px;
+}
+
+.btn-sm .icon,
+.btn-group-sm .icon {
+  font-size: 16px;
+  line-height: 16px;
+}
+.table .btn  {
+  padding: 3px 3px;
+  line-height: 16px;
+}
+.table .badge {
+  padding: 4px 6px;
+}
+
+/* List */
+.list {
+  
+}
+.list-item {
+  padding: 0;
+}
+.list-item.custom-radio .list-link:before,
+.list-item.custom-radio .list-link:after {
+  left: 24px;
+  top: 14px;
+}
+.list-link {
+  display: block;
+  padding: 12px 24px;
+  line-height: 24px;
+}
+.list-link:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+.list-item.custom-radio .list-link {
+  padding-left: 56px;
+}
+
+
+
+.counter-widget.input-group-sm .btn {
+  padding: 3px 3px;
+  line-height: 16px;
+}
+.counter-widget .btn .icon {
+ font-size: 16px;
+}
+.counter-widget .form-control {
+  line-height: 16px;
+  text-align: center;
+  background-color: #fff;
 }
