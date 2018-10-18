@@ -526,7 +526,7 @@ pre code {
 .table thead th {
   padding: 0 14px 14px 14px;
   vertical-align: bottom;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   color: #999;
 }
@@ -535,9 +535,10 @@ pre code {
   background-color: #fff;
 }
 .table tbody td {
-  line-height: 28px;
+  line-height: 24px;
   padding: 14px 14px;
   vertical-align: top;
+  font-size: 14px;
   border-bottom: 1px solid #eceae7;
 }
 .table-sm th,
@@ -551,7 +552,7 @@ pre code {
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.01);
 }
 
 .table-hover tbody tr {

@@ -3,7 +3,7 @@
 <div class="main-top d-flex align-items-center">
 	<h1 class="main-title">Продукты</h1>
 	<button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newProduct">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#plus"></use></svg>
+        <i class="icon">add</i>
         <span class="text">Добавить продукты</span>
       </button>
 </div>
@@ -39,7 +39,7 @@
 	@include('admin.components.search')
 </div>
 @if(count($products) > 0)
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>
 			<th class="col-auto">№</th>
@@ -62,11 +62,16 @@
 			<td data-category="{{ $product->category_id }}">{{ $product->category->name_ru }}</td>
 			<td data-newprice="{{ $product->new_price }}">{{ number_format($product->new_price, 0,' ',' ') }}</td>
 			<td class="text-through" data-oldprice="{{ $product->old_price }}">{{ number_format($product->old_price, 0, ' ',' ') }}</td>
-			@if($product->measurement == '2')
-			<td data-measurement="{{ $product->measurement }}">КГ</td>
-			@else
-			<td data-measurement="{{ $product->measurement }}">ШТ</td>
-			@endif @if($product->status == '1')
+			@if($product->measurement == '1')
+			<td data-measurement="{{ $product->measurement }}">шт</td>
+			@elseif($product->measurement == '2')
+			<td data-measurement="{{ $product->measurement }}">кг</td>
+			@elseif($product->measurement == '3')
+			<td data-measurement="{{ $product->measurement }}">м</td>
+			@elseif($product->measurement == '4')
+			<td data-measurement="{{ $product->measurement }}">кв^2</td>
+			@endif
+			@if($product->status == '1')
 			<td class="text-green" data-status="{{ $product->status }}">Активен</td>
 			@else
 			<td class="text-red" data-status="{{ $product->status }}">Нективен</td>
@@ -74,11 +79,11 @@
 			<td>
 				<div class="btn-group btn-group-sm product_action">
 					<a href="#" data-toggle="modal" data-target="#editProduct" class="btn btn-light" data="{{$product->id}}">
-								<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
+								<i class="icon">edit</i>
 							</a>
 				</div>
 				{!! Form::open(['method' => 'DELETE','route' => ['products.destroy', $product->id], 'class'=>'btn-group btn-group-sm delete'])
-				!!} {!! Form::button('<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#delete"></use></svg>',
+				!!} {!! Form::button('<i class="icon">delete</i>',
 				['type' => 'submit', 'class' => 'btn btn-light'] ) !!} {!! Form::close() !!}
 			</td>
 		</tr>
@@ -95,7 +100,7 @@
 </div>
 	@include('admin.products.edit') @else
 <div class="main-empty">
-	<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#store"></use></svg>
+	<i class="icon">layers</i>
 	<div class="text">Список пусто</div>
 </div>
 @endif

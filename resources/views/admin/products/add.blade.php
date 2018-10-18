@@ -42,7 +42,7 @@
               <div class="col">
                 <div class="form-group">
                   <label class="form-label" for="productManager">Магазин *</label>
-                  <select class="custom-select" name="manager_id" required>
+                  <select class="custom-select apiManager" name="manager_id" required>
                     <option value="" selected disabled>Не выбран</option>
                     @foreach($managers as $manager)
                       <option value="{{ $manager->id }}">{{ $manager->name }}</option>
@@ -53,10 +53,13 @@
               <div class="col">
                 <div class="form-group">
                   <label class="form-label" for="productCategory">Категория *</label>
-                  <select class="custom-select" name="category_id" required>
+                  <select class="custom-select apiCategory" name="category_id" required disabled>
                     <option value="" selected disabled>Не выбран</option>
                     @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name_ru }}</option>
+                      <option value="{{ $category->id }}" disabled>{{ $category->name_ru }}</option>
+                      @foreach($category->children as $child)
+                        <option value="{{ $child->id }}">&nbsp;&nbsp;{{ $child->name_ru }}</option>
+                      @endforeach
                     @endforeach
                   </select>
                 </div>
@@ -102,4 +105,4 @@
       </form>
     </div>
   </div>
-</div>  
+</div>

@@ -3,10 +3,8 @@
 <div class="main-top d-flex align-items-center">
     <h1 class="main-title">Список курьеров</h1>
     <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newCourier">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg">
-            <use xlink:href="#plus"></use>
-        </svg>
-        <span class="text">Добавить курьер</span>
+      <i class="icon">add</i>
+      <span class="text">Добавить курьер</span>
     </button>
 </div>
 
@@ -15,9 +13,9 @@
     <div class="form-row">
         <div class="col-auto">
             <select class="custom-select" name="status" onchange="this.form.submit()">
-								<option value="all" @if(request()->get('status')=="all") selected @endif>Все статуси</option>
-								<option value="1" @if(request()->get('status')=="1") selected @endif>Активен</option>
-								<option value="0" @if(request()->get('status')=="0") selected @endif>Неактивен</option>
+              <option value="all" @if(request()->get('status')=="all") selected @endif>Все статуси</option>
+              <option value="1" @if(request()->get('status')=="1") selected @endif>Активен</option>
+              <option value="0" @if(request()->get('status')=="0") selected @endif>Неактивен</option>
             </select>
         </div>
 		</div>
@@ -25,7 +23,7 @@
     @include('admin.components.search')
 </div>
 @if(count($couriers) > 0)
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover table-striped">
     <thead>
         <tr>
             <th class="col-auto">№</th>
@@ -49,11 +47,11 @@
             <td>
                 <div class="btn-group btn-group-sm courier_action">
                     <a href="#" data-toggle="modal" data-target="#editCourier" class="btn btn-light">
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
+                      <i class="icon">edit</i>
                     </a>
                   </div>
                   {!! Form::open(['method' => 'DELETE','route' => ['couriers.destroy',$courier->id], 'class'=>'btn-group btn-group-sm delete']) !!}
-                  {!! Form::button('<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#delete"></use></svg>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
+                  {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
                   {!! Form::close() !!}
             </td>
         </tr>
@@ -73,9 +71,7 @@
 @include('admin.couriers.edit')
 @else
 <div class="main-empty">
-    <svg class="icon" xmlns="http://www.w3.org/2000/svg">
-        <use xlink:href="#store"></use>
-    </svg>
+    <i class="icon">local_shipping</i>
     <div class="text">Список пусто</div>
 </div>
 @endif

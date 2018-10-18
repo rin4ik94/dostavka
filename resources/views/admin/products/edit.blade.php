@@ -53,7 +53,10 @@
                   <label class="form-label" for="editCat">Категория *</label>
                   <select class="custom-select category_id" name="category_id" required>
                     @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name_ru }}</option>
+                      <option value="{{ $category->id }}" disabled>{{ $category->name_ru }}</option>
+                      @foreach($category->children as $child)
+                        <option value="{{ $child->id }}">&nbsp;{{ $child->name_ru }}</option>
+                      @endforeach
                     @endforeach
                   </select>
                 </div>
