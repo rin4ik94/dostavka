@@ -18,7 +18,7 @@
               </li>  -->
       <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
-        <router-link :to="{name: 'pp', params:{product : product.id}}" data-toggle="modal" data-target="#product">
+        <router-link :to="{name: 'pp', params:{product : product.slug}}" data-toggle="modal" data-target="#product">
             <div v-if="product.new_price < product.old_price" class="product-discount">-{{getPersentage(product)}}%</div>
             <div class="product-image"><img :src="product.image"></div>
             <div class="product-title">{{product.name}} 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>

@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         if (request()->has('withManager')) {
-            $categories = Category::with('children', 'children.children')->where('manager_id', request()->manager)->active()->parents()->ordered()->get();
+            $categories = Category::with('children', 'children.children')->ofManager(request()->manager)->active()->parents()->ordered()->get();
             return CategoryResource::collection($categories);
         }
         $categories = Category::with('children', 'children.children')->active()->parents()->ordered()->get();

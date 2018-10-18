@@ -25,9 +25,10 @@ export default {
       let response = await axios.get("/api/regions");
       this.regions = response.data.data;
     },
-    replaceC() {
+    replacePage() {
       let url = this.$route.path;
       var str = url.substr(url.lastIndexOf("/") + 1);
+      // alert(str);
       if (str == this.$route.params.slug) {
         this.$router.replace({ name: "catalog" });
       } else {
@@ -41,8 +42,7 @@ export default {
   mounted() {
     this.getRegions();
     let self = this;
-
-    $("#product").on("hide.bs.modal", this.replaceC);
+    $("#product").on("hide.bs.modal", this.replacePage);
     // this.setRegion().catch(() => {
     //   console.log("sad");
     //   $("#Regions").modal("show");

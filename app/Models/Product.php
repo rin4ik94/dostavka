@@ -8,9 +8,8 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Product extends Model
 {
     use Sluggable;
-    protected $table = 'products';
     protected $fillable = [
-        'name_uz', 'name_ru', 'image', 'measurement', 'new_price', 'old_price', 'status', 'category_id', 'manager_id'
+        'name_uz', 'name_ru', 'slug', 'image', 'measurement', 'new_price', 'old_price', 'status', 'category_id', 'manager_id'
     ];
 
     public function sluggable()
@@ -52,7 +51,6 @@ class Product extends Model
     }
     public function scopeSortByPrice(Builder $builder, $price)
     {
-
         if (!$price) {
             return;
         }
@@ -62,7 +60,7 @@ class Product extends Model
     {
         $builder->where('status', 1);
     }
-    
+
     public function category()
     {
         return $this->belongsTo(Category::class);

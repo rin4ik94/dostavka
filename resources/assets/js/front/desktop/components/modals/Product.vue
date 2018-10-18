@@ -17,11 +17,9 @@
              
               <h1 class="title f-product-title">{{product.name}}, 2,6%</h1>
               <div class="f-product-segment"><a href="/">Продукты</a> / <a href="/">Молочные продукты</a></div>
-
-              
-              <div class="f-product-quantity">{{product.new_price}} сум за 1 шт</div>
+              <div class="f-product-quantity">{{product.new_price | toCurrency}} сум за 1 шт</div>
               <div class="f-product-price">
-                <div class="f-product-price-new">{{product.new_price}} сум</div>
+                <div class="f-product-price-new">{{product.new_price | toCurrency}} сум</div>
                 <div class="f-product-price-old"></div>
               </div>
               <div class="row mt-auto">
