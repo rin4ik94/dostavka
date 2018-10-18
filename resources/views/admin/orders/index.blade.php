@@ -27,7 +27,7 @@
       </div>
       @include('admin.components.search')
     </div>
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover table-striped">
     <thead>
       <tr>
         <th class="col-auto">№</th>
