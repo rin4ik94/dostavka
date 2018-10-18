@@ -26,9 +26,18 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-      $manager = $request->manager ?? null;
-      if($manager == 'all'){
-        $manager = null;
+      $user = auth()->user();
+      $manager = $request->manager ?? $user->manager_id;
+      if($user->id == '1'){
+      $managers = Manager::all();
+          if($manager == 'all'){
+              $manager = null;
+          }
+      }else{
+        $managers = Manager::find($user->manager_id);
+        if($manager == 'all'){
+          $manager = $user->manager_id;
+        }
       }
       $status = $request->status ?? null;
       if($status == 'all'){
@@ -51,10 +60,9 @@ class ProductController extends Controller
         $query->orwhere('name_uz', 'like',  '%' . $search .'%');
       })
       ->paginate(10);
-      $managers = Manager::all();
-      $manager_id = \Auth::user()->manager_id;
-      $categories = Category::where(function($query) use($manager_id){
-      $query->whereNotNull('parent_id');
+      $manager_id = $user->manager_id;
+      $categories = Category::with('children')->where(function($query) use($manager_id){
+      $query->whereNull('parent_id');
       $query->whereManagerId($manager_id);
       })->get();
       return view('admin.products.index',compact('products','managers','categories'));

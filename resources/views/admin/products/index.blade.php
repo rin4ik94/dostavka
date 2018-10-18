@@ -62,11 +62,16 @@
 			<td data-category="{{ $product->category_id }}">{{ $product->category->name_ru }}</td>
 			<td data-newprice="{{ $product->new_price }}">{{ number_format($product->new_price, 0,' ',' ') }}</td>
 			<td class="text-through" data-oldprice="{{ $product->old_price }}">{{ number_format($product->old_price, 0, ' ',' ') }}</td>
-			@if($product->measurement == '2')
-			<td data-measurement="{{ $product->measurement }}">КГ</td>
-			@else
-			<td data-measurement="{{ $product->measurement }}">ШТ</td>
-			@endif @if($product->status == '1')
+			@if($product->measurement == '1')
+			<td data-measurement="{{ $product->measurement }}">шт</td>
+			@elseif($product->measurement == '2')
+			<td data-measurement="{{ $product->measurement }}">кг</td>
+			@elseif($product->measurement == '3')
+			<td data-measurement="{{ $product->measurement }}">м</td>
+			@elseif($product->measurement == '4')
+			<td data-measurement="{{ $product->measurement }}">кв^2</td>
+			@endif
+			@if($product->status == '1')
 			<td class="text-green" data-status="{{ $product->status }}">Активен</td>
 			@else
 			<td class="text-red" data-status="{{ $product->status }}">Нективен</td>

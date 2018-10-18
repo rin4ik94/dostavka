@@ -22,8 +22,8 @@ class ProductController extends Controller
             $products = Product::active()->paginate(request()->count);
             return ProductResource::collection($products);
         } else if (request()->has('manager') && request()->has('category')) {
-            $manager = Manager::where('slug', request()->manager)->first();
-            $category = Category::where('slug', request()->category)->first();
+            $manager = Manager::whereSlug(request()->manager)->first();
+            $category = Category::whereSlug(request()->category)->first();
             if (count($category->children) < 1) {
                 $products = Product::sortByPrice(request()->price)->ofCategory($category->id)->ofManager($manager->id)->active()->paginate(20);
                 return ProductResource::collection($products);
@@ -31,7 +31,7 @@ class ProductController extends Controller
                 return ProductResource::collection($category->childProducts($manager->id, request()->price)->paginate(20));
             }
         } else if (request()->has('manager')) {
-            $manager = Manager::where('slug', request()->manager)->first();
+            $manager = Manager::whereSlug(request()->manager)->first();
             $products = Product::sortByPrice(request()->price)->ofManager($manager->id)->active()->paginate(20);
             return ProductResource::collection($products);
         } else {
