@@ -47,14 +47,14 @@
     <li class="nav-item" data-toggle="modal" data-target="#Chat">
       <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Чат">
         <div >
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#chat"></use></svg>
+          <i class="icon">forum</i>
         <span class="badge badge-red">9</span>
         </div>
       </a>
     </li>
    <li class="nav-item" data-toggle="modal" data-target="#Profile">
     <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Профиль">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#user"></use></svg>
+      <i class="icon">person</i>
     </a>
     </li>
    <li class="nav-item" data-toggle="modal" data-target="#confirm">
@@ -63,7 +63,7 @@
        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
          @csrf
        </form>
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#logout"></use></svg>
+      <i class="icon">exit_to_app</i>
     </a>
     </li>
   </ul>

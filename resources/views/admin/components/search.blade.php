@@ -4,7 +4,7 @@
 			<input class="form-control deletable" name="q" type="text" placeholder="Поиск" value="{{ request()->has('q') ? request()->get('q') : '' }}">
 			<div class="input-group-append">
 			<button class="btn btn-light" type="submit">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#search"></use></svg>
+              <i class="icon">search</i>
 			</button>
 		</div>
 		</form>

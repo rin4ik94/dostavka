@@ -5,13 +5,13 @@
         <div class="col-auto">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-outline-green active">
-              <input type="radio" name="options" id="option1" autocomplete="off" checked>Новый
+              <input type="radio" name="options" id="option1" autocomplete="off" checked>Новый <span class="badge">4</span>
             </label>
             <label class="btn btn-outline-green">
-              <input type="radio" name="options" id="option2" autocomplete="off">Формируется
+              <input type="radio" name="options" id="option2" autocomplete="off">Формируется <span class="badge">4</span>
             </label>
             <label class="btn btn-outline-green">
-              <input type="radio" name="options" id="option3" autocomplete="off">В пути
+              <input type="radio" name="options" id="option3" autocomplete="off">В пути <span class="badge">4</span>
             </label>
             <label class="btn btn-outline-green">
               <input type="radio" name="options" id="option4" autocomplete="off">Доставлен
@@ -31,7 +31,7 @@
     <thead>
       <tr>
         <th class="col-auto">№</th>
-        <th class="col-2">Дата и время</th>
+        <th class="col-2">Поступил</th>
         <th class="col-2">Магазин</th>
         <th class="col-2">Товары</th>
         <th class="col-2">Адрес доставки</th>
@@ -45,7 +45,40 @@
     </thead>
     <tbody>
       <tr>
-        <td>1</td>
+        <td>4721</td>
+        <td>01.01.2018 20:00</td>
+        <td>Makro</td>
+        <td>15</td>
+        <td>г.Фергана ул.Сфйлгох</td>
+        <td>Абдулла</td>
+        <td><a class="text-red" href="#" data-toggle="modal" data-target="#confirm">Назначить</a></td>
+        <td>50 000</td>
+        <td><span class="badge badge-primary">Новый</span></td>
+        <td>
+          <button class="btn btn-sm btn-light" type="submit">
+            <i class="icon">edit</i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>2358</td>
+        <td>01.01.2018 20:00</td>
+        <td>Makro</td>
+        <td>15</td>
+        <td>г.Фергана ул.Сфйлгох</td>
+        <td>Абдулла</td>
+        <td><a class="text-red" href="#" data-toggle="modal" data-target="#confirm">Назначить</a></td>
+        <td>50 000</td>
+      
+        <td><span class="badge badge-secondary">Формируется</span></td>
+        <td>
+          <button class="btn btn-sm btn-light" type="submit">
+            <i class="icon">edit</i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>0147</td>
         <td>01.01.2018 20:00</td>
         <td>Makro</td>
         <td>15</td>
@@ -54,16 +87,45 @@
         <td><a href="#" data-toggle="modal" data-target="#confirm">Абдулла</a></td>
         <td>50 000</td>
       
-        <td class="text-green">В пути</td>
+        <td><span class="badge badge-warning">В пути</span></td>
         <td>
-          <form class="btn-group btn-group-sm">
-            <button class="btn btn-light" type="submit">
-              <i class="icon">place</i>
-            </button>
-            <button class="btn btn-light" type="submit">
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
-            </button>
-          </form>
+          <button class="btn btn-sm btn-light" type="submit">
+            <i class="icon">edit</i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>6332</td>
+        <td>01.01.2018 20:00</td>
+        <td>Makro</td>
+        <td>15</td>
+        <td>г.Фергана ул.Сфйлгох</td>
+        <td>Абдулла</td>
+        <td><a href="#" data-toggle="modal" data-target="#confirm">Абдулла</a></td>
+        <td>50 000</td>
+      
+        <td><span class="badge badge-success">Доставлен</span></td>
+        <td>
+          <button class="btn btn-sm btn-light" type="submit">
+            <i class="icon">edit</i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>7446</td>
+        <td>01.01.2018 20:00</td>
+        <td>Makro</td>
+        <td>15</td>
+        <td>г.Фергана ул.Сфйлгох</td>
+        <td>Абдулла</td>
+        <td><a href="#" data-toggle="modal" data-target="#confirm">Абдулла</a></td>
+        <td>50 000</td>
+      
+        <td><span class="badge badge-red">Отменен</span></td>
+        <td>
+          <button class="btn btn-sm btn-light" type="submit">
+            <i class="icon">edit</i>
+          </button>
         </td>
       </tr>
     </tbody>
