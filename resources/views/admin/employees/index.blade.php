@@ -3,7 +3,7 @@
 <div class="main-top d-flex align-items-center">
   <h1 class="main-title">Список сотрудников</h1>
   <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newEmployee">
-    <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#plus"></use></svg>
+    <i class="icon">add</i>
     <span class="text">Добавить сотрудника</span>
   </button>
 </div>
@@ -36,7 +36,7 @@
   </form>
   @include('admin.components.search')
 </div>
-  <table class="table table-bordered table-hover">
+  <table class="table table-bordered table-hover table-stiped">
     <thead>
       <tr>
         <th class="col-auto">№</th>
@@ -64,11 +64,11 @@
         <td>
           <div class="btn-group btn-group-sm employee_actions">
             <a href="#" data-toggle="modal" data-target="#editEmployee" class="btn btn-light">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
+              <i class="icon">edit</i>
             </a>
           </div>
           {!! Form::open(['method' => 'DELETE','route' => ['employees.destroy', $employee->id], 'class'=>'btn-group btn-group-sm delete']) !!}
-          {!! Form::button('<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#delete"></use></svg>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
+          {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
           {!! Form::close() !!}
         </td>
       </tr>
@@ -88,7 +88,7 @@
     @include('admin.employees.edit')
     @else
     <div class="main-empty">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#store"></use></svg>
+      <i class="icon">group</i>
       <div class="text">Список пусто</div>
     </div>
   @endif

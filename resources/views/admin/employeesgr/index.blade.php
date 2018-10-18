@@ -3,7 +3,7 @@
 <div class="main-top d-flex align-items-center">
   <h1 class="main-title">Группа сотрудников</h1>
   <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newEmployeGroup">
-    <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#plus"></use></svg>
+    <i class="icon">add</i>
     <span class="text">Добавить группа сотрудников</span>
   </button>
 </div>
@@ -24,7 +24,7 @@
   </div>
 </form>
 @if(count($roles) > 0)
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover table-striped">
   <thead>
     <tr>
       <th class="col-auto">№</th>
@@ -42,11 +42,11 @@
       <td>
         <div class="btn-group btn-group-sm editEmployeGroup">
           <a href="{{ route('employees.group.edit',$employeegroup->id) }}" data-toggle="modal" data-target="#editEmployeGroup" class="btn btn-light" data="{{$employeegroup->id}}">
-          <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
+            <i class="icon">edit</i>
           </a>
         </div>
         {!! Form::open(['method' => 'DELETE','route' => ['employees.group.destroy', $employeegroup->id], 'class'=>'btn-group btn-group-sm delete']) !!}
-        {!! Form::button('<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#delete"></use></svg>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
+        {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
         {!! Form::close() !!}
       </td>
     </tr>
@@ -65,7 +65,7 @@
   </div>
   @else
   <div class="main-empty">
-    <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#store"></use></svg>
+    <i class="icon">group</i>
     <div class="text">Список пусто</div>
   </div>
   @endif
