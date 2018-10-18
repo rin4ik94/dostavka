@@ -71,8 +71,6 @@ export default {
           if ($route.params.product) {
             $("#product").modal("show");
           }
-
-          console.log("asdasadas");
         });
       }
     },

@@ -26,7 +26,13 @@ class Category extends Model
     {
         return slug;
     }
-
+    public function scopeOfManager(Builder $builder, $managerId)
+    {
+        if (!$managerId) {
+            return;
+        }
+        $builder->where('manager_id', $managerId);
+    }
     public function manager()
     {
         return $this->belongsTo('App\Models\Manager');
