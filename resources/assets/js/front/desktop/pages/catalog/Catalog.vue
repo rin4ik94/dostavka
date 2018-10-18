@@ -28,7 +28,6 @@
                 <router-link class="nav-link" :to="{name: 'catalog', params:{slug : catalog.slug}}" exact :class="{'active': $route.name == 'tp'}">Все категории</router-link>
               </li>
               <SubCategories :activeIndex="active" :key="category.id"  @updateActive="setActive" :index="category.id" v-for="(category,index) in categories" :category="category" />
-              
             </ul>
           </nav> 
           </aside>

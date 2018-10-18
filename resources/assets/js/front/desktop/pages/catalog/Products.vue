@@ -35,7 +35,7 @@ import localforage from "localforage";
 import { isEmpty } from "lodash";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  props: ["prods"],
+  // props: { prods: { default: null } },
   data() {
     return {
       product: "",
@@ -43,27 +43,38 @@ export default {
       products: []
     };
   },
+
   watch: {
-    prods: {
-      immediate: true,
-      handler(prods) {
-        console.log(1);
-        if (prods.length > 0) {
-          this.products = prods;
-          this.fetchProducts();
-        }
-        // Vue.nextTick(() => {
-        //   if ($route.params.product) {
-        //     $("#product").modal("show");
-        //   }
-        // });
+    $route(route) {
+      if (route.name == "ct") {
+        this.fetchItems();
       }
+    }
+  },
+  beforeMount: async function() {
+    if (!this.$route.params.sluged) {
+      let response = await axios.get(
+        `/api/products?manager=${this.$route.params.slug}`
+      );
+      this.products = await response.data.data;
+      this.fetchProducts();
+    } else {
+      this.fetchItems();
     }
   },
   computed: mapGetters({
     totalCart: "totalCart"
   }),
   methods: {
+    async fetchItems() {
+      let response = await axios.get(
+        `/api/products?manager=${this.$route.params.slug}&category=${
+          this.$route.params.sluged
+        }`
+      );
+      this.products = response.data.data;
+      this.fetchProducts();
+    },
     ...mapActions({
       setCartAction: "setCart",
       setTotal: "setTotal"
@@ -73,11 +84,9 @@ export default {
         return prod.id == product.id;
       });
       this.productMenu.splice(item, 1);
-      this.cartState();
+      this.setCartAction(this.productMenu);
     },
     fetchProducts() {
-      console.log(1);
-
       setTimeout(() => {
         let total = 0;
         localforage.getItem("cart").then(response => {
@@ -90,7 +99,6 @@ export default {
 
               this.productMenu.map((l, o) => {
                 if (v.id == l.id) {
-                  //console.log(v);
                   total = total + v.new_price;
                   v.quantity = l.quantity;
                   Vue.set(this.products, k, v);
@@ -99,10 +107,11 @@ export default {
                 }
               });
             });
+            if (total > 0) {
+              this.setTotal(total);
+            }
           }
         });
-        this.setTotal(total);
-        console.log(total);
       }, 0);
     },
     decreaseQuantity(product) {
@@ -127,12 +136,12 @@ export default {
       return item ? true : false;
     },
     setCart() {
-      let cart = [];
+      let cart = []; 
       let data = {
         id: "",
         quantity: 0
       };
-      this.productMenu.map((value, key) => {
+      this.productMenu.map((value, key) => { 
         data = {
           id: "",
           quantity: 0
@@ -142,7 +151,7 @@ export default {
           data.quantity = value.quantity;
           cart.push(data);
         }
-      });
+      }); 
       // this.setCartAction(cart);
       localforage.setItem("cart", cart);
     },
