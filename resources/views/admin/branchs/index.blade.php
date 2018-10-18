@@ -3,7 +3,7 @@
 <div class="main-top d-flex align-items-center">
 	<h1 class="main-title">Список филиалов</h1>
 	<button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
-		<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#plus"></use></svg>
+		<i class="icon">add</i>
 		<span class="text">Добавить филиал</span>
 	</button>
 </div>
@@ -38,7 +38,7 @@
 @include('admin.components.search')
 </div>
 @if(count($branches) > 0)
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>
 			<th class="col-auto">№</th>
@@ -60,11 +60,11 @@
 				<td>
 					<div class="btn-group btn-group-sm">
 						<a href="{{ route('branchs.edit',$branch->id) }}" data-toggle="modal" data-target="#editBranch" class="btn btn-light branchs_action" data="{{ $branch->id }}">
-						<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
+						<i class="icon">edit</i>
 					</a>
 				</div>
 				{!! Form::open(['method' => 'DELETE','route' => ['branchs.destroy',$branch->id], 'class'=>'btn-group btn-group-sm delete']) !!}
-				{!! Form::button('<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#delete"></use></svg>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
+				{!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
 				{!! Form::close() !!}
 			</td>
 			</tr>
@@ -84,7 +84,7 @@
 	@include('admin.branchs.edit')
 @else
 	<div class="main-empty">
-		<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#store"></use></svg>
+		<i class="icon">place</i>
 		<div class="text">Список пусто</div>
 	</div>
 @endif

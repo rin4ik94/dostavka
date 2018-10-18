@@ -3,7 +3,7 @@
 <div class="main-top d-flex align-items-center">
     <h1 class="main-title">Список магазинов</h1>
     <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#plus"></use></svg>
+      <i class="icon">add</i>
       <span class="text">Добавить магазин</span>
     </button>
   </div>
@@ -32,7 +32,7 @@
     @include('admin.components.search')
   </div>
   @if(count($managers) > 0)
-  <table class="table table-bordered table-hover">
+  <table class="table table-bordered table-hover table-striped">
     <thead>
       <tr>
         <th class="col-auto">№</th>
@@ -50,11 +50,11 @@
         <td data-status="{{ $manager->status }}">
         <div class="btn-group btn-group-sm managers_action">
             <a href="#" data-toggle="modal" data-target="#editManager" class="btn btn-light">
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
+              <i class="icon">edit</i>
             </a>
           </div>
         {!! Form::open(['method' => 'DELETE','route' => ['managers.destroy', $manager->id], 'class'=>'btn-group btn-group-sm delete']) !!}
-        {!! Form::button('<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#delete"></use></svg>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
+        {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
         {!! Form::close() !!}
         </td>
       </tr>
@@ -74,7 +74,7 @@
   @include('admin.managers.edit')
   @else
   <div class="main-empty">
-    <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#store"></use></svg>
+    <i class="icon">store</i>
     <div class="text">Список пусто</div>
   </div>
   @endif
