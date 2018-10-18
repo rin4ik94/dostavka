@@ -53,7 +53,7 @@
               <div class="col">
                 <div class="form-group">
                   <label class="form-label" for="productCategory">Категория *</label>
-                  <select class="custom-select" name="category_id" required>
+                  <select class="custom-select" name="category_id" id="managerChange" required>
                     <option value="" selected disabled>Не выбран</option>
                     @foreach($categories as $category)
                       <option value="{{ $category->id }}" disabled>{{ $category->name_ru }}</option>
@@ -105,4 +105,4 @@
       </form>
     </div>
   </div>
-</div>  
+</div>
