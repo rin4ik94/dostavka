@@ -3,17 +3,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Product extends Model
 {
+    use Sluggable;
     protected $table = 'products';
     protected $fillable = [
         'name_uz', 'name_ru', 'image', 'measurement', 'new_price', 'old_price', 'status', 'category_id', 'manager_id'
     ];
-    // protected $casts = [
-    //     'price' => 'integer',
-    //     'old_price' => 'integer'
-    // ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name_ru'
+            ]
+        ];
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function getImage()
     {
         if ($this->image) {
@@ -22,6 +35,7 @@ class Product extends Model
             return '/desktop/img/001.jpg';
         }
     }
+
     public function scopeOfManager(Builder $builder, $managerId)
     {
         if (!$managerId) {
@@ -48,6 +62,7 @@ class Product extends Model
     {
         $builder->where('status', 1);
     }
+    
     public function category()
     {
         return $this->belongsTo(Category::class);
