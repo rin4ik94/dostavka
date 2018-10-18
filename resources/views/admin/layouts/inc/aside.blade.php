@@ -22,7 +22,6 @@
     <li class="nav-item"><a class="nav-link {{ Request::segment(2) === 'products' ? 'active' : null }}" href="/admin/products">
         <i class="icon">layers</i>
         <span class="text">Продукты</span>
-        <span class="badge badge-red">1</span>
       </a></li>
       @endcan
       @can('Заказы')
