@@ -56,7 +56,10 @@
                   <select class="custom-select" name="category_id" required>
                     <option value="" selected disabled>Не выбран</option>
                     @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name_ru }}</option>
+                      <option value="{{ $category->id }}" disabled>{{ $category->name_ru }}</option>
+                      @foreach($category->children as $child)
+                        <option value="{{ $child->id }}">&nbsp;{{ $child->name_ru }}</option>
+                      @endforeach
                     @endforeach
                   </select>
                 </div>
