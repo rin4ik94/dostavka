@@ -39,7 +39,6 @@
     <tr>
       <th class="col-auto">№</th>
       <th class="col-4">ФИО</th>
-      <th class="col-2">Группа</th>
       <th class="col-2">Регион</th>
       <th class="col-2">Телефон</th>
       <th class="col-2">Кол. заказов</th>
@@ -53,7 +52,6 @@
       data-region="{{ $client->region->id }}">
       <td>{{ $client->id }}</td>
       <td> {{ $client->first_name }} {{ $client->last_name }}</td>
-      <td>{{ $client->client_group->name }}</td>
       <td> {{ $client->region->name_ru }} </td>
       <td>+998{{ $client->mobile }}</td>
       <td>{{ $client->birth_date }}</td>

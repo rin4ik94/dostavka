@@ -10,15 +10,11 @@ class Client extends Authenticatable
     
     protected $table = 'clients';
     
-    protected $fillable = ['first_name','last_name','mobile','password','birth_date','jender','status','group_id','region_id'];
+    protected $fillable = ['first_name','last_name','mobile','password','birth_date','jender','status','region_id'];
     
     protected $hidden = [
 	    'password', 'remember_token',
     ];
-
-    public function client_group(){
-      return $this->belongsTo('App\Models\ClientGroup','id');
-    }
 
     public function region(){
         return $this->belongsTo('App\Models\Region');
