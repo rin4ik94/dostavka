@@ -21,6 +21,14 @@ class PaymentTypesTableSeeder extends Seeder
                     'name_uz' => "Bank kartasi",
                     'name_ru' => "Банковская карта",
                 ],
+                [
+                    'name_uz' => "Payme",
+                    'name_ru' => "Payme",
+                ],
+                [
+                    'name_uz' => "Click",
+                    'name_ru' => "Click",
+                ]
             ]
         );
     }

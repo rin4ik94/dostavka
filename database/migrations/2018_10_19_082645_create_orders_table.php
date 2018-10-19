@@ -28,9 +28,9 @@ class CreateOrdersTable extends Migration
             $table->string('delivery_address_apartment')->nullable();
             $table->text('delivery_address_remark')->nullable();
             $table->text('comment')->nullable();
-            $table->decimal('delivery_price')->nullable();
-            $table->decimal('order_price')->nullable();
-            $table->decimal('total_price')->nullable();
+            $table->string('delivery_price')->nullable();
+            $table->string('order_price')->nullable();
+            $table->string('total_price')->nullable();
             $table->timestamps();
         });
     }

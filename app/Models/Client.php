@@ -26,6 +26,6 @@ class Client extends Authenticatable
 
     public function statuses()
     {
-        return $this->belongsToMany(OrderStatus::class, 'order_status_dates')->withPivot()->withTimestamps();
+        return $this->belongsToMany(OrderStatus::class, 'order_status_dates')->withTimestamps();
     }
 }
