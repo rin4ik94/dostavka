@@ -22,8 +22,6 @@ class CreateClientsTable extends Migration
             $table->integer('jender');
             $table->string('password');
             $table->integer('status')->default(1);
-            $table->integer('group_id')->unsigned()->index();
-            $table->foreign('group_id')->references('id')->on('client_groups');
             $table->integer('region_id')->unsigned()->index();
             $table->foreign('region_id')->references('id')->on('regions');
             $table->rememberToken();

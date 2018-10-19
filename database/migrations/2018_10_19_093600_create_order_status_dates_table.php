@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientGroupsTable extends Migration
+class CreateOrderStatusDatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateClientGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('client_groups', function (Blueprint $table) {
+        Schema::create('order_status_dates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->unsignedInteger('order_id')->nullable()->index();
+            $table->unsignedInteger('client_id')->nullable()->index();
+            $table->unsignedInteger('order_status_id')->index()->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateClientGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client_groups');
+        Schema::dropIfExists('order_status_dates');
     }
 }

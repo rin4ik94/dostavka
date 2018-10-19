@@ -20,7 +20,6 @@ Route::group([
     Route::resource('reports', 'ReportController')->except(['show', 'create', 'edit']);
     Route::resource('couriers', 'CourierController')->except(['show', 'create', 'edit']);
     Route::resource('categories', 'CategoryController')->except(['show', 'create']);
-    Route::resource('clients/group', 'ClientgroupController', ['as' => 'clients'])->except(['show', 'create', 'edit']);
     Route::resource('clients', 'ClientController')->except(['show', 'create', 'edit']);
     Route::resource('products', 'ProductController')->except(['show', 'create', 'edit']);
     Route::get('settings', 'SettingController@index')->name('settings');
