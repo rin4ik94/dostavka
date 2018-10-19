@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="content" v-if="catalog">
+    <div class="content" v-if="!notFound && catalog">
       <div class="container">
         <div class="main-actions">
           <a class="btn btn-outline-green" @click="$router.push({name:'home'})">&#8592; Назад к список магазинов</a>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <NotFound v-if="notFound"/>
+    <NotFound v-else/>
     </div>
 </template>
 <script>
@@ -63,12 +63,12 @@ export default {
           this.active = 0;
         }
       }
-    },
-    region: {
-      handler(region) {
-        this.getCatalog();
-      }
     }
+    // regionSlug: {
+    //   handler(region) {
+    //     this.getCatalog();
+    //   }
+    // }
   },
   methods: {
     setActive(id) {
@@ -76,45 +76,53 @@ export default {
       this.id = id;
     },
     getCatalog() {
-      let uri = `/api/managers/${this.$route.params.slug}?withManagers&region=${
-        this.region
-      }`;
-      let response = axios.get(uri).then(response => {
-        this.catalog = response.data.data;
-        if (this.catalog.branches.length) {
-          this.branchName = this.catalog.branches[0].region_name;
-        }
-        this.getCategories();
-      });
+      setTimeout(() => {
+        let uri = `/api/managers/${
+          this.$route.params.slug
+        }?withManagers&region=${this.$route.params.city}`;
+        let response = axios.get(uri).then(response => {
+          this.catalog = response.data.data;
+          if (this.catalog.branches.length > 0) {
+            this.branchName = this.catalog.branches[0].region_name;
+          } else {
+            this.notFound = true;
+            // this.$router.replace({ name: "notFound" });
+          }
+          this.getCategories();
+        });
+      }, 0);
     },
     getCategories() {
-      axios
-        .get(`/api/categories?withManager&manager=${this.catalog.id}`)
-        .then(response => {
-          this.categories = response.data.data;
-          this.categories.map((v, k) => {
-            if (v.children.length == 0) {
-              if (this.$route.params.sluged == v.slug) {
-                this.setActive(v.id);
-              }
-            } else {
-              if (this.$route.params.sluged == v.slug) {
-                this.setActive(v.id);
-              }
-              v.children.map((ve, ke) => {
-                if (this.$route.params.sluged == ve.slug) {
-                  this.setActive(ve.id);
+      this.$nextTick(() => {
+        axios
+          .get(`/api/categories?withManager&manager=${this.catalog.id}`)
+          .then(response => {
+            this.categories = response.data.data;
+            this.categories.map((v, k) => {
+              if (v.children.length == 0) {
+                if (this.$route.params.sluged == v.slug) {
+                  this.setActive(v.id);
                 }
-              });
-            }
+              } else {
+                if (this.$route.params.sluged == v.slug) {
+                  this.setActive(v.id);
+                }
+                v.children.map((ve, ke) => {
+                  if (this.$route.params.sluged == ve.slug) {
+                    this.setActive(ve.id);
+                  }
+                });
+              }
+            });
           });
-        });
+      });
     }
   },
   computed: {
     ...mapGetters({
       region: "regionId",
-      regionName: "regionName"
+      regionName: "regionName",
+      regionSlug: "regionSlug"
     })
   },
   created() {

@@ -61,7 +61,7 @@ export default {
       this.regions.map((value, key) => {
         if (value.id == this.regionId) {
           this.region = value;
-          this.setRegionName(value.name);
+          this.setRegionName(value);
           EventBus.$emit("changeRegion", this.region);
         }
       });

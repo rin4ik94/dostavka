@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Manager;
+use App\Models\Region;
 use App\Http\Resources\Manager as ManagerResource;
 
 class ManagerController extends Controller
@@ -26,8 +27,9 @@ class ManagerController extends Controller
     public function show(Request $request, Manager $manager)
     {
         if ($request->has('region')) {
-            return new ManagerResource($manager->load(['branches' => function ($query) use ($request) {
-                return $query->where('region_id', $request->region)->where('status', 1);
+            $region = Region::whereSlug(request()->region)->firstOrFail();
+            return new ManagerResource($manager->load(['branches' => function ($query) use ($request, $region) {
+                return $query->where('region_id', $region->id)->where('status', 1);
             }]));
         } else {
             return new ManagerResource($manager);

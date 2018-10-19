@@ -21,7 +21,10 @@ export default {
         this.isOpen = true;
       }
       this.$emit("updateActive", id);
-      this.$router.push({ name: "ct", params: { sluged: this.category.slug } });
+      this.$router.push({
+        name: "category",
+        params: { sluged: this.category.slug }
+      });
     }
   },
   computed: {
