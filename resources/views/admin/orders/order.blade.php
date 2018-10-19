@@ -173,10 +173,10 @@
           <table class="table table-bordered table-hover table-striped">
             <thead>
               <tr>
-                <th width="100px">№</th>
+                <th width="74px">№</th>
                 <th>Название</th>
                 <th width="100px">Ценна</th>
-                <th width="160px">Количество (15)</th>
+                <th width="130px">Количество (15)</th>
               </tr>
             </thead>
             <tbody>
