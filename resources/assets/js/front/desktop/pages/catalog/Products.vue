@@ -58,6 +58,8 @@ export default {
     $route(route) {
       if (route.name == "category") {
         this.fetchItems();
+      } else {
+        this.allProducts;
       }
     },
     price(price) {
@@ -118,18 +120,17 @@ export default {
       this.fetchProducts();
     },
     ...mapActions({
-      setCartAction: "setCart"
+      setCart: "setCart"
     }),
     removeFromCart(product) {
       let item = this.productMenu.findIndex(prod => {
         return prod.id == product.id;
       });
       this.productMenu.splice(item, 1);
-      this.setCartAction(this.productMenu);
+      this.cartData(this.productMenu);
     },
     fetchProducts() {
       setTimeout(() => {
-        let total = 0;
         localforage.getItem("cart").then(response => {
           if (!isEmpty(response)) {
             this.productMenu = response;
@@ -137,7 +138,6 @@ export default {
               v.quantity = 1;
               this.productMenu.map((l, o) => {
                 if (v.id == l.id) {
-                  total = total + v.new_price;
                   v.quantity = l.quantity;
                   Vue.set(this.products, k, v);
                   l = v;
@@ -145,9 +145,6 @@ export default {
                 }
               });
             });
-            if (total > 0) {
-              // this.setTotal(total);
-            }
           }
         });
       }, 0);
@@ -158,7 +155,7 @@ export default {
       });
       --product.quantity;
       Vue.set(this.productMenu, index, product);
-      this.setCart();
+      this.cartData();
     },
     showModal(product) {
       this.product = product;
@@ -173,7 +170,7 @@ export default {
       });
       return item ? true : false;
     },
-    setCart() {
+    cartData() {
       let cart = [];
       let data = {
         id: "",
@@ -220,7 +217,7 @@ export default {
             this.productMenu.unshift(this.product);
           }
         }
-        this.setCart();
+        this.cartData();
       });
     }
   }

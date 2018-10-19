@@ -40,6 +40,8 @@
 import { mapGetters } from "vuex";
 import NotFound from "../NotFound";
 import Products from "./Products";
+import localforage from "localforage";
+import { isEmpty } from "lodash";
 export default {
   data() {
     return {
