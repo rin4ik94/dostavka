@@ -3,11 +3,16 @@
     <ul class="products"> 
               <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
-        <router-link :to="{name: 'tp', params:{product : product.slug}}">
+        <router-link v-if="$route.name == 'catalog' | $route.name == 'tp'" :to="{name: 'tp', params:{product : product.slug}}">
        
               <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
             <div class="product-image"><img :src="product.image"></div>
-            <div class="product-title">{{product.name}} 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
+            <div class="product-title">{{product.name}}</div>
+        </router-link>
+         <router-link v-if="$route.name == 'ct' | $route.name == 'pp'" :to="{name: 'pp', params:{product : product.slug}}">
+              <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
+            <div class="product-image"><img :src="product.image"></div>
+            <div class="product-title">{{product.name}}</div>
         </router-link>
         <div class="product-footer" v-if="productInCart(product)">
                     <div class="counter-widget input-group">
@@ -26,18 +31,23 @@
             
         </div>
         </li> 
-      <!-- <ProductModal :product="product"/> -->
     </ul> 
+    <Pagination :pagination="pagination" :offset="3" @paginate="allProducts"/>
+
     </div>
 </template>
 <script>
 import localforage from "localforage";
 import { isEmpty } from "lodash";
 import { mapActions, mapGetters } from "vuex";
+import Pagination from "../../components/Pagination";
+
 export default {
-  // props: { prods: { default: null } },
+  props: ["price"],
+  components: { Pagination },
   data() {
     return {
+      pagination: {},
       product: "",
       productMenu: [],
       products: []
@@ -49,15 +59,18 @@ export default {
       if (route.name == "ct") {
         this.fetchItems();
       }
+    },
+    price(price) {
+      if (this.$route.name == "catalog") {
+        this.allProducts();
+        return;
+      }
+      this.fetchItems();
     }
   },
   beforeMount: async function() {
     if (!this.$route.params.sluged) {
-      let response = await axios.get(
-        `/api/products?manager=${this.$route.params.slug}`
-      );
-      this.products = await response.data.data;
-      this.fetchProducts();
+      this.allProducts();
     } else {
       this.fetchItems();
     }
@@ -66,13 +79,42 @@ export default {
     totalCart: "totalCart"
   }),
   methods: {
+    async allProducts() {
+      let params = {};
+      if (this.price) {
+        params["price"] = this.price;
+      }
+      if (this.pagination) {
+        params["page"] = this.pagination.current_page;
+      }
+      let response = await axios.get(
+        `/api/products?manager=${this.$route.params.slug}`,
+        {
+          params: params
+        }
+      );
+      this.products = await response.data.data;
+      this.pagination = await response.data.meta;
+
+      this.fetchProducts();
+    },
     async fetchItems() {
+      let params = {};
+      if (this.price) {
+        params["price"] = this.price;
+      }
+      if (this.pagination) {
+        params["page"] = this.pagination.current_page;
+      }
       let response = await axios.get(
         `/api/products?manager=${this.$route.params.slug}&category=${
           this.$route.params.sluged
-        }`
+        }`,
+        { params: params }
       );
       this.products = response.data.data;
+      this.pagination = response.data.meta;
+
       this.fetchProducts();
     },
     ...mapActions({
@@ -136,12 +178,12 @@ export default {
       return item ? true : false;
     },
     setCart() {
-      let cart = []; 
+      let cart = [];
       let data = {
         id: "",
         quantity: 0
       };
-      this.productMenu.map((value, key) => { 
+      this.productMenu.map((value, key) => {
         data = {
           id: "",
           quantity: 0
@@ -151,8 +193,7 @@ export default {
           data.quantity = value.quantity;
           cart.push(data);
         }
-      }); 
-      // this.setCartAction(cart);
+      });
       localforage.setItem("cart", cart);
     },
     addToCart(product) {
@@ -180,7 +221,6 @@ export default {
             }
           });
           if (d != 1) {
-            // console.log(product);
             this.product.quantity = 1;
             this.productMenu.unshift(this.product);
           }

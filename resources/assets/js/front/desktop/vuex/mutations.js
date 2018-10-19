@@ -15,10 +15,8 @@ import { isEmpty } from 'lodash'
 //     localforage.setItem('phone', phone)
 // }
 export const setRegion = (state, regionId) => {
-    if (!isEmpty(regionId)) {
-        state.user.region = regionId;
-        return
-    }
+    console.log(regionId)
+    state.user.region = regionId;
 }
 export const setRegionName = (state, region) => {
     if (!isEmpty(region)) {

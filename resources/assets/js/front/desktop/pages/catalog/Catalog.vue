@@ -4,8 +4,8 @@
       <div class="container">
         <div class="main-actions">
           <a class="btn btn-outline-green" @click="$router.push({name:'home'})">&#8592; Назад к список магазинов</a>
-        </div>
-        <h1 class="main-title">Каталог продуктов магазина «{{catalog.name}}» {{catalog.branches[0].region_name}}</h1>
+        </div> 
+        <h1 class="main-title" v-if="branchName">Каталог продуктов магазина «{{catalog.name}}» {{branchName}}</h1>
         <div class="content-inner">
           <main class="main">
             <div class="btn-group btn-group-sm btn-group-toggle main-sorter" data-toggle="buttons">
@@ -17,9 +17,8 @@
                 По цене
               </div>
             </div>
-              <router-view @updatePagination="updatePagination" :sortBy="sortByPrice" @setActive="setActive"></router-view>
-              <Products  v-if="active == 0" :prods="products" /> 
-              <Pagination v-if="active == 0" :pagination="pagination" :offset="3" @paginate="allProducts"/>
+              <router-view  :price="sortByPrice" @setActive="setActive"></router-view>
+              <Products  v-if="active == 0" :price="sortByPrice" /> 
           </main>
           <aside class="aside">
           <nav class="categories">
@@ -41,7 +40,6 @@
 import { mapGetters } from "vuex";
 import NotFound from "../NotFound";
 import Products from "./Products";
-import Pagination from "../../components/Pagination";
 export default {
   data() {
     return {
@@ -49,13 +47,13 @@ export default {
       catalog: null,
       notFound: false,
       id: 0,
-      pagination: {},
       products: [],
       categories: [],
+      branchName: null,
       sortByPrice: false
     };
   },
-  components: { NotFound, Products, Pagination },
+  components: { NotFound, Products },
   watch: {
     $route: {
       immediate: true,
@@ -63,139 +61,31 @@ export default {
         if ($route.name == "catalog") {
           this.id = 0;
           this.active = 0;
-          this.allProducts(0);
         }
-        // Vue.nextTick(() => {
-        //   if ($route.params.product) {
-        //     $("#product").modal("show");
-        //   }
-        // });
       }
     },
-    sortByPrice() {
-      if (this.active == 0) {
-        this.allProducts();
+    region: {
+      handler(region) {
+        this.getCatalog();
       }
     }
   },
   methods: {
-    updatePagination(pagination) {
-      this.pagination = pagination;
-    },
     setActive(id) {
       this.active = id;
       this.id = id;
     },
-    // updateProducts(id) {
-    //   this.active = id;
-    //   this.id = id;
-    // },
-    allProducts() {
-      // let data = [];
-      let params = {};
-      if (this.sortByPrice) {
-        params["price"] = this.sortByPrice;
-      }
-      if (this.pagination) {
-        params["page"] = this.pagination.current_page;
-      }
-      axios
-        .get(`/api/products?manager=${this.$route.params.slug}`, {
-          params: params
-        })
-        .then(response => {
-          this.products = response.data.data;
-          this.pagination = response.data.meta;
-        });
-      // this.categories.map((v, k) => {
-      //   if (v.children.length == 0) {
-      //     v.products.map((value, key) => {
-      //       data.push(value);
-      //     });
-      //   } else {
-      //     v.children.map((ve, ke) => {
-      //       if (ve.children.length == 0) {
-      //         ve.products.map((vu, ku) => {
-      //           data.push(vu);
-      //         });
-      //       } else {
-      //         ve.children.map((vey, kep) => {
-      //           data.push(vey.products);
-      //         });
-      //       }
-      //     });
-      //   }
-      // });
-      // this.products = data;
-    },
-    // filterProducts(id) {
-    //   if (id == 0) {
-    //     this.allProducts();
-    //   }
-    //   if (this.active != 0) {
-    //     let category = this.categories.find(category => category.id == id);
-    //     if (!category) {
-    //       console.log("ds");
-    //       this.categories.map((v, k) => {
-    //         v.children.map((value, key) => {
-    //           if (id == value.id) {
-    //             category = value;
-    //           }
-    //         });
-    //       });
-    //     }
-    //     if (category.children.length > 0) {
-    //       let data = [];
-
-    //       category.children.map((value, key) => {
-    //         value.products.map((v, k) => {
-    //           data.push(v);
-    //         });
-    //       });
-
-    //       this.products = data;
-    //       return;
-    //     }
-    //     this.products = category.products;
-    //   }
-    // },
-    // filterCats(id) {
-    //   let data = [];
-    //   this.categories.map((v, k) => {
-    //     if (v.children.length == 0) {
-    //       v.products.map((value, key) => {
-    //         data.push(value.products);
-    //       });
-    //     } else {
-    //       v.children.map((ve, ke) => {
-    //         if (ve.children.length == 0) {
-    //           data.push(ve.products);
-    //         } else {
-    //           ve.children.map((vey, kep) => {
-    //             data.push(vey.products);
-    //           });
-    //         }
-    //       });
-    //     }
-    //   });
-    //   this.categories = data;
-    // },
     getCatalog() {
-      setTimeout(() => {
-        let uri = `/api/managers/${
-          this.$route.params.slug
-        }?withManagers&region=${this.region}`;
-        axios
-          .get(uri)
-          .then(response => {
-            this.catalog = response.data.data;
-            this.allProducts();
-            this.getCategories();
-          })
-          .catch(() => {
-            this.notFound = true;
-          });
-      }, 0);
+      let uri = `/api/managers/${this.$route.params.slug}?withManagers&region=${
+        this.region
+      }`;
+      let response = axios.get(uri).then(response => {
+        this.catalog = response.data.data;
+        if (this.catalog.branches.length) {
+          this.branchName = this.catalog.branches[0].region_name;
+        }
+        this.getCategories();
+      });
     },
     getCategories() {
       axios

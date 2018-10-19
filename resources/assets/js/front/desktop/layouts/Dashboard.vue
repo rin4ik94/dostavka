@@ -24,6 +24,10 @@ export default {
     async getRegions() {
       let response = await axios.get("/api/regions");
       this.regions = response.data.data;
+      // let self = this;
+      // await $("#Regions").on("hide.bs.modal", function() {
+      //   self.$store.dispatch("setRegion", this.regions[0]);
+      // });
     },
     replacePage() {
       // let url = this.$route.path;
@@ -58,8 +62,10 @@ export default {
       }
     }
   },
-  mounted() {
+  beforeMount() {
     this.getRegions();
+  },
+  mounted() {
     $("#product").on("hide.bs.modal", this.replacePage);
     // this.setRegion().catch(() => {
     //   console.log("sad");

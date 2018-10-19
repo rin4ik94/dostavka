@@ -70,12 +70,12 @@ export default {
     pages() {
       let pages = [];
       let from = this.pagination.current_page - Math.floor(this.offset / 2);
-      console.log(from);
+      //   console.log(from);
       if (from < 1) {
         from = 1;
       }
       let to = from + this.offset - 1;
-      console.log(to);
+      //   console.log(to);
       if (to > this.pagination.last_page) {
         to = this.pagination.last_page;
       }

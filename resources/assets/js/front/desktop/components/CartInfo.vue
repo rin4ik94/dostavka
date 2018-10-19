@@ -1,5 +1,5 @@
 <template>
-    <div class="cart-card">
+    <div class="cart-card" v-if="cartInfo.quantity>0">
     <div class="container">
     <div class="row">
       <div class="col-auto">

@@ -39,6 +39,7 @@ Vue.filter('toCurrency', function (value) {
 store.dispatch('setRegion').catch(() => {
     $("#Regions").modal('show')
 });
+
 store.dispatch("setCart");
 
 Vue.component('SubCategories', Vue.extend(SubCategories));

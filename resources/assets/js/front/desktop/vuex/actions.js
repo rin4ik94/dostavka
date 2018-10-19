@@ -50,7 +50,9 @@ export const setCart = ({ commit, dispatch }, cart) => {
     // localforage.setItem('region', regionId)
     // console.log(cart)
     return localforage.getItem('cart').then((cart) => {
-        commit('setCart', cart)
+        if (!isEmpty(cart)) {
+            commit('setCart', cart)
+        }
     })
 
 
@@ -70,6 +72,7 @@ export const setRegionName = ({ commit, dispatch }, region) => {
 }
 export const setRegion = ({ commit, dispatch }, regionId) => {
     return localforage.getItem('region').then((regionId) => {
+        console.log('sad')
         if (isEmpty(regionId)) {
             localforage.removeItem('region')
             return Promise.reject('NO_REGION_CHOOSEN');
