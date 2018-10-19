@@ -3,11 +3,16 @@
     <ul class="products"> 
               <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
-        <router-link :to="{name: 'tp', params:{product : product.slug}}">
+        <router-link v-if="$route.name == 'catalog' | $route.name == 'tp'" :to="{name: 'tp', params:{product : product.slug}}">
        
               <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
             <div class="product-image"><img :src="product.image"></div>
-            <div class="product-title">{{product.name}} 2.5к 36шт dasdas dasd asd asd asd asdasdasdas dasd asdasdasdasdasdas dasd asdasd asd</div>
+            <div class="product-title">{{product.name}}</div>
+        </router-link>
+         <router-link v-if="$route.name == 'ct' | $route.name == 'pp'" :to="{name: 'pp', params:{product : product.slug}}">
+              <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
+            <div class="product-image"><img :src="product.image"></div>
+            <div class="product-title">{{product.name}}</div>
         </router-link>
         <div class="product-footer" v-if="productInCart(product)">
                     <div class="counter-widget input-group">
@@ -26,44 +31,92 @@
             
         </div>
         </li> 
-      <!-- <ProductModal :product="product"/> -->
     </ul> 
+    <Pagination :pagination="pagination" :offset="3" @paginate="allProducts"/>
+
     </div>
 </template>
 <script>
 import localforage from "localforage";
 import { isEmpty } from "lodash";
 import { mapActions, mapGetters } from "vuex";
+import Pagination from "../../components/Pagination";
+
 export default {
-  props: ["prods"],
+  props: ["price"],
+  components: { Pagination },
   data() {
     return {
+      pagination: {},
       product: "",
       productMenu: [],
       products: []
     };
   },
+
   watch: {
-    prods: {
-      immediate: true,
-      handler(prods) {
-        console.log(1);
-        if (prods.length > 0) {
-          this.products = prods;
-          this.fetchProducts();
-        }
-        // Vue.nextTick(() => {
-        //   if ($route.params.product) {
-        //     $("#product").modal("show");
-        //   }
-        // });
+    $route(route) {
+      if (route.name == "ct") {
+        this.fetchItems();
       }
+    },
+    price(price) {
+      if (this.$route.name == "catalog") {
+        this.allProducts();
+        return;
+      }
+      this.fetchItems();
+    }
+  },
+  beforeMount: async function() {
+    if (!this.$route.params.sluged) {
+      this.allProducts();
+    } else {
+      this.fetchItems();
     }
   },
   computed: mapGetters({
     totalCart: "totalCart"
   }),
   methods: {
+    async allProducts() {
+      let params = {};
+      if (this.price) {
+        params["price"] = this.price;
+      }
+      if (this.pagination) {
+        params["page"] = this.pagination.current_page;
+      }
+      let response = await axios.get(
+        `/api/products?manager=${this.$route.params.slug}`,
+        {
+          params: params
+        }
+      );
+      this.products = await response.data.data;
+      this.pagination = await response.data.meta;
+
+      this.fetchProducts();
+    },
+    async fetchItems() {
+      let params = {};
+      if (this.price) {
+        params["price"] = this.price;
+      }
+      if (this.pagination) {
+        params["page"] = this.pagination.current_page;
+      }
+      let response = await axios.get(
+        `/api/products?manager=${this.$route.params.slug}&category=${
+          this.$route.params.sluged
+        }`,
+        { params: params }
+      );
+      this.products = response.data.data;
+      this.pagination = response.data.meta;
+
+      this.fetchProducts();
+    },
     ...mapActions({
       setCartAction: "setCart",
       setTotal: "setTotal"
@@ -73,11 +126,9 @@ export default {
         return prod.id == product.id;
       });
       this.productMenu.splice(item, 1);
-      this.cartState();
+      this.setCartAction(this.productMenu);
     },
     fetchProducts() {
-      console.log(1);
-
       setTimeout(() => {
         let total = 0;
         localforage.getItem("cart").then(response => {
@@ -90,7 +141,6 @@ export default {
 
               this.productMenu.map((l, o) => {
                 if (v.id == l.id) {
-                  //console.log(v);
                   total = total + v.new_price;
                   v.quantity = l.quantity;
                   Vue.set(this.products, k, v);
@@ -99,10 +149,11 @@ export default {
                 }
               });
             });
+            if (total > 0) {
+              this.setTotal(total);
+            }
           }
         });
-        this.setTotal(total);
-        console.log(total);
       }, 0);
     },
     decreaseQuantity(product) {
@@ -143,7 +194,6 @@ export default {
           cart.push(data);
         }
       });
-      // this.setCartAction(cart);
       localforage.setItem("cart", cart);
     },
     addToCart(product) {
@@ -171,7 +221,6 @@ export default {
             }
           });
           if (d != 1) {
-            // console.log(product);
             this.product.quantity = 1;
             this.productMenu.unshift(this.product);
           }

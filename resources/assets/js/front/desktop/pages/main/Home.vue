@@ -1,8 +1,7 @@
 <template>
   <div class="content">
   <InnerHeader />
-  <div class="container">
-    
+  <div class="container">   
     <h1 class="main-title">Магазины и сети {{regionName}}</h1>
     <div class="content-inner">
       <main class="main">
