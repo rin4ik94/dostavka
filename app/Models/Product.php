@@ -42,6 +42,7 @@ class Product extends Model
         }
         $builder->where('manager_id', $managerId);
     }
+
     public function scopeOfCategory(Builder $builder, $categoryId)
     {
         if (!$categoryId) {
@@ -49,6 +50,7 @@ class Product extends Model
         }
         $builder->where('category_id', $categoryId);
     }
+
     public function scopeSortByPrice(Builder $builder, $price)
     {
         if (!$price) {
@@ -56,14 +58,10 @@ class Product extends Model
         }
         $builder->orderBy('new_price');
     }
+
     public function scopeActive(Builder $builder)
     {
         $builder->where('status', 1);
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
     }
 
     public function scopeOfStatus($query, $status)
@@ -77,8 +75,20 @@ class Product extends Model
         $query->where('status', $status);
     }
 
+    // relations
     public function manager()
     {
         return $this->belongsTo('App\Models\Manager');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)
+        ->withPivot(['product_name','product_count','product_price','product_total_price','product_measurement']);
     }
 }

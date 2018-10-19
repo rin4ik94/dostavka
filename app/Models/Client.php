@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Authenticatable
 {
-		use Notifiable;
+	use Notifiable;
     
     protected $table = 'clients';
     
@@ -18,5 +18,14 @@ class Client extends Authenticatable
 
     public function region(){
         return $this->belongsTo('App\Models\Region');
+    }
+
+    public function getFullname(){
+        return $this->first_name.' '.$this->last_name;
+    }
+
+    public function statuses()
+    {
+        return $this->belongsToMany(OrderStatus::class, 'order_status_dates')->withPivot()->withTimestamps();
     }
 }
