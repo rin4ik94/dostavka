@@ -89,8 +89,8 @@
         <div class="form-row">
           <div class="col-8 offset-4">
             <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" id="black_list" name="black_list" type="checkbox">
-                <label class="custom-control-label" for="black_list">Черный список</label>
+              <input class="custom-control-input" id="blackList" name="blacklist" type="checkbox">
+              <label class="custom-control-label" for="blackList">Черный список</label>
             </div>
           </div>
         </div>
