@@ -1,5 +1,4 @@
-// import App from '../App.vue'
-// import Public from '../layouts/Public'
+
 import Dashboard from '../layouts/Dashboard'
 import Home from '../pages/main/Home'
 import Profile from '../pages/Profile'
@@ -8,15 +7,7 @@ import Delivery from '../pages/Delivery'
 import Catalog from '../pages/catalog/Catalog'
 import Products from '../pages/catalog/Products'
 import ProductModal from '../components/modals/Product'
-import CatalogCategories from '../pages/catalog/CatalogCategories'
 import Cart from '../pages/Cart'
-// import Settings from '../pages/settings/Settings'
-// import Orders from '../pages/orders/Orders'
-// import Cart from '../pages/carts/Cart'
-// import Contacts from '../pages/contacts/Contacts'
-// import Terms from '../pages/terms/Terms'
-// import Delivery from '../pages/delivery/Delivery'
-// import Checkout from '../pages/checkout/Checkouts'
 import NotFound from '../pages/NotFound'
 // import store from '../vuex'
 
@@ -54,13 +45,13 @@ export default [
             component: Delivery
         },
         {
-            path: '/catalogs/:slug',
+            path: '/:city/:slug',
             name: 'catalog',
             component: Catalog,
             children: [
                 {
                     path: 'cats/:sluged',
-                    name: 'ct',
+                    name: 'category',
                     component: Products,
                     children: [
                         {

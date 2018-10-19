@@ -4,6 +4,7 @@ export default {
         total: 0,
         region: '',
         regionName: '',
+        regionSlug: '',
         phone: '',
         lang: '',
         data: {
@@ -13,7 +14,7 @@ export default {
     cart: {
         total: null,
         quantity: null,
-        prods: {
-        }
+        manager: {},
+        prods: {}
     }
 }

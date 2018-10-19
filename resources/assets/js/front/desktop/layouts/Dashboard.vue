@@ -20,22 +20,17 @@ export default {
       regions: []
     };
   },
+  components: { CartInfo, Navbar, Footer },
+
   methods: {
     async getRegions() {
       let response = await axios.get("/api/regions");
       this.regions = response.data.data;
-      // let self = this;
-      // await $("#Regions").on("hide.bs.modal", function() {
-      //   self.$store.dispatch("setRegion", this.regions[0]);
-      // });
     },
     replacePage() {
-      // let url = this.$route.path;
-      // var str = url.substr(url.lastIndexOf("/") + 1);
-      // alert(str);
       if (this.$route.params.sluged) {
         this.$router.replace({
-          name: "ct",
+          name: "category",
           params: { sluged: this.$route.params.sluged }
         });
       } else {
@@ -67,12 +62,7 @@ export default {
   },
   mounted() {
     $("#product").on("hide.bs.modal", this.replacePage);
-    // this.setRegion().catch(() => {
-    //   console.log("sad");
-    //   $("#Regions").modal("show");
-    // });
-  },
-  components: { CartInfo, Navbar, Footer }
+  }
 };
 </script>
 

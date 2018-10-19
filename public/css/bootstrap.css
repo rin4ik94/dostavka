@@ -536,7 +536,7 @@ pre code {
 }
 .table tbody td {
   line-height: 24px;
-  padding: 14px 14px;
+  padding: 12px 12px;
   vertical-align: top;
   font-size: 14px;
   border-bottom: 1px solid #eceae7;
@@ -560,7 +560,7 @@ pre code {
   
 }
 .table-hover tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(39,174,97,0.1);
   
 }
 
@@ -3878,9 +3878,9 @@ button.close {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    min-height: calc(100% - (1.75rem * 2));
+    min-height: calc(100% - ( 1.75rem * 2));
     max-width: 600px;
-    margin: 1.75rem auto;
+    margin: 24px auto;
   }
   .modal-sm {
     max-width: 300px;

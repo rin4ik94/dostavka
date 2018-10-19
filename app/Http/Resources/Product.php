@@ -16,15 +16,25 @@ class Product extends JsonResource
     {
         if ($request->lang == 'uz') {
             $name = $this->name_uz;
+            if ($this->measurement == 1) {
+                $measure = 'дона';
+            } else {
+                $measure = 'кг';
+            }
         } else {
             $name = $this->name_ru;
+            if ($this->measurement == 1) {
+                $measure = 'шт';
+            } else {
+                $measure = 'кг';
+            }
         }
         return [
             'id' => (string)$this->id,
             'name' => $name,
             'slug' => $this->slug,
             'category_id' => $this->category_id,
-            'measurement' => $this->measurement,
+            'measure' => $measure,
             'image' => $this->getImage(),
             'new_price' => (integer)$this->new_price,
             'old_price' => (integer)$this->old_price,

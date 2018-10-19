@@ -20,7 +20,8 @@ export const setRegion = (state, regionId) => {
 }
 export const setRegionName = (state, region) => {
     if (!isEmpty(region)) {
-        state.user.regionName = region;
+        state.user.regionName = region.name;
+        state.user.regionSlug = region.slug;
         return
     }
 }

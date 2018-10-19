@@ -11,7 +11,7 @@
           </div>
           <ul class="partners" v-if="filtered.length > 0">
             <li class="partner" v-for="manager in filtered" :key="manager.id">
-              <router-link :to="{name:'catalog', params: {slug: manager.slug}}" class="partner-inner">
+              <router-link :to="{name:'catalog', params: {city:regionSlug,slug: manager.slug}}" class="partner-inner">
                 <div class="partner-logo"><img :src="manager.logo"></div>
                 <div class="partner-info">
                   <div class="partner-name">{{manager.name}}</div>
@@ -43,7 +43,8 @@ export default {
   computed: {
     ...mapGetters({
       region: "regionId",
-      regionName: "regionName"
+      regionName: "regionName",
+      regionSlug: "regionSlug"
     }),
     filtered() {
       let data = [];

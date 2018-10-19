@@ -17,6 +17,7 @@ class CreateRegionsTable extends Migration
             $table->increments('id');
             $table->string('name_uz')->nullable();
             $table->string('name_ru')->nullable();
+            $table->string('slug')->nullable();
         });
     }
 
