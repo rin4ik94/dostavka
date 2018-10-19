@@ -53205,7 +53205,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
     cartInfo: "cart"
@@ -53230,7 +53229,7 @@ var render = function() {
               _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "item" }, [
-                _vm._v("Товаров в корзине " + _vm._s(_vm.cartInfo.quantity))
+                _vm._v("Товаров в корзине " + _vm._s(_vm.cartInfo.prods.length))
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "item" }, [
@@ -56074,6 +56073,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotFound__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Products__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Products___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Products__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_localforage__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_localforage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -56114,6 +56117,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+
+
 
 
 
@@ -56430,6 +56435,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     $route: function $route(route) {
       if (route.name == "category") {
         this.fetchItems();
+      } else {
+        this.allProducts;
       }
     },
     price: function price(_price) {
@@ -56561,20 +56568,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return fetchItems;
     }()
   }, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapActions */])({
-    setCartAction: "setCart"
+    setCart: "setCart"
   }), {
     removeFromCart: function removeFromCart(product) {
       var item = this.productMenu.findIndex(function (prod) {
         return prod.id == product.id;
       });
       this.productMenu.splice(item, 1);
-      this.setCartAction(this.productMenu);
+      this.cartData(this.productMenu);
     },
     fetchProducts: function fetchProducts() {
       var _this = this;
 
       setTimeout(function () {
-        var total = 0;
         __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cart").then(function (response) {
           if (!Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(response)) {
             _this.productMenu = response;
@@ -56582,7 +56588,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               v.quantity = 1;
               _this.productMenu.map(function (l, o) {
                 if (v.id == l.id) {
-                  total = total + v.new_price;
                   v.quantity = l.quantity;
                   Vue.set(_this.products, k, v);
                   l = v;
@@ -56590,9 +56595,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }
               });
             });
-            if (total > 0) {
-              // this.setTotal(total);
-            }
           }
         });
       }, 0);
@@ -56603,7 +56605,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       });
       --product.quantity;
       Vue.set(this.productMenu, index, product);
-      this.setCart();
+      this.cartData();
     },
     showModal: function showModal(product) {
       this.product = product;
@@ -56618,7 +56620,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       });
       return item ? true : false;
     },
-    setCart: function setCart() {
+    cartData: function cartData() {
       var cart = [];
       var data = {
         id: "",
@@ -56667,7 +56669,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             _this2.productMenu.unshift(_this2.product);
           }
         }
-        _this2.setCart();
+        _this2.cartData();
       });
     }
   })
@@ -57275,6 +57277,12 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_localforage__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_localforage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
+//
+//
 //
 //
 //
@@ -57321,10 +57329,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      product: ""
+      product: "",
+      productMenu: [],
+      quantity: 1
     };
   },
 
@@ -57335,19 +57347,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     }
   },
-  methods: {
-    fetchProduct: function fetchProduct() {
+  computed: {
+    productInCart: function productInCart() {
       var _this = this;
 
+      var item = this.productMenu.find(function (prod) {
+        return prod.id == _this.product.id;
+      });
+      return item ? true : false;
+    }
+  },
+  methods: {
+    removeFromCart: function removeFromCart() {
+      var _this2 = this;
+
+      var index = this.productMenu.findIndex(function (prod) {
+        return prod.id == _this2.product.id;
+      });
+      this.productMenu.splice(index, 1);
+      __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("cart", this.productMenu);
+      $("#product").modal("hide");
+    },
+    increaseQuantity: function increaseQuantity() {
+      this.quantity++;
+    },
+    decreaseQuantity: function decreaseQuantity() {
+      this.quantity--;
+    },
+    fetchProduct: function fetchProduct() {
+      var _this3 = this;
+
       axios.get("/api/products/" + this.$route.params.product).then(function (response) {
-        _this.product = response.data.data;
+        _this3.product = response.data.data;
+
+        var l = _this3.productMenu.find(function (p) {
+          return p.id == _this3.product.id;
+        });
+        if (l) {
+          _this3.quantity = l.quantity;
+        }
       });
     }
   },
   mounted: function mounted() {
+    var _this4 = this;
+
     if (this.$route.params.product) {
       this.fetchProduct();
     }
+    __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.getItem("cart").then(function (response) {
+      if (!Object(__WEBPACK_IMPORTED_MODULE_1_lodash__["isEmpty"])(response)) {
+        _this4.productMenu = response;
+      }
+    });
   }
 });
 
@@ -57415,7 +57467,97 @@ var render = function() {
                       _c("div", { staticClass: "f-product-price-old" })
                     ]),
                     _vm._v(" "),
-                    _vm._m(2)
+                    _c("div", { staticClass: "row mt-auto" }, [
+                      _c("div", { staticClass: "col" }, [
+                        _c(
+                          "div",
+                          { staticClass: "counter-widget input-group" },
+                          [
+                            _vm.productInCart & (_vm.quantity == 1)
+                              ? _c(
+                                  "div",
+                                  { staticClass: "input-group-prepend" },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-outline-red",
+                                        attrs: { type: "button" },
+                                        on: { click: _vm.removeFromCart }
+                                      },
+                                      [
+                                        _c("i", { staticClass: "icon" }, [
+                                          _vm._v("clear")
+                                        ])
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.quantity > 1
+                              ? _c(
+                                  "div",
+                                  { staticClass: "input-group-prepend" },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-outline-red",
+                                        attrs: { type: "button" },
+                                        on: { click: _vm.decreaseQuantity }
+                                      },
+                                      [
+                                        _c("i", { staticClass: "icon" }, [
+                                          _vm._v("remove")
+                                        ])
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: { type: "text", disabled: "" },
+                              domProps: {
+                                value: _vm.quantity + " " + _vm.product.measure
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "input-group-append" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-green",
+                                  attrs: { type: "button" },
+                                  on: { click: _vm.increaseQuantity }
+                                },
+                                [
+                                  _c("i", { staticClass: "icon" }, [
+                                    _vm._v("add")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col" }, [
+                        !_vm.productInCart
+                          ? _c(
+                              "button",
+                              { staticClass: "btn btn-block btn-green" },
+                              [_vm._v("Добавить в корзину")]
+                            )
+                          : _c(
+                              "button",
+                              { staticClass: "btn btn-block btn-green" },
+                              [_vm._v("Готово")]
+                            )
+                      ])
+                    ])
                   ])
                 ])
               ])
@@ -57452,49 +57594,6 @@ var staticRenderFns = [
       _c("a", { attrs: { href: "/" } }, [_vm._v("Продукты")]),
       _vm._v(" / "),
       _c("a", { attrs: { href: "/" } }, [_vm._v("Молочные продукты")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-auto" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "counter-widget input-group" }, [
-          _c("div", { staticClass: "input-group-prepend" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-red",
-                attrs: { type: "button", disabled: "" }
-              },
-              [_c("i", { staticClass: "icon" }, [_vm._v("clear")])]
-            )
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { value: "1 шт", disabled: "", type: "text" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-green",
-                attrs: { type: "button" }
-              },
-              [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("button", { staticClass: "btn btn-block btn-green" }, [
-          _vm._v("Добавить в корзину")
-        ])
-      ])
     ])
   }
 ]

@@ -11,7 +11,7 @@
       </div>
       <div class="col cart-card-center">
         <div class="item">Магазин: <a href="/">Makro</a></div>
-        <div class="item">Товаров в корзине {{cartInfo.quantity}}</div>
+        <div class="item">Товаров в корзине {{cartInfo.prods.length}}</div>
         <div class="item">На сумму {{cartInfo.total | toCurrency}} сум</div>
       </div>
       <div class="col-auto">
@@ -23,7 +23,6 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-
 export default {
   computed: mapGetters({
     cartInfo: "cart"

@@ -25,13 +25,15 @@
               <div class="row mt-auto">
                 <div class="col">
                   <div class="counter-widget input-group">
-                    <div class="input-group-prepend"><button class="btn btn-outline-red" type="button" disabled=""><i class="icon">clear</i></button></div>
-                    <input class="form-control" value="1 шт" disabled="" type="text">
-                    <div class="input-group-append"><button class="btn btn-outline-green" type="button"><i class="icon">add</i></button></div>
+                     <div class="input-group-prepend" v-if="productInCart & quantity == 1"><button class="btn btn-outline-red" type="button" @click="removeFromCart"><i class="icon">clear</i></button></div>
+                      <div class="input-group-prepend" v-if="quantity > 1"><button class="btn btn-outline-red" type="button" @click="decreaseQuantity"><i class="icon">remove</i></button></div>
+                      <input class="form-control" type="text" :value="`${quantity} ${product.measure}`" disabled>
+                      <div class="input-group-append"><button class="btn btn-outline-green" type="button" @click="increaseQuantity"><i class="icon">add</i></button></div>
                   </div>
                 </div>
                 <div class="col">
-                  <button class="btn btn-block btn-green">Добавить в корзину</button>
+                  <button v-if="!productInCart" class="btn btn-block btn-green">Добавить в корзину</button>
+                  <button v-else class="btn btn-block btn-green">Готово</button>
                 </div>
                 
               </div>
@@ -44,10 +46,14 @@
 </div>
 </template>
 <script>
+import localforage from "localforage";
+import { isEmpty } from "lodash";
 export default {
   data() {
     return {
-      product: ""
+      product: "",
+      productMenu: [],
+      quantity: 1
     };
   },
   watch: {
@@ -57,12 +63,41 @@ export default {
       }
     }
   },
+  computed: {
+    productInCart() {
+      let item = this.productMenu.find(prod => {
+        return prod.id == this.product.id;
+      });
+      return item ? true : false;
+    }
+  },
   methods: {
+    removeFromCart() {
+      let index = this.productMenu.findIndex(prod => {
+        return prod.id == this.product.id;
+      });
+      this.productMenu.splice(index, 1);
+      localforage.setItem("cart", this.productMenu);
+      $("#product").modal("hide");
+    },
+    increaseQuantity() {
+      this.quantity++;
+    },
+    decreaseQuantity() {
+      this.quantity--;
+    },
     fetchProduct() {
       axios
         .get(`/api/products/${this.$route.params.product}`)
         .then(response => {
           this.product = response.data.data;
+
+          let l = this.productMenu.find(p => {
+            return p.id == this.product.id;
+          });
+          if (l) {
+            this.quantity = l.quantity;
+          }
         });
     }
   },
@@ -70,6 +105,11 @@ export default {
     if (this.$route.params.product) {
       this.fetchProduct();
     }
+    localforage.getItem("cart").then(response => {
+      if (!isEmpty(response)) {
+        this.productMenu = response;
+      }
+    });
   }
 };
 </script>
