@@ -10,72 +10,89 @@
     <form action="{{ route('clients.store') }}" method="POST" class="needs-validation" novalidate>
       @csrf
       <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label" for="storeFirstName">Имя *</label>
-          <input type="text" class="form-control" id="storeFirstName" name="first_name" value="{{old('first_name')}}" required>
+        <div class="form-group form-row">
+          <div class="col-4 col-form-label">
+            <label class="form-label" for="storeFirstName">Имя *</label>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control" id="storeFirstName" name="first_name" value="{{old('first_name')}}" required>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="storeLastName">Фамилия *</label>
-          <input type="text" class="form-control" id="storeLastName" name="last_name" value="{{old('last_name')}}" required>
+        <div class="form-group form-row">
+          <div class="col-4 col-form-label">
+            <label class="form-label" for="storeLastName">Фамилия *</label>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control" id="storeLastName" name="last_name" value="{{old('last_name')}}" required>
+          </div>
         </div>
-        <div class="form-row">
-          <div class="col">
+        <div class="form-group form-row">
+          <div class="col-4 col-form-label">
             <label class="form-label" for="storeMobile">Телефон *</label>
+          </div>
+          <div class="col-8">
             <input class="form-control" type="text" id="storeMobile" name="mobile" value="{{old('mobile')}}" required>
           </div>
-          <div class="col">
-            <div class="form-group">
-              <label class="form-label" for="password">Пароль *</label>
-              <input class="form-control" type="text" id="password" name="password" required>
-            </div>
+        </div>
+        <div class="form-group form-row">
+          <div class="col-4 col-form-label">
+            <label class="form-label" for="password">Пароль *</label>
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="text" id="password" name="password" required>
           </div>
         </div>
-        <div class="form-row">
-          <div class="col">
-            <div class="form-group">
-              <label class="form-label" for="storeDate">Дата рождения *</label>
-              <input type="date" class="form-control" id="storeDate" name="birth_date" value="{{old('birth_date')}}" required>
-            </div>
+        <div class="form-group form-row">
+          <div class="col-4 col-form-label">
+            <label class="form-label" for="storeDate">Дата рождения *</label>
           </div>
-          <div class="col">
-            <div class="form-group">
-              <label class="form-label" for="storeJender">Пол *</label>
-              <select class="custom-select" name="jender" required>
-                <option value="" selected disabled>Не выбран</option>
-                <option value="1">Мужской</option>
-                <option value="0">Женский</option>
-              </select>
-            </div>
+          <div class="col-8">
+            <input type="date" class="form-control" id="storeDate" name="birth_date" value="{{old('birth_date')}}" required>
           </div>
         </div>
-        <div class="form-row">
-          <div class="col">
-            <div class="form-group">
-              <label class="form-label" for="storeGroup">Группа</label>
-              <select class="custom-select" id="storeGroup" name="group_id">
-                <option value="1" selected>Обычный покупатель</option>
-                <option value="2">Постоянный покупатель</option>
-              </select>
-            </div>
+        <div class="form-group form-row">
+          <div class="col-4 col-form-label">
+            <label class="form-label" for="storeJender">Пол *</label>
           </div>
-          <div class="col">
-            <div class="form-group">
-              <label class="form-label" for="storeRegion">Регион *</label>
-              <select class="custom-select" id="storeRegion" name="region_id" required>
-                <option value="" selected disabled>Не выбран</option>
-                @foreach($regions as $region)
-                <option value="{{ $region->id }}">{{ $region->name_ru }}</option>
-                @endforeach
-              </select>
-            </div>
+          <div class="col-8">
+            <select class="custom-select" name="jender" required>
+              <option value="" selected disabled>Не выбран</option>
+              <option value="1">Мужской</option>
+              <option value="0">Женский</option>
+            </select>
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="storeStatus">Статус</label>
-          <select class="custom-select" id="storeStatus" name="status">
+        <div class="form-group form-row">
+          <div class="col-4 col-form-label">
+            <label class="form-label" for="storeRegion">Регион *</label>
+          </div>
+          <div class="col-8">
+            <select class="custom-select" id="storeRegion" name="region_id" required>
+              <option value="" selected disabled>Не выбран</option>
+              @foreach($regions as $region)
+              <option value="{{ $region->id }}">{{ $region->name_ru }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="form-group form-row">
+          <div class="col-4 col-form-label">
+            <label class="form-label" for="storeStatus">Статус</label>
+          </div>
+          <div class="col-8">
+            <select class="custom-select" id="storeStatus" name="status">
             <option value="1" selected>Активный</option>
             <option value="0">Неактивен</option>
           </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-8 offset-4">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" id="black_list" name="black_list" type="checkbox">
+                <label class="custom-control-label" for="black_list">Черный список</label>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
