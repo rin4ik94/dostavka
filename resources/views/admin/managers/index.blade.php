@@ -1,12 +1,5 @@
 @extends('admin.layouts.dashboard')
 @section('content')
-<div class="main-top d-flex align-items-center">
-    <h1 class="main-title">Список магазинов</h1>
-    <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
-      <i class="icon">add</i>
-      <span class="text">Добавить магазин</span>
-    </button>
-  </div>
   <div class="toolbar d-flex">
   <form method="GET">
     <div class="form-row">
@@ -30,33 +23,34 @@
     </div>
     </form>
     @include('admin.components.search')
+    <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
+      <i class="icon">add</i>
+      <span class="text">Добавить магазин</span>
+    </button>
   </div>
   @if(count($managers) > 0)
   <table class="table table-bordered table-hover table-striped">
     <thead>
       <tr>
-        <th class="col-auto">№</th>
-        <th class="col-6">Название</th>
-        <th class="col-3">Категория</th>
-        <th class="col-auto"></th>
+        <th width="54px;">№</th>
+        <th>Название</th>
+        <th width="250px;">Категория</th>
       </tr>
     </thead>
     <tbody>
       @foreach($managers as $manager)
       <tr>
         <td data-logo="{{ $manager->logo }}">{{$manager->id}}</td>
-        <td><a href="/" target="_blank">{{$manager->name}}</a></td>
+        <td><a class="text-red" href="#" data-toggle="modal" data-target="#editManager">{{$manager->name}}</a></td>
         <td data-category="{{ $manager->manager_category_id }}" >{{$manager->managerCategory->name_ru}}</td>
+        
+        <!--
         <td data-status="{{ $manager->status }}">
-        <div class="btn-group btn-group-sm managers_action">
-            <a href="#" data-toggle="modal" data-target="#editManager" class="btn btn-light">
-              <i class="icon">edit</i>
-            </a>
-          </div>
-        {!! Form::open(['method' => 'DELETE','route' => ['managers.destroy', $manager->id], 'class'=>'btn-group btn-group-sm delete']) !!}
-        {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
-        {!! Form::close() !!}
+          {!! Form::open(['method' => 'DELETE','route' => ['managers.destroy', $manager->id], 'class'=>'btn-group btn-group-sm delete']) !!}
+          {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
+          {!! Form::close() !!}
         </td>
+        -->
       </tr>
       @endforeach
     </tbody>

@@ -103,6 +103,7 @@ html, body {
 }
 .header-main-nav .nav-link.active {
   color: #323a42;
+  font-weight: 500;
 }
 .header-main-nav .nav-link.active::before {
   position: absolute;
@@ -249,11 +250,15 @@ html, body {
 }
 .main-bottom {
   margin-top: 24px;
+  margin-bottom: 24px;
 }
 .main-bottom-info {
   margin-left: auto;
   color: #999;
   font-size: 15px;
+}
+.main-bottom .pagination {
+  margin: 0;
 }
 
 
@@ -438,9 +443,46 @@ html, body {
 }
 
 
-#editOrder .modal-dialog {
-  max-width: 1000px;
+.order .modal-dialog {
+  max-width: 1100px;
+  height: calc(100% - 48px);
+  overflow: hidden;
 }
+.order .modal-content {
+  height: 100%;
+}
+.order .modal-body {
+  display: flex;
+  height: calc(100% - 120px);
+  padding: 0;
+}
+.order-aside {
+  width: 500px;
+  height: 100%;
+  overflow: auto;
+}
+.order-aside section {
+  padding: 24px;
+  border-bottom: 1px solid #eceae7;
+}
+.order-aside section .title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.order-main {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+  padding: 24px;
+}
+.divider {
+  height: 1px;
+  background-color: #eceae7;
+}
+
+
+
+
 
 .btn-sm .icon,
 .btn-group-sm .icon {
