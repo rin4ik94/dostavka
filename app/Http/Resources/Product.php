@@ -39,6 +39,7 @@ class Product extends JsonResource
             'new_price' => (integer)$this->new_price,
             'old_price' => (integer)$this->old_price,
             'manager_id' => $this->manager_id,
+            'category' => new Category($this->whenLoaded('category'))
         ];
 
     }

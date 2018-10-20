@@ -18,11 +18,7 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      regions: null
-    };
-  },
+  props: ["regions"],
   methods: {
     ...mapActions({
       setRegion: "setRegionId"
@@ -32,11 +28,6 @@ export default {
         $("#Regions").modal("hide");
       });
     }
-  },
-  created() {
-    axios.get("/api/regions").then(response => {
-      this.regions = response.data.data;
-    });
   }
 };
 </script>

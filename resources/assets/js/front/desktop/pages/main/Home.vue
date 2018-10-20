@@ -69,20 +69,22 @@ export default {
   },
   methods: {
     getCats() {
-      axios
-        .get(`api/categories_managers?withManagers&region=${this.region}`)
-        .then(response => {
-          this.categories = response.data.data;
-          if (this.active != 0) {
-            this.categories.map((value, key) => {
-              if (this.category.id == value.id) {
-                this.category = value;
-              }
-            });
-          } else {
-            this.category = [];
-          }
-        });
+      if (this.region) {
+        axios
+          .get(`api/categories_managers?withManagers&region=${this.region}`)
+          .then(response => {
+            this.categories = response.data.data;
+            if (this.active != 0) {
+              this.categories.map((value, key) => {
+                if (this.category.id == value.id) {
+                  this.category = value;
+                }
+              });
+            } else {
+              this.category = [];
+            }
+          });
+      }
     },
     updateList(category) {
       if (category == "all") {
