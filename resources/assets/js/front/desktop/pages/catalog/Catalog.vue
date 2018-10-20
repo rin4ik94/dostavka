@@ -17,7 +17,7 @@
                 По цене
               </div>
             </div>
-              <router-view  :price="sortByPrice" @setActive="setActive"></router-view>
+              <router-view  v-if="active != 0"  :price="sortByPrice" @setActive="setActive"></router-view>
               <Products  v-if="active == 0" :price="sortByPrice" /> 
           </main>
           <aside class="aside">

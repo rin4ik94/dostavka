@@ -15,8 +15,11 @@
           <div class="col f-product-content">
             <div class="f-product-content-inner">
              
-              <h1 class="title f-product-title">{{product.name}}, 2,6%</h1>
-              <div class="f-product-segment"><a href="/">Продукты</a> / <a href="/">Молочные продукты</a></div>
+              <h1 class="title f-product-title">{{product.name}}</h1>
+              <div class="f-product-segment" v-if="product.category">
+                <a @click.prevent="changeRoute(product.category.parent.slug)" v-if="product.category.parent">{{product.category.parent.name}}  / </a>
+                <a @click.prevent="changeRoute(product.category.slug)">{{product.category.name}}</a>
+              </div>
               <div class="f-product-quantity">{{product.new_price | toCurrency}} сум за 1 шт</div>
               <div class="f-product-price">
                 <div class="f-product-price-new">{{product.new_price | toCurrency}} сум</div>
@@ -26,14 +29,15 @@
                 <div class="col">
                   <div class="counter-widget input-group">
                      <div class="input-group-prepend" v-if="productInCart & quantity == 1"><button class="btn btn-outline-red" type="button" @click="removeFromCart"><i class="icon">clear</i></button></div>
+                      <div class="input-group-prepend" v-if="!productInCart & quantity == 1"><button class="btn btn-outline-red" type="button" disabled><i class="icon">remove</i></button></div>
                       <div class="input-group-prepend" v-if="quantity > 1"><button class="btn btn-outline-red" type="button" @click="decreaseQuantity"><i class="icon">remove</i></button></div>
                       <input class="form-control" type="text" :value="`${quantity} ${product.measure}`" disabled>
                       <div class="input-group-append"><button class="btn btn-outline-green" type="button" @click="increaseQuantity"><i class="icon">add</i></button></div>
                   </div>
                 </div>
                 <div class="col">
-                  <button v-if="!productInCart" class="btn btn-block btn-green">Добавить в корзину</button>
-                  <button v-else class="btn btn-block btn-green">Готово</button>
+                  <button v-if="!productInCart" @click="addToCart" class="btn btn-block btn-green">Добавить в корзину</button>
+                  <button v-else class="btn btn-block btn-green" @click="increaseCart">Готово</button>
                 </div>
                 
               </div>
@@ -48,6 +52,7 @@
 <script>
 import localforage from "localforage";
 import { isEmpty } from "lodash";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -59,9 +64,10 @@ export default {
   watch: {
     $route() {
       if (this.$route.params.product) {
+        this.storageCart();
         this.fetchProduct();
       }
-    }
+    }, 
   },
   computed: {
     productInCart() {
@@ -69,16 +75,54 @@ export default {
         return prod.id == this.product.id;
       });
       return item ? true : false;
-    }
+    },
+    ...mapGetters({
+      cart: "cart"
+    })
   },
   methods: {
+    ...mapActions({
+      setCart: "setCart"
+    }),
+    hideModal() {
+      $("#product").modal("hide");
+    },
+    changeRoute(slug) {
+      this.$router.replace({ name: "category", params: { sluged: slug } });
+      this.hideModal();
+    },
+    addToCart() {
+      this.productMenu.push({ id: this.product.id, quantity: this.quantity });
+      this.hideModal();
+
+      localforage.setItem("cart", this.productMenu);
+      this.setCart(this.productMenu);
+      return;
+    },
+    increaseCart() {
+      this.$nextTick(() => {
+        this.hideModal();
+      });
+      let index = this.productMenu.findIndex(
+        product => product.id == this.product.id
+      );
+      this.productMenu.splice(index, 1);
+      this.productMenu.push({ id: this.product.id, quantity: this.quantity });
+
+      localforage.setItem("cart", this.productMenu);
+      this.setCart(this.productMenu);
+      return;
+    },
     removeFromCart() {
       let index = this.productMenu.findIndex(prod => {
         return prod.id == this.product.id;
       });
+
       this.productMenu.splice(index, 1);
-      localforage.setItem("cart", this.productMenu);
       $("#product").modal("hide");
+
+      localforage.setItem("cart", this.productMenu);
+      this.setCart(this.productMenu);
     },
     increaseQuantity() {
       this.quantity++;
@@ -97,19 +141,24 @@ export default {
           });
           if (l) {
             this.quantity = l.quantity;
+          } else {
+            this.quantity = 1;
           }
         });
+    },
+    storageCart() {
+      localforage.getItem("cart").then(response => {
+        if (!isEmpty(response)) {
+          this.productMenu = response;
+        }
+      });
     }
   },
   mounted() {
     if (this.$route.params.product) {
       this.fetchProduct();
     }
-    localforage.getItem("cart").then(response => {
-      if (!isEmpty(response)) {
-        this.productMenu = response;
-      }
-    });
+    this.storageCart();
   }
 };
 </script>

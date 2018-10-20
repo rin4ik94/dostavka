@@ -59,7 +59,7 @@ export default {
       if (route.name == "category") {
         this.fetchItems();
       } else {
-        this.allProducts;
+        // this.allProducts();
       }
     },
     price(price) {
@@ -68,6 +68,13 @@ export default {
         return;
       }
       this.fetchItems();
+    },
+    cart: {
+      deep: true,
+      handler() {
+        // alert("asdsd");
+        this.cartEvent();
+      }
     }
   },
   beforeMount: async function() {
@@ -80,7 +87,8 @@ export default {
     }
   },
   computed: mapGetters({
-    totalCart: "totalCart"
+    totalCart: "totalCart",
+    cart: "cart"
   }),
   methods: {
     replacePage() {
@@ -203,6 +211,15 @@ export default {
         }
       });
       localforage.setItem("cart", cart);
+      this.setCart(cart);
+    },
+    cartEvent() {
+      localforage.getItem("cart").then(response => {
+        if (!isEmpty(response)) {
+          this.productMenu = response;
+          this.fetchProducts();
+        }
+      });
     },
     addToCart(product) {
       this.product = product;
