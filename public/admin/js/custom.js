@@ -222,6 +222,33 @@ $(function () {
             $('.status').val(status);
         });
     });
+    // action for orders
+    $('.order_status').on('click', function (e) {
+        e.preventDefault(e);
+        var orderId = $(this).closest('tr').data('id');
+        var statusId = $(this).closest('tr').data('status');
+        $(".form-status input[value = " + statusId + "]").prop("checked",true);
+        $('#editOrderStatus').val(orderId);
+    });
+
+    $('.order_branch').on('click', function (e) {
+        e.preventDefault(e);
+        var orderId = $(this).closest('tr').data('id');
+        var orderBranchId = $(this).data('branch');
+        $(".form-branch input[value = " + orderBranchId + "]").prop("checked",true);
+        $('#editOrderBranch').val(orderId);
+    });
+
+    $('.order_courier').on('click', function (e) {
+        e.preventDefault(e);
+        var orderId = $(this).closest('tr').data('id');
+        var orderCourierId = $(this).data('courier');
+        if(orderCourierId == null){ orderCourierId = '0'}
+        $(".form-courier #orderCourier_" + orderCourierId ).prop("checked",true);
+        $('#editOrderCourier').val(orderId);
+    });
+
+
     // actions for couriers
     $('.courier_action a').on('click', function (e) {
         e.preventDefault(e);
