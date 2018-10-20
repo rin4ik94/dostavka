@@ -26,20 +26,20 @@ export default {
     async getRegions() {
       let response = await axios.get("/api/regions");
       this.regions = response.data.data;
-    },
-    replacePage() {
-      if (this.$route.params.sluged) {
-        this.$router.replace({
-          name: "category",
-          params: { sluged: this.$route.params.sluged }
-        });
-      } else {
-        this.$router.replace({
-          name: "catalog",
-          params: { slug: this.$route.params.slug }
-        });
-      }
     }
+    // replacePage() {
+    //   if (this.$route.params.sluged) {
+    //     this.$router.replace({
+    //       name: "category",
+    //       params: { sluged: this.$route.params.sluged }
+    //     });
+    //   } else {
+    //     this.$router.replace({
+    //       name: "catalog",
+    //       params: { slug: this.$route.params.slug }
+    //     });
+    //   }
+    // }
   },
   watch: {
     $route: {
@@ -61,7 +61,7 @@ export default {
     this.getRegions();
   },
   mounted() {
-    $("#product").on("hide.bs.modal", this.replacePage);
+    // $("#product").on("hide.bs.modal", this.replacePage);
   }
 };
 </script>

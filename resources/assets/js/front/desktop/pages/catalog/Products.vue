@@ -71,6 +71,8 @@ export default {
     }
   },
   beforeMount: async function() {
+    $(document).on("hide.bs.modal", this.replacePage);
+
     if (!this.$route.params.sluged) {
       this.allProducts();
     } else {
@@ -81,6 +83,19 @@ export default {
     totalCart: "totalCart"
   }),
   methods: {
+    replacePage() {
+      if (this.$route.params.sluged) {
+        this.$router.replace({
+          name: "category",
+          params: { sluged: this.$route.params.sluged }
+        });
+      } else {
+        this.$router.replace({
+          name: "catalog",
+          params: { slug: this.$route.params.slug }
+        });
+      }
+    },
     async allProducts() {
       let params = {};
       if (this.price) {
