@@ -14,6 +14,7 @@ export default {
     cart: {
         total: null,
         quantity: null,
+        region_id: null, 
         manager: {},
         prods: {}
     }

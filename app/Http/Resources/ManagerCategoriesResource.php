@@ -23,7 +23,7 @@ class ManagerCategoriesResource extends JsonResource
         return [
             'id' => (string)$this->id,
             'name' => $name,
-            'managers' => Manager::collection($this->whenLoaded('managers'))
+            'managers' => Manager::collection($this->managers)
         ];
     }
 }

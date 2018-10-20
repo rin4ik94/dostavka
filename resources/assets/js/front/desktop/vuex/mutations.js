@@ -15,8 +15,10 @@ import { isEmpty } from 'lodash'
 //     localforage.setItem('phone', phone)
 // }
 export const setRegion = (state, regionId) => {
-    console.log(regionId)
     state.user.region = regionId;
+}
+export const setManager = (state, manager) => {
+    state.cart.manager = manager;
 }
 export const setRegionName = (state, region) => {
     if (!isEmpty(region)) {
@@ -26,6 +28,11 @@ export const setRegionName = (state, region) => {
     }
 }
 export const setCart = (state, cart) => {
+    if (cart == 'empty') {
+        state.cart.prods = {}
+        state.cart.quantity = 0
+        state.cart.total = 0
+    }
     let d = 0
     cart.map((v, k) => {
         d = d + v.quantity

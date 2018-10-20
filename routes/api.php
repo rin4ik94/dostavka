@@ -21,6 +21,7 @@ Route::resource('/categories', 'Front\CategoryController');
 Route::post('/client/register', 'Front\Auth\AuthController@register');
 Route::get('/regions', 'Front\RegionController@index');
 Route::get('/managers', 'Front\ManagerController@index');
+Route::get('/managers/{manager}/products', 'Front\ManagerController@getProducts');
 Route::get('/managers/{manager}', 'Front\ManagerController@show');
 Route::get('/branches/{branch}', 'Front\BranchController@show');
 

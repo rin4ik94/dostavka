@@ -4,7 +4,6 @@
               <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner">
         <router-link v-if="$route.name == 'catalog' | $route.name == 'tp'" :to="{name: 'tp', params:{product : product.slug}}">
-       
               <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
             <div class="product-image"><img :src="product.image"></div>
             <div class="product-title">{{product.name}}</div>
@@ -43,7 +42,7 @@ import { mapActions, mapGetters } from "vuex";
 import Pagination from "../../components/Pagination";
 
 export default {
-  props: ["price"],
+  props: ["price", "branch"],
   components: { Pagination },
   data() {
     return {
@@ -72,7 +71,6 @@ export default {
     cart: {
       deep: true,
       handler() {
-        // alert("asdsd");
         this.cartEvent();
       }
     }
@@ -88,6 +86,7 @@ export default {
   },
   computed: mapGetters({
     totalCart: "totalCart",
+    manager: "manager",
     cart: "cart"
   }),
   methods: {
@@ -143,13 +142,24 @@ export default {
       this.fetchProducts();
     },
     ...mapActions({
-      setCart: "setCart"
+      setCart: "setCart",
+      setManager: "setManager",
+      setTotal: "setTotal"
     }),
     removeFromCart(product) {
       let item = this.productMenu.findIndex(prod => {
         return prod.id == product.id;
       });
-      this.productMenu.splice(item, 1);
+      if (this.productMenu.length == 1) {
+        this.productMenu = [];
+        localforage.removeItem("cart");
+        localforage.removeItem("manager");
+        this.setManager("empty");
+        this.setCart("empty");
+      } else {
+        this.productMenu.splice(item, 1);
+      }
+
       this.cartData(this.productMenu);
     },
     fetchProducts() {
@@ -194,12 +204,16 @@ export default {
       return item ? true : false;
     },
     cartData() {
+      let total = 0;
+
       let cart = [];
       let data = {
         id: "",
         quantity: 0
       };
       this.productMenu.map((value, key) => {
+        total = total + value.quantity * value.new_price;
+
         data = {
           id: "",
           quantity: 0
@@ -212,6 +226,7 @@ export default {
       });
       localforage.setItem("cart", cart);
       this.setCart(cart);
+      this.setTotal(total);
     },
     cartEvent() {
       localforage.getItem("cart").then(response => {
@@ -221,22 +236,50 @@ export default {
         }
       });
     },
+    emptyCartAdd(product) {
+      let cart = [];
+      axios.get(`/api/managers/${this.$route.params.slug}`).then(response => {
+        this.setManager(response.data.data);
+        localforage.setItem("manager", response.data.data);
+      });
+
+      product.quantity = 1;
+      cart.push({ id: product.id, quantity: 1 });
+      this.productMenu.push(product);
+      localforage.setItem("cart", cart);
+    },
     addToCart(product) {
       this.product = product;
       localforage.getItem("cart").then(response => {
-        let cart = [];
         let d = 0;
         let data = {
           id: "",
           quantity: 0
         };
         if (isEmpty(response)) {
-          product.quantity = 1;
-          cart.push({ id: product.id, quantity: 1 });
-          this.productMenu.push(product);
-          localforage.setItem("cart", cart);
+          this.setTotal(product.new_price * product.quantity);
+
+          this.emptyCartAdd(product);
+          this.cartData();
+
           return;
         } else {
+          if (this.manager.slug != this.$route.params.slug) {
+            if (
+              confirm(
+                "В вашей корзине продукты из другого магазина, Вы хотите удалить их?"
+              )
+            ) {
+              this.productMenu = [];
+              this.productMenu.push(product);
+              localforage.removeItem("cart");
+              this.emptyCartAdd(product);
+              this.cartData();
+              return;
+            } else {
+              return;
+            }
+          }
           this.productMenu.map((value, key) => {
             if (value.id == this.product.id) {
               this.product.quantity++;
@@ -244,6 +287,7 @@ export default {
               d = 1;
             }
           });
+
           if (d != 1) {
             this.product.quantity = 1;
             this.productMenu.unshift(this.product);

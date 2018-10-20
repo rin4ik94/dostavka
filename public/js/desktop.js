@@ -51434,7 +51434,7 @@ Vue.filter('toCurrency', function (value) {
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setRegion').catch(function () {
     $("#Regions").modal('show');
 });
-
+__WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setManager');
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch("setCart");
 
 Vue.component('SubCategories', Vue.extend(SubCategories));
@@ -51789,8 +51789,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
     }
   },
-  beforeMount: function beforeMount() {
-    this.getRegions();
+  created: function created() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      _this.getRegions();
+    });
   },
   mounted: function mounted() {
     // $("#product").on("hide.bs.modal", this.replacePage);
@@ -53156,9 +53160,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      // manager: null
+    };
+  },
+
   computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
-    cartInfo: "cart"
-  })
+    cartInfo: "cart",
+    manager: "manager"
+  }),
+  watch: {
+    manager: {
+      immediate: true,
+      handler: function handler() {
+        // this.fetchManager();
+        this.getTotalOfCart();
+      }
+    },
+    cartInfo: function cartInfo() {
+      // getTotalOfCart();
+    }
+  },
+  methods: {
+    // fetchManager() {
+    //   console.log(this.managerSlug);
+    //   axios.get(`/api/managers/${this.managerSlug}`).then(response => {
+    //     this.manager = response.data.data;
+    //   });
+    // },
+    getTotalOfCart: function getTotalOfCart() {
+      // if (this.manager.slug) {
+      //   axios
+      //     .get(`/api/managers/${this.manager.slug}/products`)
+      //     .then(response => {
+      //       let manager = response.data;
+      //       // manager.products;
+      //     });
+      // }
+    }
+  }
 });
 
 /***/ }),
@@ -53169,14 +53210,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.cartInfo.quantity > 0
+  return _vm.cartInfo.total > 0 && _vm.manager
     ? _c("div", { staticClass: "cart-card" }, [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "row" }, [
             _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "col cart-card-center" }, [
-              _vm._m(1),
+              _c("div", { staticClass: "item" }, [
+                _vm._v("Магазин: "),
+                _c("a", { attrs: { href: "/" } }, [
+                  _vm._v(_vm._s(_vm.manager.name))
+                ])
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "item" }, [
                 _vm._v("Товаров в корзине " + _vm._s(_vm.cartInfo.prods.length))
@@ -53225,15 +53271,6 @@ var staticRenderFns = [
         _c("span", { staticClass: "badge badge-danger" }, [_vm._v("1")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item" }, [
-      _vm._v("Магазин: "),
-      _c("a", { attrs: { href: "/" } }, [_vm._v("Makro")])
-    ])
   }
 ]
 render._withStripped = true
@@ -53264,7 +53301,7 @@ var render = function() {
       _vm._v(" "),
       _c("Footer"),
       _vm._v(" "),
-      _c("RegionModal"),
+      _c("RegionModal", { attrs: { regions: _vm.regions } }),
       _vm._v(" "),
       _c("ProductModal")
     ],
@@ -53413,18 +53450,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     getCats: function getCats() {
       var _this = this;
 
-      axios.get("api/categories_managers?withManagers&region=" + this.region).then(function (response) {
-        _this.categories = response.data.data;
-        if (_this.active != 0) {
-          _this.categories.map(function (value, key) {
-            if (_this.category.id == value.id) {
-              _this.category = value;
-            }
-          });
-        } else {
-          _this.category = [];
-        }
-      });
+      if (this.region) {
+        axios.get("api/categories_managers?withManagers&region=" + this.region).then(function (response) {
+          _this.categories = response.data.data;
+          if (_this.active != 0) {
+            _this.categories.map(function (value, key) {
+              if (_this.category.id == value.id) {
+                _this.category = value;
+              }
+            });
+          } else {
+            _this.category = [];
+          }
+        });
+      }
     },
     updateList: function updateList(category) {
       if (category == "all") {
@@ -56361,7 +56400,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
 
 
 
@@ -56369,7 +56407,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["price"],
+  props: ["price", "branch"],
   components: { Pagination: __WEBPACK_IMPORTED_MODULE_4__components_Pagination___default.a },
   data: function data() {
     return {
@@ -56400,7 +56438,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     cart: {
       deep: true,
       handler: function handler() {
-        // alert("asdsd");
         this.cartEvent();
       }
     }
@@ -56435,6 +56472,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   }(),
   computed: Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])({
     totalCart: "totalCart",
+    manager: "manager",
     cart: "cart"
   }),
   methods: _extends({
@@ -56542,13 +56580,24 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return fetchItems;
     }()
   }, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapActions */])({
-    setCart: "setCart"
+    setCart: "setCart",
+    setManager: "setManager",
+    setTotal: "setTotal"
   }), {
     removeFromCart: function removeFromCart(product) {
       var item = this.productMenu.findIndex(function (prod) {
         return prod.id == product.id;
       });
-      this.productMenu.splice(item, 1);
+      if (this.productMenu.length == 1) {
+        this.productMenu = [];
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem("cart");
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem("manager");
+        this.setManager("empty");
+        this.setCart("empty");
+      } else {
+        this.productMenu.splice(item, 1);
+      }
+
       this.cartData(this.productMenu);
     },
     fetchProducts: function fetchProducts() {
@@ -56595,12 +56644,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return item ? true : false;
     },
     cartData: function cartData() {
+      var total = 0;
+
       var cart = [];
       var data = {
         id: "",
         quantity: 0
       };
       this.productMenu.map(function (value, key) {
+        total = total + value.quantity * value.new_price;
+
         data = {
           id: "",
           quantity: 0
@@ -56613,6 +56666,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       });
       __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cart", cart);
       this.setCart(cart);
+      this.setTotal(total);
     },
     cartEvent: function cartEvent() {
       var _this2 = this;
@@ -56624,37 +56678,64 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }
       });
     },
-    addToCart: function addToCart(product) {
+    emptyCartAdd: function emptyCartAdd(product) {
       var _this3 = this;
+
+      var cart = [];
+      axios.get("/api/managers/" + this.$route.params.slug).then(function (response) {
+        _this3.setManager(response.data.data);
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("manager", response.data.data);
+      });
+
+      product.quantity = 1;
+      cart.push({ id: product.id, quantity: 1 });
+      this.productMenu.push(product);
+      __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cart", cart);
+    },
+    addToCart: function addToCart(product) {
+      var _this4 = this;
 
       this.product = product;
       __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cart").then(function (response) {
-        var cart = [];
         var d = 0;
         var data = {
           id: "",
           quantity: 0
         };
         if (Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(response)) {
-          product.quantity = 1;
-          cart.push({ id: product.id, quantity: 1 });
-          _this3.productMenu.push(product);
-          __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cart", cart);
+          _this4.setTotal(product.new_price * product.quantity);
+
+          _this4.emptyCartAdd(product);
+          _this4.cartData();
+
           return;
         } else {
-          _this3.productMenu.map(function (value, key) {
-            if (value.id == _this3.product.id) {
-              _this3.product.quantity++;
-              Vue.set(_this3.productMenu, key, _this3.product);
+          if (_this4.manager.slug != _this4.$route.params.slug) {
+            if (confirm("В вашей корзине продукты из другого магазина, Вы хотите удалить их?")) {
+              _this4.productMenu = [];
+              _this4.productMenu.push(product);
+              __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem("cart");
+              _this4.emptyCartAdd(product);
+              _this4.cartData();
+              return;
+            } else {
+              return;
+            }
+          }
+          _this4.productMenu.map(function (value, key) {
+            if (value.id == _this4.product.id) {
+              _this4.product.quantity++;
+              Vue.set(_this4.productMenu, key, _this4.product);
               d = 1;
             }
           });
+
           if (d != 1) {
-            _this3.product.quantity = 1;
-            _this3.productMenu.unshift(_this3.product);
+            _this4.product.quantity = 1;
+            _this4.productMenu.unshift(_this4.product);
           }
         }
-        _this3.cartData();
+        _this4.cartData();
       });
     }
   })
@@ -57234,13 +57315,21 @@ var render = function() {
                     _vm._v(" "),
                     _vm.active != 0
                       ? _c("router-view", {
-                          attrs: { price: _vm.sortByPrice },
+                          attrs: {
+                            branch: _vm.branchName,
+                            price: _vm.sortByPrice
+                          },
                           on: { setActive: _vm.setActive }
                         })
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.active == 0
-                      ? _c("Products", { attrs: { price: _vm.sortByPrice } })
+                      ? _c("Products", {
+                          attrs: {
+                            branch: _vm.branchName,
+                            price: _vm.sortByPrice
+                          }
+                        })
                       : _vm._e()
                   ],
                   1
@@ -57427,9 +57516,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     increaseCart: function increaseCart() {
       var _this2 = this;
 
-      this.$nextTick(function () {
+      setTimeout(function () {
         _this2.hideModal();
-      });
+
+        if (_this2.product.quantity == _this2.quantity) {
+          return;
+        }
+      }, 0);
+
       var index = this.productMenu.findIndex(function (product) {
         return product.id == _this2.product.id;
       });
@@ -57470,7 +57564,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         });
         if (l) {
           _this4.quantity = l.quantity;
+          _this4.product.quantity = l.quantity;
         } else {
+          _this4.product.quantity = 1;
+
           _this4.quantity = 1;
         }
       });
@@ -60961,6 +61058,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
     cart: {
         total: null,
         quantity: null,
+        region_id: null,
         manager: {},
         prods: {}
     }
@@ -60973,6 +61071,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegion", function() { return setRegion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setManager", function() { return setManager; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegionName", function() { return setRegionName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCart", function() { return setCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTotal", function() { return setTotal; });
@@ -60997,8 +61096,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //     localforage.setItem('phone', phone)
 // }
 var setRegion = function setRegion(state, regionId) {
-    console.log(regionId);
     state.user.region = regionId;
+};
+var setManager = function setManager(state, manager) {
+    state.cart.manager = manager;
 };
 var setRegionName = function setRegionName(state, region) {
     if (!Object(__WEBPACK_IMPORTED_MODULE_1_lodash__["isEmpty"])(region)) {
@@ -61008,6 +61109,11 @@ var setRegionName = function setRegionName(state, region) {
     }
 };
 var setCart = function setCart(state, cart) {
+    if (cart == 'empty') {
+        state.cart.prods = {};
+        state.cart.quantity = 0;
+        state.cart.total = 0;
+    }
     var d = 0;
     cart.map(function (v, k) {
         d = d + v.quantity;
@@ -61032,6 +61138,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCart", function() { return setCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTotal", function() { return setTotal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegionName", function() { return setRegionName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setManager", function() { return setManager; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegion", function() { return setRegion; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
@@ -61090,6 +61197,10 @@ var setCart = function setCart(_ref2, cart) {
     var commit = _ref2.commit,
         dispatch = _ref2.dispatch;
 
+    if (cart == 'empty') {
+        commit('setCart', 'empty');
+        return;
+    }
     // commit('setRegion', regionId)
     // localforage.setItem('region', regionId)
     // console.log(cart)
@@ -61114,9 +61225,28 @@ var setRegionName = function setRegionName(_ref4, region) {
 
     commit('setRegionName', region);
 };
-var setRegion = function setRegion(_ref5, regionId) {
+var setManager = function setManager(_ref5, manager) {
     var commit = _ref5.commit,
         dispatch = _ref5.dispatch;
+
+    if (manager == 'empty') {
+        commit('setManager', null);
+        return;
+    }
+    if (!manager) {
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('manager').then(function (manager) {
+            if (!Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(manager)) {
+                commit('setManager', manager);
+            }
+        });
+        return;
+    }
+    commit('setManager', manager);
+};
+var setRegion = function setRegion(_ref6, regionId) {
+    var commit = _ref6.commit,
+        dispatch = _ref6.dispatch;
+
 
     return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (regionId) {
         console.log('sad');
@@ -61202,6 +61332,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "regionName", function() { return regionName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "regionSlug", function() { return regionSlug; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cart", function() { return cart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "totalCart", function() { return totalCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "manager", function() { return manager; });
 // export const user = (state) => {
 //     return state.user
 // }
@@ -61216,6 +61348,12 @@ var regionSlug = function regionSlug(state) {
 };
 var cart = function cart(state) {
     return state.cart;
+};
+var totalCart = function totalCart(state) {
+    return state.cart.total;
+};
+var manager = function manager(state) {
+    return state.cart.manager;
 };
 // export const lang = (state) => {
 //     return state.user.lang
@@ -61526,12 +61664,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      regions: null
-    };
-  },
-
+  props: ["regions"],
   methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])({
     setRegion: "setRegionId"
   }), {
@@ -61540,14 +61673,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         $("#Regions").modal("hide");
       });
     }
-  }),
-  created: function created() {
-    var _this = this;
-
-    axios.get("/api/regions").then(function (response) {
-      _this.regions = response.data.data;
-    });
-  }
+  })
 });
 
 /***/ }),

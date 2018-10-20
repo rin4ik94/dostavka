@@ -20,7 +20,7 @@ class Manager extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'logo' => $this->getLogo(),
-            'branches' => Branches::collection($this->branches),
+            'branches' => Branches::collection($this->whenLoaded('branches')),
             'categories' => Category::collection($this->whenLoaded('categories')),
             'cat' => $this->managerCategory->name_ru
         ];

@@ -1,10 +1,10 @@
 <template>
   <div> 
-      <Navbar :regions='regions'></Navbar>
+      <Navbar :regions="regions"></Navbar>
       <router-view></router-view>
       <CartInfo />
       <Footer></Footer> 
-      <RegionModal />
+      <RegionModal :regions="regions"/>
       <ProductModal/>
   </div>
 </template>
@@ -57,8 +57,10 @@ export default {
       }
     }
   },
-  beforeMount() {
-    this.getRegions();
+  created() {
+    this.$nextTick(() => {
+      this.getRegions();
+    });
   },
   mounted() {
     // $("#product").on("hide.bs.modal", this.replacePage);

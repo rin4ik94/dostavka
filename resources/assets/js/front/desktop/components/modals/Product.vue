@@ -67,7 +67,7 @@ export default {
         this.storageCart();
         this.fetchProduct();
       }
-    }, 
+    }
   },
   computed: {
     productInCart() {
@@ -100,9 +100,14 @@ export default {
       return;
     },
     increaseCart() {
-      this.$nextTick(() => {
+      setTimeout(() => {
         this.hideModal();
-      });
+
+        if (this.product.quantity == this.quantity) {
+          return;
+        }
+      }, 0);
+
       let index = this.productMenu.findIndex(
         product => product.id == this.product.id
       );
@@ -141,7 +146,10 @@ export default {
           });
           if (l) {
             this.quantity = l.quantity;
+            this.product.quantity = l.quantity;
           } else {
+            this.product.quantity = 1;
+
             this.quantity = 1;
           }
         });

@@ -46,6 +46,10 @@ export const setRegionId = ({ commit, dispatch }, regionId) => {
 
 }
 export const setCart = ({ commit, dispatch }, cart) => {
+    if (cart == 'empty') {
+        commit('setCart', 'empty')
+        return
+    }
     // commit('setRegion', regionId)
     // localforage.setItem('region', regionId)
     // console.log(cart)
@@ -68,9 +72,24 @@ export const setTotal = ({ commit, dispatch }, total) => {
 }
 export const setRegionName = ({ commit, dispatch }, region) => {
     commit('setRegionName', region)
-
+}
+export const setManager = ({ commit, dispatch }, manager) => {
+    if (manager == 'empty') {
+        commit('setManager', null)
+        return
+    }
+    if (!manager) {
+        localforage.getItem('manager').then((manager) => {
+            if (!isEmpty(manager)) {
+                commit('setManager', manager)
+            }
+        })
+        return
+    }
+    commit('setManager', manager)
 }
 export const setRegion = ({ commit, dispatch }, regionId) => {
+
     return localforage.getItem('region').then((regionId) => {
         console.log('sad')
         if (isEmpty(regionId)) {

@@ -35,4 +35,8 @@ class ManagerController extends Controller
             return new ManagerResource($manager);
         }
     }
+    public function getProducts(Request $request, Manager $manager)
+    {
+        return $manager->load('products');
+    }
 }
