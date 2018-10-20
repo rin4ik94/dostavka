@@ -20,9 +20,9 @@
           <option value="0" @if(request()->get('status')=="0") selected @endif>Неактивен</option>
         </select>
       </div>
-    </div>
     </form>
     @include('admin.components.search')
+  </div>
     <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
       <i class="icon">add</i>
       <span class="text">Добавить магазин</span>

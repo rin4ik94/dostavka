@@ -14,10 +14,34 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       $regions = Region::all();
-       $clients = Client::with('client_group','region')->get();
+			 $region = $request->region ?? null;
+			 if($region == 'all'){
+				 $region = null;
+			 }
+			 $status = $request->status ?? null;
+			 if($status == 'all'){
+				 $status = null;
+			 }
+			 $blacklist = $request->blacklist ?? null;
+			 $search = $request->q ?? null;
+			 
+			 $regions = Region::all();
+			 $clients = Client::with('region')
+			 ->when(!is_null($region), function($query) use($region){
+				$query->whereRegionId($region);
+			 })
+			 ->when(!is_null($status), function($query) use($status){
+				$query->whereStatus($status);
+			 })
+			 ->when(!is_null($blacklist), function($query) use($blacklist){
+				$query->where('blacklist',true);
+			 })
+			 ->paginate(10);
+    //    $regions = $clients->map(function($clients){
+    //        return $clients->region;
+    //    });
        return view('admin.clients.index',compact('regions','clients'));
     }
 
@@ -36,12 +60,11 @@ class ClientController extends Controller
             'birth_date' => 'required',
             'jender' => 'required',
             'password' => 'required',
-            'status' => 'required',
-            'group_id' => 'required',
+						'status' => 'required',
             'region_id' => 'required',
         ]);
         $client = Client::create($request->all());
-
+				return back();
     }
     /**
      * Update the specified resource in storage.
@@ -52,7 +75,26 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+			$this->validate($request,[
+				'first_name' => 'required',
+				'last_name' => 'required',
+				'mobile' => 'required',
+				'birth_date' => 'required',
+				'jender' => 'required',
+				'status' => 'required',
+				'region_id' => 'required',
+		]);
+			$input = $request->all();
+			if($request->has('blacklist')){
+				$input['blacklist'] = 1;
+			}else{
+				$input = array_merge($input, ['blacklist' => 0]);
+			}
+		
+		
+			$client = Client::find($input['id'])
+			->update($input);
+			return back();
     }
 
     /**

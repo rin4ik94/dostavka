@@ -9,6 +9,7 @@
       </div>
       <form action="/admin/clients/1" method="POST" class="needs-validation" novalidate>
         {{ method_field('PUT') }}
+        @csrf
         <div class="modal-body">
         <div class="form-group">
           <input type="hidden" name="id" id="editId">
@@ -26,8 +27,8 @@
           </div>
           <div class="col">
             <div class="form-group">
-              <label class="form-label" for="editPassword">Пароль *</label>
-              <input class="form-control" type="text" id="editPassword" name="password" required>
+              <label class="form-label" for="editPassword">Пароль</label>
+              <input class="form-control" type="text" id="editPassword" name="password">
             </div>
           </div>
         </div>
@@ -52,15 +53,6 @@
         <div class="form-row">
           <div class="col">
             <div class="form-group">
-              <label class="form-label" for="editGroup">Группа</label>
-              <select class="custom-select" id="editGroup" name="group_id">
-                <option value="1" selected>Обычный покупатель</option>
-                <option value="2">Постоянный покупатель</option>
-              </select>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
               <label class="form-label" for="editRegion">Регион *</label>
               <select class="custom-select" id="editRegion" name="region_id" required>
                 <option value="" selected disabled>Не выбран</option>
@@ -77,6 +69,14 @@
             <option value="1" selected>Активный</option>
             <option value="0">Неактивен</option>
           </select>
+        </div>
+        <div class="form-row">
+            <div class="col-8 offset-4">
+              <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" id="editBlackList" name="blacklist" type="checkbox">
+                <label class="custom-control-label" for="editBlackList">Черный список</label>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">

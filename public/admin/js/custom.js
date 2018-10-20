@@ -247,20 +247,24 @@ $(function () {
             var last_name = $(this).data('lname');
             var mobile = $(this).data('mobile');
             var birth_date = $(this).data('bdate');
-            var group = $(this).data('group');
             var jender = $(this).data('jender');
             var region = $(this).data('region');
             var status = $(this).data('status');
-
+            var blacklist = $(this).data('blist');
             $('#editId').val(id);
             $('#editFirstName').val(first_name);
             $('#editLastName').val(last_name);
             $('#editMobile').val(mobile);
             $('#editDate').val(birth_date);
-            $('#editGroup').val(group);
             $('#editJender').val(jender);
             $('#editRegion').val(region);
             $('#editStatus').val(status);
+            if(blacklist == '1'){
+                $('#editBlackList').prop('checked',true);
+            }else{
+                $('#editBlackList').prop('checked',false);
+            }
+            
         });
     });
     // checkbox button click disable input {working_time} select

@@ -1,22 +1,22 @@
 <?php 
-use App\Models\Order;
-use App\Models\Product;
-Route::get('/neworder', function () {
-    $order = Order::create(['manager_id' => rand(1, 8), 'client_id' => 1, 'payment_type_id' => rand(1, 4), 'region_id' => rand(1, 8), 'payment_type_id' => rand(1, 2), 'order_status_id' => 1, 'region_id' => 1, 'delivery_address_street' => '
-    Чиланзарский район, ул 2', 'order_price' => 25000, 'delivery_price' => 5000, 'total_price' => 30000 ]);
-    $product = Product::find(1);
-    $order->products()->attach($product->id, ['product_count' => 5, 'product_name' => $product->name_ru, 'product_price' => $product->new_price, 'product_total_price' => $product->new_price * 5, 'product_measurement' => $product->measurement]);
-    $order->statuses()->attach(1, ['client_id' => 1]);
-    return redirect('/');
-});
-Route::get('cp', 'Admin\Admin\LoginController@showLoginForm')->name('admin.login');
-Route::post('cp', 'Admin\Admin\LoginController@login');
-Route::post('logout', 'Admin\Admin\LoginController@logout')->name('logout');
-Route::group([
-    'prefix' => 'admin',
-    'namespace' => 'Admin',
-    'middleware' => 'auth:admin'
-], function () {
+    use App\Models\Order;
+    use App\Models\Product;
+    Route::get('/neworder', function () {
+        $order = Order::create(['manager_id' => rand(1, 8), 'client_id' => 1, 'payment_type_id' => rand(1, 4), 'region_id' => 1, 'payment_type_id' => rand(1, 2), 'order_status_id' => 1, 'region_id' => 1, 'delivery_address_street' => '
+        Чиланзарский район, ул 2', 'order_price' => 25000, 'delivery_price' => 5000, 'total_price' => 30000 ]);
+        $product = Product::find(1);
+        $order->products()->attach($product->id, ['product_count' => 5, 'product_name' => $product->name_ru, 'product_price' => $product->new_price, 'product_total_price' => $product->new_price * 5, 'product_measurement' => $product->measurement]);
+        $order->statuses()->attach(1, ['client_id' => 1]);
+        return redirect('/');
+    });
+    Route::get('cp', 'Admin\Admin\LoginController@showLoginForm')->name('admin.login');
+    Route::post('cp', 'Admin\Admin\LoginController@login');
+    Route::post('logout', 'Admin\Admin\LoginController@logout')->name('logout');
+    Route::group([
+        'prefix' => 'admin',
+        'namespace' => 'Admin',
+        'middleware' => 'auth:admin'
+    ], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('roles', 'RoleController');
     Route::resource('employees/group', 'EmployeegroupController', ['as' => 'employees'])->except(['show', 'create']);
