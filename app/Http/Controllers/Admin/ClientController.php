@@ -60,7 +60,7 @@ class ClientController extends Controller
             'birth_date' => 'required',
             'jender' => 'required',
             'password' => 'required',
-						'status' => 'required',
+			'status' => 'required',
             'region_id' => 'required',
         ]);
         $client = Client::create($request->all());
