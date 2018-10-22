@@ -1,11 +1,11 @@
 @extends('admin.layouts.dashboard')
 @section('content')
 <div class="toolbar d-flex">
-    <form method="GET" class="form-row status-filter">
+    <form method="GET" class="form-row status-filter" data-fetch="{{ Request::get('status') ?? '' }}">
         <div class="col-auto">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-outline-green @if(!request()->status) active @endif">
-                    <input type="radio" @if(!request()->status) checked @endif onchange="this.form.submit()">Все<span class="badge"></span>
+                <label class="btn btn-outline-green @if(request()->status < 1) active @endif">
+                    <input type="radio" name="status" value="0" @if(request()->status < 1) checked @endif onchange="this.form.submit()">Все<span class="badge"></span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='1') active @endif">
                     <input type="radio" name="status" value="1" @if(request()->status=='1') checked @endif onchange="this.form.submit()">Новый<span class="badge"></span>
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="col-auto">
-          <input class="form-control" type="date" name="date" value="{{ request()->date }}" onchange="this.form.submit()">
+          <input class="form-control orderByDate" type="date" name="date" value="{{ request()->date ?? Carbon\Carbon::now()->format('Y-m-d') }}" onchange="this.form.submit()" disabled>
         </div>
     </form>
     <div class="ml-auto form-row">
@@ -106,13 +106,15 @@
 @endif
 <script>
     $(document).ready(function(){
-    var datevalue = $(".status-filter input[name = 'date']").val();
-    if(!datevalue && ){
-      $(".status-filter input[name = 'date']").prop('name', '');
-    }
-    else{
-      $(".status-filter input[name = 'date']").prop('name', 'date');
-    }
+        $statusid = $('.status-filter').data('fetch');
+        if($statusid == 4 || $statusid == 5){
+            $('.orderByDate').prop('disabled',false);
+        }else{
+            $('.orderByDate').prop('disabled',true);
+        }
+        if(!$status){
+            alert('test');
+        }
   });
   </script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -66,9 +67,26 @@ class Order extends Model
         ->withPivot(['product_name','product_count','product_price','product_total_price','product_measurement']);
     }
 
-    public function scopeOfStatus($query, $status)
+    public function scopeOfStatus($result, $status)
     {
         if (!$status) { return; }
-        $query->where('order_status_id', $status);
+        $result->where('order_status_id', $status);
+    }
+
+    public function scopeOfDate($result, $date, $status)
+    {
+        if ($status == 4 || $status == 5) {
+            if (!$date) {
+                return;
+            }
+            $result->whereDate(
+            'created_at',
+            $date
+        );
+        }
+    }
+    public function scopeOfId($result, $id)
+    {
+        $result->where('id', $id);
     }
 }
