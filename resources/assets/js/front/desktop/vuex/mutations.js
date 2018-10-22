@@ -1,5 +1,6 @@
 import localforage from 'localforage'
 import { isEmpty } from 'lodash'
+import { totalCart } from './getters';
 // export const setToken = (state, token) => {
 //     if (isEmpty(token)) {
 //         localforage.removeItem('authtoken', token)
@@ -34,17 +35,32 @@ export const setCart = (state, cart) => {
         state.cart.total = 0
         return
     }
-    let d = 0
-    console.log(cart)
-    cart.map((v, k) => {
-        d = d + v.quantity
-    })
+    // let d = 0
+    // cart.map((v, k) => {
+    //     d = d + v.quantity
+    // })
 
     state.cart.prods = cart;
-    state.cart.quantity = d;
+    // state.cart.quantity = d;
+    return
+}
+export const addToTotal = (state, price) => {
+    state.cart.total = state.cart.total + price;
+    localforage.setItem('totalCart', state.cart.total)
     return
 }
 export const setTotal = (state, total) => {
+    if (total == null) {
+        localforage.getItem("totalCart").then((total) => {
+            if (!isEmpty('total')) {
+                state.cart.total = total;
+
+            }
+        })
+        return
+    }
     state.cart.total = total;
+    localforage.setItem('totalCart', state.cart.total)
+
     return
 }

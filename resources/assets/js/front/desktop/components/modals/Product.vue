@@ -82,7 +82,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      setCart: "setCart"
+      setCart: "setCart",
+      addToTotal: "addToTotal"
     }),
     hideModal() {
       $("#product").modal("hide");
@@ -94,7 +95,7 @@ export default {
     addToCart() {
       this.productMenu.push({ id: this.product.id, quantity: this.quantity });
       this.hideModal();
-
+      this.addToTotal(this.product.new_price * this.quantity);
       localforage.setItem("cart", this.productMenu);
       this.setCart(this.productMenu);
       return;
@@ -107,6 +108,20 @@ export default {
           return;
         }
       }, 0);
+      if (this.product.quantity > this.quantity) {
+        let d = this.product.quantity - this.quantity;
+        this.addToTotal(-(this.product.new_price * d));
+        let index = this.productMenu.findIndex(
+          product => product.id == this.product.id
+        );
+        this.productMenu.splice(index, 1);
+        this.productMenu.push({ id: this.product.id, quantity: this.quantity });
+
+        localforage.setItem("cart", this.productMenu);
+        this.setCart(this.productMenu);
+        return;
+      }
+      this.addToTotal(this.product.new_price * this.quantity);
 
       let index = this.productMenu.findIndex(
         product => product.id == this.product.id
@@ -122,7 +137,7 @@ export default {
       let index = this.productMenu.findIndex(prod => {
         return prod.id == this.product.id;
       });
-
+      this.addToTotal(-(this.product.quantity * this.product.new_price));
       this.productMenu.splice(index, 1);
       $("#product").modal("hide");
 

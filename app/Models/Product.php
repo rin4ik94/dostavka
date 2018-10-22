@@ -4,10 +4,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Cviebrock\EloquentSluggable\Sluggable;
+use App\Traits\ManagerCheck;
 
 class Product extends Model
 {
-    use Sluggable;
+    use Sluggable, ManagerCheck;
     protected $fillable = [
         'name_uz', 'name_ru', 'slug', 'image', 'measurement', 'new_price', 'old_price', 'status', 'category_id', 'manager_id'
     ];
@@ -35,13 +36,6 @@ class Product extends Model
         }
     }
 
-    public function scopeOfManager(Builder $builder, $managerId)
-    {
-        if (!$managerId) {
-            return;
-        }
-        $builder->where('manager_id', $managerId);
-    }
 
     public function scopeOfCategory(Builder $builder, $categoryId)
     {
@@ -89,6 +83,6 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class)
-        ->withPivot(['product_name','product_count','product_price','product_total_price','product_measurement']);
+            ->withPivot(['product_name', 'product_count', 'product_price', 'product_total_price', 'product_measurement']);
     }
 }

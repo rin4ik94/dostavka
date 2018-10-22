@@ -39,8 +39,10 @@ Vue.filter('toCurrency', function (value) {
 store.dispatch('setRegion').catch(() => {
     $("#Regions").modal('show')
 });
-store.dispatch('setManager')
-store.dispatch("setCart");
+store.dispatch('setManager').then(() => {
+    store.dispatch("setCart");
+    store.dispatch('setTotal')
+})
 
 Vue.component('SubCategories', Vue.extend(SubCategories));
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 

@@ -13,4 +13,9 @@ class RegionController extends Controller
     {
         return RegionResource::collection(Region::get());
     }
+    public function show(Region $region)
+    {
+        // $region = Region::where('slug', $region)->first();
+        return new RegionResource($region);
+    }
 }
