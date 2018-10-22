@@ -5,27 +5,34 @@
         <div class="col-auto">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-outline-green @if(request()->status < 1) active @endif">
-                    <input type="radio" name="status" value="0" @if(request()->status < 1) checked @endif onchange="this.form.submit()">Все<span class="badge"></span>
+                    <input type="radio" name="status" value="0" @if(request()->status < 1) checked @endif onchange="this.form.submit()">Все<span
+                            class="badge"></span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='1') active @endif">
-                    <input type="radio" name="status" value="1" @if(request()->status=='1') checked @endif onchange="this.form.submit()">Новый<span class="badge"></span>
+                    <input type="radio" name="status" value="1" @if(request()->status=='1') checked @endif
+                    onchange="this.form.submit()">Новый<span class="badge"></span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='2') active @endif">
-                    <input type="radio" name="status" value="2" @if(request()->status=='2') checked @endif onchange="this.form.submit()">Формируется<span class="badge"></span>
+                    <input type="radio" name="status" value="2" @if(request()->status=='2') checked @endif
+                    onchange="this.form.submit()">Формируется<span class="badge"></span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='3') active @endif">
-                    <input type="radio" name="status" value="3" @if(request()->status=='3') checked @endif onchange="this.form.submit()">В пути<span class="badge"></span>
+                    <input type="radio" name="status" value="3" @if(request()->status=='3') checked @endif
+                    onchange="this.form.submit()">В пути<span class="badge"></span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='4') active @endif">
-                    <input type="radio" name="status" value="4" @if(request()->status=='4') checked @endif onchange="this.form.submit()">Доставлен
+                    <input type="radio" name="status" value="4" @if(request()->status=='4') checked @endif
+                    onchange="this.form.submit()">Доставлен
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='5') active @endif">
-                    <input type="radio" name="status" value="5" @if(request()->status=='5') checked @endif onchange="this.form.submit()">Отменен
+                    <input type="radio" name="status" value="5" @if(request()->status=='5') checked @endif
+                    onchange="this.form.submit()">Отменен
                 </label>
             </div>
         </div>
         <div class="col-auto">
-          <input class="form-control orderByDate" type="date" name="date" value="{{ request()->date ?? Carbon\Carbon::now()->format('Y-m-d') }}" onchange="this.form.submit()" disabled>
+            <input class="form-control orderByDate" type="date" name="date" value="{{ request()->date ?? Carbon\Carbon::now()->format('Y-m-d') }}"
+                onchange="this.form.submit()" disabled>
         </div>
     </form>
     <div class="ml-auto form-row">
@@ -78,7 +85,7 @@
             <td>{{ $order->total_price }}</td>
             <td>{{ $order->payment->name_ru }}</td>
             <td><a class="{{ $order->status->color }} order_status" href="#" data-toggle="modal" data-target="#orderStatus">{{
-                    $order->status->name }}</a></td>
+                    $order->status->name }} {{ $order->status_count }}</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -105,16 +112,17 @@
 </div>
 @endif
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $statusid = $('.status-filter').data('fetch');
-        if($statusid == 4 || $statusid == 5){
-            $('.orderByDate').prop('disabled',false);
-        }else{
-            $('.orderByDate').prop('disabled',true);
+        if ($statusid == 4 || $statusid == 5) {
+            $('.orderByDate').prop('disabled', false);
+        } else {
+            $('.orderByDate').prop('disabled', true);
         }
-        if(!$status){
+        if (!$status) {
             alert('test');
         }
-  });
-  </script>
+    });
+
+</script>
 @endsection

@@ -77,16 +77,17 @@ class Order extends Model
     {
         if ($status == 4 || $status == 5) {
             if (!$date) {
-                return;
+                $date = Carbon::now()->format('Y-m-d');
+                $result->whereDate('created_at', $date);
             }
-            $result->whereDate(
-            'created_at',
-            $date
-        );
+            $result->whereDate('created_at',$date);
         }
     }
     public function scopeOfId($result, $id)
     {
+        if (!$id) {
+            return;
+        }
         $result->where('id', $id);
     }
 }
