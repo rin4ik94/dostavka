@@ -138,15 +138,16 @@ export default {
       );
       this.products = response.data.data;
       this.pagination = response.data.meta;
-
       this.fetchProducts();
     },
     ...mapActions({
       setCart: "setCart",
       setManager: "setManager",
-      setTotal: "setTotal"
+      setTotal: "setTotal",
+      addToTotal: "addToTotal"
     }),
     removeFromCart(product) {
+      console.log("here");
       let item = this.productMenu.findIndex(prod => {
         return prod.id == product.id;
       });
@@ -154,16 +155,20 @@ export default {
         this.productMenu = [];
         localforage.removeItem("cart");
         localforage.removeItem("manager");
+        localforage.removeItem("cartRegion");
+        localforage.removeItem("totalCart");
         this.setManager("empty");
         this.setCart("empty");
       } else {
+        this.addToTotal(-product.new_price);
+
         this.productMenu.splice(item, 1);
       }
 
       this.cartData(this.productMenu);
     },
     fetchProducts() {
-      setTimeout(() => {
+      this.$nextTick(() => {
         localforage.getItem("cart").then(response => {
           if (!isEmpty(response)) {
             this.productMenu = response;
@@ -175,18 +180,25 @@ export default {
                   Vue.set(this.products, k, v);
                   l = v;
                   Vue.set(this.productMenu, o, l);
+                } else {
+                  if (!l.new_price) {
+                    // this.productMenu.splice(o, 1);
+                  }
                 }
               });
             });
           }
         });
-      }, 0);
+      });
     },
     decreaseQuantity(product) {
+      console.log("here");
+
       let index = this.productMenu.findIndex(prod => {
         return prod.id == product.id;
       });
       --product.quantity;
+      this.addToTotal(-product.new_price);
       Vue.set(this.productMenu, index, product);
       this.cartData();
     },
@@ -212,8 +224,6 @@ export default {
         quantity: 0
       };
       this.productMenu.map((value, key) => {
-        total = total + value.quantity * value.new_price;
-
         data = {
           id: "",
           quantity: 0
@@ -226,18 +236,19 @@ export default {
       });
       localforage.setItem("cart", cart);
       this.setCart(cart);
-      this.setTotal(total);
+      // this.setTotal(total);
     },
     cartEvent() {
       localforage.getItem("cart").then(response => {
         if (!isEmpty(response)) {
-          this.productMenu = response;
+          // this.productMenu = response;
           this.fetchProducts();
         }
       });
     },
     emptyCartAdd(product) {
       let cart = [];
+      localforage.setItem("cartRegion", this.$route.params.city);
       axios.get(`/api/managers/${this.$route.params.slug}`).then(response => {
         this.setManager(response.data.data);
         localforage.setItem("manager", response.data.data);
@@ -257,7 +268,7 @@ export default {
           quantity: 0
         };
         if (isEmpty(response)) {
-          this.setTotal(product.new_price * product.quantity);
+          this.addToTotal(product.new_price);
 
           this.emptyCartAdd(product);
           this.cartData();
@@ -273,6 +284,10 @@ export default {
               this.productMenu = [];
               // this.productMenu.push(product);
               localforage.removeItem("cart");
+              localforage.removeItem("totalCart");
+              this.setTotal(0);
+              this.addToTotal(product.new_price);
+
               this.emptyCartAdd(product);
               this.cartData();
               return;
@@ -282,6 +297,9 @@ export default {
           }
           this.productMenu.map((value, key) => {
             if (value.id == this.product.id) {
+              this.addToTotal(product.new_price);
+              localforage.setItem("cartRegion", this.$route.params.city);
+
               this.product.quantity++;
               Vue.set(this.productMenu, key, this.product);
               d = 1;
@@ -289,6 +307,9 @@ export default {
           });
 
           if (d != 1) {
+            this.addToTotal(product.new_price);
+            localforage.setItem("cartRegion", this.$route.params.city);
+
             this.product.quantity = 1;
             this.productMenu.unshift(this.product);
           }

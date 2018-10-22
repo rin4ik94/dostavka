@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Cviebrock\EloquentSluggable\Sluggable;
+use App\Traits\HasChildProducts;
+use App\Traits\ManagerCheck;
 
 class Category extends Model
 {
-    use Sluggable;
+    use Sluggable, HasChildProducts, ManagerCheck;
 
   // protected $guarded = ['id'];
     protected $table = 'categories';
@@ -26,13 +28,7 @@ class Category extends Model
     {
         return slug;
     }
-    public function scopeOfManager(Builder $builder, $managerId)
-    {
-        if (!$managerId) {
-            return;
-        }
-        $builder->where('manager_id', $managerId);
-    }
+
     public function manager()
     {
         return $this->belongsTo('App\Models\Manager');
@@ -45,21 +41,7 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\Category', 'parent_id');
     }
-    public function childProducts($managerId, $price)
-    {
-        if (!$managerId) {
-            return;
-        }
-        $collection = $this->children->map(function ($cat) use ($managerId) {
-            return $cat->products->filter(function ($product) use ($managerId) {
-                return $product->manager_id == $managerId;
-            });
-        })->flatten();
-        if (!$price) {
-            return $collection;
-        }
-        return $collection->sortBy('new_price');
-    }
+
     public function children()
     {
         return $this->hasMany('App\Models\Category', 'parent_id');

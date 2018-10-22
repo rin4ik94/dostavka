@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <NotFound v-else/>
+    <NotFound v-if="notFound && !catalog"/>
     </div>
 </template>
 <script>
@@ -82,16 +82,22 @@ export default {
         let uri = `/api/managers/${
           this.$route.params.slug
         }?withManagers&region=${this.$route.params.city}`;
-        let response = axios.get(uri).then(response => {
-          this.catalog = response.data.data;
-          if (this.catalog.branches.length > 0) {
-            this.branchName = this.catalog.branches[0].region_name;
-          } else {
+        let response = axios
+          .get(uri)
+          .then(response => {
+            this.catalog = response.data.data;
+            if (this.catalog.branches.length > 0) {
+              this.branchName = this.catalog.branches[0].region_name;
+            } else {
+              // this.$router.replace({ name: "notFound" });
+            }
+            this.getCategories();
+          })
+          .catch(() => {
             this.notFound = true;
-            // this.$router.replace({ name: "notFound" });
-          }
-          this.getCategories();
-        });
+
+            // this.$router.push({ name: "notFound" });
+          });
       }, 0);
     },
     getCategories() {

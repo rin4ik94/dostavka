@@ -938,7 +938,7 @@ module.exports.default = axios;
 
 __webpack_require__(171);
 
-window.Vue = __webpack_require__(7);
+window.Vue = __webpack_require__(8);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36474,7 +36474,7 @@ module.exports = defaults;
 
 /***/ }),
 
-/***/ 7:
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

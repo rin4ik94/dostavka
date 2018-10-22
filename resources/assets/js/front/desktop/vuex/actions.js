@@ -70,6 +70,15 @@ export const setTotal = ({ commit, dispatch }, total) => {
 
 
 }
+export const addToTotal = ({ commit, dispatch }, price) => {
+    // commit('setRegion', regionId)
+    // localforage.setItem('region', regionId)    console.log(cart)
+
+    commit('addToTotal', price)
+
+
+
+}
 export const setRegionName = ({ commit, dispatch }, region) => {
     commit('setRegionName', region)
 }
@@ -91,7 +100,6 @@ export const setManager = ({ commit, dispatch }, manager) => {
 export const setRegion = ({ commit, dispatch }, regionId) => {
 
     return localforage.getItem('region').then((regionId) => {
-        console.log('sad')
         if (isEmpty(regionId)) {
             localforage.removeItem('region')
             return Promise.reject('NO_REGION_CHOOSEN');

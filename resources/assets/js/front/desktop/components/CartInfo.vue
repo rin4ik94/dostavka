@@ -1,5 +1,5 @@
 <template>
-    <div class="cart-card" v-if="cartInfo.quantity > 0 && manager">
+    <div class="cart-card" v-if="cartInfo.total > 0 && manager && $route.name != 'cart'">
     <div class="container">
     <div class="row">
       <div class="col-auto">

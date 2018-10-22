@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Manager;
 use App\Models\Region;
+use App\Models\Product;
 use App\Http\Resources\Manager as ManagerResource;
+use App\Http\Resources\Product as ProductResource;
 
 class ManagerController extends Controller
 {
@@ -35,8 +37,16 @@ class ManagerController extends Controller
             return new ManagerResource($manager);
         }
     }
-    public function getProducts(Request $request, Manager $manager)
+    // public function getProducts(Request $request, Manager $manager)
+    // {
+    //     return $manager->load('products');
+    // }
+    public function getCart(Request $request, Manager $manager)
     {
-        return $manager->load('products');
+        $ids = explode(',', $request->ids);
+        $products = Product::where('manager_id', $manager->id)->findMany($ids);
+        return ProductResource::collection($products);
+
+        // return $products;
     }
 }

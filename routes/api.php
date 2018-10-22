@@ -20,9 +20,11 @@ Route::get('/categories_managers', 'Front\ManagerCategoriesController@index');
 Route::resource('/categories', 'Front\CategoryController');
 Route::post('/client/register', 'Front\Auth\AuthController@register');
 Route::get('/regions', 'Front\RegionController@index');
+Route::get('/regions/{region}', 'Front\RegionController@show');
 Route::get('/managers', 'Front\ManagerController@index');
-Route::get('/managers/{manager}/products', 'Front\ManagerController@getProducts');
+// Route::get('/managers/{manager}/products', 'Front\ManagerController@getProducts');
 Route::get('/managers/{manager}', 'Front\ManagerController@show');
+Route::get('/managers/{manager}/products/cart', 'Front\ManagerController@getCart');
 Route::get('/branches/{branch}', 'Front\BranchController@show');
 
 // Route::group(['middleware' => 'jwt.generate'], function () {
