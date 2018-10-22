@@ -32,8 +32,10 @@ export const setCart = (state, cart) => {
         state.cart.prods = {}
         state.cart.quantity = 0
         state.cart.total = 0
+        return
     }
     let d = 0
+    console.log(cart)
     cart.map((v, k) => {
         d = d + v.quantity
     })

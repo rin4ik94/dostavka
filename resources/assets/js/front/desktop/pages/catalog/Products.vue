@@ -271,7 +271,7 @@ export default {
               )
             ) {
               this.productMenu = [];
-              this.productMenu.push(product);
+              // this.productMenu.push(product);
               localforage.removeItem("cart");
               this.emptyCartAdd(product);
               this.cartData();
