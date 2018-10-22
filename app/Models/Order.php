@@ -65,4 +65,10 @@ class Order extends Model
         return $this->belongsToMany(Product::class)
         ->withPivot(['product_name','product_count','product_price','product_total_price','product_measurement']);
     }
+
+    public function scopeOfStatus($query, $status)
+    {
+        if (!$status) { return; }
+        $query->where('order_status_id', $status);
+    }
 }

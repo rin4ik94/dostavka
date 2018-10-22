@@ -41,10 +41,10 @@
   </thead>
   <tbody>
     @foreach($managers as $manager)
-    <tr>
-      <td data-logo="{{ $manager->logo }}">{{$manager->id}}</td>
-      <td><a class="text-green" href="#" data-toggle="modal" data-target="#editManager">{{$manager->name}}</a></td>
-      <td data-category="{{ $manager->manager_category_id }}" >{{$manager->managerCategory->name_ru}}</td>
+    <tr data-id="{{ $manager->id }}" data-name="{{ $manager->name }}" data-logo="{{ $manager->logo }}" data-category="{{ $manager->manager_category_id }}" data-status="{{ $manager->status }}">
+      <td>{{$manager->id}}</td>
+      <td><a class="text-green manager_action" href="#" data-toggle="modal" data-target="#editManager">{{$manager->name}}</a></td>
+      <td>{{$manager->managerCategory->name_ru}}</td>
     </tr>
     @endforeach
   </tbody>

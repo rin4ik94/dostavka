@@ -57,13 +57,28 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-outline-red" type="button" type="submit">Удалить</button>
+        <a href="#" class="btn btn-outline-red" href="#" data-toggle="modal" data-target="#deleteModal">Удалить</a>
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-green">OK</button>
         <input type="hidden" name="id" id="manager_id" value="">
         {{ method_field('PUT') }}
         @csrf
       </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <form class="modal-content" method="POST">
+      <div class="modal-header">
+          <h1 class="text-center">Are you sure?</h1>
+        <div>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cencel</button>
+          <button type="submit" class="btn btn-outline-red">Delete</button>
+        </div>
+      </div>
+        @csrf
     </form>
   </div>
 </div>

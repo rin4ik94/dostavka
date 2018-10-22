@@ -64,21 +64,19 @@ $(function () {
     });
 
     // manager-actions
-    $('.managers_action a').on('click', function (e) {
-        e.preventDefault(e);
-        $(this).closest('tr').each(function () {
-            var id = $(this).children('td:first').text();
-            var logo = $(this).children('td:eq(0)').attr('data-logo');
-            var name = $(this).children('td:eq(1)').text();
-            var category = $(this).children('td:eq(2)').attr('data-category');
-            var status = $(this).children('td:eq(3)').attr('data-status');
-            $('#image_show').attr('src', "/storage/logos/" + logo);
-            $('#image_show').parent().show().prevAll().hide();
-            $('#edit_name').val(name);
-            $("#edit_managerCatId").val(category);
-            $('#manager_id').val(id);
-            $('#edit_status').val(status);
-        });
+    $('.manager_action').on('click', function (e) {
+    e.preventDefault(e);
+        var id = $(this).closest('tr').data('id');
+        var logo = $(this).closest('tr').data('logo');
+        var name = $(this).closest('tr').data('name');
+        var category = $(this).closest('tr').data('category');
+        var status = $(this).closest('tr').data('status');
+        $('#image_show').attr('src', "/storage/logos/" + logo);
+        $('#image_show').parent().show().prevAll().hide();
+        $('#edit_name').val(name);
+        $("#edit_managerCatId").val(category);
+        $('#manager_id').val(id);
+        $('#edit_status').val(status);
     });
 
     // manager-group-actions
@@ -227,6 +225,8 @@ $(function () {
         e.preventDefault(e);
         var orderId = $(this).closest('tr').data('id');
         var statusId = $(this).closest('tr').data('status');
+        var branchId = $(this).closest('tr').data('bname');
+        
         $(".form-status input[value = " + statusId + "]").prop("checked",true);
         $('#editOrderStatus').val(orderId);
     });
