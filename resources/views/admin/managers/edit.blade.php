@@ -1,6 +1,8 @@
 <div class="modal fade" id="editManager" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form class="modal-content needs-validation" method='POST' action="/admin/managers/2" enctype="multipart/form-data" novalidate>
+       {{ method_field('PUT') }}
+          @csrf
       <div class="modal-header">
         <h5 class="modal-title">Редактировать магазин</h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
@@ -57,28 +59,11 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#" class="btn btn-outline-red" href="#" data-toggle="modal" data-target="#deleteModal">Удалить</a>
-        <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
-        <button type="submit" class="btn btn-green">OK</button>
-        <input type="hidden" name="id" id="manager_id" value="">
-        {{ method_field('PUT') }}
-        @csrf
+          <a href="#" class="deleteManager btn btn-outline-red" data-id="" data-token="{{ csrf_token() }}" >Удалить</a>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
+          <button type="submit" class="btn btn-green">OK</button>
+          <input type="hidden" name="id" id="manager_id" value="">
       </div>
-    </form>
-  </div>
-</div>
-
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <form class="modal-content" method="POST">
-      <div class="modal-header">
-          <h1 class="text-center">Are you sure?</h1>
-        <div>
-          <button type="button" class="btn btn-light" data-dismiss="modal">Cencel</button>
-          <button type="submit" class="btn btn-outline-red">Delete</button>
-        </div>
-      </div>
-        @csrf
     </form>
   </div>
 </div>

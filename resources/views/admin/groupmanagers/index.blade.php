@@ -20,20 +20,13 @@
       </thead>
       <tbody>
         @foreach($managerCategories as $managerCategorie)
-        <tr>
+        <tr data-id="{{ $managerCategorie->id }}" data-nameuz="{{ $managerCategorie->name_uz }}" data-nameru="{{ $managerCategorie->name_ru }}">
           <td>
             {{$managerCategorie->id}}
           </td>
-          <td data-nameUz="{{ $managerCategorie->name_uz }}">
-            <a class="text-green" href="#" data-toggle="modal" data-target="#editCategory">{{$managerCategorie->name_ru}}</a>
-          </td>
-          <!--
           <td>
-            {!! Form::open(['method' => 'DELETE','route' => ['managers.group.destroy', $managerCategorie->id], 'class'=>'btn-group btn-group-sm delete']) !!}
-            {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
-            {!! Form::close() !!}
+            <a class="text-green managergr_action" href="#" data-toggle="modal" data-target="#editCategory">{{$managerCategorie->name_ru}}</a>
           </td>
-          -->
         </tr>
         @endforeach
       </tbody>

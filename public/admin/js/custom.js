@@ -77,19 +77,38 @@ $(function () {
         $("#edit_managerCatId").val(category);
         $('#manager_id').val(id);
         $('#edit_status').val(status);
+        $('.deleteManager').attr('data-id',id);
+    });
+// delete manager via ajax
+    $(".deleteManager").click(function(){
+        var id = $(this).data('id');
+        $result = confirm("Are  you sure?");
+        if($result){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/admin/managers/delete',
+            type: 'post',
+            data:{id:id},
+            success: function(result) {
+                location.reload();
+            }
+        });
+        }
     });
 
     // manager-group-actions
-    $('.managergr_actions a').on('click', function (e) {
+    $('.managergr_action').on('click', function (e) {
         e.preventDefault(e);
-        $(this).closest('tr').each(function () {
-            var id = $(this).children('td:first').text();
-            var name_ru = $(this).children('td:eq(1)').text();
-            var name_uz = $(this).children('td:eq(1)').attr('data-nameUz');
+            var id = $(this).closest('tr').data('id');
+            var name_ru = $(this).closest('tr').data('nameru');
+            var name_uz = $(this).closest('tr').data('nameuz');
             $('#name_ru').val(name_ru);
             $('#name_uz').val(name_uz);
-            $('#id').val(id);
-        });
+            $('#editManagerGr').val(id);
     });
     // employee-group-actions
     $('.editEmployeGroup a').on('click', function (e) {
