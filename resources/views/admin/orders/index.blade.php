@@ -73,7 +73,7 @@
             @else
             <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id }}">Выбрать</a></td>
             @endif
-            <td><a class="text-green order_client" href="#" data-toggle="modal" data-target="#Client" data-clientId="{{ $order->client_id }}">{{
+            <td><a class="text-green order_client" href="#" data-toggle="modal" data-target="#Client" data-client="{{ $order->client_id }}">{{
                     $order->client->getFullname() }}</a></td>
             <td>{{ $order->delivery_address_street }}</td>
             @if($order->courier_id != '')

@@ -9,7 +9,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="list"></div>
+      <div class="list branch_list"></div>
       <div class="modal-footer">
         <input type="hidden" name="id" id="editOrderBranch">
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
