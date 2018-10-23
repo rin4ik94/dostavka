@@ -16,7 +16,6 @@ class OrderController extends Controller
             $orders = Order::with('manager', 'branch', 'client','payment', 'courier', 'region', 'status')->orderBy('id', 'desc')
             ->whereNotIn('order_status_id', [1,2,3])
             ->ofStatus(request()->status)
-            ->withCount('status')
             ->ofDate(request()->date, request()->status)
             ->paginate(10);
             
@@ -25,9 +24,12 @@ class OrderController extends Controller
             ->orderBy('id', 'desc')
             ->whereNotIn('order_status_id', [4,5])
             ->ofStatus(request()->status)
-            ->withCount('status')
             ->paginate(10);
         }
+            $branches = $orders->map(function($orders){
+                return $orders->getBranches();
+            });
+
         $couriers = Courier::orderBy('id','ASC')->take(5)->get();
         return view('admin.orders.index',compact('orders','couriers'));    
     }

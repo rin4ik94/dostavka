@@ -252,10 +252,21 @@ $(function () {
 
     $('.order_branch').on('click', function (e) {
         e.preventDefault(e);
+        var branches = $(this).closest('tr').data('branches');
         var orderId = $(this).closest('tr').data('id');
         var orderBranchId = $(this).data('branch');
-        $(".form-branch input[value = " + orderBranchId + "]").prop("checked",true);
         $('#editOrderBranch').val(orderId);
+        $('span.orderId').html(orderId);
+        $('.list').empty();
+        $.each(branches, function (index, orderBranches) {
+            $('.list').append('<div class="list-item custom-control custom-radio"><input type="radio" id="orderBranch_' + orderBranches.id + '" name="branch_id" value="' + orderBranches.id + '" class="custom-control-input" '+ activeBranch(orderBranches.id) +'><label class="list-link custom-control-label" for="orderBranch_' + orderBranches.id + '"><div>' + orderBranches.name + '</div><small class="text-muted">Адресс: ' + orderBranches.address + '</small></label></div>');
+        });
+        function activeBranch($param){
+            if($param == orderBranchId){
+                return "checked";
+            }
+            return;
+        }
     });
 
     $('.order_courier').on('click', function (e) {

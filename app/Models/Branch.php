@@ -27,4 +27,9 @@ class Branch extends Model
 	{
 		return $this->belongsTo('App\Models\Manager');
 	}
+
+	public function orders()
+	{
+		return $this->hasMany('App\Models\Order');
+	}
 }

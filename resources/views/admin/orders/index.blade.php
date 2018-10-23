@@ -57,12 +57,13 @@
     </thead>
     <tbody>
         @foreach($orders as $order)
-        <tr data-id="{{ $order->id }}" data-mname="{{ $order->manager->name }}" data-bname="{{ $order->branch->name ?? '' }}"
+        <tr data-id="{{ $order->id }}" data-mname="{{ $order->manager->name }}" data-omanager="{{ $order->manager_id }}"
+            data-bname="{{ $order->branch->name ?? '' }}"
             data-cname="{{ $order->client->getFullname() }}" data-cmobile="{{ $order->client->mobile }}" data-status="{{  $order->order_status_id }}"
             data-ostreet="{{  $order->delivery_address_street }}" data-ohome="{{  $order->delivery_address_home }}"
             data-ofloor="{{  $order->delivery_address_floor }}" data-oapartment="{{  $order->delivery_address_apartment }}"
             data-oremark="{{  $order->delivery_address_remark }}" data-odeliver="5000" data-payment="{{ $order->payment->name_ru}}"
-            data-oprice="{{$order->order_price}}" data-tprice="{{$order->total_price}}">
+            data-oprice="{{$order->order_price}}" data-tprice="{{$order->total_price}}" data-branches="{{ $order->getBranches() }}">
             <td><a class="text-red" href="#" data-toggle="modal" data-target="#Order">{{ $order->id }}</a></td>
             <td>{{ $order->getTime()}}</td>
             <td>{{ $order->manager->name }}</td>
@@ -123,6 +124,5 @@
             alert('test');
         }
     });
-
 </script>
 @endsection

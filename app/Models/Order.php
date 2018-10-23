@@ -19,7 +19,7 @@ class Order extends Model
     public function getTime(){
         return Carbon::parse($this->created_at)->format('d.m.Y H:i');
     }
-
+    
     public function manager()
     {
         return $this->belongsTo(Manager::class);
@@ -89,5 +89,9 @@ class Order extends Model
             return;
         }
         $result->where('id', $id);
+    }
+
+    public function getBranches(){
+        return Branch::where('manager_id', $this->manager_id)->select('id','name','address')->get();
     }
 }
