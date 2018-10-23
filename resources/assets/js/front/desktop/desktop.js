@@ -2,15 +2,27 @@ window.Vue = require('vue');
 import router from './router'
 import store from './vuex'
 var SubCategories = require('./pages/catalog/SubCategories.vue');
+import Vuex from 'vuex';
+import vuexI18n from 'vuex-i18n';
+import Locales from '../../vue-i18n-locales.generated.js';
 import localforage from 'localforage'
 // require('../../bootstrap')
 import * as Modals from './components/modals/index'
+
+const config = {
+    moduleName: 'lang',
+    translateFilterName: 't'
+}
+// set the start locale to use
+Vue.use(vuexI18n.plugin, store, config);
+
 Object.values(Modals).forEach((Modal) => {
     Vue.use(Modal)
 })
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -36,6 +48,11 @@ Vue.filter('toCurrency', function (value) {
     }
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
 });
+
+Vue.i18n.add('ru', Locales.ru);
+Vue.i18n.add('uz', Locales.uz);
+Vue.i18n.fallback('ru')
+store.dispatch('checkLangExists')
 store.dispatch('setRegion').catch(() => {
     $("#Regions").modal('show')
 });

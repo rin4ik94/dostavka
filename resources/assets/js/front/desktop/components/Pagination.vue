@@ -3,7 +3,7 @@
     <nav>
         <ul class="pagination">
         <li class="page-item" :class="pagination.current_page <= 1 ? 'disabled' : ''">
-            <a class="page-link" @click.prevent="changePage(pagination.current_page - 1)">&#8592; Назад</a>
+            <a class="page-link" @click.prevent="changePage(pagination.current_page - 1)">&#8592; {{$t('pagination.previous')}}</a>
         </li> 
         <li :key="page.id"
                     v-for="page in pages" class="page-item" :class="isCurrentPage(page) ? 'active' : ''"
@@ -12,7 +12,7 @@
             <!-- <span class="sr-only">(current)</span> -->
         </li> 
         <li class="page-item" :class="pagination.current_page >= pagination.last_page ? 'disabled' : ''">
-            <a @click.prevent="changePage(pagination.current_page + 1)" class="page-link">Вперед &#8594;</a>
+            <a @click.prevent="changePage(pagination.current_page + 1)" class="page-link"> {{$t('pagination.next')}} &#8594;</a>
         </li>
         </ul>
     </nav>

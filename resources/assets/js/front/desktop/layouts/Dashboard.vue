@@ -13,6 +13,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import CartInfo from "../components/CartInfo";
 // import { mapActions, mapGetters } from "vuex";
+import { EventBus } from "../bus.js";
 
 export default {
   data() {
@@ -63,6 +64,10 @@ export default {
     });
   },
   mounted() {
+    EventBus.$on("changeLanguage", () => {
+      // this.$emit("hidePage");
+      this.getRegions();
+    });
     // $("#product").on("hide.bs.modal", this.replacePage);
   }
 };

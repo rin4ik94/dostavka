@@ -51390,17 +51390,30 @@ module.exports = __webpack_require__(180);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vuex__ = __webpack_require__(236);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_localforage__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_localforage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_modals_index__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex_i18n__ = __webpack_require__(249);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__vue_i18n_locales_generated_js__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_localforage__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_localforage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_modals_index__ = __webpack_require__(244);
 window.Vue = __webpack_require__(8);
 
 
 var SubCategories = __webpack_require__(241);
 
+
+
+
 // require('../../bootstrap')
 
-Object.values(__WEBPACK_IMPORTED_MODULE_3__components_modals_index__).forEach(function (Modal) {
+
+var config = {
+    moduleName: 'lang',
+    translateFilterName: 't'
+    // set the start locale to use
+};Vue.use(__WEBPACK_IMPORTED_MODULE_3_vuex_i18n__["a" /* default */].plugin, __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */], config);
+
+Object.values(__WEBPACK_IMPORTED_MODULE_6__components_modals_index__).forEach(function (Modal) {
     Vue.use(Modal);
 });
 window.axios = __webpack_require__(16);
@@ -51421,8 +51434,8 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-__WEBPACK_IMPORTED_MODULE_2_localforage___default.a.config({
-    driver: __WEBPACK_IMPORTED_MODULE_2_localforage___default.a.LOCALSTORAGE,
+__WEBPACK_IMPORTED_MODULE_5_localforage___default.a.config({
+    driver: __WEBPACK_IMPORTED_MODULE_5_localforage___default.a.LOCALSTORAGE,
     storeName: 'delivery'
 });
 Vue.filter('toCurrency', function (value) {
@@ -51431,6 +51444,11 @@ Vue.filter('toCurrency', function (value) {
     }
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 });
+
+Vue.i18n.add('ru', __WEBPACK_IMPORTED_MODULE_4__vue_i18n_locales_generated_js__["a" /* default */].ru);
+Vue.i18n.add('uz', __WEBPACK_IMPORTED_MODULE_4__vue_i18n_locales_generated_js__["a" /* default */].uz);
+Vue.i18n.fallback('ru');
+__WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('checkLangExists');
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setRegion').catch(function () {
     $("#Regions").modal('show');
 });
@@ -51701,6 +51719,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Navbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Navbar__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CartInfo__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CartInfo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_CartInfo__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bus_js__ = __webpack_require__(41);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -51720,6 +51739,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 // import { mapActions, mapGetters } from "vuex";
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -51799,6 +51819,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     });
   },
   mounted: function mounted() {
+    var _this2 = this;
+
+    __WEBPACK_IMPORTED_MODULE_4__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
+      // this.$emit("hidePage");
+      _this2.getRegions();
+    });
     // $("#product").on("hide.bs.modal", this.replacePage);
   }
 });
@@ -52722,6 +52748,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(251)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(190)
@@ -52730,7 +52760,7 @@ var __vue_template__ = __webpack_require__(191)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -52772,8 +52802,16 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bus_js__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -52825,13 +52863,34 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   data: function data() {
     return {
       region: "",
+      show: true,
+      search: "",
+      products: [],
       id: this.regionId
     };
   },
 
-  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])({
+  methods: _extends({
+    highlight: function highlight(name) {
+      if (!this.search) {
+        return name;
+      }
+      return name.replace(new RegExp(this.search, "gi"), function (match) {
+        return '<em class="highlightText">' + match + "</em>";
+      });
+    },
+    showProduct: function showProduct(product) {
+      if (this.$route.name == "catalog") {
+        this.$router.push({ name: "tp", params: { product: product.slug } });
+      } else {
+        this.$router.push({ name: "pp", params: { product: product.slug } });
+      }
+      this.show = false;
+    }
+  }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])({
     setRegion: "setRegionId",
-    setRegionName: "setRegionName"
+    setRegionName: "setRegionName",
+    langChange: "langChange"
   }), {
     regionData: function regionData() {
       var _this = this;
@@ -52843,13 +52902,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           __WEBPACK_IMPORTED_MODULE_1__bus_js__["a" /* EventBus */].$emit("changeRegion", _this.region);
         }
       });
+    },
+    changeLocale: function changeLocale() {
+      if (this.locale == "ru") {
+        this.langChange("uz").then(function () {
+          __WEBPACK_IMPORTED_MODULE_1__bus_js__["a" /* EventBus */].$emit("changeLanguage");
+        });
+      } else {
+        this.langChange("ru").then(function () {
+          __WEBPACK_IMPORTED_MODULE_1__bus_js__["a" /* EventBus */].$emit("changeLanguage");
+        });
+      }
     }
   }),
   computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
-    regionId: "regionId"
+    regionId: "regionId",
+    locale: "locale"
   }),
 
   watch: {
+    $route: function $route() {
+      this.search = "";
+    },
+
     regionId: {
       immediate: true,
       handler: function handler(regionId) {
@@ -52862,7 +52937,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       handler: function handler(regions) {
         this.regionData();
       }
-    }
+    },
+    search: __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.debounce(function () {
+      var _this2 = this;
+
+      if (this.search.length < 3) {
+        this.products = [];
+        return;
+      }
+      axios.get("/api/products/search?q=" + this.search + "&manager=" + this.$route.params.slug).then(function (response) {
+        _this2.products = response.data.data;
+      });
+    }, 300)
   }
 });
 
@@ -52876,203 +52962,234 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("header", { staticClass: "header" }, [
     _c("div", { staticClass: "container" }, [
-      _c(
-        "div",
-        { staticClass: "header-inner" },
-        [
-          _c("router-link", {
-            staticClass: "header-logo",
-            attrs: { to: { name: "home" }, exact: "" }
-          }),
+      _c("div", { staticClass: "header-inner" }, [
+        _c("ul", { staticClass: "nav header-nav" }, [
+          _c(
+            "li",
+            { staticClass: "nav-item" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-link",
+                  attrs: { to: { name: "home" }, exact: "" }
+                },
+                [_vm._v(_vm._s(_vm.$t("header.shops")))]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("ul", { staticClass: "nav header-nav" }, [
-            _c(
-              "li",
-              { staticClass: "nav-item" },
-              [
-                _c(
-                  "router-link",
+          _c(
+            "li",
+            { staticClass: "nav-item" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-link",
+                  attrs: { to: { name: "delivery" } }
+                },
+                [_vm._v(_vm._s(_vm.$t("header.delivery")))]
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _vm.$route.name == "catalog" ||
+        _vm.$route.name == "category" ||
+        _vm.$route.name == "pp" ||
+        _vm.$route.name == "tp"
+          ? _c("div", { staticClass: "input-group header-search" }, [
+              _c("input", {
+                directives: [
                   {
-                    staticClass: "nav-link",
-                    attrs: { to: { name: "home" }, exact: "" }
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.search,
+                    expression: "search"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "search", placeholder: "Поиск товаров" },
+                domProps: { value: _vm.search },
+                on: {
+                  focus: function($event) {
+                    _vm.show = true
                   },
-                  [_vm._v("Магазины")]
-                )
-              ],
-              1
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.search = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.products.length && _vm.show,
+                      expression: "products.length && show"
+                    }
+                  ],
+                  staticClass: "dropdown-menu w-100  ",
+                  staticStyle: { display: "block" }
+                },
+                _vm._l(_vm.products, function(product) {
+                  return _c(
+                    "div",
+                    {
+                      key: product.id,
+                      staticClass: "dropdown-item",
+                      on: {
+                        click: function($event) {
+                          _vm.showProduct(product)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.highlight(product.name))
+                        }
+                      })
+                    ]
+                  )
+                })
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "header-controls" }, [
+          _c("div", { staticClass: "dropdown" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-link header-lang-toggle dropdown-toggle",
+                attrs: {
+                  type: "button",
+                  "data-toggle": "dropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
+                }
+              },
+              [_vm._v(_vm._s(_vm.locale == "ru" ? "Русский" : "O`zbekcha"))]
             ),
             _vm._v(" "),
-            _c(
-              "li",
-              { staticClass: "nav-item" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { to: { name: "delivery" } }
-                  },
-                  [_vm._v("Доставка")]
-                )
-              ],
-              1
-            )
+            _c("div", { staticClass: "dropdown-menu" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "dropdown-item acitve",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.changeLocale($event)
+                    }
+                  }
+                },
+                [_vm._v("Русский")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "dropdown-item",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.changeLocale($event)
+                    }
+                  }
+                },
+                [_vm._v("O`zbekcha")]
+              )
+            ])
           ]),
           _vm._v(" "),
-          _vm.$route.name == "catalog" ||
-          _vm.$route.name == "ct" ||
-          _vm.$route.name == "pp" ||
-          _vm.$route.name == "tp"
-            ? _c("form", { staticClass: "input-group header-search" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "search",
-                    name: "s",
-                    placeholder: "Поиск товаров"
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(0)
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link header-profile-toggle",
+              attrs: {
+                type: "button",
+                "data-toggle": "modal",
+                "data-target": "#Regions"
+              }
+            },
+            [
+              _c("i", { staticClass: "icon" }, [_vm._v("place")]),
+              _c("span", { staticClass: "text" }, [
+                _vm._v(_vm._s(_vm.region.name))
               ])
-            : _vm._e(),
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "header-controls" }, [
-            _vm._m(1),
-            _vm._v(" "),
+          _c("div", { staticClass: "dropdown" }, [
             _c(
               "button",
               {
                 staticClass: "btn btn-link header-profile-toggle",
                 attrs: {
                   type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#Regions"
+                  "data-toggle": "dropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
                 }
               },
               [
-                _c("i", { staticClass: "icon" }, [_vm._v("place")]),
+                _c("i", { staticClass: "icon" }, [_vm._v("person")]),
                 _c("span", { staticClass: "text" }, [
-                  _vm._v(_vm._s(_vm.region.name))
+                  _vm._v(_vm._s(_vm.$t("header.login")))
                 ])
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "dropdown" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "dropdown-menu dropdown-menu-right" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "dropdown-item",
-                      attrs: { to: { name: "profile" } }
-                    },
-                    [_vm._v("Мои данные")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "dropdown-item",
-                      attrs: { to: { name: "orders" } }
-                    },
-                    [_vm._v("Мои Заказы")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "dropdown-divider" }),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-item",
-                      attrs: { href: "/logout" }
-                    },
-                    [_vm._v("Выйти")]
-                  )
-                ],
-                1
-              )
-            ])
+            _c(
+              "div",
+              { staticClass: "dropdown-menu dropdown-menu-right" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { to: { name: "profile" } }
+                  },
+                  [_vm._v("Мои данные")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { to: { name: "orders" } }
+                  },
+                  [_vm._v("Мои Заказы")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "dropdown-divider" }),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "/logout" } },
+                  [_vm._v(_vm._s(_vm.$t("header.logout")))]
+                )
+              ],
+              1
+            )
           ])
-        ],
-        1
-      )
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-append" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-outline-green", attrs: { type: "submit" } },
-        [_vm._v("Найти")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-link header-lang-toggle dropdown-toggle",
-          attrs: {
-            type: "button",
-            "data-toggle": "dropdown",
-            "aria-haspopup": "true",
-            "aria-expanded": "false"
-          }
-        },
-        [_vm._v("Русский")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "dropdown-menu" }, [
-        _c(
-          "a",
-          { staticClass: "dropdown-item acitve", attrs: { href: "/?lang=ru" } },
-          [_vm._v("Русский")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          { staticClass: "dropdown-item", attrs: { href: "/?lang=uz" } },
-          [_vm._v("O`zbekcha")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-link header-profile-toggle",
-        attrs: {
-          type: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("i", { staticClass: "icon" }, [_vm._v("person")]),
-        _c("span", { staticClass: "text" }, [_vm._v("Вход")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -53216,25 +53333,47 @@ var render = function() {
     ? _c("div", { staticClass: "cart-card" }, [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "row" }, [
-            _vm._m(0),
+            _c("div", { staticClass: "col-auto" }, [
+              _c(
+                "a",
+                { staticClass: "btn btn-link", attrs: { href: "/cart.php" } },
+                [
+                  _c("i", { staticClass: "icon" }, [_vm._v("shopping_cart")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text" }, [
+                    _vm._v(_vm._s(_vm.$t("cart.cart")))
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "badge badge-danger" }, [
+                    _vm._v("1")
+                  ])
+                ]
+              )
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "col cart-card-center" }, [
               _c("div", { staticClass: "item" }, [
-                _vm._v("Магазин: "),
+                _vm._v(_vm._s(_vm.$t("cart.shop")) + ": "),
                 _c("a", { attrs: { href: "/" } }, [
                   _vm._v(_vm._s(_vm.manager.name))
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "item" }, [
-                _vm._v("Товаров в корзине " + _vm._s(_vm.cartInfo.prods.length))
+                _vm._v(
+                  _vm._s(_vm.$t("cart.inCart")) +
+                    " " +
+                    _vm._s(_vm.cartInfo.prods.length)
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "item" }, [
                 _vm._v(
-                  "На сумму " +
+                  _vm._s(_vm.$t("cart.price")) +
+                    " " +
                     _vm._s(_vm._f("toCurrency")(_vm.cartInfo.total)) +
-                    " сум"
+                    " " +
+                    _vm._s(_vm.$t("cart.sum"))
                 )
               ])
             ]),
@@ -53249,7 +53388,7 @@ var render = function() {
                     staticClass: "btn btn-green",
                     attrs: { to: { name: "cart" } }
                   },
-                  [_vm._v("Оформить заказ")]
+                  [_vm._v(_vm._s(_vm.$t("cart.button")))]
                 )
               ],
               1
@@ -53259,22 +53398,7 @@ var render = function() {
       ])
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-auto" }, [
-      _c("a", { staticClass: "btn btn-link", attrs: { href: "/cart.php" } }, [
-        _c("i", { staticClass: "icon" }, [_vm._v("shopping_cart")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "text" }, [_vm._v("Корзина")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "badge badge-danger" }, [_vm._v("1")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -53480,6 +53604,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     this.getCats();
   },
   mounted: function mounted() {
+    var _this2 = this;
+
+    __WEBPACK_IMPORTED_MODULE_0__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
+      // this.$emit("hidePage");
+      _this2.getCats();
+    });
     __WEBPACK_IMPORTED_MODULE_0__bus_js__["a" /* EventBus */].$on("changeRegion", this.getCats);
   }
 });
@@ -53539,71 +53669,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "partners-intro" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("h1", { staticClass: "title intro-title" }, [
+        _vm._v(_vm._s(_vm.$t("header.title")))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-4 intro-item" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "intro-item-text" }, [
+            _vm._v(_vm._s(_vm.$t("header.step1")))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4 intro-item" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "intro-item-text" }, [
+            _vm._v(_vm._s(_vm.$t("header.step2")))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4 intro-item" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "intro-item-text" }, [
+            _vm._v(_vm._s(_vm.$t("header.step3")))
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "partners-intro" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("h1", { staticClass: "title intro-title" }, [
-          _vm._v("Быстрая доставка продуктов")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-4 intro-item" }, [
-            _c("div", { staticClass: "intro-item-icon" }, [
-              _c("img", {
-                staticClass: "p-cashbacks__tutorial-img",
-                attrs: {
-                  src:
-                    "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "intro-item-text" }, [
-              _vm._v("Выбирайте свой любимый магазин в своем регионе")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4 intro-item" }, [
-            _c("div", { staticClass: "intro-item-icon" }, [
-              _c("img", {
-                staticClass: "p-cashbacks__tutorial-img",
-                attrs: {
-                  src:
-                    "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "intro-item-text" }, [
-              _vm._v("Собирайте нужные продукты в корзину и оформляйте заказ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4 intro-item" }, [
-            _c("div", { staticClass: "intro-item-icon" }, [
-              _c("img", {
-                staticClass: "p-cashbacks__tutorial-img",
-                attrs: {
-                  src:
-                    "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "intro-item-text" }, [
-              _vm._v(
-                "Наш курьер доставит Ваш заказ по указанному адресу и времени"
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "intro-item-icon" }, [
+      _c("img", {
+        staticClass: "p-cashbacks__tutorial-img",
+        attrs: {
+          src:
+            "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "intro-item-icon" }, [
+      _c("img", {
+        staticClass: "p-cashbacks__tutorial-img",
+        attrs: {
+          src:
+            "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "intro-item-icon" }, [
+      _c("img", {
+        staticClass: "p-cashbacks__tutorial-img",
+        attrs: {
+          src:
+            "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
+        }
+      })
     ])
   }
 ]
@@ -56068,6 +56208,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_localforage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bus_js__ = __webpack_require__(41);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -56108,6 +56249,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+
+
 
 
 
@@ -56202,7 +56345,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     regionSlug: "regionSlug"
   })),
   created: function created() {
+    var _this3 = this;
+
     this.getCatalog();
+    __WEBPACK_IMPORTED_MODULE_5__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
+      // this.$emit("hidePage");
+      _this3.getCatalog();
+    });
   }
 });
 
@@ -56362,6 +56511,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Pagination__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Pagination__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bus_js__ = __webpack_require__(41);
 
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -56411,9 +56561,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["price", "branch"],
   components: { Pagination: __WEBPACK_IMPORTED_MODULE_4__components_Pagination___default.a },
+
   data: function data() {
     return {
       pagination: {},
@@ -56447,6 +56599,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
     }
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    __WEBPACK_IMPORTED_MODULE_5__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
+      // this.$emit("hidePage");
+      if (_this.$route.name == "category") {
+        _this.fetchItems();
+      } else {
+        _this.allProducts();
+      }
+    });
+  },
+
   beforeMount: function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
       return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
@@ -56590,7 +56755,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     addToTotal: "addToTotal"
   }), {
     removeFromCart: function removeFromCart(product) {
-      console.log("here");
       var item = this.productMenu.findIndex(function (prod) {
         return prod.id == product.id;
       });
@@ -56611,20 +56775,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       this.cartData(this.productMenu);
     },
     fetchProducts: function fetchProducts() {
-      var _this = this;
+      var _this2 = this;
 
       this.$nextTick(function () {
         __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cart").then(function (response) {
           if (!Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(response)) {
-            _this.productMenu = response;
-            _this.products.map(function (v, k) {
+            _this2.productMenu = response;
+            _this2.products.map(function (v, k) {
               v.quantity = 1;
-              _this.productMenu.map(function (l, o) {
+              _this2.productMenu.map(function (l, o) {
                 if (v.id == l.id) {
                   v.quantity = l.quantity;
-                  Vue.set(_this.products, k, v);
+                  Vue.set(_this2.products, k, v);
                   l = v;
-                  Vue.set(_this.productMenu, o, l);
+                  Vue.set(_this2.productMenu, o, l);
                 } else {
                   if (!l.new_price) {
                     // this.productMenu.splice(o, 1);
@@ -56676,7 +56840,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         if (value.id != data.id) {
           data.id = value.id;
           data.quantity = value.quantity;
-          cart.push(data);
+          cart.unshift(data);
         }
       });
       __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cart", cart);
@@ -56684,32 +56848,32 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       // this.setTotal(total);
     },
     cartEvent: function cartEvent() {
-      var _this2 = this;
+      var _this3 = this;
 
       __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cart").then(function (response) {
         if (!Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(response)) {
           // this.productMenu = response;
-          _this2.fetchProducts();
+          _this3.fetchProducts();
         }
       });
     },
     emptyCartAdd: function emptyCartAdd(product) {
-      var _this3 = this;
+      var _this4 = this;
 
       var cart = [];
       __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cartRegion", this.$route.params.city);
       axios.get("/api/managers/" + this.$route.params.slug).then(function (response) {
-        _this3.setManager(response.data.data);
+        _this4.setManager(response.data.data);
         __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("manager", response.data.data);
       });
 
       product.quantity = 1;
-      cart.push({ id: product.id, quantity: 1 });
+      cart.unshift({ id: product.id, quantity: 1 });
       this.productMenu.push(product);
       __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cart", cart);
     },
     addToCart: function addToCart(product) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.product = product;
       __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cart").then(function (response) {
@@ -56719,49 +56883,49 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           quantity: 0
         };
         if (Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(response)) {
-          _this4.addToTotal(product.new_price);
+          _this5.addToTotal(product.new_price);
 
-          _this4.emptyCartAdd(product);
-          _this4.cartData();
+          _this5.emptyCartAdd(product);
+          _this5.cartData();
 
           return;
         } else {
-          if (_this4.manager.slug != _this4.$route.params.slug) {
+          if (_this5.manager.slug != _this5.$route.params.slug) {
             if (confirm("В вашей корзине продукты из другого магазина, Вы хотите удалить их?")) {
-              _this4.productMenu = [];
+              _this5.productMenu = [];
               // this.productMenu.push(product);
               __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem("cart");
               __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem("totalCart");
-              _this4.setTotal(0);
-              _this4.addToTotal(product.new_price);
+              _this5.setTotal(0);
+              _this5.addToTotal(product.new_price);
 
-              _this4.emptyCartAdd(product);
-              _this4.cartData();
+              _this5.emptyCartAdd(product);
+              _this5.cartData();
               return;
             } else {
               return;
             }
           }
-          _this4.productMenu.map(function (value, key) {
-            if (value.id == _this4.product.id) {
-              _this4.addToTotal(product.new_price);
-              __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cartRegion", _this4.$route.params.city);
+          _this5.productMenu.map(function (value, key) {
+            if (value.id == _this5.product.id) {
+              _this5.addToTotal(product.new_price);
+              __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cartRegion", _this5.$route.params.city);
 
-              _this4.product.quantity++;
-              Vue.set(_this4.productMenu, key, _this4.product);
+              _this5.product.quantity++;
+              Vue.set(_this5.productMenu, key, _this5.product);
               d = 1;
             }
           });
 
           if (d != 1) {
-            _this4.addToTotal(product.new_price);
-            __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cartRegion", _this4.$route.params.city);
+            _this5.addToTotal(product.new_price);
+            __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cartRegion", _this5.$route.params.city);
 
-            _this4.product.quantity = 1;
-            _this4.productMenu.unshift(_this4.product);
+            _this5.product.quantity = 1;
+            _this5.productMenu.unshift(_this5.product);
           }
         }
-        _this4.cartData();
+        _this5.cartData();
       });
     }
   })
@@ -56986,7 +57150,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("← Назад")]
+                [_vm._v("← " + _vm._s(_vm.$t("pagination.previous")))]
               )
             ]
           ),
@@ -57030,7 +57194,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Вперед →")]
+                [_vm._v(" " + _vm._s(_vm.$t("pagination.next")) + " →")]
               )
             ]
           )
@@ -57271,7 +57435,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("← Назад к список магазинов")]
+                  [_vm._v("← " + _vm._s(_vm.$t("pages.back")))]
                 )
               ]),
               _vm._v(" "),
@@ -57535,7 +57699,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.hideModal();
     },
     addToCart: function addToCart() {
-      this.productMenu.push({ id: this.product.id, quantity: this.quantity });
+      this.productMenu.unshift({
+        id: this.product.id,
+        quantity: this.quantity
+      });
       this.hideModal();
       this.addToTotal(this.product.new_price * this.quantity);
       __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("cart", this.productMenu);
@@ -57559,7 +57726,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           return product.id == _this2.product.id;
         });
         this.productMenu.splice(_index, 1);
-        this.productMenu.push({ id: this.product.id, quantity: this.quantity });
+        this.productMenu.unshift({
+          id: this.product.id,
+          quantity: this.quantity
+        });
 
         __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("cart", this.productMenu);
         this.setCart(this.productMenu);
@@ -57571,7 +57741,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         return product.id == _this2.product.id;
       });
       this.productMenu.splice(index, 1);
-      this.productMenu.push({ id: this.product.id, quantity: this.quantity });
+      this.productMenu.unshift({
+        id: this.product.id,
+        quantity: this.quantity
+      });
 
       __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("cart", this.productMenu);
       this.setCart(this.productMenu);
@@ -58032,6 +58205,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -58057,7 +58236,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         _this.cartInfo.prods.map(function (value, key) {
           if (v.id == value.id) {
             v.quantity = value.quantity;
-            d.push(v);
+            d.unshift(v);
           }
         });
       });
@@ -58073,42 +58252,123 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     // }
 
   },
-  methods: {
+  methods: _extends({
     fetchRegion: function fetchRegion(region) {
       var _this2 = this;
 
-      axios.get("/api/regions/" + region).then(function (response) {
-        _this2.region = response.data.data;
-        _this2.getProducts();
+      if (region) {
+        axios.get("/api/regions/" + region).then(function (response) {
+          _this2.region = response.data.data;
+          _this2.getProducts();
+        });
+      }
+    }
+  }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])({
+    setCart: "setCart",
+    setTotal: "setTotal",
+    setManager: "setManager",
+    addToTotal: "addToTotal"
+  }), {
+    cartData: function cartData() {
+      var total = 0;
+
+      var cart = [];
+      var data = {
+        id: "",
+        quantity: 0
+      };
+      this.products.map(function (value, key) {
+        data = {
+          id: "",
+          quantity: 0
+        };
+        if (value.id != data.id) {
+          data.id = value.id;
+          data.quantity = value.quantity;
+          cart.unshift(data);
+        }
       });
+      __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem("cart", cart);
+      this.setCart(cart);
+      // this.setTotal(total);
+    },
+    decreaseQuantity: function decreaseQuantity(product) {
+      var index = this.products.findIndex(function (prod) {
+        return prod.id == product.id;
+      });
+      --product.quantity;
+      this.addToTotal(-product.new_price);
+      Vue.set(this.products, index, product);
+      this.cartData();
+    },
+    removeFromCart: function removeFromCart(product) {
+      var item = this.products.findIndex(function (prod) {
+        return prod.id == product.id;
+      });
+      if (this.products.length == 1) {
+        this.products = [];
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem("cart");
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem("manager");
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem("cartRegion");
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem("totalCart");
+        this.setManager("empty");
+        this.setCart("empty");
+      } else {
+        this.addToTotal(-product.new_price);
+
+        this.products.splice(item, 1);
+      }
+
+      this.cartData();
+    },
+    addToCart: function addToCart(product) {
+      var _this3 = this;
+
+      var d = 0;
+      var data = {
+        id: "",
+        quantity: 0
+      };
+      this.products.map(function (value, key) {
+        if (value.id == product.id) {
+          _this3.addToTotal(product.new_price);
+          // localforage.setItem("cartRegion", this.$route.params.city);
+
+          product.quantity++;
+          Vue.set(_this3.products, key, product);
+          d = 1;
+        }
+      });
+
+      this.cartData();
     },
     getProducts: function getProducts() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$nextTick(function () {
         var params = {};
         var p = void 0;
-        _this3.cartInfo.prods.map(function (v, k) {
+        _this4.cartInfo.prods.map(function (v, k) {
           if (!p) {
             return p = v.id;
           }
           p = p + "," + v.id;
         });
         params["ids"] = p;
-        axios.get("/api/managers/" + _this3.manager.slug + "/products/cart", {
+        axios.get("/api/managers/" + _this4.manager.slug + "/products/cart", {
           params: params
         }).then(function (response) {
-          _this3.products = response.data.data;
+          _this4.products = response.data.data;
         });
       });
     }
-  },
+  }),
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
 
     __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cartRegion").then(function (region) {
       if (!Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])("region")) {
-        _this4.fetchRegion(region);
+        _this5.fetchRegion(region);
       }
     });
   }
@@ -58123,35 +58383,37 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content" }, [
-    _vm.region
-      ? _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "main-actions" },
+        [
           _c(
-            "div",
-            { staticClass: "main-actions" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-outline-green",
-                  attrs: { to: { name: "home" }, exact: "" }
-                },
-                [_vm._v("← Назад к магазин")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("h1", { staticClass: "main-title" }, [
+            "router-link",
+            {
+              staticClass: "btn btn-outline-green",
+              attrs: { to: { name: "home" }, exact: "" }
+            },
+            [_vm._v("←  " + _vm._s(_vm.$t("pages.back")))]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.region && _vm.manager
+        ? _c("h1", { staticClass: "main-title" }, [
             _vm._v(
               "Ваша корзина из магазина «" +
                 _vm._s(_vm.manager.name) +
                 "» " +
                 _vm._s(_vm.region.name)
             )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "content-inner" }, [
-            _c("main", { staticClass: "main" }, [
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "content-inner" }, [
+        _vm.filteredProducts.length > 0
+          ? _c("main", { staticClass: "main" }, [
               _c(
                 "ul",
                 { staticClass: "cart-items" },
@@ -58190,15 +58452,82 @@ var render = function() {
                                 "counter-widget input-group input-group-sm"
                             },
                             [
-                              _vm._m(0, true),
+                              product.quantity == 1
+                                ? _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-outline-red",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.removeFromCart(product)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", { staticClass: "icon" }, [
+                                            _vm._v("clear")
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                : _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-outline-red",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.decreaseQuantity(product)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", { staticClass: "icon" }, [
+                                            _vm._v("remove")
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  ),
                               _vm._v(" "),
                               _c("input", {
                                 staticClass: "form-control",
                                 attrs: { type: "text", disabled: "" },
-                                domProps: { value: product.quantity + " шт" }
+                                domProps: {
+                                  value:
+                                    product.quantity + " " + product.measure
+                                }
                               }),
                               _vm._v(" "),
-                              _vm._m(1, true)
+                              _c("div", { staticClass: "input-group-append" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-outline-green",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.addToCart(product)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", { staticClass: "icon" }, [
+                                      _vm._v("add")
+                                    ])
+                                  ]
+                                )
+                              ])
                             ]
                           )
                         ]
@@ -58209,47 +58538,42 @@ var render = function() {
                         { staticClass: "cart-item-column cart-item-price" },
                         [
                           _c("div", { staticClass: "cart-item-price-new" }, [
-                            _vm._v(_vm._s(product.new_price) + " сумов")
-                          ])
+                            _vm._v(
+                              _vm._s(_vm._f("toCurrency")(product.new_price)) +
+                                " сум"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          product.new_price < product.old_price
+                            ? _c(
+                                "div",
+                                { staticClass: "cart-item-price-old" },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm._f("toCurrency")(product.old_price)
+                                    ) + " сум"
+                                  )
+                                ]
+                              )
+                            : _vm._e()
                         ]
                       )
                     ]
                   )
                 })
               )
+            ])
+          : _c("main", { staticClass: "main" }, [
+              _c("h1", [_vm._v("content goes here")])
             ]),
-            _vm._v(" "),
-            _vm._m(2)
-          ])
-        ])
-      : _vm._e()
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-prepend" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-outline-red", attrs: { type: "button" } },
-        [_c("i", { staticClass: "icon" }, [_vm._v("clear")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-append" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-outline-green", attrs: { type: "button" } },
-        [_c("i", { staticClass: "icon" }, [_vm._v("add")])]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -61107,6 +61431,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegion", function() { return setRegion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setManager", function() { return setManager; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLang", function() { return setLang; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegionName", function() { return setRegionName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCart", function() { return setCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToTotal", function() { return addToTotal; });
@@ -61138,6 +61463,9 @@ var setRegion = function setRegion(state, regionId) {
 };
 var setManager = function setManager(state, manager) {
     state.cart.manager = manager;
+};
+var setLang = function setLang(state, lang) {
+    state.user.lang = lang;
 };
 var setRegionName = function setRegionName(state, region) {
     if (!Object(__WEBPACK_IMPORTED_MODULE_1_lodash__["isEmpty"])(region)) {
@@ -61195,6 +61523,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegionName", function() { return setRegionName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setManager", function() { return setManager; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegion", function() { return setRegion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkLangExists", function() { return checkLangExists; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "langChange", function() { return langChange; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_localforage__ = __webpack_require__(7);
@@ -61321,6 +61651,31 @@ var setRegion = function setRegion(_ref7, regionId) {
         return Promise.resolve(regionId);
     });
 };
+
+var checkLangExists = function checkLangExists(_ref8) {
+    var commit = _ref8.commit,
+        dispatch = _ref8.dispatch;
+
+    return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('lang').then(function (lang) {
+        dispatch('langChange', lang);
+    });
+};
+var langChange = function langChange(_ref9, lang) {
+    var commit = _ref9.commit,
+        dispatch = _ref9.dispatch;
+
+
+    if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(lang)) {
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', 'ru');
+        Vue.i18n.set('ru');
+        commit('setLang', 'ru');
+    } else {
+        axios.get('/api/locale/' + lang);
+        commit('setLang', lang);
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', lang);
+        Vue.i18n.set(lang);
+    }
+};
 // export const setToken = ({ commit, dispatch }, token) => {
 //     if (isEmpty(token)) {
 //         return dispatch('checkTokenExists').then((token) => {
@@ -61393,6 +61748,7 @@ var setRegion = function setRegion(_ref7, regionId) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "regionId", function() { return regionId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "regionName", function() { return regionName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "locale", function() { return locale; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "regionSlug", function() { return regionSlug; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cart", function() { return cart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "totalCart", function() { return totalCart; });
@@ -61405,6 +61761,9 @@ var regionId = function regionId(state) {
 };
 var regionName = function regionName(state) {
     return state.user.regionName;
+};
+var locale = function locale(state) {
+    return state.user.lang;
 };
 var regionSlug = function regionSlug(state) {
     return state.user.regionSlug;
@@ -61705,6 +62064,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bus_js__ = __webpack_require__(41);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -61723,6 +62083,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+
 
 
 
@@ -61800,6 +62161,1160 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-1fff7a8f", module.exports)
   }
 }
+
+/***/ }),
+/* 248 */,
+/* 249 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+/* vuex-i18n-store defines a vuex module to store locale translations. Make sure
+** to also include the file vuex-i18n.js to enable easy access to localized
+** strings in your vue components.
+*/
+
+// define a simple vuex module to handle locale translations
+var i18nVuexModule = {
+	namespaced: true,
+	state: {
+		locale: null,
+		fallback: null,
+		translations: {}
+	},
+	mutations: {
+
+		// set the current locale
+		SET_LOCALE: function SET_LOCALE(state, payload) {
+			state.locale = payload.locale;
+		},
+
+
+		// add a new locale
+		ADD_LOCALE: function ADD_LOCALE(state, payload) {
+
+			// reduce the given translations to a single-depth tree
+			var translations = flattenTranslations(payload.translations);
+
+			if (state.translations.hasOwnProperty(payload.locale)) {
+				// get the existing translations
+				var existingTranslations = state.translations[payload.locale];
+				// merge the translations
+				state.translations[payload.locale] = Object.assign({}, existingTranslations, translations);
+			} else {
+				// just set the locale if it does not yet exist
+				state.translations[payload.locale] = translations;
+			}
+
+			// make sure to notify vue of changes (this might break with new vue versions)
+			try {
+				if (state.translations.__ob__) {
+					state.translations.__ob__.dep.notify();
+				}
+			} catch (ex) {}
+		},
+
+
+		// replace existing locale information with new translations
+		REPLACE_LOCALE: function REPLACE_LOCALE(state, payload) {
+
+			// reduce the given translations to a single-depth tree
+			var translations = flattenTranslations(payload.translations);
+
+			// replace the translations entirely
+			state.translations[payload.locale] = translations;
+
+			// make sure to notify vue of changes (this might break with new vue versions)
+			try {
+				if (state.translations.__ob__) {
+					state.translations.__ob__.dep.notify();
+				}
+			} catch (ex) {}
+		},
+
+
+		// remove a locale from the store
+		REMOVE_LOCALE: function REMOVE_LOCALE(state, payload) {
+
+			// check if the given locale is present in the state
+			if (state.translations.hasOwnProperty(payload.locale)) {
+
+				// check if the current locale is the given locale to remvoe
+				if (state.locale === payload.locale) {
+					// reset the current locale
+					state.locale = null;
+				}
+
+				// create a copy of the translations object
+				var translationCopy = Object.assign({}, state.translations);
+
+				// remove the given locale
+				delete translationCopy[payload.locale];
+
+				// set the state to the new object
+				state.translations = translationCopy;
+			}
+		},
+		SET_FALLBACK_LOCALE: function SET_FALLBACK_LOCALE(state, payload) {
+			state.fallback = payload.locale;
+		}
+	},
+	actions: {
+
+		// set the current locale
+		setLocale: function setLocale(context, payload) {
+			context.commit({
+				type: 'SET_LOCALE',
+				locale: payload.locale
+			});
+		},
+
+
+		// add or extend a locale with translations
+		addLocale: function addLocale(context, payload) {
+			context.commit({
+				type: 'ADD_LOCALE',
+				locale: payload.locale,
+				translations: payload.translations
+			});
+		},
+
+
+		// replace locale information
+		replaceLocale: function replaceLocale(context, payload) {
+			context.commit({
+				type: 'REPLACE_LOCALE',
+				locale: payload.locale,
+				translations: payload.translations
+			});
+		},
+
+
+		// remove the given locale translations
+		removeLocale: function removeLocale(context, payload) {
+			context.commit({
+				type: 'REMOVE_LOCALE',
+				locale: payload.locale,
+				translations: payload.translations
+			});
+		},
+		setFallbackLocale: function setFallbackLocale(context, payload) {
+			context.commit({
+				type: 'SET_FALLBACK_LOCALE',
+				locale: payload.locale
+			});
+		}
+	}
+};
+
+// flattenTranslations will convert object trees for translations into a
+// single-depth object tree
+var flattenTranslations = function flattenTranslations(translations) {
+
+	var toReturn = {};
+
+	for (var i in translations) {
+
+		// check if the property is present
+		if (!translations.hasOwnProperty(i)) {
+			continue;
+		}
+
+		// get the type of the property
+		var objType = _typeof(translations[i]);
+
+		// allow unflattened array of strings
+		if (isArray(translations[i])) {
+
+			var count = translations[i].length;
+
+			for (var index = 0; index < count; index++) {
+				var itemType = _typeof(translations[i][index]);
+
+				if (itemType !== 'string') {
+					console.warn('i18n:', 'currently only arrays of strings are fully supported', translations[i]);
+					break;
+				}
+			}
+
+			toReturn[i] = translations[i];
+		} else if (objType == 'object' && objType !== null) {
+
+			var flatObject = flattenTranslations(translations[i]);
+
+			for (var x in flatObject) {
+				if (!flatObject.hasOwnProperty(x)) continue;
+
+				toReturn[i + '.' + x] = flatObject[x];
+			}
+		} else {
+			toReturn[i] = translations[i];
+		}
+	}
+	return toReturn;
+};
+
+// check if the given object is an array
+function isArray(obj) {
+	return !!obj && Array === obj.constructor;
+}
+
+var plurals = {
+	getTranslationIndex: function getTranslationIndex(languageCode, n) {
+		switch (languageCode) {
+			case 'ay': // Aymará
+			case 'bo': // Tibetan
+			case 'cgg': // Chiga
+			case 'dz': // Dzongkha
+			case 'fa': // Persian
+			case 'id': // Indonesian
+			case 'ja': // Japanese
+			case 'jbo': // Lojban
+			case 'ka': // Georgian
+			case 'kk': // Kazakh
+			case 'km': // Khmer
+			case 'ko': // Korean
+			case 'ky': // Kyrgyz
+			case 'lo': // Lao
+			case 'ms': // Malay
+			case 'my': // Burmese
+			case 'sah': // Yakut
+			case 'su': // Sundanese
+			case 'th': // Thai
+			case 'tt': // Tatar
+			case 'ug': // Uyghur
+			case 'vi': // Vietnamese
+			case 'wo': // Wolof
+			case 'zh':
+				// Chinese
+				// 1 form
+				return 0;
+			case 'is':
+				// Icelandic
+				// 2 forms
+				return n % 10 !== 1 || n % 100 === 11 ? 1 : 0;
+			case 'jv':
+				// Javanese
+				// 2 forms
+				return n !== 0 ? 1 : 0;
+			case 'mk':
+				// Macedonian
+				// 2 forms
+				return n === 1 || n % 10 === 1 ? 0 : 1;
+			case 'ach': // Acholi
+			case 'ak': // Akan
+			case 'am': // Amharic
+			case 'arn': // Mapudungun
+			case 'br': // Breton
+			case 'fil': // Filipino
+			case 'fr': // French
+			case 'gun': // Gun
+			case 'ln': // Lingala
+			case 'mfe': // Mauritian Creole
+			case 'mg': // Malagasy
+			case 'mi': // Maori
+			case 'oc': // Occitan
+			case 'pt_BR': // Brazilian Portuguese
+			case 'tg': // Tajik
+			case 'ti': // Tigrinya
+			case 'tr': // Turkish
+			case 'uz': // Uzbek
+			case 'wa': // Walloon
+			/* eslint-disable */
+			/* Disable "Duplicate case label" because there are 2 forms of Chinese plurals */
+			case 'zh':
+				// Chinese
+				/* eslint-enable */
+				// 2 forms
+				return n > 1 ? 1 : 0;
+			case 'lv':
+				// Latvian
+				// 3 forms
+				return n % 10 === 1 && n % 100 !== 11 ? 0 : n !== 0 ? 1 : 2;
+			case 'lt':
+				// Lithuanian
+				// 3 forms
+				return n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
+			case 'be': // Belarusian
+			case 'bs': // Bosnian
+			case 'hr': // Croatian
+			case 'ru': // Russian
+			case 'sr': // Serbian
+			case 'uk':
+				// Ukrainian
+				// 3 forms
+				return n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
+			case 'mnk':
+				// Mandinka
+				// 3 forms
+				return n === 0 ? 0 : n === 1 ? 1 : 2;
+			case 'ro':
+				// Romanian
+				// 3 forms
+				return n === 1 ? 0 : n === 0 || n % 100 > 0 && n % 100 < 20 ? 1 : 2;
+			case 'pl':
+				// Polish
+				// 3 forms
+				return n === 1 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
+			case 'cs': // Czech
+			case 'sk':
+				// Slovak
+				// 3 forms
+				return n === 1 ? 0 : n >= 2 && n <= 4 ? 1 : 2;
+			case 'csb':
+				// Kashubian
+				// 3 forms
+				return n === 1 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
+			case 'sl':
+				// Slovenian
+				// 4 forms
+				return n % 100 === 1 ? 0 : n % 100 === 2 ? 1 : n % 100 === 3 || n % 100 === 4 ? 2 : 3;
+			case 'mt':
+				// Maltese
+				// 4 forms
+				return n === 1 ? 0 : n === 0 || n % 100 > 1 && n % 100 < 11 ? 1 : n % 100 > 10 && n % 100 < 20 ? 2 : 3;
+			case 'gd':
+				// Scottish Gaelic
+				// 4 forms
+				return n === 1 || n === 11 ? 0 : n === 2 || n === 12 ? 1 : n > 2 && n < 20 ? 2 : 3;
+			case 'cy':
+				// Welsh
+				// 4 forms
+				return n === 1 ? 0 : n === 2 ? 1 : n !== 8 && n !== 11 ? 2 : 3;
+			case 'kw':
+				// Cornish
+				// 4 forms
+				return n === 1 ? 0 : n === 2 ? 1 : n === 3 ? 2 : 3;
+			case 'ga':
+				// Irish
+				// 5 forms
+				return n === 1 ? 0 : n === 2 ? 1 : n > 2 && n < 7 ? 2 : n > 6 && n < 11 ? 3 : 4;
+			case 'ar':
+				// Arabic
+				// 6 forms
+				return n === 0 ? 0 : n === 1 ? 1 : n === 2 ? 2 : n % 100 >= 3 && n % 100 <= 10 ? 3 : n % 100 >= 11 ? 4 : 5;
+			default:
+				// Everything else
+				return n !== 1 ? 1 : 0;
+		}
+	}
+};
+
+/* vuex-i18n defines the Vuexi18nPlugin to enable localization using a vuex
+** module to store the translation information. Make sure to also include the
+** file vuex-i18n-store.js to include a respective vuex module.
+*/
+
+// initialize the plugin object
+var VuexI18nPlugin = {};
+
+// internationalization plugin for vue js using vuex
+VuexI18nPlugin.install = function install(Vue, store, config) {
+
+	// TODO: remove this block for next major update (API break)
+	if (typeof arguments[2] === 'string' || typeof arguments[3] === 'string') {
+		console.warn('i18n: Registering the plugin vuex-i18n with a string for `moduleName` or `identifiers` is deprecated. Use a configuration object instead.', 'https://github.com/dkfbasel/vuex-i18n#setup');
+		config = {
+			moduleName: arguments[2],
+			identifiers: arguments[3]
+		};
+	}
+
+	// merge default options with user supplied options
+	var mergedConfig = Object.assign({
+		moduleName: 'i18n',
+		identifiers: ['{', '}'],
+		preserveState: false,
+		onTranslationNotFound: function onTranslationNotFound() {}
+	}, config);
+
+	// define module name and identifiers as constants to prevent any changes
+	var moduleName = mergedConfig.moduleName;
+	var identifiers = mergedConfig.identifiers;
+
+	// initialize the onTranslationNotFound function and make sure it is actually
+	// a function
+	var onTranslationNotFound = mergedConfig.onTranslationNotFound;
+	if (typeof onTranslationNotFound !== 'function') {
+		console.error('i18n: i18n config option onTranslationNotFound must be a function');
+		onTranslationNotFound = function onTranslationNotFound() {};
+	}
+
+	// register the i18n module in the vuex store
+	// preserveState can be used via configuration if server side rendering is used
+	store.registerModule(moduleName, i18nVuexModule, { preserveState: mergedConfig.preserveState });
+
+	// check if the plugin was correctly initialized
+	if (store.state.hasOwnProperty(moduleName) === false) {
+		console.error('i18n: i18n vuex module is not correctly initialized. Please check the module name:', moduleName);
+
+		// always return the key if module is not initialized correctly
+		Vue.prototype.$i18n = function (key) {
+			return key;
+		};
+
+		Vue.prototype.$getLanguage = function () {
+			return null;
+		};
+
+		Vue.prototype.$setLanguage = function () {
+			console.error('i18n: i18n vuex module is not correctly initialized');
+		};
+
+		return;
+	}
+
+	// initialize the replacement function
+	var render = renderFn(identifiers);
+
+	// get localized string from store. note that we pass the arguments passed
+	// to the function directly to the translateInLanguage function
+	var translate = function $t() {
+
+		// get the current language from the store
+		var locale = store.state[moduleName].locale;
+
+		return translateInLanguage.apply(undefined, [locale].concat(Array.prototype.slice.call(arguments)));
+	};
+
+	// get localized string from store in a given language if available.
+	// there are two possible signatures for the function.
+	// we will check the arguments to make up the options passed.
+	// 1: locale, key, options, pluralization
+	// 2: locale, key, defaultValue, options, pluralization
+	var translateInLanguage = function translateInLanguage(locale) {
+
+		// read the function arguments
+		var args = arguments;
+
+		// initialize options
+		var key = '';
+		var defaultValue = '';
+		var options = {};
+		var pluralization = null;
+
+		var count = args.length;
+
+		// check if a default value was specified and fill options accordingly
+		if (count >= 3 && typeof args[2] === 'string') {
+
+			key = args[1];
+			defaultValue = args[2];
+
+			if (count > 3) {
+				options = args[3];
+			}
+
+			if (count > 4) {
+				pluralization = args[4];
+			}
+		} else {
+
+			key = args[1];
+
+			// default value was not specified and is therefore the same as the key
+			defaultValue = key;
+
+			if (count > 2) {
+				options = args[2];
+			}
+
+			if (count > 3) {
+				pluralization = args[3];
+			}
+		}
+
+		// return the default value if the locale is not set (could happen on initialization)
+		if (!locale) {
+			console.warn('i18n: i18n locale is not set when trying to access translations:', key);
+			return defaultValue;
+		}
+
+		// get the translations from the store
+		var translations = store.state[moduleName].translations;
+
+		// get the last resort fallback from the store
+		var fallback = store.state[moduleName].fallback;
+
+		// split locale by - to support partial fallback for regional locales
+		// like de-CH, en-UK
+		var localeRegional = locale.split('-');
+
+		// flag for translation to exist or not
+		var translationExists = true;
+
+		// check if the language exists in the store. return the key if not
+		if (translations.hasOwnProperty(locale) === false) {
+			translationExists = false;
+
+			// check if the key exists in the store. return the key if not
+		} else if (translations[locale].hasOwnProperty(key) === false) {
+			translationExists = false;
+		}
+
+		// return the value from the store
+		if (translationExists === true) {
+			return render(locale, translations[locale][key], options, pluralization);
+		}
+
+		// check if a regional locale translation would be available for the key
+		// i.e. de for de-CH
+		if (localeRegional.length > 1 && translations.hasOwnProperty(localeRegional[0]) === true && translations[localeRegional[0]].hasOwnProperty(key) === true) {
+			return render(localeRegional[0], translations[localeRegional[0]][key], options, pluralization);
+		}
+
+		// invoke a method if a translation is not found
+		var asyncTranslation = onTranslationNotFound(locale, key, defaultValue);
+
+		// resolve async translations by updating the store
+		if (asyncTranslation) {
+			Promise.resolve(asyncTranslation).then(function (value) {
+				var additionalTranslations = {};
+				additionalTranslations[key] = value;
+				addLocale(locale, additionalTranslations);
+			});
+		}
+
+		// check if a vaild fallback exists in the store.
+		// return the default value if not
+		if (translations.hasOwnProperty(fallback) === false) {
+			return render(locale, defaultValue, options, pluralization);
+		}
+
+		// check if the key exists in the fallback locale in the store.
+		// return the default value if not
+		if (translations[fallback].hasOwnProperty(key) === false) {
+			return render(fallback, defaultValue, options, pluralization);
+		}
+
+		return render(locale, translations[fallback][key], options, pluralization);
+	};
+
+	// check if the given key exists in the current locale
+	var checkKeyExists = function checkKeyExists(key) {
+		var scope = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'fallback';
+
+
+		// get the current language from the store
+		var locale = store.state[moduleName].locale;
+		var fallback = store.state[moduleName].fallback;
+		var translations = store.state[moduleName].translations;
+
+		// check the current translation
+		if (translations.hasOwnProperty(locale) && translations[locale].hasOwnProperty(key)) {
+			return true;
+		}
+
+		if (scope == 'strict') {
+			return false;
+		}
+
+		// check any localized translations
+		var localeRegional = locale.split('-');
+
+		if (localeRegional.length > 1 && translations.hasOwnProperty(localeRegional[0]) && translations[localeRegional[0]].hasOwnProperty(key)) {
+			return true;
+		}
+
+		if (scope == 'locale') {
+			return false;
+		}
+
+		// check if a fallback locale exists
+		if (translations.hasOwnProperty(fallback) && translations[fallback].hasOwnProperty(key)) {
+			return true;
+		}
+
+		// key does not exist in the store
+		return false;
+	};
+
+	// set fallback locale
+	var setFallbackLocale = function setFallbackLocale(locale) {
+		store.dispatch({
+			type: moduleName + '/setFallbackLocale',
+			locale: locale
+		});
+	};
+
+	// set the current locale
+	var setLocale = function setLocale(locale) {
+		store.dispatch({
+			type: moduleName + '/setLocale',
+			locale: locale
+		});
+	};
+
+	// get the current locale
+	var getLocale = function getLocale() {
+		return store.state[moduleName].locale;
+	};
+
+	// get all available locales
+	var getLocales = function getLocales() {
+		return Object.keys(store.state[moduleName].translations);
+	};
+
+	// add predefined translations to the store (keeping existing information)
+	var addLocale = function addLocale(locale, translations) {
+		return store.dispatch({
+			type: moduleName + '/addLocale',
+			locale: locale,
+			translations: translations
+		});
+	};
+
+	// replace all locale information in the store
+	var replaceLocale = function replaceLocale(locale, translations) {
+		return store.dispatch({
+			type: moduleName + '/replaceLocale',
+			locale: locale,
+			translations: translations
+		});
+	};
+
+	// remove the givne locale from the store
+	var removeLocale = function removeLocale(locale) {
+		if (store.state[moduleName].translations.hasOwnProperty(locale)) {
+			store.dispatch({
+				type: moduleName + '/removeLocale',
+				locale: locale
+			});
+		}
+	};
+
+	// we are phasing out the exists function
+	var phaseOutExistsFn = function phaseOutExistsFn(locale) {
+		console.warn('i18n: $i18n.exists is depreceated. Please use $i18n.localeExists instead. It provides exatly the same functionality.');
+		return checkLocaleExists(locale);
+	};
+
+	// check if the given locale is already loaded
+	var checkLocaleExists = function checkLocaleExists(locale) {
+		return store.state[moduleName].translations.hasOwnProperty(locale);
+	};
+
+	// register vue prototype methods
+	Vue.prototype.$i18n = {
+		locale: getLocale,
+		locales: getLocales,
+		set: setLocale,
+		add: addLocale,
+		replace: replaceLocale,
+		remove: removeLocale,
+		fallback: setFallbackLocale,
+		localeExists: checkLocaleExists,
+		keyExists: checkKeyExists,
+
+		translate: translate,
+		translateIn: translateInLanguage,
+
+		exists: phaseOutExistsFn
+	};
+
+	// register global methods
+	Vue.i18n = {
+		locale: getLocale,
+		locales: getLocales,
+		set: setLocale,
+		add: addLocale,
+		replace: replaceLocale,
+		remove: removeLocale,
+		fallback: setFallbackLocale,
+		translate: translate,
+		translateIn: translateInLanguage,
+		localeExists: checkLocaleExists,
+		keyExists: checkKeyExists,
+
+		exists: phaseOutExistsFn
+	};
+
+	// register the translation function on the vue instance directly
+	Vue.prototype.$t = translate;
+
+	// register the specific language translation function on the vue instance directly
+	Vue.prototype.$tlang = translateInLanguage;
+
+	// register a filter function for translations
+	Vue.filter('translate', translate);
+};
+
+// renderFn will initialize a function to render the variable substitutions in
+// the translation string. identifiers specify the tags will be used to find
+// variable substitutions, i.e. {test} or {{test}}, note that we are using a
+// closure to avoid recompilation of the regular expression to match tags on
+// every render cycle.
+var renderFn = function renderFn(identifiers) {
+
+	if (identifiers == null || identifiers.length != 2) {
+		console.warn('i18n: You must specify the start and end character identifying variable substitutions');
+	}
+
+	// construct a regular expression ot find variable substitutions, i.e. {test}
+	var matcher = new RegExp('' + identifiers[0] + '\\w+' + identifiers[1], 'g');
+
+	// define the replacement function
+	var replace = function replace(translation, replacements) {
+		var warn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+
+		// check if the object has a replace property
+		if (!translation.replace) {
+			return translation;
+		}
+
+		return translation.replace(matcher, function (placeholder) {
+
+			// remove the identifiers (can be set on the module level)
+			var key = placeholder.replace(identifiers[0], '').replace(identifiers[1], '');
+
+			if (replacements[key] !== undefined) {
+				return replacements[key];
+			}
+
+			// warn user that the placeholder has not been found
+			if (warn === true) {
+				console.group ? console.group('i18n: Not all placeholders found') : console.warn('i18n: Not all placeholders found');
+				console.warn('Text:', translation);
+				console.warn('Placeholder:', placeholder);
+				if (console.groupEnd) {
+					console.groupEnd();
+				}
+			}
+
+			// return the original placeholder
+			return placeholder;
+		});
+	};
+
+	// the render function will replace variable substitutions and prepare the
+	// translations for rendering
+	var render = function render(locale, translation) {
+		var replacements = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+		var pluralization = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+		// get the type of the property
+		var objType = typeof translation === 'undefined' ? 'undefined' : _typeof(translation);
+		var pluralizationType = typeof pluralization === 'undefined' ? 'undefined' : _typeof(pluralization);
+
+		var resolvePlaceholders = function resolvePlaceholders() {
+
+			if (isArray$1(translation)) {
+
+				// replace the placeholder elements in all sub-items
+				return translation.map(function (item) {
+					return replace(item, replacements, false);
+				});
+			} else if (objType === 'string') {
+				return replace(translation, replacements, true);
+			}
+		};
+
+		// return translation item directly
+		if (pluralization === null) {
+			return resolvePlaceholders();
+		}
+
+		// check if pluralization value is countable
+		if (pluralizationType !== 'number') {
+			console.warn('i18n: pluralization is not a number');
+			return resolvePlaceholders();
+		}
+
+		// --- handle pluralizations ---
+
+		// replace all placeholders
+		var resolvedTranslation = resolvePlaceholders();
+
+		// initialize pluralizations
+		var pluralizations = null;
+
+		// if translations are already an array and have more than one entry,
+		// we will not perform a split operation on :::
+		if (isArray$1(resolvedTranslation) && resolvedTranslation.length > 0) {
+			pluralizations = resolvedTranslation;
+		} else {
+			// split translation strings by ::: to find create the pluralization array
+			pluralizations = resolvedTranslation.split(':::');
+		}
+
+		// determine the pluralization version to use by locale
+		var index = plurals.getTranslationIndex(locale, pluralization);
+
+		// check if the specified index is present in the pluralization
+		if (typeof pluralizations[index] === 'undefined') {
+			console.warn('i18n: pluralization not provided in locale', translation, locale, index);
+
+			// return the first element of the pluralization by default
+			return pluralizations[0].trim();
+		}
+
+		// return the requested item from the pluralizations
+		return pluralizations[index].trim();
+	};
+
+	// return the render function to the caller
+	return render;
+};
+
+// check if the given object is an array
+function isArray$1(obj) {
+	return !!obj && Array === obj.constructor;
+}
+
+// import the vuex module for localization
+// import the corresponding plugin for vue
+// export both modules as one file
+var index = {
+	store: i18nVuexModule,
+	plugin: VuexI18nPlugin
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (index);
+
+
+/***/ }),
+/* 250 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    "ru": {
+        "header": {
+            "title": "Быстрая доставка продуктов",
+            "step1": "Выбирайте свой любимый магазин в своем регионе",
+            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
+            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
+            "delivery": "Доставка",
+            "login": "Вход",
+            "logout": "Выйти",
+            "shops": "Магазины"
+        },
+        "cart": {
+            "shop": "Магазин",
+            "inCart": "Товаров в корзине",
+            "price": "На сумму",
+            "sum": "сум",
+            "cart": "Корзина",
+            "button": "Оформить заказ"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "auth": {
+            "failed": "These credentials do not match our records.",
+            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
+        },
+        "pages": {
+            "back": "Назад к списку магазинов"
+        },
+        "pagination": {
+            "previous": "Назад",
+            "next": "Вперед"
+        },
+        "validation": {
+            "accepted": "The {attribute} must be accepted.",
+            "active_url": "The {attribute} is not a valid URL.",
+            "after": "The {attribute} must be a date after {date}.",
+            "after_or_equal": "The {attribute} must be a date after or equal to {date}.",
+            "alpha": "The {attribute} may only contain letters.",
+            "alpha_dash": "The {attribute} may only contain letters, numbers, dashes and underscores.",
+            "alpha_num": "The {attribute} may only contain letters and numbers.",
+            "array": "The {attribute} must be an array.",
+            "before": "The {attribute} must be a date before {date}.",
+            "before_or_equal": "The {attribute} must be a date before or equal to {date}.",
+            "between": {
+                "numeric": "The {attribute} must be between {min} and {max}.",
+                "file": "The {attribute} must be between {min} and {max} kilobytes.",
+                "string": "The {attribute} must be between {min} and {max} characters.",
+                "array": "The {attribute} must have between {min} and {max} items."
+            },
+            "boolean": "The {attribute} field must be true or false.",
+            "confirmed": "The {attribute} confirmation does not match.",
+            "date": "The {attribute} is not a valid date.",
+            "date_format": "The {attribute} does not match the format {format}.",
+            "different": "The {attribute} and {other} must be different.",
+            "digits": "The {attribute} must be {digits} digits.",
+            "digits_between": "The {attribute} must be between {min} and {max} digits.",
+            "dimensions": "The {attribute} has invalid image dimensions.",
+            "distinct": "The {attribute} field has a duplicate value.",
+            "email": "The {attribute} must be a valid email address.",
+            "exists": "The selected {attribute} is invalid.",
+            "file": "The {attribute} must be a file.",
+            "filled": "The {attribute} field must have a value.",
+            "gt": {
+                "numeric": "The {attribute} must be greater than {value}.",
+                "file": "The {attribute} must be greater than {value} kilobytes.",
+                "string": "The {attribute} must be greater than {value} characters.",
+                "array": "The {attribute} must have more than {value} items."
+            },
+            "gte": {
+                "numeric": "The {attribute} must be greater than or equal {value}.",
+                "file": "The {attribute} must be greater than or equal {value} kilobytes.",
+                "string": "The {attribute} must be greater than or equal {value} characters.",
+                "array": "The {attribute} must have {value} items or more."
+            },
+            "image": "The {attribute} must be an image.",
+            "in": "The selected {attribute} is invalid.",
+            "in_array": "The {attribute} field does not exist in {other}.",
+            "integer": "The {attribute} must be an integer.",
+            "ip": "The {attribute} must be a valid IP address.",
+            "ipv4": "The {attribute} must be a valid IPv4 address.",
+            "ipv6": "The {attribute} must be a valid IPv6 address.",
+            "json": "The {attribute} must be a valid JSON string.",
+            "lt": {
+                "numeric": "The {attribute} must be less than {value}.",
+                "file": "The {attribute} must be less than {value} kilobytes.",
+                "string": "The {attribute} must be less than {value} characters.",
+                "array": "The {attribute} must have less than {value} items."
+            },
+            "lte": {
+                "numeric": "The {attribute} must be less than or equal {value}.",
+                "file": "The {attribute} must be less than or equal {value} kilobytes.",
+                "string": "The {attribute} must be less than or equal {value} characters.",
+                "array": "The {attribute} must not have more than {value} items."
+            },
+            "max": {
+                "numeric": "The {attribute} may not be greater than {max}.",
+                "file": "The {attribute} may not be greater than {max} kilobytes.",
+                "string": "The {attribute} may not be greater than {max} characters.",
+                "array": "The {attribute} may not have more than {max} items."
+            },
+            "mimes": "The {attribute} must be a file of type: {values}.",
+            "mimetypes": "The {attribute} must be a file of type: {values}.",
+            "min": {
+                "numeric": "The {attribute} must be at least {min}.",
+                "file": "The {attribute} must be at least {min} kilobytes.",
+                "string": "The {attribute} must be at least {min} characters.",
+                "array": "The {attribute} must have at least {min} items."
+            },
+            "not_in": "The selected {attribute} is invalid.",
+            "not_regex": "The {attribute} format is invalid.",
+            "numeric": "The {attribute} must be a number.",
+            "present": "The {attribute} field must be present.",
+            "regex": "The {attribute} format is invalid.",
+            "required": "The {attribute} field is required.",
+            "required_if": "The {attribute} field is required when {other} is {value}.",
+            "required_unless": "The {attribute} field is required unless {other} is in {values}.",
+            "required_with": "The {attribute} field is required when {values} is present.",
+            "required_with_all": "The {attribute} field is required when {values} is present.",
+            "required_without": "The {attribute} field is required when {values} is not present.",
+            "required_without_all": "The {attribute} field is required when none of {values} are present.",
+            "same": "The {attribute} and {other} must match.",
+            "size": {
+                "numeric": "The {attribute} must be {size}.",
+                "file": "The {attribute} must be {size} kilobytes.",
+                "string": "The {attribute} must be {size} characters.",
+                "array": "The {attribute} must contain {size} items."
+            },
+            "string": "The {attribute} must be a string.",
+            "timezone": "The {attribute} must be a valid zone.",
+            "unique": "The {attribute} has already been taken.",
+            "uploaded": "The {attribute} failed to upload.",
+            "url": "The {attribute} format is invalid.",
+            "custom": {
+                "attribute-name": {
+                    "rule-name": "custom-message"
+                }
+            },
+            "attributes": []
+        }
+    },
+    "uz": {
+        "header": {
+            "title": "Mahsulotlarni tezda yetkazib beramiz",
+            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
+            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
+            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
+            "delivery": "Buyurtma",
+            "login": "Kirish",
+            "logout": "Chiqish",
+            "shops": "Do'konlar"
+        },
+        "cart": {
+            "shop": "Do'kon",
+            "inCart": "Savatchadagi maxsulotlar",
+            "price": "Umumiy puli",
+            "sum": "sum",
+            "cart": "Savatcha",
+            "button": "Buyurtma qilish"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "auth": {
+            "failed": "These credentials do not match our records.",
+            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
+        },
+        "pages": {
+            "back": "Orqaga, do'konlar ro'yhati"
+        },
+        "pagination": {
+            "previous": "Orqaga",
+            "next": "Oldinga"
+        },
+        "validation": {
+            "accepted": "The {attribute} must be accepted.",
+            "active_url": "The {attribute} is not a valid URL.",
+            "after": "The {attribute} must be a date after {date}.",
+            "after_or_equal": "The {attribute} must be a date after or equal to {date}.",
+            "alpha": "The {attribute} may only contain letters.",
+            "alpha_dash": "The {attribute} may only contain letters, numbers, dashes and underscores.",
+            "alpha_num": "The {attribute} may only contain letters and numbers.",
+            "array": "The {attribute} must be an array.",
+            "before": "The {attribute} must be a date before {date}.",
+            "before_or_equal": "The {attribute} must be a date before or equal to {date}.",
+            "between": {
+                "numeric": "The {attribute} must be between {min} and {max}.",
+                "file": "The {attribute} must be between {min} and {max} kilobytes.",
+                "string": "The {attribute} must be between {min} and {max} characters.",
+                "array": "The {attribute} must have between {min} and {max} items."
+            },
+            "boolean": "The {attribute} field must be true or false.",
+            "confirmed": "The {attribute} confirmation does not match.",
+            "date": "The {attribute} is not a valid date.",
+            "date_format": "The {attribute} does not match the format {format}.",
+            "different": "The {attribute} and {other} must be different.",
+            "digits": "The {attribute} must be {digits} digits.",
+            "digits_between": "The {attribute} must be between {min} and {max} digits.",
+            "dimensions": "The {attribute} has invalid image dimensions.",
+            "distinct": "The {attribute} field has a duplicate value.",
+            "email": "The {attribute} must be a valid email address.",
+            "exists": "The selected {attribute} is invalid.",
+            "file": "The {attribute} must be a file.",
+            "filled": "The {attribute} field must have a value.",
+            "gt": {
+                "numeric": "The {attribute} must be greater than {value}.",
+                "file": "The {attribute} must be greater than {value} kilobytes.",
+                "string": "The {attribute} must be greater than {value} characters.",
+                "array": "The {attribute} must have more than {value} items."
+            },
+            "gte": {
+                "numeric": "The {attribute} must be greater than or equal {value}.",
+                "file": "The {attribute} must be greater than or equal {value} kilobytes.",
+                "string": "The {attribute} must be greater than or equal {value} characters.",
+                "array": "The {attribute} must have {value} items or more."
+            },
+            "image": "The {attribute} must be an image.",
+            "in": "The selected {attribute} is invalid.",
+            "in_array": "The {attribute} field does not exist in {other}.",
+            "integer": "The {attribute} must be an integer.",
+            "ip": "The {attribute} must be a valid IP address.",
+            "ipv4": "The {attribute} must be a valid IPv4 address.",
+            "ipv6": "The {attribute} must be a valid IPv6 address.",
+            "json": "The {attribute} must be a valid JSON string.",
+            "lt": {
+                "numeric": "The {attribute} must be less than {value}.",
+                "file": "The {attribute} must be less than {value} kilobytes.",
+                "string": "The {attribute} must be less than {value} characters.",
+                "array": "The {attribute} must have less than {value} items."
+            },
+            "lte": {
+                "numeric": "The {attribute} must be less than or equal {value}.",
+                "file": "The {attribute} must be less than or equal {value} kilobytes.",
+                "string": "The {attribute} must be less than or equal {value} characters.",
+                "array": "The {attribute} must not have more than {value} items."
+            },
+            "max": {
+                "numeric": "The {attribute} may not be greater than {max}.",
+                "file": "The {attribute} may not be greater than {max} kilobytes.",
+                "string": "The {attribute} may not be greater than {max} characters.",
+                "array": "The {attribute} may not have more than {max} items."
+            },
+            "mimes": "The {attribute} must be a file of type: {values}.",
+            "mimetypes": "The {attribute} must be a file of type: {values}.",
+            "min": {
+                "numeric": "The {attribute} must be at least {min}.",
+                "file": "The {attribute} must be at least {min} kilobytes.",
+                "string": "The {attribute} must be at least {min} characters.",
+                "array": "The {attribute} must have at least {min} items."
+            },
+            "not_in": "The selected {attribute} is invalid.",
+            "not_regex": "The {attribute} format is invalid.",
+            "numeric": "The {attribute} must be a number.",
+            "present": "The {attribute} field must be present.",
+            "regex": "The {attribute} format is invalid.",
+            "required": "The {attribute} field is required.",
+            "required_if": "The {attribute} field is required when {other} is {value}.",
+            "required_unless": "The {attribute} field is required unless {other} is in {values}.",
+            "required_with": "The {attribute} field is required when {values} is present.",
+            "required_with_all": "The {attribute} field is required when {values} is present.",
+            "required_without": "The {attribute} field is required when {values} is not present.",
+            "required_without_all": "The {attribute} field is required when none of {values} are present.",
+            "same": "The {attribute} and {other} must match.",
+            "size": {
+                "numeric": "The {attribute} must be {size}.",
+                "file": "The {attribute} must be {size} kilobytes.",
+                "string": "The {attribute} must be {size} characters.",
+                "array": "The {attribute} must contain {size} items."
+            },
+            "string": "The {attribute} must be a string.",
+            "timezone": "The {attribute} must be a valid zone.",
+            "unique": "The {attribute} has already been taken.",
+            "uploaded": "The {attribute} failed to upload.",
+            "url": "The {attribute} format is invalid.",
+            "custom": {
+                "attribute-name": {
+                    "rule-name": "custom-message"
+                }
+            },
+            "attributes": []
+        }
+    }
+});
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(252);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(166)("97d34a20", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-13625124\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navbar.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-13625124\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Navbar.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(37)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  background-color: yellow;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

@@ -93,7 +93,10 @@ export default {
       this.hideModal();
     },
     addToCart() {
-      this.productMenu.push({ id: this.product.id, quantity: this.quantity });
+      this.productMenu.unshift({
+        id: this.product.id,
+        quantity: this.quantity
+      });
       this.hideModal();
       this.addToTotal(this.product.new_price * this.quantity);
       localforage.setItem("cart", this.productMenu);
@@ -115,7 +118,10 @@ export default {
           product => product.id == this.product.id
         );
         this.productMenu.splice(index, 1);
-        this.productMenu.push({ id: this.product.id, quantity: this.quantity });
+        this.productMenu.unshift({
+          id: this.product.id,
+          quantity: this.quantity
+        });
 
         localforage.setItem("cart", this.productMenu);
         this.setCart(this.productMenu);
@@ -127,7 +133,10 @@ export default {
         product => product.id == this.product.id
       );
       this.productMenu.splice(index, 1);
-      this.productMenu.push({ id: this.product.id, quantity: this.quantity });
+      this.productMenu.unshift({
+        id: this.product.id,
+        quantity: this.quantity
+      });
 
       localforage.setItem("cart", this.productMenu);
       this.setCart(this.productMenu);

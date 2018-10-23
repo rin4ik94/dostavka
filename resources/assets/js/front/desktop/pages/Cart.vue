@@ -1,12 +1,12 @@
 <template>
     <div class="content">
-  <div class="container" v-if="region">
+  <div class="container">
     <div class="main-actions">
-      <router-link class="btn btn-outline-green" :to="{name:'home'}" exact>&#8592; Назад к магазин</router-link>
+      <router-link class="btn btn-outline-green" :to="{name:'home'}" exact>&#8592;  {{$t('pages.back')}}</router-link>
     </div>
-    <h1 class="main-title">Ваша корзина из магазина «{{manager.name}}» {{region.name}}</h1>
+    <h1 class="main-title"   v-if="region && manager">Ваша корзина из магазина «{{manager.name}}» {{region.name}}</h1>
     <div class="content-inner">
-    <main class="main">
+    <main class="main" v-if="filteredProducts.length > 0">
       <ul class="cart-items"> 
           <li class="cart-item" :key="product.id" v-for="product in filteredProducts">
             <a class="cart-item-column cart-item-image" href="/">
@@ -17,16 +17,22 @@
             </div>
             <div class="cart-item-column cart-item-counter">
               <div class="counter-widget input-group input-group-sm">
-                <div class="input-group-prepend"><button class="btn btn-outline-red" type="button"><i class="icon">clear</i></button></div>
-                <input class="form-control" type="text" :value="`${product.quantity} шт`" disabled>
-                <div class="input-group-append"><button class="btn btn-outline-green" type="button"><i class="icon">add</i></button></div>
+                <div class="input-group-prepend" v-if="product.quantity ==1"><button @click="removeFromCart(product)" class="btn btn-outline-red" type="button"><i class="icon">clear</i></button></div>
+                 <div class="input-group-prepend" v-else><button class="btn btn-outline-red" type="button" @click="decreaseQuantity(product)"><i class="icon">remove</i></button></div>
+               
+                <input class="form-control" type="text" :value="`${product.quantity} ${product.measure}`" disabled>
+                <div class="input-group-append"><button class="btn btn-outline-green" type="button" @click="addToCart(product)"><i class="icon">add</i></button></div>
               </div>
             </div>
-            <div class="cart-item-column cart-item-price">
-              <div class="cart-item-price-new">{{product.new_price}} сумов</div>
+              <div class="cart-item-column cart-item-price">
+              <div class="cart-item-price-new">{{product.new_price | toCurrency}} сум</div>
+              <div class="cart-item-price-old" v-if="product.new_price < product.old_price">{{product.old_price | toCurrency}} сум</div>
             </div>
           </li> 
         </ul>
+    </main>
+    <main  class="main" v-else>
+      <h1>content goes here</h1>
     </main>
     <aside class="aside">
 
@@ -81,7 +87,7 @@
 </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 import localforage from "localforage";
 import { isEmpty } from "lodash";
@@ -103,7 +109,7 @@ export default {
         this.cartInfo.prods.map((value, key) => {
           if (v.id == value.id) {
             v.quantity = value.quantity;
-            d.push(v);
+            d.unshift(v);
           }
         });
       });
@@ -120,10 +126,89 @@ export default {
   },
   methods: {
     fetchRegion(region) {
-      axios.get(`/api/regions/${region}`).then(response => {
-        this.region = response.data.data;
-        this.getProducts();
+      if (region) {
+        axios.get(`/api/regions/${region}`).then(response => {
+          this.region = response.data.data;
+          this.getProducts();
+        });
+      }
+    },
+    ...mapActions({
+      setCart: "setCart",
+      setTotal: "setTotal",
+      setManager: "setManager",
+      addToTotal: "addToTotal"
+    }),
+    cartData() {
+      let total = 0;
+
+      let cart = [];
+      let data = {
+        id: "",
+        quantity: 0
+      };
+      this.products.map((value, key) => {
+        data = {
+          id: "",
+          quantity: 0
+        };
+        if (value.id != data.id) {
+          data.id = value.id;
+          data.quantity = value.quantity;
+          cart.unshift(data);
+        }
       });
+      localforage.setItem("cart", cart);
+      this.setCart(cart);
+      // this.setTotal(total);
+    },
+    decreaseQuantity(product) {
+      let index = this.products.findIndex(prod => {
+        return prod.id == product.id;
+      });
+      --product.quantity;
+      this.addToTotal(-product.new_price);
+      Vue.set(this.products, index, product);
+      this.cartData();
+    },
+    removeFromCart(product) {
+      let item = this.products.findIndex(prod => {
+        return prod.id == product.id;
+      });
+      if (this.products.length == 1) {
+        this.products = [];
+        localforage.removeItem("cart");
+        localforage.removeItem("manager");
+        localforage.removeItem("cartRegion");
+        localforage.removeItem("totalCart");
+        this.setManager("empty");
+        this.setCart("empty");
+      } else {
+        this.addToTotal(-product.new_price);
+
+        this.products.splice(item, 1);
+      }
+
+      this.cartData();
+    },
+    addToCart(product) {
+      let d = 0;
+      let data = {
+        id: "",
+        quantity: 0
+      };
+      this.products.map((value, key) => {
+        if (value.id == product.id) {
+          this.addToTotal(product.new_price);
+          // localforage.setItem("cartRegion", this.$route.params.city);
+
+          product.quantity++;
+          Vue.set(this.products, key, product);
+          d = 1;
+        }
+      });
+
+      this.cartData();
     },
     getProducts() {
       this.$nextTick(() => {

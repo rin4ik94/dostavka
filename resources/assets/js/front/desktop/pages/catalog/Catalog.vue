@@ -3,7 +3,7 @@
     <div class="content" v-if="!notFound && catalog">
       <div class="container">
         <div class="main-actions">
-          <a class="btn btn-outline-green" @click="$router.push({name:'home'})">&#8592; Назад к список магазинов</a>
+          <a class="btn btn-outline-green" @click="$router.push({name:'home'})">&#8592; {{$t('pages.back')}}</a>
         </div> 
         <h1 class="main-title" v-if="branchName">Каталог продуктов магазина «{{catalog.name}}» {{branchName}}</h1>
         <div class="content-inner">
@@ -42,6 +42,8 @@ import NotFound from "../NotFound";
 import Products from "./Products";
 import localforage from "localforage";
 import { isEmpty } from "lodash";
+import { EventBus } from "../../bus.js";
+
 export default {
   data() {
     return {
@@ -135,6 +137,10 @@ export default {
   },
   created() {
     this.getCatalog();
+    EventBus.$on("changeLanguage", () => {
+      // this.$emit("hidePage");
+      this.getCatalog();
+    });
   }
 };
 </script>

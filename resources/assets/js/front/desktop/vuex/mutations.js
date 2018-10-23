@@ -21,6 +21,9 @@ export const setRegion = (state, regionId) => {
 export const setManager = (state, manager) => {
     state.cart.manager = manager;
 }
+export const setLang = (state, lang) => {
+    state.user.lang = lang;
+}
 export const setRegionName = (state, region) => {
     if (!isEmpty(region)) {
         state.user.regionName = region.name;

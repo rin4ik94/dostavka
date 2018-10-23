@@ -5,17 +5,17 @@
       <div class="col-auto">
         <a class="btn btn-link" href="/cart.php">
           <i class="icon">shopping_cart</i>
-          <span class="text">Корзина</span>
+          <span class="text">{{$t('cart.cart')}}</span>
           <span class="badge badge-danger">1</span>
         </a>
       </div>
       <div class="col cart-card-center">
-        <div class="item">Магазин: <a href="/">{{manager.name}}</a></div>
-        <div class="item">Товаров в корзине {{cartInfo.prods.length}}</div>
-        <div class="item">На сумму {{cartInfo.total | toCurrency}} сум</div>
+        <div class="item">{{$t("cart.shop")}}: <a href="/">{{manager.name}}</a></div>
+        <div class="item">{{$t("cart.inCart")}} {{cartInfo.prods.length}}</div>
+        <div class="item">{{$t("cart.price")}} {{cartInfo.total | toCurrency}} {{$t("cart.sum")}}</div>
       </div>
       <div class="col-auto">
-        <router-link class="btn btn-green" :to="{name:'cart'}">Оформить заказ</router-link>
+        <router-link class="btn btn-green" :to="{name:'cart'}">{{$t('cart.button')}}</router-link>
       </div>
     </div>
   </div>
