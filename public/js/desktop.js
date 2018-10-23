@@ -52903,13 +52903,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       });
     },
-    changeLocale: function changeLocale() {
-      if (this.locale == "ru") {
-        this.langChange("uz").then(function () {
-          __WEBPACK_IMPORTED_MODULE_1__bus_js__["a" /* EventBus */].$emit("changeLanguage");
-        });
-      } else {
-        this.langChange("ru").then(function () {
+    changeLocale: function changeLocale(lang) {
+      if (lang != this.locale) {
+        this.langChange(lang).then(function () {
           __WEBPACK_IMPORTED_MODULE_1__bus_js__["a" /* EventBus */].$emit("changeLanguage");
         });
       }
@@ -53090,7 +53086,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      return _vm.changeLocale($event)
+                      _vm.changeLocale("ru")
                     }
                   }
                 },
@@ -53104,7 +53100,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      return _vm.changeLocale($event)
+                      _vm.changeLocale("uz")
                     }
                   }
                 },
@@ -63311,7 +63307,7 @@ exports = module.exports = __webpack_require__(37)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  background-color: yellow;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  background-color: #e84c3d;\n  color: white;\n}\n", ""]);
 
 // exports
 

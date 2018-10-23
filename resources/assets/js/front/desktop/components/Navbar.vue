@@ -22,8 +22,8 @@
         <div class="dropdown">
           <button class="btn btn-link header-lang-toggle dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{locale == 'ru' ? 'Русский' : 'O`zbekcha'}}</button>
           <div class="dropdown-menu">
-            <a class="dropdown-item acitve" @click.prevent="changeLocale">Русский</a>
-            <a class="dropdown-item" @click.prevent="changeLocale">O`zbekcha</a>
+            <a class="dropdown-item acitve" @click.prevent="changeLocale('ru')">Русский</a>
+            <a class="dropdown-item" @click.prevent="changeLocale('uz')">O`zbekcha</a>
           </div>
         </div>
          
@@ -92,13 +92,9 @@ export default {
         }
       });
     },
-    changeLocale() {
-      if (this.locale == "ru") {
-        this.langChange("uz").then(() => {
-          EventBus.$emit("changeLanguage");
-        });
-      } else {
-        this.langChange("ru").then(() => {
+    changeLocale(lang) {
+      if (lang != this.locale) {
+        this.langChange(lang).then(() => {
           EventBus.$emit("changeLanguage");
         });
       }
@@ -151,6 +147,7 @@ export default {
 } */
 .highlightText {
   font-weight: 600;
-  background-color: yellow;
+  background-color: #fd5646;
+  color: white; 
 }
 </style>
