@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -18,7 +19,7 @@ class Order extends Model
     public function getTime(){
         return Carbon::parse($this->created_at)->format('d.m.Y H:i');
     }
-
+    
     public function manager()
     {
         return $this->belongsTo(Manager::class);
@@ -66,9 +67,31 @@ class Order extends Model
         ->withPivot(['product_name','product_count','product_price','product_total_price','product_measurement']);
     }
 
-    public function scopeOfStatus($query, $status)
+    public function scopeOfStatus($result, $status)
     {
         if (!$status) { return; }
-        $query->where('order_status_id', $status);
+        $result->where('order_status_id', $status);
+    }
+
+    public function scopeOfDate($result, $date, $status)
+    {
+        if ($status == 4 || $status == 5) {
+            if (!$date) {
+                $date = Carbon::now()->format('Y-m-d');
+                $result->whereDate('created_at', $date);
+            }
+            $result->whereDate('created_at',$date);
+        }
+    }
+    public function scopeOfId($result, $id)
+    {
+        if (!$id) {
+            return;
+        }
+        $result->where('id', $id);
+    }
+
+    public function getBranches(){
+        return Branch::where('manager_id', $this->manager_id)->select('id','name','address')->get();
     }
 }

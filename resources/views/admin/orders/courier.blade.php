@@ -4,7 +4,7 @@
       {{ method_field('PUT') }}
       @csrf
       <div class="modal-header">
-        <h5 class="modal-title">Назначить курьер на заказ № {{ $order->id }}</h5>
+        <h5 class="modal-title">Назначить курьер на заказ № <span class="orderIdForCourier"></span></h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

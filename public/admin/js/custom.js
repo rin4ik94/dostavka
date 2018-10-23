@@ -77,19 +77,38 @@ $(function () {
         $("#edit_managerCatId").val(category);
         $('#manager_id').val(id);
         $('#edit_status').val(status);
+        $('.deleteManager').attr('data-id',id);
+    });
+// delete manager via ajax
+    $(".deleteManager").click(function(){
+        var id = $(this).data('id');
+        $result = confirm("Are  you sure?");
+        if($result){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/admin/managers/delete',
+            type: 'post',
+            data:{id:id},
+            success: function(result) {
+                location.reload();
+            }
+        });
+        }
     });
 
     // manager-group-actions
-    $('.managergr_actions a').on('click', function (e) {
+    $('.managergr_action').on('click', function (e) {
         e.preventDefault(e);
-        $(this).closest('tr').each(function () {
-            var id = $(this).children('td:first').text();
-            var name_ru = $(this).children('td:eq(1)').text();
-            var name_uz = $(this).children('td:eq(1)').attr('data-nameUz');
+            var id = $(this).closest('tr').data('id');
+            var name_ru = $(this).closest('tr').data('nameru');
+            var name_uz = $(this).closest('tr').data('nameuz');
             $('#name_ru').val(name_ru);
             $('#name_uz').val(name_uz);
-            $('#id').val(id);
-        });
+            $('#editManagerGr').val(id);
     });
     // employee-group-actions
     $('.editEmployeGroup a').on('click', function (e) {
@@ -221,22 +240,31 @@ $(function () {
         });
     });
     // action for orders
-    $('.order_status').on('click', function (e) {
-        e.preventDefault(e);
-        var orderId = $(this).closest('tr').data('id');
-        var statusId = $(this).closest('tr').data('status');
-        var branchId = $(this).closest('tr').data('bname');
-        
-        $(".form-status input[value = " + statusId + "]").prop("checked",true);
-        $('#editOrderStatus').val(orderId);
-    });
-
     $('.order_branch').on('click', function (e) {
         e.preventDefault(e);
+        var branches = $(this).closest('tr').data('branches');
         var orderId = $(this).closest('tr').data('id');
         var orderBranchId = $(this).data('branch');
-        $(".form-branch input[value = " + orderBranchId + "]").prop("checked",true);
         $('#editOrderBranch').val(orderId);
+        $('span.orderId').html(orderId);
+        $('.branch_list').empty();
+        $.each(branches, function (index, orderBranches) {
+            $('.branch_list').append('<div class="list-item custom-control custom-radio"><input type="radio" id="orderBranch_' + orderBranches.id + '" name="branch_id" value="' + orderBranches.id + '" class="custom-control-input" '+ activeBranch(orderBranches.id) +'><label class="list-link custom-control-label" for="orderBranch_' + orderBranches.id + '"><div>' + orderBranches.name + '</div><small class="text-muted">Адресс: ' + orderBranches.address + '</small></label></div>');
+        });
+        function activeBranch($param){
+            if($param == orderBranchId){
+                return "checked";
+            }
+            return;
+        }
+    });
+
+    $('.order_client').on('click', function(e){
+        e.preventDefault(e);
+        var clientName = $(this).closest('tr').data('cname');
+        var clientId = $(this).data('client');
+        $('span.orderIdForClient').html(clientId);
+        $('.client-name').html(clientName);
     });
 
     $('.order_courier').on('click', function (e) {
@@ -246,9 +274,19 @@ $(function () {
         if(orderCourierId == null){ orderCourierId = '0'}
         $(".form-courier #orderCourier_" + orderCourierId ).prop("checked",true);
         $('#editOrderCourier').val(orderId);
+        $('span.orderIdForCourier').html(orderId);
     });
 
-
+    $('.order_status').on('click', function (e) {
+        e.preventDefault(e);
+        var orderId = $(this).closest('tr').data('id');
+        var statusId = $(this).closest('tr').data('status');
+        var branchId = $(this).closest('tr').data('bname');
+        
+        $(".form-status input[value = " + statusId + "]").prop("checked",true);
+        $('#editOrderStatus').val(orderId);
+    });
+    
     // actions for couriers
     $('.courier_action a').on('click', function (e) {
         e.preventDefault(e);

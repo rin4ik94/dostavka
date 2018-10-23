@@ -1,6 +1,6 @@
 <div class="modal fade" id="newStoreCategory" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form class="modal-content" action="{{ route('managers.group.store') }}" method="POST" novalidate>
+    <form class="modal-content needs-validation" action="{{ route('managers.group.store') }}" method="POST" novalidate>
       <div class="modal-header">
         <h5 class="modal-title">Новая категория магазина</h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">

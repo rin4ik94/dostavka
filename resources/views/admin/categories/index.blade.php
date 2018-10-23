@@ -16,7 +16,7 @@
             @foreach($managers as $manager)
               <option value="{{$manager->id}}" 
                 @if(request()->get('manager') == $manager->id) selected 
-                @endif>{{ $manager->manager->name }}</option>
+                @endif>{{ $manager->name }}</option>
             @endforeach
           </select>
         </div>
@@ -35,7 +35,7 @@
           <div class="category-column category-action" data="{{$category->status}}">
               <div class="btn-group btn-group-sm action-edit">
                 <a href="{{ route('categories.edit',$category->id) }}" data-toggle="modal" data-target="#categoryEdit" class="btn btn-light" data="{{ $category->id }}">
-                  <i class="icon">delete</i>
+                  <i class="icon">edit</i>
                 </a>
               </div>
             @if(count($category->children) < 1)

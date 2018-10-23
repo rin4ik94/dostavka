@@ -8,9 +8,30 @@ class OrderController extends Controller
 {
 		public function index()
     {
+        $q = request()->q ?? '';
+        if($q){
+            $orders = Order::with('manager', 'branch', 'client','payment', 'courier', 'region', 'status')->ofId($q)->paginate(1);
+        }
+        elseif(in_array(request()->status,['4','5'])){
+            $orders = Order::with('manager', 'branch', 'client','payment', 'courier', 'region', 'status')->orderBy('id', 'desc')
+            ->whereNotIn('order_status_id', [1,2,3])
+            ->ofStatus(request()->status)
+            ->ofDate(request()->date, request()->status)
+            ->paginate(10);
+            
+        }else{
+            $orders = Order::with('manager', 'branch', 'client','payment', 'courier', 'region', 'status')
+            ->orderBy('id', 'desc')
+            ->whereNotIn('order_status_id', [4,5])
+            ->ofStatus(request()->status)
+            ->paginate(10);
+        }
+            $branches = $orders->map(function($orders){
+                return $orders->getBranches();
+            });
+
         $couriers = Courier::orderBy('id','ASC')->take(5)->get();
-        $orders = Order::with('manager', 'branch', 'client','payment', 'courier', 'region', 'status')->orderBy('id', 'desc')->ofStatus(request()->status)->paginate(10);
-        return view('admin.orders.index',compact('orders','couriers'));
+        return view('admin.orders.index',compact('orders','couriers'));    
     }
 
     public function create()

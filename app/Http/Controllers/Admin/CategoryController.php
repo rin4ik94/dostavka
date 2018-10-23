@@ -15,17 +15,13 @@ class CategoryController extends Controller
     {
         $this->middleware('permission:Категории');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index(Request $request)
     {
         $user = auth()->user();
-        $manager = $request->manager ?? null;
         if ($user->id == 1) {
-            $managers = Employee::with('manager')->get();
+            $manager = $request->manager ?? null;
+            $managers = Manager::all();
             $categories = Category::with('manager', 'children')->where(function ($query) use ($manager) {
                 if ($manager != 'all') {
                     $query->whereManagerId($manager);
@@ -33,21 +29,16 @@ class CategoryController extends Controller
                 $query->whereNull('parent_id');
             })->get();
         } else {
-            $managers = Employee::with('manager')->whereManagerId($user->id)->get();
-            $manager = $user->manager_id;
-            $categories = Category::with('manager', 'children')->where(function ($query) use ($manager) {
-                $query->whereManagerId($manager);
+            $selfmanager = $user->manager_id;
+            $managers = Manager::whereId($selfmanager)->get();
+            $categories = Category::with('manager', 'children')->where(function ($query) use ($selfmanager) {
+                $query->whereManagerId($selfmanager);
                 $query->whereNull('parent_id');
             })->get();
         }
         return view('admin.categories.index', compact('categories', 'managers'));
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -59,25 +50,12 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', "Категория успешно добавлены!");
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $category = Category::findOrFail($id);
         return $response->json($category);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -91,12 +69,6 @@ class CategoryController extends Controller
         return back()->with('success', 'Категория отредактирована.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $category = Category::whereHas('products', function ($query) use ($id) {

@@ -148,8 +148,16 @@ class ManagerController extends Controller
      */
     public function destroy($id)
     {
-      Manager::findOrFail($id)->delete();
+      $idManager = response()->id;
+      // ->delete()
+      Manager::findOrFail($idManager);
       return redirect()->route('managers.index')
         ->with('success', 'Manager deleted successfully');
+    }
+
+    public function delete(Request $request){
+
+        Manager::find($request->id)->delete();
+        return response()->json($request->id);
     }
   }

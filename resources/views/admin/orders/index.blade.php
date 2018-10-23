@@ -1,31 +1,38 @@
 @extends('admin.layouts.dashboard')
 @section('content')
 <div class="toolbar d-flex">
-    <form method="GET" class="form-row status-filter">
+    <form method="GET" class="form-row status-filter" data-fetch="{{ Request::get('status') ?? '' }}">
         <div class="col-auto">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-outline-green @if(!request()->status) active @endif">
-                    <input type="radio" @if(!request()->status) checked @endif onchange="this.form.submit()">Все<span class="badge"></span>
+                <label class="btn btn-outline-green @if(request()->status < 1) active @endif">
+                    <input type="radio" name="status" value="0" @if(request()->status < 1) checked @endif onchange="this.form.submit()">Все<span
+                            class="badge"></span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='1') active @endif">
-                    <input type="radio" name="status" value="1" @if(request()->status=='1') checked @endif onchange="this.form.submit()">Новый<span class="badge"></span>
+                    <input type="radio" name="status" value="1" @if(request()->status=='1') checked @endif
+                    onchange="this.form.submit()">Новый<span class="badge"></span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='2') active @endif">
-                    <input type="radio" name="status" value="2" @if(request()->status=='2') checked @endif onchange="this.form.submit()">Формируется<span class="badge"></span>
+                    <input type="radio" name="status" value="2" @if(request()->status=='2') checked @endif
+                    onchange="this.form.submit()">Формируется<span class="badge"></span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='3') active @endif">
-                    <input type="radio" name="status" value="3" @if(request()->status=='3') checked @endif onchange="this.form.submit()">В пути<span class="badge"></span>
+                    <input type="radio" name="status" value="3" @if(request()->status=='3') checked @endif
+                    onchange="this.form.submit()">В пути<span class="badge"></span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='4') active @endif">
-                    <input type="radio" name="status" value="4" @if(request()->status=='4') checked @endif onchange="this.form.submit()">Доставлен
+                    <input type="radio" name="status" value="4" @if(request()->status=='4') checked @endif
+                    onchange="this.form.submit()">Доставлен
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='5') active @endif">
-                    <input type="radio" name="status" value="5" @if(request()->status=='5') checked @endif onchange="this.form.submit()">Отменен
+                    <input type="radio" name="status" value="5" @if(request()->status=='5') checked @endif
+                    onchange="this.form.submit()">Отменен
                 </label>
             </div>
         </div>
         <div class="col-auto">
-          <input class="form-control" type="date" name="date" value="{{ request()->date }}" onchange="this.form.submit()">
+            <input class="form-control orderByDate" type="date" name="date" value="{{ request()->date ?? Carbon\Carbon::now()->format('Y-m-d') }}"
+                onchange="this.form.submit()" disabled>
         </div>
     </form>
     <div class="ml-auto form-row">
@@ -50,12 +57,13 @@
     </thead>
     <tbody>
         @foreach($orders as $order)
-        <tr data-id="{{ $order->id }}" data-mname="{{ $order->manager->name }}" data-bname="{{ $order->branch->name ?? '' }}"
+        <tr data-id="{{ $order->id }}" data-mname="{{ $order->manager->name }}" data-omanager="{{ $order->manager_id }}"
+            data-bname="{{ $order->branch->name ?? '' }}"
             data-cname="{{ $order->client->getFullname() }}" data-cmobile="{{ $order->client->mobile }}" data-status="{{  $order->order_status_id }}"
             data-ostreet="{{  $order->delivery_address_street }}" data-ohome="{{  $order->delivery_address_home }}"
             data-ofloor="{{  $order->delivery_address_floor }}" data-oapartment="{{  $order->delivery_address_apartment }}"
             data-oremark="{{  $order->delivery_address_remark }}" data-odeliver="5000" data-payment="{{ $order->payment->name_ru}}"
-            data-oprice="{{$order->order_price}}" data-tprice="{{$order->total_price}}">
+            data-oprice="{{$order->order_price}}" data-tprice="{{$order->total_price}}" data-branches="{{ $order->getBranches() }}">
             <td><a class="text-red" href="#" data-toggle="modal" data-target="#Order">{{ $order->id }}</a></td>
             <td>{{ $order->getTime()}}</td>
             <td>{{ $order->manager->name }}</td>
@@ -65,7 +73,7 @@
             @else
             <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id }}">Выбрать</a></td>
             @endif
-            <td><a class="text-green order_client" href="#" data-toggle="modal" data-target="#Client" data-clientId="{{ $order->client_id }}">{{
+            <td><a class="text-green order_client" href="#" data-toggle="modal" data-target="#Client" data-client="{{ $order->client_id }}">{{
                     $order->client->getFullname() }}</a></td>
             <td>{{ $order->delivery_address_street }}</td>
             @if($order->courier_id != '')
@@ -78,7 +86,7 @@
             <td>{{ $order->total_price }}</td>
             <td>{{ $order->payment->name_ru }}</td>
             <td><a class="{{ $order->status->color }} order_status" href="#" data-toggle="modal" data-target="#orderStatus">{{
-                    $order->status->name }}</a></td>
+                    $order->status->name }} {{ $order->status_count }}</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -105,14 +113,16 @@
 </div>
 @endif
 <script>
-    $(document).ready(function(){
-    var datevalue = $(".status-filter input[name = 'date']").val();
-    if(!datevalue && ){
-      $(".status-filter input[name = 'date']").prop('name', '');
-    }
-    else{
-      $(".status-filter input[name = 'date']").prop('name', 'date');
-    }
-  });
-  </script>
+    $(document).ready(function () {
+        $statusid = $('.status-filter').data('fetch');
+        if ($statusid == 4 || $statusid == 5) {
+            $('.orderByDate').prop('disabled', false);
+        } else {
+            $('.orderByDate').prop('disabled', true);
+        }
+        if (!$status) {
+            alert('test');
+        }
+    });
+</script>
 @endsection
