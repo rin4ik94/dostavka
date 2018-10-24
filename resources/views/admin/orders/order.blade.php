@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Заказ № 154</h5>
+        <h5 class="modal-title">Заказ № <span class="orderIdForOrder"></span></h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,8 +15,8 @@
                 <label class="form-label" for="editNameUz">Статус</label>
               </div>
               <div class="col-8">
-                <select class="custom-select" id="storeManager" name="manager_id" required="">
-                  <option value="1" selected>Новый</option>
+                <select class="custom-select" id="statusOrder" name="status_id" required>
+                  <option value="1">Новый</option>
                   <option value="2">Формируется</option>
                   <option value="3">В пути</option>
                   <option value="4">Доставлен</option>
@@ -26,10 +26,10 @@
             </div>
             <div class="form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="editNameUz">История</label>
+                <label class="form-label" for="orderStory">История</label>
               </div>
               <div class="col-8">
-                <textarea class="form-control" rows="2" disabled>Тест</textarea>
+                <textarea class="form-control" rows="2" id="orderStory" disabled>Тест</textarea>
               </div>
             </div>
           </section>
@@ -37,19 +37,19 @@
             <h4 class="title">Клиенть</h4>
             <div class="form-group form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="editNameUz">Имя</label>
+                <label class="form-label" for="orderClientName">Имя</label>
               </div>
               <div class="col-8">
-                <input class="form-control" type="text" value="Jalolddin" disabled>
+                <input class="form-control" type="text" id="orderClientName" value="Jalolddin" disabled>
               </div>
             </div>
             <div class="form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="editNameUz">Телефон</label>
+                <label class="form-label" for="orderClientMobile">Телефон</label>
               </div>
               <div class="col-8">
-                <input class="form-control" type="text" value="+998903003363" disabled>
-                <small class="form-text text-red">Клиент в черном списке</small>
+                <input class="form-control" type="text" id="orderClientMobile" value="+998903003363" disabled>
+                {{-- <small class="form-text text-red">Клиент в черном списке</small> --}}
               </div>
             </div>
           </section>
@@ -57,22 +57,19 @@
             <h4 class="title">Магазин</h4>
             <div class="form-group form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label">Магазин</label>
+                <label class="form-label" for="orderManagerName">Магазин</label>
               </div>
               <div class="col-8">
-                <input class="form-control" type="text" value="Makro" disabled>
+                <input class="form-control" type="text" id="orderManagerName" value="Makro" disabled>
               </div>
             </div>
             <div class="form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="order_branch">Филиал</label>
+                <label class="form-label" for="ordeBranches">Филиал</label>
               </div>
               <div class="col-8">
-                <select class="custom-select" id="order_branch" name="order_branch" required="">
-                  <option value="0" selected disabled>Невыбран</option>
-                  <option value="1">Филиал 1 (Buyuk Ipak Yo`li 101-uy)</option>
-                  <option value="2">Филиал 2 (Farg`ona Sh, Yuksalish ko`chasi 100-uy)</option>
-                  <option value="3">Филиал 3 (Toshloq tumani, Eski shahar ko`chasi 100-uy)</option>
+                <select class="custom-select" id="orderBranches" name="branch_id" required>
+                  <option value="" selected disabled>Не выбран</option>
                 </select>
               </div>
             </div>
@@ -81,11 +78,11 @@
             <h4 class="title">Доставка</h4>
             <div class="form-group form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="editNameUz">Регион</label>
+                <label class="form-label" for="orderRegions">Регион</label>
               </div>
               <div class="col-8">
-                <select class="custom-select" id="storeManager" name="manager_id" required="">
-                  <option value="0" selected disabled>Не выбран</option>
+                <select class="custom-select" id="orderRegions" name="region_id" required>
+                  <option value="" selected disabled>Не выбран</option>
                   <option value="1">Ishonch</option>
                   <option value="2">Makro</option>
                   <option value="3">Euro Spar</option>
@@ -99,36 +96,36 @@
             </div>
             <div class="form-group form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="edit_order_street">Улица</label>
+                <label class="form-label" for="deliveryStreet">Улица</label>
               </div>
               <div class="col-8">
-                <input class="form-control" id="edit_order_street" type="text" name="edit_order_street" value="ул.Сфйлгох">
+                <input class="form-control" id="deliveryStreet" type="text" name="delivery_address_street" value="">
               </div>
             </div>
             <div class="form-group form-row">
               <div class="col-8 offset-4">
                 <div class="form-row">
               <div class="col">
-                <label class="form-label" for="edit_order_house">Дом</label>
-                <input class="form-control" id="edit_order_house" type="text" name="edit_order_house" value="2">
+                <label class="form-label" for="deliveryHome">Дом</label>
+                <input class="form-control" id="deliveryHome" type="text" name="delivery_address_home" value="">
               </div>
               <div class="col">
-                <label class="form-label" for="edit_order_body">Корп.</label>
-                <input class="form-control" id="edit_order_body" type="text" name="edit_order_body" value="1">
+                <label class="form-label" for="deliveryFloor">Корп.</label>
+                <input class="form-control" id="deliveryFloor" type="text" name="delivery_address_floor" value="">
               </div>
               <div class="col">
-                <label class="form-label" for="edit_order_apartment">Кв.</label>
-                <input class="form-control" id="edit_order_apartment" type="text" name="edit_order_apartment" value="130">
+                <label class="form-label" for="deliveryApartment">Кв.</label>
+                <input class="form-control" id="deliveryApartment" type="text" name="delivery_address_apartment" value="">
               </div>
             </div>
               </div>
             </div>
             <div class="form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="edit_order_desc">Комментарий</label>
+                <label class="form-label" for="deliveryRemark">Комментарий</label>
               </div>
               <div class="col-8">
-                <textarea class="form-control" id="edit_order_desc" name="edit_order_desc" rows="2">Ески бозор олдиан кирилади</textarea>
+                <textarea class="form-control" id="deliveryRemark" name="delivery_address_remark" rows="2"></textarea>
               </div>
             </div>
           </section>
@@ -139,7 +136,7 @@
                 <label class="form-label">Способ оплаты</label>
               </div>
               <div class="col-8">
-                <input class="form-control" value="Наличными" disabled>
+                <input class="form-control" id="payment" value="Наличными" disabled>
               </div>
             </div>
             <div class="form-group form-row">
@@ -147,23 +144,23 @@
                 <label class="form-label">Сумма заказа</label>
               </div>
               <div class="col-8">
-                <input class="form-control" value="5 000" disabled>
+                <input class="form-control" id="orderPrice" name="order_price" value="" disabled>
               </div>
             </div>
             <div class="form-group form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="edit_order_delivery_price">Цена доставки</label>
+                <label class="form-label" for="deliveryPrice">Цена доставки</label>
               </div>
               <div class="col-8">
-                <input class="form-control" id="edit_order_delivery_price" type="text" name="edit_order_delivery_price" value="5000">
+                <input class="form-control" id="deliveryPrice" type="text" name="delivery_price" value="">
               </div>
             </div>
             <div class="form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label">Сумма к оплате</label>
+                <label class="form-label" for="totalPrice">Сумма к оплате</label>
               </div>
               <div class="col-8">
-                <input class="form-control" value="36 000" disabled>
+                <input class="form-control" id="totalPrice" name="total_price" value="" disabled>
               </div>
             </div>
           </section>
