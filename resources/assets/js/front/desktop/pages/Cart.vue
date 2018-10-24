@@ -220,7 +220,7 @@ export default {
           }
           p = p + "," + v.id;
         });
-        params["ids"] = p;
+        params["ids"] = p; 
         axios
           .get(`/api/managers/${this.manager.slug}/products/cart`, {
             params: params

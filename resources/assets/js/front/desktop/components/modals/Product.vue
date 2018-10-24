@@ -102,7 +102,7 @@ export default {
             this.productMenu.unshift({
               id: this.product.id,
               quantity: this.quantity
-            });
+            }); 
             localforage.setItem("cartRegion", this.$route.params.city);
             axios
               .get(`/api/managers/${this.$route.params.slug}`)
@@ -121,7 +121,8 @@ export default {
               this.productMenu = [];
               // this.productMenu.push(product);
               localforage.removeItem("cart");
-              localforage.removeItem("totalCart");
+              localforage.removeItem("totalCart"); 
+
               this.setTotal(0);
               this.addToTotal(this.product.new_price * this.quantity);
               this.productMenu.unshift({

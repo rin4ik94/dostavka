@@ -56710,7 +56710,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              $(document).on("hide.bs.modal", this.replacePage);
+              $("#product").on("hide.bs.modal", this.replacePage);
 
               if (!this.$route.params.sluged) {
                 this.allProducts();
@@ -57816,6 +57816,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
               // this.productMenu.push(product);
               __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.removeItem("cart");
               __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.removeItem("totalCart");
+
               _this2.setTotal(0);
               _this2.addToTotal(_this2.product.new_price * _this2.quantity);
               _this2.productMenu.unshift({

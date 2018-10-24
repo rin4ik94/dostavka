@@ -88,7 +88,7 @@ export default {
     });
   },
   beforeMount: async function() {
-    $(document).on("hide.bs.modal", this.replacePage);
+    $("#product").on("hide.bs.modal", this.replacePage);
 
     if (!this.$route.params.sluged) {
       this.allProducts();
