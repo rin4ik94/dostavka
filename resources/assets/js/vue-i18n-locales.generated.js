@@ -16,7 +16,9 @@ export default {
             "price": "На сумму",
             "sum": "сум",
             "cart": "Корзина",
-            "button": "Оформить заказ"
+            "button": "Оформить заказ",
+            "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
+            "confirmTitle": "Подтвердите действие:"
         },
         "passwords": {
             "password": "Passwords must be at least six characters and match the confirmation.",
@@ -142,6 +144,10 @@ export default {
                 }
             },
             "attributes": []
+        },
+        "helper": {
+            "yes": "Да",
+            "no": "Нет"
         }
     },
     "uz": {
@@ -161,7 +167,9 @@ export default {
             "price": "Umumiy puli",
             "sum": "sum",
             "cart": "Savatcha",
-            "button": "Buyurtma qilish"
+            "button": "Buyurtma qilish",
+            "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
+            "confirmTitle": "Amalni tasdiqlang:"
         },
         "passwords": {
             "password": "Passwords must be at least six characters and match the confirmation.",
@@ -287,6 +295,10 @@ export default {
                 }
             },
             "attributes": []
+        },
+        "helper": {
+            "yes": "Xa",
+            "no": "Yo'q"
         }
     }
 }

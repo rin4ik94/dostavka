@@ -39,12 +39,22 @@
                   <button v-else class="btn btn-block btn-green" @click="increaseCart">Готово</button>
                 </div>
               </div>
+               <pu-dialog-confirm v-if="manager"
+                :pu-active.sync="active"
+                :pu-size="500"
+                :pu-title="$t('cart.confirmTitle')"
+                :pu-content="$t('cart.confirmContent', {'shop': manager.name})"
+                :pu-confirm-text="$t('helper.yes')"
+                :pu-cancel-text="$t('helper.no')" 
+                @pu-cancel="onCancel"
+                @pu-confirm="confirmAdd" /> 
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </div> 
+ 
 </div>
 </template>
 <script>
@@ -55,8 +65,10 @@ export default {
   data() {
     return {
       product: "",
+      active: false,
       productMenu: [],
-      quantity: 1
+      quantity: 1,
+      value: null
     };
   },
   watch: {
@@ -80,6 +92,9 @@ export default {
     })
   },
   methods: {
+    onCancel() {
+      this.active = false;
+    },
     ...mapActions({
       setCart: "setCart",
       setManager: "setManager",
@@ -93,6 +108,27 @@ export default {
       this.$router.replace({ name: "category", params: { sluged: slug } });
       this.hideModal();
     },
+    confirmAdd() {
+      this.productMenu = [];
+      localforage.removeItem("cart");
+      localforage.removeItem("totalCart");
+
+      this.setTotal(0);
+      this.addToTotal(this.product.new_price * this.quantity);
+      this.productMenu.unshift({
+        id: this.product.id,
+        quantity: this.quantity
+      });
+      localforage.setItem("cartRegion", this.$route.params.city);
+      axios.get(`/api/managers/${this.$route.params.slug}`).then(response => {
+        this.setManager(response.data.data);
+        localforage.setItem("manager", response.data.data);
+      });
+      localforage.setItem("cart", this.productMenu);
+      this.setCart(this.productMenu);
+      this.hideModal();
+      return;
+    },
     addToCart() {
       if (this.manager.slug != this.$route.params.slug) {
         localforage.getItem("cart").then(response => {
@@ -102,7 +138,7 @@ export default {
             this.productMenu.unshift({
               id: this.product.id,
               quantity: this.quantity
-            }); 
+            });
             localforage.setItem("cartRegion", this.$route.params.city);
             axios
               .get(`/api/managers/${this.$route.params.slug}`)
@@ -113,36 +149,8 @@ export default {
             this.setCart(this.productMenu);
             this.hideModal();
           } else {
-            if (
-              confirm(
-                "В вашей корзине продукты из другого магазина, Вы хотите удалить их?"
-              )
-            ) {
-              this.productMenu = [];
-              // this.productMenu.push(product);
-              localforage.removeItem("cart");
-              localforage.removeItem("totalCart"); 
-
-              this.setTotal(0);
-              this.addToTotal(this.product.new_price * this.quantity);
-              this.productMenu.unshift({
-                id: this.product.id,
-                quantity: this.quantity
-              });
-              localforage.setItem("cartRegion", this.$route.params.city);
-              axios
-                .get(`/api/managers/${this.$route.params.slug}`)
-                .then(response => {
-                  this.setManager(response.data.data);
-                  localforage.setItem("manager", response.data.data);
-                });
-              localforage.setItem("cart", this.productMenu);
-              this.setCart(this.productMenu);
-              this.hideModal();
-              return;
-            } else {
-              return;
-            }
+            this.active = true;
+            return;
           }
         });
       } else {

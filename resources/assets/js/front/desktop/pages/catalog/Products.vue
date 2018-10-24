@@ -32,7 +32,14 @@
         </li> 
     </ul> 
     <Pagination :pagination="pagination" :offset="3" @paginate="allProducts"/>
-
+    <pu-dialog-confirm  v-if="manager"
+        :pu-active.sync="active"
+        :pu-size="500"
+        :pu-title="$t('cart.confirmTitle')"
+        :pu-content="$t('cart.confirmContent', {'shop': manager.name})"
+        :pu-confirm-text="$t('helper.yes')"
+        :pu-cancel-text="$t('helper.no')" 
+        @pu-confirm="confirmAdd" /> 
     </div>
 </template>
 <script>
@@ -51,7 +58,8 @@ export default {
       pagination: {},
       product: "",
       productMenu: [],
-      products: []
+      products: [],
+      active: false
     };
   },
 
@@ -203,8 +211,6 @@ export default {
       });
     },
     decreaseQuantity(product) {
-      console.log("here");
-
       let index = this.productMenu.findIndex(prod => {
         return prod.id == product.id;
       });
@@ -257,6 +263,17 @@ export default {
         }
       });
     },
+    confirmAdd() {
+      this.productMenu = [];
+      // this.productMenu.push(product);
+      localforage.removeItem("cart");
+      localforage.removeItem("totalCart");
+      this.setTotal(0);
+      this.addToTotal(this.product.new_price);
+
+      this.emptyCartAdd(this.product);
+      this.cartData();
+    },
     emptyCartAdd(product) {
       let cart = [];
       localforage.setItem("cartRegion", this.$route.params.city);
@@ -287,24 +304,8 @@ export default {
           return;
         } else {
           if (this.manager.slug != this.$route.params.slug) {
-            if (
-              confirm(
-                "В вашей корзине продукты из другого магазина, Вы хотите удалить их?"
-              )
-            ) {
-              this.productMenu = [];
-              // this.productMenu.push(product);
-              localforage.removeItem("cart");
-              localforage.removeItem("totalCart");
-              this.setTotal(0);
-              this.addToTotal(product.new_price);
-
-              this.emptyCartAdd(product);
-              this.cartData();
-              return;
-            } else {
-              return;
-            }
+            this.active = true;
+            return;
           }
           this.productMenu.map((value, key) => {
             if (value.id == this.product.id) {

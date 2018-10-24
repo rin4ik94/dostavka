@@ -79,8 +79,8 @@ export default {
       this.active = id;
       this.id = id;
     },
-    getCatalog() { 
-      setTimeout(() => {  
+    getCatalog() {
+      setTimeout(() => {
         let uri = `/api/managers/${
           this.$route.params.slug
         }?withManagers&region=${this.$route.params.city}`;
