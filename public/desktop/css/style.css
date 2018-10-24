@@ -342,6 +342,7 @@
   color: #323a42;
   border-bottom: 1px solid #eceae7;
   border-top-width: 0px;
+  cursor: pointer;
 }
 .categories > .nav >  .nav-item > .nav-link:after,
 .categories > .nav >  .nav-item > .nav .nav-link:after {
@@ -382,7 +383,7 @@
   display: block;
   padding: 8px 24px;
   color: #323a42;
-
+  cursor: pointer;
 }
 
 .regions-nav .nav-item {

@@ -108,6 +108,25 @@ export const setRegion = ({ commit, dispatch }, regionId) => {
         return Promise.resolve(regionId)
     })
 }
+
+export const checkLangExists = ({ commit, dispatch }) => {
+    return localforage.getItem('lang').then((lang) => {
+        dispatch('langChange', lang)
+    })
+}
+export const langChange = ({ commit, dispatch }, lang) => {
+
+    if (isEmpty(lang)) {
+        localforage.setItem('lang', 'ru')
+        Vue.i18n.set('ru');
+        commit('setLang', 'ru')
+    } else {
+        axios.get(`/api/locale/${lang}`)
+        commit('setLang', lang)
+        localforage.setItem('lang', lang)
+        Vue.i18n.set(lang);
+    }
+}
 // export const setToken = ({ commit, dispatch }, token) => {
 //     if (isEmpty(token)) {
 //         return dispatch('checkTokenExists').then((token) => {

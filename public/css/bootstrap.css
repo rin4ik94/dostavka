@@ -1613,6 +1613,7 @@ input[type="button"].btn-block {
   white-space: nowrap;
   background-color: transparent;
   border: 0;
+  cursor: pointer;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
@@ -1630,6 +1631,7 @@ input[type="button"].btn-block {
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #6c757d;
   background-color: transparent;
+  cursor: default;
 }
 
 .dropdown-menu.show {

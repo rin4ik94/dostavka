@@ -7,6 +7,9 @@ export const regionId = (state) => {
 export const regionName = (state) => {
     return state.user.regionName
 }
+export const locale = (state) => {
+    return state.user.lang
+}
 export const regionSlug = (state) => {
     return state.user.regionSlug
 }

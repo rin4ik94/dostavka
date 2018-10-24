@@ -16,6 +16,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { EventBus } from "../../bus.js";
 
 export default {
   props: ["regions"],

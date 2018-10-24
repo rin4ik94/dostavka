@@ -40,10 +40,12 @@ import localforage from "localforage";
 import { isEmpty } from "lodash";
 import { mapActions, mapGetters } from "vuex";
 import Pagination from "../../components/Pagination";
+import { EventBus } from "../../bus.js";
 
 export default {
   props: ["price", "branch"],
   components: { Pagination },
+
   data() {
     return {
       pagination: {},
@@ -74,6 +76,16 @@ export default {
         this.cartEvent();
       }
     }
+  },
+  mounted() {
+    EventBus.$on("changeLanguage", () => {
+      // this.$emit("hidePage");
+      if (this.$route.name == "category") {
+        this.fetchItems();
+      } else {
+        this.allProducts();
+      }
+    });
   },
   beforeMount: async function() {
     $(document).on("hide.bs.modal", this.replacePage);
@@ -147,7 +159,6 @@ export default {
       addToTotal: "addToTotal"
     }),
     removeFromCart(product) {
-      console.log("here");
       let item = this.productMenu.findIndex(prod => {
         return prod.id == product.id;
       });
@@ -231,7 +242,7 @@ export default {
         if (value.id != data.id) {
           data.id = value.id;
           data.quantity = value.quantity;
-          cart.push(data);
+          cart.unshift(data);
         }
       });
       localforage.setItem("cart", cart);
@@ -255,7 +266,7 @@ export default {
       });
 
       product.quantity = 1;
-      cart.push({ id: product.id, quantity: 1 });
+      cart.unshift({ id: product.id, quantity: 1 });
       this.productMenu.push(product);
       localforage.setItem("cart", cart);
     },

@@ -15,7 +15,7 @@ class ManagerCategoriesResource extends JsonResource
      */
     public function toArray($request)
     {
-        if ($request->lang == 'uz') {
+        if (\Cache::get('lang') == 'uz' || $request->lang == 'uz') {
             $name = $this->name_uz;
         } else {
             $name = $this->name_ru;
