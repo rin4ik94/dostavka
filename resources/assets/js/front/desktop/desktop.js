@@ -9,6 +9,7 @@ import localforage from 'localforage'
 // require('../../bootstrap')
 import * as Modals from './components/modals/index'
 import PrismaVue from './components/prisma/material'
+
 Vue.use(PrismaVue)
 const config = {
     moduleName: 'lang',
@@ -17,9 +18,14 @@ const config = {
 // set the start locale to use
 Vue.use(vuexI18n.plugin, store, config);
 
+Vue.i18n.add('ru', Locales.ru);
+Vue.i18n.add('uz', Locales.uz);
+Vue.i18n.fallback('ru')
+
 Object.values(Modals).forEach((Modal) => {
     Vue.use(Modal)
 })
+
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -50,9 +56,7 @@ Vue.filter('toCurrency', function (value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
 });
 
-Vue.i18n.add('ru', Locales.ru);
-Vue.i18n.add('uz', Locales.uz);
-Vue.i18n.fallback('ru')
+
 store.dispatch('checkLangExists')
 store.dispatch('setRegion').catch(() => {
     $("#Regions").modal('show')

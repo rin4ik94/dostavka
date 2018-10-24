@@ -36,7 +36,7 @@
         :pu-active.sync="active"
         :pu-size="500"
         :pu-title="$t('cart.confirmTitle')"
-        :pu-content="$t('cart.confirmContent', {'shop': manager.name})"
+        :pu-content="$t('cart.confirmContent', {'shop': manager.name ? manager.name : 'none'})"
         :pu-confirm-text="$t('helper.yes')"
         :pu-cancel-text="$t('helper.no')" 
         @pu-confirm="confirmAdd" /> 
@@ -82,6 +82,7 @@ export default {
       deep: true,
       handler() {
         this.cartEvent();
+        this.productMenu = [];
       }
     }
   },

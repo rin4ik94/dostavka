@@ -51464,6 +51464,7 @@ var SubCategories = __webpack_require__(243);
 // require('../../bootstrap')
 
 
+
 Vue.use(__WEBPACK_IMPORTED_MODULE_7__components_prisma_material__["a" /* default */]);
 var config = {
     moduleName: 'lang',
@@ -51471,9 +51472,14 @@ var config = {
     // set the start locale to use
 };Vue.use(__WEBPACK_IMPORTED_MODULE_3_vuex_i18n__["a" /* default */].plugin, __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */], config);
 
+Vue.i18n.add('ru', __WEBPACK_IMPORTED_MODULE_4__vue_i18n_locales_generated_js__["a" /* default */].ru);
+Vue.i18n.add('uz', __WEBPACK_IMPORTED_MODULE_4__vue_i18n_locales_generated_js__["a" /* default */].uz);
+Vue.i18n.fallback('ru');
+
 Object.values(__WEBPACK_IMPORTED_MODULE_6__components_modals_index__).forEach(function (Modal) {
     Vue.use(Modal);
 });
+
 window.axios = __webpack_require__(18);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -51503,9 +51509,6 @@ Vue.filter('toCurrency', function (value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 });
 
-Vue.i18n.add('ru', __WEBPACK_IMPORTED_MODULE_4__vue_i18n_locales_generated_js__["a" /* default */].ru);
-Vue.i18n.add('uz', __WEBPACK_IMPORTED_MODULE_4__vue_i18n_locales_generated_js__["a" /* default */].uz);
-Vue.i18n.fallback('ru');
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('checkLangExists');
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setRegion').catch(function () {
     $("#Regions").modal('show');
@@ -56698,6 +56701,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       deep: true,
       handler: function handler() {
         this.cartEvent();
+        this.productMenu = [];
       }
     }
   },
@@ -57503,7 +57507,7 @@ var render = function() {
               "pu-size": 500,
               "pu-title": _vm.$t("cart.confirmTitle"),
               "pu-content": _vm.$t("cart.confirmContent", {
-                shop: _vm.manager.name
+                shop: _vm.manager.name ? _vm.manager.name : "none"
               }),
               "pu-confirm-text": _vm.$t("helper.yes"),
               "pu-cancel-text": _vm.$t("helper.no")
@@ -57789,7 +57793,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      product: "",
+      product: [],
       active: false,
       productMenu: [],
       quantity: 1,
@@ -57861,7 +57865,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     addToCart: function addToCart() {
       var _this3 = this;
 
-      if (this.manager.slug != this.$route.params.slug) {
+      if (this.manager && this.manager.slug != this.$route.params.slug) {
         __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.getItem("cart").then(function (response) {
           if (Object(__WEBPACK_IMPORTED_MODULE_1_lodash__["isEmpty"])(response)) {
             _this3.setTotal(0);
@@ -57871,6 +57875,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
               quantity: _this3.quantity
             });
             __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("cartRegion", _this3.$route.params.city);
+            __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("cart", _this3.productMenu);
             axios.get("/api/managers/" + _this3.$route.params.slug).then(function (response) {
               _this3.setManager(response.data.data);
               __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("manager", response.data.data);
@@ -57890,6 +57895,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         this.hideModal();
         this.addToTotal(this.product.new_price * this.quantity);
         __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("cart", this.productMenu);
+        __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("cartRegion", this.$route.params.city);
         this.setCart(this.productMenu);
         return;
       }
@@ -57944,9 +57950,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.addToTotal(-(this.product.quantity * this.product.new_price));
       this.productMenu.splice(index, 1);
       $("#product").modal("hide");
-
+      alert(this.productMenu);
+      if (!this.productMenu.length) {
+        console.log("here");
+        __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.removeItem("manager");
+        this.setManager("empty");
+        __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.removeItem("cart");
+        __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.removeItem("totalCart");
+        __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.removeItem("cartRegion");
+      }
       __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem("cart", this.productMenu);
-      this.setCart(this.productMenu);
+      this.setCart("empty");
     },
     increaseQuantity: function increaseQuantity() {
       this.quantity++;
@@ -58211,6 +58225,8 @@ var render = function() {
                               "pu-title": _vm.$t("cart.confirmTitle"),
                               "pu-content": _vm.$t("cart.confirmContent", {
                                 shop: _vm.manager.name
+                                  ? _vm.manager.name
+                                  : "none"
                               }),
                               "pu-confirm-text": _vm.$t("helper.yes"),
                               "pu-cancel-text": _vm.$t("helper.no")
@@ -63759,7 +63775,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n.pu-dialog {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  text-align: center;\n  overflow: hidden;\n  z-index: 9999;\n  pointer-events: none;\n}\n.pu-dialog-leave-active {\n  -webkit-transition: opacity 0.15s ease;\n  transition: opacity 0.15s ease;\n}\n.pu-dialog::before {\n  content: \"\";\n  display: inline-block;\n  vertical-align: middle;\n  height: 100%;\n}\n.pu-dialog-container {\n  pointer-events: auto;\n  position: relative;\n  display: inline-block;\n  vertical-align: middle;\n  text-align: left;\n  min-width: 280px;\n  max-width: 100%;\n  max-height: 100%;\n  margin: 0 auto;\n  outline: 0;\n  pointer-events: auto;\n  background-color: #fff;\n  border-radius: 10px;\n  -webkit-box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);\n          box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);\n  -webkit-transition: opacity 0.15s ease, -webkit-transform 0.15s ease;\n  transition: opacity 0.15s ease, -webkit-transform 0.15s ease;\n  transition: opacity 0.15s ease, transform 0.15s ease;\n  transition: opacity 0.15s ease, transform 0.15s ease, -webkit-transform 0.15s ease;\n}\n.pu-dialog-enter-active .pu-dialog-container,\n.pu-dialog-leave-active .pu-dialog-container {\n  opacity: 0;\n  -webkit-transform: translate3d(0, 35px, 0);\n          transform: translate3d(0, 35px, 0);\n}\n.pu-dialog-title {\n  padding: 24px 24px 0;\n}\n.pu-dialog-content {\n  padding: 20px 24px 1px 24px;\n  overflow: auto;\n  position: relative;\n}\n.pu-dialog-content:first-child {\n    padding-top: 24px;\n}\n.pu-dialog-content p:first-child:not(:only-child) {\n    margin-top: 0;\n}\n.pu-dialog-content p:last-child:not(:only-child) {\n    margin-bottom: 0;\n}\n.pu-dialog-actions {\n  min-height: 52px;\n  padding: 1px 24px 1px 24px;\n  text-align: right;\n  position: relative;\n}\n.pu-dialog-actions .pu-button {\n    min-width: 64px;\n    margin: 0;\n}\n.pu-dialog-actions .pu-button + .pu-button {\n      margin-left: 12px;\n}\n", ""]);
+exports.push([module.i, "\n.pu-dialog {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  text-align: center;\n  overflow: hidden;\n  z-index: 9999;\n  pointer-events: none;\n}\n.pu-dialog-leave-active {\n  -webkit-transition: opacity 0.15s ease;\n  transition: opacity 0.15s ease;\n}\n.pu-dialog::before {\n  content: \"\";\n  display: inline-block;\n  vertical-align: middle;\n  height: 100%;\n}\n.pu-dialog-container {\n  pointer-events: auto;\n  position: relative;\n  display: inline-block;\n  vertical-align: middle;\n  text-align: left;\n  min-width: 280px;\n  max-width: 100%;\n  max-height: 100%;\n  margin: 0 auto;\n  outline: 0;\n  pointer-events: auto;\n  background-color: #fff;\n  border-radius: 10px;\n  -webkit-box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);\n          box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);\n  -webkit-transition: opacity 0.15s ease, -webkit-transform 0.15s ease;\n  transition: opacity 0.15s ease, -webkit-transform 0.15s ease;\n  transition: opacity 0.15s ease, transform 0.15s ease;\n  transition: opacity 0.15s ease, transform 0.15s ease, -webkit-transform 0.15s ease;\n}\n.pu-dialog-enter-active .pu-dialog-container,\n.pu-dialog-leave-active .pu-dialog-container {\n  opacity: 0;\n  -webkit-transform: translate3d(0, 35px, 0);\n          transform: translate3d(0, 35px, 0);\n}\n.pu-dialog-title {\n  padding: 24px 24px 0;\n}\n.pu-dialog-content {\n  padding: 24px 24px 1px 24px;\n  overflow: auto;\n  position: relative;\n}\n.pu-dialog-content:first-child {\n    padding-top: 24px;\n}\n.pu-dialog-content p:first-child:not(:only-child) {\n    margin-top: 0;\n}\n.pu-dialog-content p:last-child:not(:only-child) {\n    margin-bottom: 0;\n}\n.pu-dialog-actions {\n  min-height: 52px;\n  padding: 1px 24px 1px 24px;\n  text-align: right;\n  position: relative;\n}\n.pu-dialog-actions .pu-button {\n    min-width: 64px;\n    margin: 0;\n}\n.pu-dialog-actions .pu-button + .pu-button {\n      margin-left: 12px;\n}\n", ""]);
 
 // exports
 
