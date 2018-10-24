@@ -109,10 +109,10 @@ $(function () {
         var name_uz = $(this).closest('tr').data('nameuz');
         $('#name_ru').val(name_ru);
         $('#name_uz').val(name_uz);
-				$('#editManagerGr').val(id);
-				$('.deleteManagerGroup').attr('data-id',id);
-		});
-		
+        $('#editManagerGr').val(id);
+        $('.deleteManagerGroup').attr('data-id', id);
+    });
+
     //actions for employee-group
     $('.editEmployeGroup a').on('click', function (e) {
         e.preventDefault(e);
@@ -244,14 +244,14 @@ $(function () {
     });
     // actions for orders
     $('.order_id').on('click', function (e) {
-				e.preventDefault(e);
-				$('#orderBranches').empty();
-				$('.order_products').empty();
-        $status_id = $(this).closest('tr').data('status'); //#statusOrder
-        $client_name = $(this).closest('tr').data('cname'); // #orderClientName
-        $client_mobile = $(this).closest('tr').data('cmobile'); // #orderClientMobile
-        $manager_name = $(this).closest('tr').data('mname'); // #orderManagerName
-        $branches = $(this).closest('tr').data('branches'); // #ordeBranches
+        e.preventDefault(e);
+        $('#orderBranches').empty();
+        $('.order_products').empty();
+        $status_id = $(this).closest('tr').data('status');
+        $client_name = $(this).closest('tr').data('cname');
+        $client_mobile = $(this).closest('tr').data('cmobile');
+        $manager_name = $(this).closest('tr').data('mname');
+        $branches = $(this).closest('tr').data('branches');
         $order_street = $(this).closest('tr').data('ostreet');
         $order_home = $(this).closest('tr').data('ohome');
         $order_floor = $(this).closest('tr').data('ofloor');
@@ -260,49 +260,50 @@ $(function () {
         $order_price = $(this).closest('tr').data('oprice');
         $total_price = $(this).closest('tr').data('tprice');
         $deliver_price = $(this).closest('tr').data('odeliver');
-				$payment = $(this).closest('tr').data('payment');
+        $payment = $(this).closest('tr').data('payment');
 				$products = $(this).closest('tr').data('products');
-				$product_pivot = $.map( $products, function( $value, $key ) {
+				$statuses = $(this).closest('tr').data('statuses');
+				$product_pivot = $.map($products, function ($value, $key) {
+            return $value['pivot'];
+				});
+				$order_status_pivot = $.map($statuses, function ($value, $key) {
 					return $value['pivot'];
 				});
-				
+				$('#orderStory').empty();
+				$.each($order_status_pivot, function (index, orderStory) {
+					$('#orderStory').append(orderStory.created_at+'\n');
+				});
 				$.each($product_pivot, function (index, orderProduct) {
-					$('.order_products').append('<tr class="parent_row_order"><td>'+ orderProduct.product_id +'</td><td>'+orderProduct.product_name+'</td><td>'+ orderProduct.product_price +'</td><td>шт</td><td class="product_count"><div class="counter-widget input-group input-group-sm"><div class="input-group-prepend"><button class="btn btn-outline-red decrement" type="button"><i class="icon">remove</i></button></div><input class="form-control input_porduct_count" value="'+ orderProduct.product_count +'" disabled="" type="text"><div class="input-group-append"><button class="btn btn-outline-green increment" type="button"><i class="icon">add</i></button></div></div></td></tr>');	
-				});
-				$('.product_total_count').html('('+calculateSum()+')');
-				function calculateSum() {				
-					var sum = 0;
-					$(".input_porduct_count").each(function() {
-					if(!isNaN(this.value) && this.value.length!=0) {
-					sum += parseFloat(this.value);
-					}
-					});
-					return sum;
-				};
-				$('.increment').click(function(){
-					$y = parseInt($(this).parent().prev().val());
-					$y+= 1;
-					if($y > 1 ){
-						$('.decrement').html('<i class="icon">remove</i>');
-					}
-					$(this).parent().prev().val($y);
-					$('.product_total_count').html('('+calculateSum()+')');
-				});
+            $('.order_products').append('<tr class="parent_row_order"><td>' + orderProduct.product_id + '</td><td>' + orderProduct.product_name + '</td><td class="product_price">' + orderProduct.product_price + '</td><td>шт</td><td class="product_count"><div class="counter-widget input-group input-group-sm"><div class="input-group-prepend"><button class="btn btn-outline-red decrement" type="button"><i class="icon">remove</i></button></div><input class="form-control input_porduct_count" value="' + orderProduct.product_count + '" disabled="" type="text"><div class="input-group-append"><button class="btn btn-outline-green increment" type="button"><i class="icon">add</i></button></div></div></td></tr>');
+        });
+        $('.product_total_count').html('(' + calculateSum() + ')');
+        $('.increment').click(function () {
+            $y = parseInt($(this).parent().prev().val());
+            $y += 1;
+            if ($y > 1) {
+                $(this).parents('.product_count').find('.decrement').html('<i class="icon">remove</i>');
+            }
+            $(this).parent().prev().val($y);
+            $('.product_total_count').html('(' + calculateSum() + ')');
+						$('#orderPrice').val(calculateProductSumma());
+						$('#totalPrice').val(calculateProductTotalPrice());
+        });
+        $('.decrement').click(function () {
+            $y = parseInt($(this).parent().next().val());
+            $y -= 1;
+            if ($y == 1) {
+                $(this).html('<i class="icon">clear</i>');
+            }
+            if ($y < 1) {
+                $(this).closest('tr').remove();
+            }
+            $(this).parent().next().val($y);
+            $('.product_total_count').html('(' + calculateSum() + ')');
+						$('#orderPrice').val(calculateProductSumma());
+						$('#totalPrice').val(calculateProductTotalPrice());
+        });
 
-				$('.decrement').click(function(){
-					$y = parseInt($(this).parent().next().val());
-						$y-= 1;	
-						if($y == 1){
-							$(this).html('<i class="icon">clear</i>');
-						}
-						if($y < 1){
-							$(this).closest('tr').remove();
-						}
-						$(this).parent().next().val($y);
-					$('.product_total_count').html('('+calculateSum()+')');
-				});
-
-				$('#statusOrder').val($status_id);
+        $('#statusOrder').val($status_id);
         $('#orderClientName').val($client_name);
         $('#orderClientMobile').val('+998' + $client_mobile);
         $('#orderManagerName').val($manager_name);
@@ -316,9 +317,14 @@ $(function () {
         $('#deliveryApartment').val($order_apartment);
         $('#deliveryRemark').val($order_remark);
         $('#payment').val($payment);
-        $('#orderPrice').val($order_price);
+        $('#orderPrice').val(calculateProductSumma());
         $('#deliveryPrice').val($deliver_price);
-        $('#totalPrice').val($total_price);
+				$('#totalPrice').val(calculateProductTotalPrice());
+				function calculateProductTotalPrice(){
+					$order_price = parseInt($('#orderPrice').val());
+					$delivery_price = parseInt($('#deliveryPrice').val());
+					return $order_price + $delivery_price;
+				}
     });
 
     $('.order_branch').on('click', function (e) {
@@ -448,3 +454,23 @@ $(function () {
 function disable(input) {
     return $(this).prop('disable', true);
 }
+
+function calculateSum() {
+    var sum = 0;
+    $(".input_porduct_count").each(function () {
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+    });
+    return sum;
+};
+
+function calculateProductSumma() {
+    $summa = 0;
+    $(".parent_row_order").each(function () {
+        $product_price = parseInt($(this).find('.product_price').text());
+        $product_count = parseInt($(this).find('.input_porduct_count').val());
+        $summa += $product_price * $product_count;
+    });
+    return $summa;
+};
