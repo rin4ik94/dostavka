@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="col-auto">
-            <input class="form-control orderByDate" type="date" name="date" value="{{ request()->date ?? Carbon\Carbon::now()->format('Y-m-d') }}"
+            <input class="form-control orderByDate d-none" type="date" name="date" value="{{ request()->date ?? Carbon\Carbon::now()->format('Y-m-d') }}"
                 onchange="this.form.submit()" disabled>
         </div>
     </form>
@@ -64,7 +64,7 @@
             data-ofloor="{{  $order->delivery_address_floor }}" data-oapartment="{{  $order->delivery_address_apartment }}"
             data-oremark="{{  $order->delivery_address_remark }}" data-odeliver="5000" data-payment="{{ $order->payment->name_ru}}"
             data-oprice="{{$order->order_price}}" data-tprice="{{$order->total_price}}" data-branches="{{ $order->getBranches() }}">
-            <td><a class="text-red" href="#" data-toggle="modal" data-target="#Order">{{ $order->id }}</a></td>
+            <td class="order_id"><a class="text-red" href="#" data-toggle="modal" data-target="#Order">{{ $order->id }}</a></td>
             <td>{{ $order->getTime()}}</td>
             <td>{{ $order->manager->name }}</td>
             @if($order->branch_id != '')
@@ -116,12 +116,11 @@
     $(document).ready(function () {
         $statusid = $('.status-filter').data('fetch');
         if ($statusid == 4 || $statusid == 5) {
-            $('.orderByDate').prop('disabled', false);
+            $('.orderByDate').prop('disabled',false);
+            $('.orderByDate').removeClass('d-none');
         } else {
-            $('.orderByDate').prop('disabled', true);
-        }
-        if (!$status) {
-            alert('test');
+            $('.orderByDate').prop('disabled',true);
+            $('.orderByDate').addClass('d-none')
         }
     });
 </script>

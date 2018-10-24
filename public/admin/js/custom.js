@@ -240,6 +240,42 @@ $(function () {
         });
     });
     // action for orders
+    $('.order_id').on('click', function (e) {
+        e.preventDefault(e);
+        $status_id = $(this).closest('tr').data('status'); //#statusOrder
+        $client_name = $(this).closest('tr').data('cname'); // #orderClientName
+        $client_mobile = $(this).closest('tr').data('cmobile'); // #orderClientMobile
+        $manager_name = $(this).closest('tr').data('mname'); // #orderManagerName
+        $branches = $(this).closest('tr').data('branches'); // #ordeBranches
+        $order_street = $(this).closest('tr').data('ostreet');
+        $order_home = $(this).closest('tr').data('ohome');
+        $order_floor = $(this).closest('tr').data('ofloor');
+        $order_apartment = $(this).closest('tr').data('oapartment');
+        $order_remark = $(this).closest('tr').data('oremark');
+        $order_price = $(this).closest('tr').data('oprice');
+        $total_price = $(this).closest('tr').data('tprice');
+        $deliver_price = $(this).closest('tr').data('odeliver');
+        $payment = $(this).closest('tr').data('payment');
+        $('#statusOrder').val($status_id);
+        $('#orderClientName').val($client_name);
+        $('#orderClientMobile').val('+998'+$client_mobile);
+        $('#orderManagerName').val($manager_name);
+        $('#orderBranches').empty();
+        $('#orderBranches').append('<option value="" selected disabled>Не выбран</option>')
+        $.each($branches, function (index, orderBranches) {
+            $('#orderBranches').append('<option value="'+orderBranches.id+'">'+ orderBranches.name +'('+orderBranches.address+')</option>')
+        });
+        $('#deliveryStreet').val($order_street);
+        $('#deliveryHome').val($order_home);
+        $('#deliveryFloor').val($order_floor);
+        $('#deliveryApartment').val($order_apartment);
+        $('#deliveryRemark').val($order_remark);
+        $('#payment').val($payment);
+        $('#orderPrice').val($order_price);
+        $('#deliveryPrice').val($deliver_price);
+        $('#totalPrice').val($total_price);
+    });
+
     $('.order_branch').on('click', function (e) {
         e.preventDefault(e);
         var branches = $(this).closest('tr').data('branches');
