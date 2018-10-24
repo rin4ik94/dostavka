@@ -8,7 +8,8 @@ import Locales from '../../vue-i18n-locales.generated.js';
 import localforage from 'localforage'
 // require('../../bootstrap')
 import * as Modals from './components/modals/index'
-
+import PrismaVue from './components/prisma/material'
+Vue.use(PrismaVue)
 const config = {
     moduleName: 'lang',
     translateFilterName: 't'
