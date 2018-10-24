@@ -14,7 +14,6 @@
           </div>
           <div class="col f-product-content">
             <div class="f-product-content-inner">
-             
               <h1 class="title f-product-title">{{product.name}}</h1>
               <div class="f-product-segment" v-if="product.category">
                 <a @click.prevent="changeRoute(product.category.parent.slug)" v-if="product.category.parent">{{product.category.parent.name}}  / </a>
@@ -39,7 +38,6 @@
                   <button v-if="!productInCart" @click="addToCart" class="btn btn-block btn-green">Добавить в корзину</button>
                   <button v-else class="btn btn-block btn-green" @click="increaseCart">Готово</button>
                 </div>
-                
               </div>
             </div>
           </div>
@@ -77,12 +75,15 @@ export default {
       return item ? true : false;
     },
     ...mapGetters({
-      cart: "cart"
+      cart: "cart",
+      manager: "manager"
     })
   },
   methods: {
     ...mapActions({
       setCart: "setCart",
+      setManager: "setManager",
+      setTotal: "setTotal",
       addToTotal: "addToTotal"
     }),
     hideModal() {
@@ -93,15 +94,67 @@ export default {
       this.hideModal();
     },
     addToCart() {
-      this.productMenu.unshift({
-        id: this.product.id,
-        quantity: this.quantity
-      });
-      this.hideModal();
-      this.addToTotal(this.product.new_price * this.quantity);
-      localforage.setItem("cart", this.productMenu);
-      this.setCart(this.productMenu);
-      return;
+      if (this.manager.slug != this.$route.params.slug) {
+        localforage.getItem("cart").then(response => {
+          if (isEmpty(response)) {
+            this.setTotal(0);
+            this.addToTotal(this.product.new_price * this.quantity);
+            this.productMenu.unshift({
+              id: this.product.id,
+              quantity: this.quantity
+            });
+            localforage.setItem("cartRegion", this.$route.params.city);
+            axios
+              .get(`/api/managers/${this.$route.params.slug}`)
+              .then(response => {
+                this.setManager(response.data.data);
+                localforage.setItem("manager", response.data.data);
+              });
+            this.setCart(this.productMenu);
+            this.hideModal();
+          } else {
+            if (
+              confirm(
+                "В вашей корзине продукты из другого магазина, Вы хотите удалить их?"
+              )
+            ) {
+              this.productMenu = [];
+              // this.productMenu.push(product);
+              localforage.removeItem("cart");
+              localforage.removeItem("totalCart");
+              this.setTotal(0);
+              this.addToTotal(this.product.new_price * this.quantity);
+              this.productMenu.unshift({
+                id: this.product.id,
+                quantity: this.quantity
+              });
+              localforage.setItem("cartRegion", this.$route.params.city);
+              axios
+                .get(`/api/managers/${this.$route.params.slug}`)
+                .then(response => {
+                  this.setManager(response.data.data);
+                  localforage.setItem("manager", response.data.data);
+                });
+              localforage.setItem("cart", this.productMenu);
+              this.setCart(this.productMenu);
+              this.hideModal();
+              return;
+            } else {
+              return;
+            }
+          }
+        });
+      } else {
+        this.productMenu.unshift({
+          id: this.product.id,
+          quantity: this.quantity
+        });
+        this.hideModal();
+        this.addToTotal(this.product.new_price * this.quantity);
+        localforage.setItem("cart", this.productMenu);
+        this.setCart(this.productMenu);
+        return;
+      }
     },
     increaseCart() {
       setTimeout(() => {
