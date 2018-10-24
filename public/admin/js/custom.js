@@ -42,14 +42,14 @@ $(function () {
                 $('.apiCategory').empty();
                 $('.apiCategory').append("<option value='' selected disabled>Не выбран</option>");
                 $.each(data.data, function (index, dataObj) {
-                    $('.apiCategory').append("<option value="+dataObj.id+" disabled>"+dataObj.name+"</option>");
+                    $('.apiCategory').append("<option value=" + dataObj.id + " disabled>" + dataObj.name + "</option>");
                     if (dataObj.children.length > 0) {
                         $.each(dataObj.children, function (index, childObj) {
-                            $('.apiCategory').append("<option value="+childObj.id+">"+"&nbsp;&nbsp;"+childObj.name+"</option>");
+                            $('.apiCategory').append("<option value=" + childObj.id + ">" + "&nbsp;&nbsp;" + childObj.name + "</option>");
                         });
                     }
                 });
-                $('.apiCategory').prop('disabled',false);
+                $('.apiCategory').prop('disabled', false);
             },
             error: function (data) {
                 console.log('error');
@@ -63,9 +63,9 @@ $(function () {
         $(this).parents(':eq(1)').show().find('input').val('');
     });
 
-    // manager-actions
+    //actions for manager
     $('.manager_action').on('click', function (e) {
-    e.preventDefault(e);
+        e.preventDefault(e);
         var id = $(this).closest('tr').data('id');
         var logo = $(this).closest('tr').data('logo');
         var name = $(this).closest('tr').data('name');
@@ -77,40 +77,43 @@ $(function () {
         $("#edit_managerCatId").val(category);
         $('#manager_id').val(id);
         $('#edit_status').val(status);
-        $('.deleteManager').attr('data-id',id);
+        $('.deleteManager').attr('data-id', id);
     });
-// delete manager via ajax
-    $(".deleteManager").click(function(){
+    // delete manager via ajax
+    $(".deleteManager").click(function () {
         var id = $(this).data('id');
-        $result = confirm("Are  you sure?");
-        if($result){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: '/admin/managers/delete',
-            type: 'post',
-            data:{id:id},
-            success: function(result) {
-                location.reload();
-            }
-        });
+        if ($result) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/admin/managers/delete',
+                type: 'post',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                    location.reload();
+                }
+            });
         }
     });
 
-    // manager-group-actions
+    //actions for manager-group
     $('.managergr_action').on('click', function (e) {
         e.preventDefault(e);
-            var id = $(this).closest('tr').data('id');
-            var name_ru = $(this).closest('tr').data('nameru');
-            var name_uz = $(this).closest('tr').data('nameuz');
-            $('#name_ru').val(name_ru);
-            $('#name_uz').val(name_uz);
-            $('#editManagerGr').val(id);
-    });
-    // employee-group-actions
+        var id = $(this).closest('tr').data('id');
+        var name_ru = $(this).closest('tr').data('nameru');
+        var name_uz = $(this).closest('tr').data('nameuz');
+        $('#name_ru').val(name_ru);
+        $('#name_uz').val(name_uz);
+				$('#editManagerGr').val(id);
+				$('.deleteManagerGroup').attr('data-id',id);
+		});
+		
+    //actions for employee-group
     $('.editEmployeGroup a').on('click', function (e) {
         e.preventDefault(e);
         var id = $(this).attr('data');
@@ -143,7 +146,7 @@ $(function () {
             }
         })
     });
-    //employeer-actions
+    //actions for employeer
     $('.employee_actions a').on('click', function (e) {
         e.preventDefault(e);
         $(this).closest('tr').each(function () {
@@ -196,7 +199,7 @@ $(function () {
             }
         });
     });
-    // category actions
+    // actions for category
     $('.action-edit a').on('click', function (e) {
         e.preventDefault(e);
         var cat_id = $(this).closest('a').attr('data');
@@ -239,9 +242,11 @@ $(function () {
             $('.status').val(status);
         });
     });
-    // action for orders
+    // actions for orders
     $('.order_id').on('click', function (e) {
-        e.preventDefault(e);
+				e.preventDefault(e);
+				$('#orderBranches').empty();
+				$('.order_products').empty();
         $status_id = $(this).closest('tr').data('status'); //#statusOrder
         $client_name = $(this).closest('tr').data('cname'); // #orderClientName
         $client_mobile = $(this).closest('tr').data('cmobile'); // #orderClientMobile
@@ -255,15 +260,55 @@ $(function () {
         $order_price = $(this).closest('tr').data('oprice');
         $total_price = $(this).closest('tr').data('tprice');
         $deliver_price = $(this).closest('tr').data('odeliver');
-        $payment = $(this).closest('tr').data('payment');
-        $('#statusOrder').val($status_id);
+				$payment = $(this).closest('tr').data('payment');
+				$products = $(this).closest('tr').data('products');
+				$product_pivot = $.map( $products, function( $value, $key ) {
+					return $value['pivot'];
+				});
+				
+				$.each($product_pivot, function (index, orderProduct) {
+					$('.order_products').append('<tr class="parent_row_order"><td>'+ orderProduct.product_id +'</td><td>'+orderProduct.product_name+'</td><td>'+ orderProduct.product_price +'</td><td>шт</td><td class="product_count"><div class="counter-widget input-group input-group-sm"><div class="input-group-prepend"><button class="btn btn-outline-red decrement" type="button"><i class="icon">remove</i></button></div><input class="form-control input_porduct_count" value="'+ orderProduct.product_count +'" disabled="" type="text"><div class="input-group-append"><button class="btn btn-outline-green increment" type="button"><i class="icon">add</i></button></div></div></td></tr>');	
+				});
+				$('.product_total_count').html('('+calculateSum()+')');
+				function calculateSum() {				
+					var sum = 0;
+					$(".input_porduct_count").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+					sum += parseFloat(this.value);
+					}
+					});
+					return sum;
+				};
+				$('.increment').click(function(){
+					$y = parseInt($(this).parent().prev().val());
+					$y+= 1;
+					if($y > 1 ){
+						$('.decrement').html('<i class="icon">remove</i>');
+					}
+					$(this).parent().prev().val($y);
+					$('.product_total_count').html('('+calculateSum()+')');
+				});
+
+				$('.decrement').click(function(){
+					$y = parseInt($(this).parent().next().val());
+						$y-= 1;	
+						if($y == 1){
+							$(this).html('<i class="icon">clear</i>');
+						}
+						if($y < 1){
+							$(this).closest('tr').remove();
+						}
+						$(this).parent().next().val($y);
+					$('.product_total_count').html('('+calculateSum()+')');
+				});
+
+				$('#statusOrder').val($status_id);
         $('#orderClientName').val($client_name);
-        $('#orderClientMobile').val('+998'+$client_mobile);
+        $('#orderClientMobile').val('+998' + $client_mobile);
         $('#orderManagerName').val($manager_name);
-        $('#orderBranches').empty();
         $('#orderBranches').append('<option value="" selected disabled>Не выбран</option>')
         $.each($branches, function (index, orderBranches) {
-            $('#orderBranches').append('<option value="'+orderBranches.id+'">'+ orderBranches.name +'('+orderBranches.address+')</option>')
+            $('#orderBranches').append('<option value="' + orderBranches.id + '">' + orderBranches.name + '(' + orderBranches.address + ')</option>')
         });
         $('#deliveryStreet').val($order_street);
         $('#deliveryHome').val($order_home);
@@ -285,17 +330,18 @@ $(function () {
         $('span.orderId').html(orderId);
         $('.branch_list').empty();
         $.each(branches, function (index, orderBranches) {
-            $('.branch_list').append('<div class="list-item custom-control custom-radio"><input type="radio" id="orderBranch_' + orderBranches.id + '" name="branch_id" value="' + orderBranches.id + '" class="custom-control-input" '+ activeBranch(orderBranches.id) +'><label class="list-link custom-control-label" for="orderBranch_' + orderBranches.id + '"><div>' + orderBranches.name + '</div><small class="text-muted">Адресс: ' + orderBranches.address + '</small></label></div>');
+            $('.branch_list').append('<div class="list-item custom-control custom-radio"><input type="radio" id="orderBranch_' + orderBranches.id + '" name="branch_id" value="' + orderBranches.id + '" class="custom-control-input" ' + activeBranch(orderBranches.id) + '><label class="list-link custom-control-label" for="orderBranch_' + orderBranches.id + '"><div>' + orderBranches.name + '</div><small class="text-muted">Адресс: ' + orderBranches.address + '</small></label></div>');
         });
-        function activeBranch($param){
-            if($param == orderBranchId){
+
+        function activeBranch(param) {
+            if (param == orderBranchId) {
                 return "checked";
             }
             return;
         }
     });
 
-    $('.order_client').on('click', function(e){
+    $('.order_client').on('click', function (e) {
         e.preventDefault(e);
         var clientName = $(this).closest('tr').data('cname');
         var clientId = $(this).data('client');
@@ -307,8 +353,10 @@ $(function () {
         e.preventDefault(e);
         var orderId = $(this).closest('tr').data('id');
         var orderCourierId = $(this).data('courier');
-        if(orderCourierId == null){ orderCourierId = '0'}
-        $(".form-courier #orderCourier_" + orderCourierId ).prop("checked",true);
+        if (orderCourierId == null) {
+            orderCourierId = '0'
+        }
+        $(".form-courier #orderCourier_" + orderCourierId).prop("checked", true);
         $('#editOrderCourier').val(orderId);
         $('span.orderIdForCourier').html(orderId);
     });
@@ -318,11 +366,10 @@ $(function () {
         var orderId = $(this).closest('tr').data('id');
         var statusId = $(this).closest('tr').data('status');
         var branchId = $(this).closest('tr').data('bname');
-        
-        $(".form-status input[value = " + statusId + "]").prop("checked",true);
+
+        $(".form-status input[value = " + statusId + "]").prop("checked", true);
         $('#editOrderStatus').val(orderId);
     });
-    
     // actions for couriers
     $('.courier_action a').on('click', function (e) {
         e.preventDefault(e);
@@ -360,12 +407,12 @@ $(function () {
             $('#editJender').val(jender);
             $('#editRegion').val(region);
             $('#editStatus').val(status);
-            if(blacklist == '1'){
-                $('#editBlackList').prop('checked',true);
-            }else{
-                $('#editBlackList').prop('checked',false);
+            if (blacklist == '1') {
+                $('#editBlackList').prop('checked', true);
+            } else {
+                $('#editBlackList').prop('checked', false);
             }
-            
+
         });
     });
     // checkbox button click disable input {working_time} select
@@ -383,8 +430,6 @@ $(function () {
         $('.myForm').find(name).val(value);
         $('.myForm').submit();
     });
-
-
     // from action delete show confirmations
     $(".delete").on("click", function () {
         return confirm("Are you sure?");

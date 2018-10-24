@@ -30,11 +30,6 @@ class OrderController extends Controller
                 return $orders->getBranches();
             });
 
-            $products = $orders->map(function($orders){
-               return $orders->products;
-            });
-            // dd($products);
-
         $couriers = Courier::orderBy('id','ASC')->take(5)->get();
         return view('admin.orders.index',compact('orders','couriers'));    
     }

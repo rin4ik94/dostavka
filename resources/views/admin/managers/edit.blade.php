@@ -59,7 +59,7 @@
         </div>
       </div>
       <div class="modal-footer">
-          <a href="#" class="deleteManager btn btn-outline-red" data-id="" data-token="{{ csrf_token() }}" >Удалить</a>
+          <a href="#" class="deleteManager delete btn btn-outline-red" data-id="" data-token="{{ csrf_token() }}" >Удалить</a>
           <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
           <button type="submit" class="btn btn-green">OK</button>
           <input type="hidden" name="id" id="manager_id" value="">

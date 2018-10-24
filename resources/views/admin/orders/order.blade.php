@@ -40,7 +40,7 @@
                 <label class="form-label" for="orderClientName">Имя</label>
               </div>
               <div class="col-8">
-                <input class="form-control" type="text" id="orderClientName" value="Jalolddin" disabled>
+                <input class="form-control" type="text" id="orderClientName" value="" disabled>
               </div>
             </div>
             <div class="form-row">
@@ -48,7 +48,7 @@
                 <label class="form-label" for="orderClientMobile">Телефон</label>
               </div>
               <div class="col-8">
-                <input class="form-control" type="text" id="orderClientMobile" value="+998903003363" disabled>
+                <input class="form-control" type="text" id="orderClientMobile" value="" disabled>
                 {{-- <small class="form-text text-red">Клиент в черном списке</small> --}}
               </div>
             </div>
@@ -60,7 +60,7 @@
                 <label class="form-label" for="orderManagerName">Магазин</label>
               </div>
               <div class="col-8">
-                <input class="form-control" type="text" id="orderManagerName" value="Makro" disabled>
+                <input class="form-control" type="text" id="orderManagerName" value="" disabled>
               </div>
             </div>
             <div class="form-row">
@@ -170,49 +170,14 @@
           <table class="table table-bordered table-hover table-striped">
             <thead>
               <tr>
-                <th width="74px">№</th>
+                <th width="50px">№</th>
                 <th>Название</th>
-                <th width="100px">Ценна</th>
-                <th width="130px">Количество (15)</th>
+                <th>Ценна</th>
+                <th width="50px">Ед. изм.</th>
+                <th width="130px">Количество <span class="product_total_count"></span></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Davon D'Amore</td>
-                <td>35 000</td>
-                <td>
-                  <div class="counter-widget input-group input-group-sm">
-                    <div class="input-group-prepend"><button class="btn btn-outline-red" type="button"><i class="icon">remove</i></button></div>
-                    <input class="form-control" value="2 шт" disabled="" type="text">
-                    <div class="input-group-append"><button class="btn btn-outline-green" type="button"><i class="icon">add</i></button></div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Davon D'Amore</td>
-                <td>35 000</td>
-                <td>
-                  <div class="counter-widget input-group input-group-sm">
-                    <div class="input-group-prepend"><button class="btn btn-outline-red" type="button"><i class="icon">clear</i></button></div>
-                    <input class="form-control" value="1 шт" disabled="" type="text">
-                    <div class="input-group-append"><button class="btn btn-outline-green" type="button"><i class="icon">add</i></button></div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Davon D'Amore</td>
-                <td>35 000</td>
-                <td>
-                  <div class="counter-widget input-group input-group-sm">
-                    <div class="input-group-prepend"><button class="btn btn-outline-red" type="button"><i class="icon">clear</i></button></div>
-                    <input class="form-control" value="1 шт" disabled="" type="text">
-                    <div class="input-group-append"><button class="btn btn-outline-green" type="button"><i class="icon">add</i></button></div>
-                  </div>
-                </td>
-              </tr>
+            <tbody class="order_products">
             </tbody>
           </table>
         </div>

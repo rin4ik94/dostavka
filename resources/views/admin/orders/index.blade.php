@@ -63,7 +63,8 @@
             data-ostreet="{{  $order->delivery_address_street }}" data-ohome="{{  $order->delivery_address_home }}"
             data-ofloor="{{  $order->delivery_address_floor }}" data-oapartment="{{  $order->delivery_address_apartment }}"
             data-oremark="{{  $order->delivery_address_remark }}" data-odeliver="5000" data-payment="{{ $order->payment->name_ru}}"
-            data-oprice="{{$order->order_price}}" data-tprice="{{$order->total_price}}" data-branches="{{ $order->getBranches() }}">
+            data-oprice="{{$order->order_price}}" data-tprice="{{$order->total_price}}" data-branches="{{ $order->getBranches() }}"
+            data-products="{{ $order->products }}">
             <td class="order_id"><a class="text-red" href="#" data-toggle="modal" data-target="#Order">{{ $order->id }}</a></td>
             <td>{{ $order->getTime()}}</td>
             <td>{{ $order->manager->name }}</td>
