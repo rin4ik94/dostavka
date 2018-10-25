@@ -270,8 +270,8 @@ $(function () {
 					return $value['pivot'];
 				});
 				$('#orderStory').empty();
-				$.each($order_status_pivot, function (index, orderStory) {
-					$('#orderStory').append(orderStory.created_at+'\n');
+					$.each($order_status_pivot, function (index, orderStory) {
+						$('#orderStory').append(getStatusName(orderStory.order_status_id) +': '+ dateFormat(orderStory.created_at)+'\n');
 				});
 				$.each($product_pivot, function (index, orderProduct) {
             $('.order_products').append('<tr class="parent_row_order"><td>' + orderProduct.product_id + '</td><td>' + orderProduct.product_name + '</td><td class="product_price">' + orderProduct.product_price + '</td><td>шт</td><td class="product_count"><div class="counter-widget input-group input-group-sm"><div class="input-group-prepend"><button class="btn btn-outline-red decrement" type="button"><i class="icon">remove</i></button></div><input class="form-control input_porduct_count" value="' + orderProduct.product_count + '" disabled="" type="text"><div class="input-group-append"><button class="btn btn-outline-green increment" type="button"><i class="icon">add</i></button></div></div></td></tr>');
@@ -453,7 +453,27 @@ $(function () {
 // custom functions
 function disable(input) {
     return $(this).prop('disable', true);
-}
+};
+
+function getStatusName($status){
+	switch ($status) {
+		case 2:
+		return 'Формируется';
+		break;
+		case 3:
+		return 'В пути';
+		break;
+		case 4:
+		return 'Доставлен';
+		break;
+		case 5:
+		return 'Отменен';
+		break;
+		default:
+		return 'Новый';
+		break;
+	}
+};
 
 function calculateSum() {
     var sum = 0;
@@ -473,4 +493,17 @@ function calculateProductSumma() {
         $summa += $product_price * $product_count;
     });
     return $summa;
+};
+
+function dateFormat($date){
+	$formattedDate = new Date($date);
+	$d = $formattedDate.getDate();
+	$m = $formattedDate.getMonth()+1;
+	$y = $formattedDate.getFullYear();
+	$h = $formattedDate.getHours();
+	$min = $formattedDate.getMinutes();
+	if($d < 10 ){ $d =  "0" + $d; }
+	if($m < 10 ){ $m = "0" + $m; }
+	if($min == 0 ){ $min = "0" + $min; }
+	return  $d +"."+ $m +"."+ $y+" "+$h+":"+$min;
 };

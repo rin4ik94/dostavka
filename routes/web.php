@@ -29,6 +29,7 @@ Route::group([
     Route::post('managers/delete', 'Managers\ManagerController@delete');
     Route::resource('branchs', 'BranchController')->except(['show', 'create']);
     Route::resource('orders', 'OrderController')->except(['show', 'create', 'edit']);
+    Route::put('orderstatus/{order}', 'OrderStatusController@update')->name('orderstatus.update');
     Route::resource('reports', 'ReportController')->except(['show', 'create', 'edit']);
     Route::resource('couriers', 'CourierController')->except(['show', 'create', 'edit']);
     Route::resource('categories', 'CategoryController')->except(['show', 'create']);
