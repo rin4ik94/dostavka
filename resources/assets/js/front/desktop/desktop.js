@@ -9,7 +9,9 @@ import localforage from 'localforage'
 // require('../../bootstrap')
 import * as Modals from './components/modals/index'
 import PrismaVue from './components/prisma/material'
+// import vuelidate from 'vuelidate'
 
+// Vue.use(vuelidate)
 Vue.use(PrismaVue)
 const config = {
     moduleName: 'lang',
@@ -65,7 +67,16 @@ store.dispatch('setManager').then(() => {
     store.dispatch("setCart");
     store.dispatch('setTotal')
 })
+store.dispatch('setToken').then(() => {
+    store.dispatch('fetchUser').catch(() => {
+        store.dispatch('clearAuth')
+        router.replace({ name: 'home' })
+    }).catch(() => {
+        store.dispatch('clearAuth')
+        store.dispatch('showNavbar')
+    })
 
+});
 Vue.component('SubCategories', Vue.extend(SubCategories));
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 

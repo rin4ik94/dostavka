@@ -31,13 +31,13 @@ Route::get('locale/{locale}', function ($locale) {
     \Cache::forever('lang', $locale);
     return response(\App::getLocale(), 200);
 });
-// Route::group(['middleware' => 'jwt.generate'], function () {
-//     Route::get('/me', 'Front\Auth\AuthController@user');
-//     Route::patch('/clients/{client}/settings', 'Front\Auth\AuthController@update');
-//     Route::post('/proceed/checkout', 'Front\OrderController@store');
-// });
-// Route::post('/logout', 'Front\Auth\AuthController@logout');
+Route::get('/sms/check', 'Front\SMSController@getCheckCode');
+Route::post('/sms/create', 'Front\SMSController@create');
+Route::post('/client/register', 'Front\Auth\AuthController@register');
+Route::group(['middleware' => 'jwt.generate'], function () {
+    Route::get('/me', 'Front\Auth\AuthController@user');
+    Route::patch('/clients/{client}/settings', 'Front\Auth\AuthController@update');
+    Route::post('/proceed/checkout', 'Front\OrderController@store');
+    Route::post('/logout', 'Front\Auth\AuthController@logout');
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+});

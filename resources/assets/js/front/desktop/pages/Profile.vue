@@ -23,7 +23,7 @@
               <div class="form-group row">
                 <label class="col-3 col-form-label" for="profile_birthday">Дата рождения</label>
                 <div class="col-9">
-                    <DatePicker placeholder="DD.MM.YYYY" class="form-control" />
+                    <DatePicker v-model="form.date" placeholder="DD.MM.YYYY" class="form-control" />
                   <div class="invalid-feedback">Пожалуйста заполните поле</div>
                 </div>
               </div>
@@ -66,6 +66,13 @@
 <script>
 import DatePicker from "../components/DatePicker";
 export default {
-  components: { DatePicker }
+  components: { DatePicker },
+  data() {
+    return {
+      form: {
+        date: null
+      }
+    };
+  }
 };
 </script>
