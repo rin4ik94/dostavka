@@ -30,17 +30,20 @@
           <button class="btn btn-link header-profile-toggle" type="button" data-toggle="modal" data-target="#Regions">
             <i class="icon">place</i><span class="text">{{region.name}}</span>
           </button>
-        <div class="dropdown">
+        <div class="dropdown" v-if="user.data && user.data.phone">
           <button class="btn btn-link header-profile-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="icon">person</i><span class="text">{{$t("header.login")}}</span>
+            <i class="icon">person</i><span class="text">Mening profilim</span>
           </button>
           <div class="dropdown-menu dropdown-menu-right">
               <router-link class="dropdown-item" :to="{name: 'profile'}">Мои данные</router-link> 
               <router-link class="dropdown-item" :to="{name: 'orders'}">Мои Заказы</router-link> 
               <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/logout">{{$t('header.logout')}}</a>
+            <a class="dropdown-item" @click.prevent="signout">{{$t('header.logout')}}</a>
           </div>
         </div>
+         <button v-else class="btn btn-link header-profile-toggle" type="button" data-toggle="modal" data-target="#login">
+            <i class="icon">person</i><span class="text">{{$t("header.login")}}</span>
+          </button>
       </div>
     </div>
   </div>
@@ -79,6 +82,7 @@ export default {
       this.show = false;
     },
     ...mapActions({
+      logout: "logout",
       setRegion: "setRegionId",
       setRegionName: "setRegionName",
       langChange: "langChange"
@@ -92,6 +96,12 @@ export default {
         }
       });
     },
+    signout() {
+      this.logout().then(() => {
+        this.phone = "";
+        this.$router.replace({ name: "home" });
+      });
+    },
     changeLocale(lang) {
       if (lang != this.locale) {
         this.langChange(lang).then(() => {
@@ -102,7 +112,8 @@ export default {
   },
   computed: mapGetters({
     regionId: "regionId",
-    locale: "locale"
+    locale: "locale",
+    user: "user"
   }),
 
   watch: {
@@ -147,7 +158,7 @@ export default {
 } */
 .highlightText {
   font-weight: 600;
-  background-color: #fd5646;
-  color: white; 
+  /* background-color: #fd5646; */
+  color: black;
 }
 </style>

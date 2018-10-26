@@ -43,7 +43,7 @@
                 :pu-active.sync="active"
                 :pu-size="500"
                 :pu-title="$t('cart.confirmTitle')"
-                :pu-content="$t('cart.confirmContent', {'shop': manager.name})"
+                :pu-content="$t('cart.confirmContent', {'shop': manager.name ? manager.name : 'none'})"
                 :pu-confirm-text="$t('helper.yes')"
                 :pu-cancel-text="$t('helper.no')" 
                 @pu-cancel="onCancel"
@@ -64,7 +64,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      product: "",
+      product: [],
       active: false,
       productMenu: [],
       quantity: 1,
@@ -130,7 +130,7 @@ export default {
       return;
     },
     addToCart() {
-      if (this.manager.slug != this.$route.params.slug) {
+      if (this.manager && this.manager.slug != this.$route.params.slug) {
         localforage.getItem("cart").then(response => {
           if (isEmpty(response)) {
             this.setTotal(0);
@@ -140,6 +140,7 @@ export default {
               quantity: this.quantity
             });
             localforage.setItem("cartRegion", this.$route.params.city);
+            localforage.setItem("cart", this.productMenu);
             axios
               .get(`/api/managers/${this.$route.params.slug}`)
               .then(response => {
@@ -161,6 +162,7 @@ export default {
         this.hideModal();
         this.addToTotal(this.product.new_price * this.quantity);
         localforage.setItem("cart", this.productMenu);
+        localforage.setItem("cartRegion", this.$route.params.city);
         this.setCart(this.productMenu);
         return;
       }
@@ -211,9 +213,17 @@ export default {
       this.addToTotal(-(this.product.quantity * this.product.new_price));
       this.productMenu.splice(index, 1);
       $("#product").modal("hide");
-
+      alert(this.productMenu);
+      if (!this.productMenu.length) {
+        console.log("here");
+        localforage.removeItem("manager");
+        this.setManager("empty");
+        localforage.removeItem("cart");
+        localforage.removeItem("totalCart");
+        localforage.removeItem("cartRegion");
+      }
       localforage.setItem("cart", this.productMenu);
-      this.setCart(this.productMenu);
+      this.setCart("empty");
     },
     increaseQuantity() {
       this.quantity++;

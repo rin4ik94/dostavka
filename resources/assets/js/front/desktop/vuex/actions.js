@@ -1,45 +1,53 @@
 import { isEmpty } from 'lodash'
 import localforage from 'localforage'
-// import { setHttpToken } from '../../../helpers/index'
-// // window.Vue = require('vue');
+import { setHttpToken } from '../helpers/index'
+// window.Vue = require('vue');
 
-// export const register = ({ dispatch }, { payload, context }) => {
-//     return axios.post('/api/client/register?its=1', payload).then((response) => {
-//         let token = response.data.meta.token
 
-//         dispatch('setToken', token).then(() => {
-//             dispatch('fetchUser')
-//         })
-//     }).catch((error) => {
-//         return Promise.reject('Something went wrong');
 
-//         context.errors = error.response.data.errors
+export const login = ({ dispatch }, { payload, context }) => {
+    return axios.post('/api/login', payload).then((response) => {
+        dispatch('setToken', response.data.meta.token, response.data.data.phone).then(() => {
+            dispatch('fetchUser')
+        })
+    }).catch((error) => {
+        context.errors = error.response.data.errors
+    })
+}
+
+export const fetchUser = ({ commit }) => {
+    return axios.get('/api/me').then((response) => {
+        commit('setAuthenticated', true)
+        commit('setUserData', response.data.data)
+    })
+}
+
+export const checkTokenExists = ({ commit, dispatch }, token) => {
+    return localforage.getItem('authtoken').then((token) => {
+        if (isEmpty(token)) {
+            return Promise.reject('NO_STORAGE_TOKEN');
+        }
+
+
+        return Promise.resolve(token)
+    })
+}
+// export const checkPhoneExists = ({ commit, dispatch }, phone) => {
+//     return localforage.getItem('phone').then((phone) => {
+//         if (isEmpty(phone)) {
+//             return;
+//         }
+//         return Promise.resolve(phone)
 //     })
 // }
+export const clearAuth = ({ commit }, token) => {
+    commit('setAuthenticated', false)
+    commit('setUserData', null)
+    commit('setToken', null)
+    // commit('setPhone', null)
+    setHttpToken(null)
+}
 
-
-// export const login = ({ dispatch }, { payload, context }) => {
-//     return axios.post('/api/login', payload).then((response) => {
-//         dispatch('setToken', response.data.meta.token, response.data.data.phone).then(() => {
-//             dispatch('fetchUser')
-//         })
-//     }).catch((error) => {
-//         context.errors = error.response.data.errors
-//     })
-// }
-
-// export const fetchUser = ({ commit }) => {
-//     return axios.get('/api/me').then((response) => {
-//         commit('setAuthenticated', true)
-//         commit('setUserData', response.data.data)
-//     })
-// }
-
-// export const logout = ({ dispatch }) => {
-//     return axios.post('/api/logout').then((response) => {
-//         dispatch('clearAuth')
-//     })
-// }
 export const setRegionId = ({ commit, dispatch }, regionId) => {
     commit('setRegion', regionId)
     localforage.setItem('region', regionId)
@@ -61,6 +69,30 @@ export const setCart = ({ commit, dispatch }, cart) => {
 
 
 }
+
+export const logout = ({ dispatch }) => {
+    return axios.post('/api/logout').then((response) => {
+        dispatch('clearAuth')
+    })
+}
+
+export const setToken = ({ commit, dispatch }, token) => {
+    if (isEmpty(token)) {
+        return dispatch('checkTokenExists').then((token) => {
+
+
+            setHttpToken(token)
+        })
+    }
+    commit('setToken', token)
+    setHttpToken(token)
+}
+// export const setPhone = ({ commit, dispatch }, phone) => {
+//     if (isEmpty(phone)) {
+//         return dispatch('checkPhoneExists')
+//     }
+//     commit('setPhone', phone)
+// }
 export const setTotal = ({ commit, dispatch }, total) => {
     // commit('setRegion', regionId)
     // localforage.setItem('region', regionId)    console.log(cart)
@@ -166,7 +198,6 @@ export const langChange = ({ commit, dispatch }, lang) => {
 // export const checkTokenExists = ({ commit, dispatch }, token) => {
 //     return localforage.getItem('authtoken').then((token) => {
 //         if (isEmpty(token)) {
-//             localforage.removeItem('phone')
 
 //             return Promise.reject('NO_STORAGE_TOKEN');
 //         }

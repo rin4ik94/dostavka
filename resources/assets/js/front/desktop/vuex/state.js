@@ -5,7 +5,7 @@ export default {
         region: '',
         regionName: '',
         regionSlug: '',
-        phone: '',
+        // phone: '',
         lang: '',
         data: {
 
@@ -14,7 +14,7 @@ export default {
     cart: {
         total: null,
         quantity: null,
-        region_id: null, 
+        region_id: null,
         manager: {},
         prods: {}
     }

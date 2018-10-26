@@ -42,19 +42,19 @@
             <div class="card-title">Оформление</div>
           </div>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Имя">
+            <input class="form-control" v-model="user.data.first_name" type="text" placeholder="Имя">
           </div>
           <div class="form-group">
             <div class="input-group">
-            <div class="input-group-prepend">
+            <!-- <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+998</span>
-            </div>
-            <input class="form-control" type="text" placeholder="Телефон">
+            </div> -->
+            <input v-model="user.data.phone" class="form-control" type="text" placeholder="Телефон">
             </div>
           </div>
           <div class="form-group">
             <select class="custom-select">
-              <option value="0" disabled selected>Регион</option>
+              <option value="0" disabled selected>{{region.name}}</option>
               <option value="1">Город Фергана</option>
               <option value="2">Город Маргилан</option>
               <option value="2">Город Киргули</option>
@@ -100,6 +100,8 @@ export default {
   },
   computed: {
     ...mapGetters({
+      region: "region",
+      user: "user",
       cartInfo: "cart",
       manager: "manager"
     }),
@@ -220,7 +222,7 @@ export default {
           }
           p = p + "," + v.id;
         });
-        params["ids"] = p; 
+        params["ids"] = p;
         axios
           .get(`/api/managers/${this.manager.slug}/products/cart`, {
             params: params

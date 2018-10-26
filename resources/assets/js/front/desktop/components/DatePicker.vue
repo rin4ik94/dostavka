@@ -12,8 +12,8 @@ export default {
   },
   props: {
     value: { required: true },
-    format: { default: "DD.MM.YYYY" },
-    options: { default: {} }
+    format: { default: "YYYY.MM.DD" },
+    options: {}
   },
 
   mounted() {

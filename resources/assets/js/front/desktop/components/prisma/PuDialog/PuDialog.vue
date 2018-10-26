@@ -147,7 +147,7 @@ export default {
   padding: 24px 24px 0;
 }
 .pu-dialog-content {
-  padding: 20px 24px 1px 24px;
+  padding: 24px 24px 1px 24px;
 
   overflow: auto;
   position: relative;

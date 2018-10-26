@@ -1,13 +1,13 @@
 import localforage from 'localforage'
 import { isEmpty } from 'lodash'
 import { totalCart } from './getters';
-// export const setToken = (state, token) => {
-//     if (isEmpty(token)) {
-//         localforage.removeItem('authtoken', token)
-//         return
-//     }
-//     localforage.setItem('authtoken', token)
-// }
+export const setToken = (state, token) => {
+    if (isEmpty(token)) {
+        localforage.removeItem('authtoken', token)
+        return
+    }
+    localforage.setItem('authtoken', token)
+}
 // export const setPhone = (state, phone) => {
 //     if (isEmpty(phone)) {
 //         localforage.removeItem('phone', phone)
@@ -15,6 +15,12 @@ import { totalCart } from './getters';
 //     }
 //     localforage.setItem('phone', phone)
 // }
+export const setAuthenticated = (state, trueOrFalse) => {
+    state.user.authenticated = trueOrFalse;
+}
+export const setUserData = (state, user) => {
+    state.user.data = user
+}
 export const setRegion = (state, regionId) => {
     state.user.region = regionId;
 }

@@ -547,6 +547,9 @@ flex-direction: column;
 
 
 /* Login */
+.login .modal-dialog {
+  max-width: 400px;
+}
 .login .modal-body {
   text-align: center;
 }

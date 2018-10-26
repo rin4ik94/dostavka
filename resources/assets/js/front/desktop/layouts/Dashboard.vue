@@ -5,6 +5,7 @@
       <CartInfo />
       <Footer></Footer> 
       <RegionModal :regions="regions"/>
+      <LoginModal />
       <ProductModal/>
   </div>
 </template>

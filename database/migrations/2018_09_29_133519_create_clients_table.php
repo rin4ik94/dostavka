@@ -15,15 +15,15 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('mobile')->unique();
-            $table->date('birth_date');
-            $table->integer('jender');
-            $table->string('password');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone')->unique();
+            $table->date('birth_date')->nullable();
+            $table->integer('jender')->nullable();
+            $table->string('password')->nullable();
             $table->integer('status')->default(1);
             $table->boolean('blacklist')->default(0);
-            $table->integer('region_id')->unsigned()->index();
+            $table->unsignedInteger('region_id')->index()->nullable();
             $table->foreign('region_id')->references('id')->on('regions');
             $table->rememberToken();
             $table->timestamps();

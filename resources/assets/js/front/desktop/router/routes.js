@@ -19,45 +19,73 @@ export default [
             path: '/',
             name: 'home',
             component: Home,
-            // meta: {
-            //     guest: true,
-            //     needsAuth: false
-            // }
+            meta: {
+                guest: true,
+                needsAuth: false
+            }
         },
         {
             path: '/profile',
             name: 'profile',
-            component: Profile
+            component: Profile,
+            meta: {
+                guest: false,
+                needsAuth: true
+            }
         },
         {
             path: '/orders',
             name: 'orders',
-            component: Orders
+            component: Orders,
+            meta: {
+                guest: false,
+                needsAuth: true
+            }
         },
         {
             path: '/cart',
             name: 'cart',
-            component: Cart
+            component: Cart,
+            meta: {
+                guest: true,
+                needsAuth: false
+            }
         },
         {
             path: '/delivery',
             name: 'delivery',
-            component: Delivery
+            component: Delivery,
+            meta: {
+                guest: true,
+                needsAuth: false
+            }
         },
         {
             path: '/:city/:slug',
             name: 'catalog',
             component: Catalog,
+            meta: {
+                guest: true,
+                needsAuth: false
+            },
             children: [
                 {
                     path: 'cats/:sluged',
                     name: 'category',
                     component: Products,
+                    meta: {
+                        guest: true,
+                        needsAuth: false
+                    },
                     children: [
                         {
                             path: ':product',
                             name: 'pp',
                             component: ProductModal,
+                            meta: {
+                                guest: true,
+                                needsAuth: false
+                            }
                         }
                     ]
                 },
@@ -65,13 +93,21 @@ export default [
                     path: ':product',
                     name: 'tp',
                     component: ProductModal,
+                    meta: {
+                        guest: true,
+                        needsAuth: false
+                    }
                 }
             ]
         },
         {
             path: '*',
             name: 'notFound',
-            component: NotFound
+            component: NotFound,
+            meta: {
+                guest: true,
+                needsAuth: false
+            }
         }
         ],
         // {

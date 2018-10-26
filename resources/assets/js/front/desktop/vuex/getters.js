@@ -1,6 +1,6 @@
-// export const user = (state) => {
-//     return state.user
-// }
+export const user = (state) => {
+    return state.user
+}
 export const regionId = (state) => {
     return state.user.region
 }
