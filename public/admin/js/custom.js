@@ -282,10 +282,25 @@ $(function () {
         });
         $('.product_total_count').html('(' + calculateSum() + ')');
         $('.increment').click(function () {
+
             $y = parseInt($(this).parent().prev().val());
             $y++;
-            
-            console.log($productSet);
+            var data = [];
+            $(".order_products tr").each(function (i, v) {
+                data[i] = [];
+                var set = $(this).children('td');
+                var length = set.length;
+                set.each(function (ii, vv) {
+                    data[i][ii] = $(this).text();
+                    if (ii === (length - 1)) {
+                        if (parseInt($(this).find('.input_porduct_count').val()) + 1 == $y) {
+                            data[i][ii] = $y;
+                        } else {
+                            data[i][ii] = parseInt($(this).find('.input_porduct_count').val());
+                        }
+                    }
+                });
+            });
             if ($y > 1) {
                 $(this).parents('.product_count').find('.decrement').html('<i class="icon">remove</i>');
             }
@@ -293,20 +308,41 @@ $(function () {
             $('.product_total_count').html('(' + calculateSum() + ')');
             $('.orderPrice').val(calculateProductSumma());
             $('.totalPrice').val(calculateProductTotalPrice());
+            $('#orderProductSet').val(data);
         });
         $('.decrement').click(function () {
             $y = parseInt($(this).parent().next().val());
             $y--;
+            var data = [];
+            $(".order_products tr").each(function (i, v) {
+                data[i] = [];
+                var set = $(this).children('td');
+                var length = set.length;
+                set.each(function (ii, vv) {
+                    data[i][ii] = $(this).text();
+                    if (ii === (length - 1)) {
+                        if (parseInt($(this).find('.input_porduct_count').val()) - 1 == $y) {
+                            data[i][ii] = $y;
+                        } else {
+                            data[i][ii] = parseInt($(this).find('.input_porduct_count').val());
+                        }
+                    }
+                });
+            });
             if ($y == 1) {
                 $(this).html('<i class="icon">clear</i>');
             }
             if ($y < 1) {
-                $(this).closest('tr').remove();
+                $tr = $(this).closest('tr');
+                $tr.fadeOut(400, function () {
+                    $tr.remove();
+                });
             }
             $(this).parent().next().val($y);
             $('.product_total_count').html('(' + calculateSum() + ')');
             $('.orderPrice').val(calculateProductSumma());
             $('.totalPrice').val(calculateProductTotalPrice());
+            $('#orderProductSet').val(data);
         });
 
         $('#statusOrder').val($status_id);
@@ -329,12 +365,13 @@ $(function () {
         $('.totalPrice').val(calculateProductTotalPrice());
         $('#orderIdForOrder').val($orderId);
         $('.orderIdForOrder').text($orderId);
-       
+
         function calculateProductTotalPrice() {
             $order_price = parseInt($('.orderPrice').val());
             $delivery_price = parseInt($('#deliveryPrice').val());
             return $order_price + $delivery_price;
         }
+
         function activeOrderBranch($param) {
             if ($param == $orderBranchId) {
                 return "selected";
@@ -354,6 +391,7 @@ $(function () {
         $.each(branches, function (index, orderBranches) {
             $('.branch_list').append('<div class="list-item custom-control custom-radio"><input type="radio" id="orderBranch_' + orderBranches.id + '" name="branch_id" value="' + orderBranches.id + '" class="custom-control-input" ' + activeBranch(orderBranches.id) + '><label class="list-link custom-control-label" for="orderBranch_' + orderBranches.id + '"><div>' + orderBranches.name + '</div><small class="text-muted">Адресс: ' + orderBranches.address + '</small></label></div>');
         });
+
         function activeBranch(param) {
             if (param == orderBranchId) {
                 return "checked";
@@ -529,7 +567,7 @@ function dateFormat($date) {
     return $d + "." + $m + "." + $y + " " + $h + ":" + $min;
 };
 
-function number_format(number, decimals='2', dec_point=',', thousands_sep=' ') {
+function number_format(number, decimals = '2', dec_point = ',', thousands_sep = ' ') {
     number = number.toFixed(decimals);
 
     var nstr = number.toString();

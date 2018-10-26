@@ -182,6 +182,7 @@
       </div>
       <div class="modal-footer">
         <input type="hidden" id="orderIdForOrder" name="id">
+        <input type="hidden" id="orderProductSet" name="productSet">
         <input type="hidden" class="totalPrice" name="total_price">
         <input type="hidden" class="orderPrice" name="order_price">
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>

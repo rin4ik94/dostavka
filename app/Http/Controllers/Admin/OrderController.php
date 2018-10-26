@@ -52,7 +52,7 @@ class OrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         $order_id = $request->id;
         $order = Order::find($order_id);
         if($order->order_status_id == $request->order_status_id){
@@ -61,7 +61,26 @@ class OrderController extends Controller
             $order->update($request->all());
             $order->statuses()->attach($request->order_status_id, ['client_id' => $order->client_id]);
         }
-        // $order->products()->detach();
+        if($request->productSet != null){
+        $order->products()->detach();
+        $keys = array('id', 'product_name', 'product_price', 'product_measurement', 'product_count');
+        $array = explode(',', $request->productSet);
+        $array = array_chunk($array, 5);
+        $array = array_map(function($array) use ($keys) {
+            return array_combine($keys, $array);
+        }, $array);
+        
+        foreach ($array as $product) {
+            $total_price = (int)$product['product_count'] * (int)$product['product_price'];
+            if($product['product_measurement']== 'шт'){
+                $product_measurement = 1;
+            }else {
+                $product_measurement = 2;
+            }
+                $order->products()->attach($product['id'], ['product_name' => $product['product_name'], 'product_count' => $product['product_count'], 'product_price' => $product['product_price'], 'product_total_price' => $total_price, 'product_measurement' => $product_measurement ]);
+            }
+        }
+        
         return back()->with('success','successful');
     }
 
