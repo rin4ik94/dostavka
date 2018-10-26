@@ -18,7 +18,7 @@
                 <label class="form-label" for="editNameUz">Статус</label>
               </div>
               <div class="col-8">
-                <select class="custom-select" id="statusOrder" name="status_id" required>
+                <select class="custom-select" id="statusOrder" name="order_status_id" required>
                   <option value="1">Новый</option>
                   <option value="2">Формируется</option>
                   <option value="3">В пути</option>

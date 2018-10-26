@@ -6,19 +6,19 @@
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-outline-green @if(request()->status < 1) active @endif">
                     <input type="radio" name="status" value="0" @if(request()->status < 1) checked @endif onchange="this.form.submit()">Все<span
-                            class="badge"></span>
+                class="badge count_all">{{ $s['total_count'] or '' }}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='1') active @endif">
                     <input type="radio" name="status" value="1" @if(request()->status=='1') checked @endif
-                    onchange="this.form.submit()">Новый<span class="badge"></span>
+                onchange="this.form.submit()">Новый<span class="badge new">{{ $s['data'][1] or ''}}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='2') active @endif">
                     <input type="radio" name="status" value="2" @if(request()->status=='2') checked @endif
-                    onchange="this.form.submit()">Формируется<span class="badge"></span>
+                onchange="this.form.submit()">Формируется<span class="badge is_formed">{{ $s['data'][2] or ''}}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='3') active @endif">
                     <input type="radio" name="status" value="3" @if(request()->status=='3') checked @endif
-                    onchange="this.form.submit()">В пути<span class="badge"></span>
+                onchange="this.form.submit()">В пути<span class="badge on_way">{{ $s['data'][3] or '' }}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='4') active @endif">
                     <input type="radio" name="status" value="4" @if(request()->status=='4') checked @endif
@@ -115,6 +115,7 @@
 @endif
 <script>
     $(document).ready(function () {
+    
         $statusid = $('.status-filter').data('fetch');
         if ($statusid == 4 || $statusid == 5) {
             $('.orderByDate').prop('disabled',false);
@@ -124,5 +125,10 @@
             $('.orderByDate').addClass('d-none')
         }
     });
+    
+    // setInterval("my_function();",10000); 
+    // function my_function(){
+    //     window.location = location.href;
+    // }
 </script>
 @endsection
