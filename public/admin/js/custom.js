@@ -109,10 +109,10 @@ $(function () {
         var name_uz = $(this).closest('tr').data('nameuz');
         $('#name_ru').val(name_ru);
         $('#name_uz').val(name_uz);
-				$('#editManagerGr').val(id);
-				$('.deleteManagerGroup').attr('data-id',id);
-		});
-		
+        $('#editManagerGr').val(id);
+        $('.deleteManagerGroup').attr('data-id', id);
+    });
+
     //actions for employee-group
     $('.editEmployeGroup a').on('click', function (e) {
         e.preventDefault(e);
@@ -244,14 +244,18 @@ $(function () {
     });
     // actions for orders
     $('.order_id').on('click', function (e) {
-				e.preventDefault(e);
-				$('#orderBranches').empty();
-				$('.order_products').empty();
-        $status_id = $(this).closest('tr').data('status'); //#statusOrder
-        $client_name = $(this).closest('tr').data('cname'); // #orderClientName
-        $client_mobile = $(this).closest('tr').data('cmobile'); // #orderClientMobile
-        $manager_name = $(this).closest('tr').data('mname'); // #orderManagerName
-        $branches = $(this).closest('tr').data('branches'); // #ordeBranches
+        e.preventDefault(e);
+        $('#orderBranches').empty();
+        $('.order_products').empty();
+        $productSet = [];
+        $orderId = $(this).closest('tr').data('id');
+        $status_id = $(this).closest('tr').data('status');
+        $client_name = $(this).closest('tr').data('cname');
+        $client_mobile = $(this).closest('tr').data('cmobile');
+        $manager_name = $(this).closest('tr').data('mname');
+        $branches = $(this).closest('tr').data('branches');
+        $orderBranchId = $(this).closest('tr').data('branch');
+        $region_id = $(this).closest('tr').data('region');
         $order_street = $(this).closest('tr').data('ostreet');
         $order_home = $(this).closest('tr').data('ohome');
         $order_floor = $(this).closest('tr').data('ofloor');
@@ -260,74 +264,129 @@ $(function () {
         $order_price = $(this).closest('tr').data('oprice');
         $total_price = $(this).closest('tr').data('tprice');
         $deliver_price = $(this).closest('tr').data('odeliver');
-				$payment = $(this).closest('tr').data('payment');
-				$products = $(this).closest('tr').data('products');
-				$product_pivot = $.map( $products, function( $value, $key ) {
-					return $value['pivot'];
-				});
-				
-				$.each($product_pivot, function (index, orderProduct) {
-					$('.order_products').append('<tr class="parent_row_order"><td>'+ orderProduct.product_id +'</td><td>'+orderProduct.product_name+'</td><td>'+ orderProduct.product_price +'</td><td>шт</td><td class="product_count"><div class="counter-widget input-group input-group-sm"><div class="input-group-prepend"><button class="btn btn-outline-red decrement" type="button"><i class="icon">remove</i></button></div><input class="form-control input_porduct_count" value="'+ orderProduct.product_count +'" disabled="" type="text"><div class="input-group-append"><button class="btn btn-outline-green increment" type="button"><i class="icon">add</i></button></div></div></td></tr>');	
-				});
-				$('.product_total_count').html('('+calculateSum()+')');
-				function calculateSum() {				
-					var sum = 0;
-					$(".input_porduct_count").each(function() {
-					if(!isNaN(this.value) && this.value.length!=0) {
-					sum += parseFloat(this.value);
-					}
-					});
-					return sum;
-				};
-				$('.increment').click(function(){
-					$y = parseInt($(this).parent().prev().val());
-					$y+= 1;
-					if($y > 1 ){
-						$('.decrement').html('<i class="icon">remove</i>');
-					}
-					$(this).parent().prev().val($y);
-					$('.product_total_count').html('('+calculateSum()+')');
-				});
+        $payment = $(this).closest('tr').data('payment');
+        $products = $(this).closest('tr').data('products');
+        $statuses = $(this).closest('tr').data('statuses');
+        $product_pivot = $.map($products, function ($value, $key) {
+            return $value['pivot'];
+        });
+        $order_status_pivot = $.map($statuses, function ($value, $key) {
+            return $value['pivot'];
+        });
+        $('#orderStory').empty();
+        $.each($order_status_pivot, function (index, orderStory) {
+            $('#orderStory').append(getStatusName(orderStory.order_status_id) + ': ' + dateFormat(orderStory.created_at) + '\n');
+        });
+        $.each($product_pivot, function (index, orderProduct) {
+            $('.order_products').append('<tr class="parent_row_order"><td>' + orderProduct.product_id + '</td><td>' + orderProduct.product_name + '</td><td class="product_price">' + orderProduct.product_price + '</td><td>шт</td><td class="product_count"><div class="counter-widget input-group input-group-sm"><div class="input-group-prepend"><button class="btn btn-outline-red decrement" type="button"><i class="icon">remove</i></button></div><input class="form-control input_porduct_count" name="product_count[]" value="' + orderProduct.product_count + '" type="text" disabled><div class="input-group-append"><button class="btn btn-outline-green increment" type="button"><i class="icon">add</i></button></div></div></td></tr>');
+        });
+        $('.product_total_count').html('(' + calculateSum() + ')');
+        $('.increment').click(function () {
 
-				$('.decrement').click(function(){
-					$y = parseInt($(this).parent().next().val());
-						$y-= 1;	
-						if($y == 1){
-							$(this).html('<i class="icon">clear</i>');
-						}
-						if($y < 1){
-							$(this).closest('tr').remove();
-						}
-						$(this).parent().next().val($y);
-					$('.product_total_count').html('('+calculateSum()+')');
-				});
+            $y = parseInt($(this).parent().prev().val());
+            $y++;
+            var data = [];
+            $(".order_products tr").each(function (i, v) {
+                data[i] = [];
+                var set = $(this).children('td');
+                var length = set.length;
+                set.each(function (ii, vv) {
+                    data[i][ii] = $(this).text();
+                    if (ii === (length - 1)) {
+                        if (parseInt($(this).find('.input_porduct_count').val()) + 1 == $y) {
+                            data[i][ii] = $y;
+                        } else {
+                            data[i][ii] = parseInt($(this).find('.input_porduct_count').val());
+                        }
+                    }
+                });
+            });
+            if ($y > 1) {
+                $(this).parents('.product_count').find('.decrement').html('<i class="icon">remove</i>');
+            }
+            $(this).parent().prev().val($y);
+            $('.product_total_count').html('(' + calculateSum() + ')');
+            $('.orderPrice').val(calculateProductSumma());
+            $('.totalPrice').val(calculateProductTotalPrice());
+            $('#orderProductSet').val(data);
+        });
+        $('.decrement').click(function () {
+            $y = parseInt($(this).parent().next().val());
+            $y--;
+            var data = [];
+            $(".order_products tr").each(function (i, v) {
+                data[i] = [];
+                var set = $(this).children('td');
+                var length = set.length;
+                set.each(function (ii, vv) {
+                    data[i][ii] = $(this).text();
+                    if (ii === (length - 1)) {
+                        if (parseInt($(this).find('.input_porduct_count').val()) - 1 == $y) {
+                            data[i][ii] = $y;
+                        } else {
+                            data[i][ii] = parseInt($(this).find('.input_porduct_count').val());
+                        }
+                    }
+                });
+            });
+            if ($y == 1) {
+                $(this).html('<i class="icon">clear</i>');
+            }
+            if ($y < 1) {
+                $tr = $(this).closest('tr');
+                $tr.fadeOut(400, function () {
+                    $tr.remove();
+                });
+            }
+            $(this).parent().next().val($y);
+            $('.product_total_count').html('(' + calculateSum() + ')');
+            $('.orderPrice').val(calculateProductSumma());
+            $('.totalPrice').val(calculateProductTotalPrice());
+            $('#orderProductSet').val(data);
+        });
 
-				$('#statusOrder').val($status_id);
+        $('#statusOrder').val($status_id);
         $('#orderClientName').val($client_name);
         $('#orderClientMobile').val('+998' + $client_mobile);
         $('#orderManagerName').val($manager_name);
         $('#orderBranches').append('<option value="" selected disabled>Не выбран</option>')
         $.each($branches, function (index, orderBranches) {
-            $('#orderBranches').append('<option value="' + orderBranches.id + '">' + orderBranches.name + '(' + orderBranches.address + ')</option>')
+            $('#orderBranches').append('<option value="' + orderBranches.id + '" ' + activeOrderBranch(orderBranches.id) + '>' + orderBranches.name + '(' + orderBranches.address + ')</option>');
         });
+        $('#orderRegions').val($region_id);
         $('#deliveryStreet').val($order_street);
         $('#deliveryHome').val($order_home);
         $('#deliveryFloor').val($order_floor);
         $('#deliveryApartment').val($order_apartment);
         $('#deliveryRemark').val($order_remark);
         $('#payment').val($payment);
-        $('#orderPrice').val($order_price);
+        $('.orderPrice').val(calculateProductSumma());
         $('#deliveryPrice').val($deliver_price);
-        $('#totalPrice').val($total_price);
+        $('.totalPrice').val(calculateProductTotalPrice());
+        $('#orderIdForOrder').val($orderId);
+        $('.orderIdForOrder').text($orderId);
+
+        function calculateProductTotalPrice() {
+            $order_price = parseInt($('.orderPrice').val());
+            $delivery_price = parseInt($('#deliveryPrice').val());
+            return $order_price + $delivery_price;
+        }
+
+        function activeOrderBranch($param) {
+            if ($param == $orderBranchId) {
+                return "selected";
+            }
+            return;
+        }
     });
 
     $('.order_branch').on('click', function (e) {
         e.preventDefault(e);
         var branches = $(this).closest('tr').data('branches');
         var orderId = $(this).closest('tr').data('id');
-        var orderBranchId = $(this).data('branch');
+        var orderBranchId = $(this).closest('tr').data('branch');
         $('#editOrderBranch').val(orderId);
-        $('span.orderId').html(orderId);
+        $('span.orderId').text(orderId);
         $('.branch_list').empty();
         $.each(branches, function (index, orderBranches) {
             $('.branch_list').append('<div class="list-item custom-control custom-radio"><input type="radio" id="orderBranch_' + orderBranches.id + '" name="branch_id" value="' + orderBranches.id + '" class="custom-control-input" ' + activeBranch(orderBranches.id) + '><label class="list-link custom-control-label" for="orderBranch_' + orderBranches.id + '"><div>' + orderBranches.name + '</div><small class="text-muted">Адресс: ' + orderBranches.address + '</small></label></div>');
@@ -345,8 +404,8 @@ $(function () {
         e.preventDefault(e);
         var clientName = $(this).closest('tr').data('cname');
         var clientId = $(this).data('client');
-        $('span.orderIdForClient').html(clientId);
-        $('.client-name').html(clientName);
+        $('span.orderIdForClient').text(clientId);
+        $('.client-name').text(clientName);
     });
 
     $('.order_courier').on('click', function (e) {
@@ -447,4 +506,77 @@ $(function () {
 // custom functions
 function disable(input) {
     return $(this).prop('disable', true);
-}
+};
+
+function getStatusName($status) {
+    switch ($status) {
+        case 2:
+            return 'Формируется';
+            break;
+        case 3:
+            return 'В пути';
+            break;
+        case 4:
+            return 'Доставлен';
+            break;
+        case 5:
+            return 'Отменен';
+            break;
+        default:
+            return 'Новый';
+            break;
+    }
+};
+
+function calculateSum() {
+    var sum = 0;
+    $(".input_porduct_count").each(function () {
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+    });
+    return sum;
+};
+
+function calculateProductSumma() {
+    $summa = 0;
+    $(".parent_row_order").each(function () {
+        $product_price = parseInt($(this).find('.product_price').text());
+        $product_count = parseInt($(this).find('.input_porduct_count').val());
+        $summa += $product_price * $product_count;
+    });
+    return $summa;
+};
+
+function dateFormat($date) {
+    $formattedDate = new Date($date);
+    $d = $formattedDate.getDate();
+    $m = $formattedDate.getMonth() + 1;
+    $y = $formattedDate.getFullYear();
+    $h = $formattedDate.getHours();
+    $min = $formattedDate.getMinutes();
+    if ($d < 10) {
+        $d = "0" + $d;
+    }
+    if ($m < 10) {
+        $m = "0" + $m;
+    }
+    if ($min == 0) {
+        $min = "0" + $min;
+    }
+    return $d + "." + $m + "." + $y + " " + $h + ":" + $min;
+};
+
+function number_format(number, decimals = '2', dec_point = ',', thousands_sep = ' ') {
+    number = number.toFixed(decimals);
+
+    var nstr = number.toString();
+    nstr += '';
+    x = nstr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? dec_point + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1))
+        x1 = x1.replace(rgx, '$1' + thousands_sep + '$2');
+    return x1 + x2;
+};

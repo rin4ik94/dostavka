@@ -58,21 +58,21 @@
     <tbody>
         @foreach($orders as $order)
         <tr data-id="{{ $order->id }}" data-mname="{{ $order->manager->name }}" data-omanager="{{ $order->manager_id }}"
-            data-bname="{{ $order->branch->name ?? '' }}"
+            data-bname="{{ $order->branch->name ?? '' }}" data-branch="{{ $order->branch_id }}" data-region="{{ $order->region_id }}"
             data-cname="{{ $order->client->getFullname() }}" data-cmobile="{{ $order->client->mobile }}" data-status="{{  $order->order_status_id }}"
             data-ostreet="{{  $order->delivery_address_street }}" data-ohome="{{  $order->delivery_address_home }}"
             data-ofloor="{{  $order->delivery_address_floor }}" data-oapartment="{{  $order->delivery_address_apartment }}"
             data-oremark="{{  $order->delivery_address_remark }}" data-odeliver="5000" data-payment="{{ $order->payment->name_ru}}"
             data-oprice="{{$order->order_price}}" data-tprice="{{$order->total_price}}" data-branches="{{ $order->getBranches() }}"
-            data-products="{{ $order->products }}">
+            data-products="{{ $order->products }}" data-statuses="{{ $order->statuses }}">
             <td class="order_id"><a class="text-red" href="#" data-toggle="modal" data-target="#Order">{{ $order->id }}</a></td>
             <td>{{ $order->getTime()}}</td>
             <td>{{ $order->manager->name }}</td>
             @if($order->branch_id != '')
-            <td><a class="text-green order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id }}">{{
+            <td><a class="text-green order_branch" href="#" data-toggle="modal" data-target="#orderBranch">{{
                     $order->branch->name }}</a></td>
             @else
-            <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id }}">Выбрать</a></td>
+            <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch">Выбрать</a></td>
             @endif
             <td><a class="text-green order_client" href="#" data-toggle="modal" data-target="#Client" data-client="{{ $order->client_id }}">{{
                     $order->client->getFullname() }}</a></td>
@@ -84,7 +84,7 @@
             <td><a class="text-red order_courier" href="#" data-toggle="modal" data-target="#orderCourier" data-courier="0">{{
                     __('Назначить') }}</a></td>
             @endif
-            <td>{{ $order->total_price }}</td>
+            <td>{{ number_format($order->total_price,'0',' ',' ') }}</td>
             <td>{{ $order->payment->name_ru }}</td>
             <td><a class="{{ $order->status->color }} order_status" href="#" data-toggle="modal" data-target="#orderStatus">{{
                     $order->status->name }} {{ $order->status_count }}</a></td>
