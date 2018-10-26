@@ -52,14 +52,13 @@ class OrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         $order_id = $request->id;
         $order = Order::find($order_id);
-        if($order->order_status_id == $request->order_status_id){
+        if($order->order_status_id == $request->status_id){
             $order->update($request->all());
         }else{
             $order->update($request->all());
-            $order->statuses()->attach($request->order_status_id, ['client_id' => $order->client_id]);
+            $order->statuses()->attach($request->status_id, ['client_id' => $order->client_id]);
         }
         if($request->productSet != null){
         $order->products()->detach();
