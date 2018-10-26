@@ -1,6 +1,6 @@
 <div class="modal fade" id="orderCourier" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form class="modal-content form-courier" action="/admin/orders/1" method="POST">
+    <form class="modal-content form-courier" action="/admin/ordercourier/1" method="POST">
       {{ method_field('PUT') }}
       @csrf
       <div class="modal-header">

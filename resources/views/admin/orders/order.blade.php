@@ -1,6 +1,9 @@
 <div class="modal fade order" id="Order" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
+      <form class="modal-content form-order" action="/admin/orders/1" method="POST">
+        {{ method_field('PUT') }}
+        @csrf
       <div class="modal-header">
         <h5 class="modal-title">Заказ № <span class="orderIdForOrder"></span></h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
@@ -65,7 +68,7 @@
             </div>
             <div class="form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="ordeBranches">Филиал</label>
+                <label class="form-label" for="ordeBranches">Филиал <span class="text-red">*</span></label>
               </div>
               <div class="col-8">
                 <select class="custom-select" id="orderBranches" name="branch_id" required>
@@ -78,28 +81,23 @@
             <h4 class="title">Доставка</h4>
             <div class="form-group form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="orderRegions">Регион</label>
+                <label class="form-label" for="orderRegions">Регион <span class="text-red">*</span></label>
               </div>
               <div class="col-8">
                 <select class="custom-select" id="orderRegions" name="region_id" required>
                   <option value="" selected disabled>Не выбран</option>
-                  <option value="1">Ishonch</option>
-                  <option value="2">Makro</option>
-                  <option value="3">Euro Spar</option>
-                  <option value="4">Дикси</option>
-                  <option value="5">Metro</option>
-                  <option value="6">Пятёрочка</option>
-                  <option value="7">Перекресток</option>
-                  <option value="8">Ашан</option>
+                  @foreach($regions as $region)
+                    <option value="{{ $region->id }}">{{ $region->name_ru }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
             <div class="form-group form-row">
               <div class="col-4 col-form-label">
-                <label class="form-label" for="deliveryStreet">Улица</label>
+                <label class="form-label" for="deliveryStreet">Улица <span class="text-red">*</span></label>
               </div>
               <div class="col-8">
-                <input class="form-control" id="deliveryStreet" type="text" name="delivery_address_street" value="">
+                <input class="form-control" id="deliveryStreet" type="text" name="delivery_address_street" value="" required>
               </div>
             </div>
             <div class="form-group form-row">
@@ -144,7 +142,7 @@
                 <label class="form-label">Сумма заказа</label>
               </div>
               <div class="col-8">
-                <input class="form-control" id="orderPrice" name="order_price" value="" disabled>
+                <input class="form-control orderPrice" id="orderPrice" disabled>
               </div>
             </div>
             <div class="form-group form-row">
@@ -160,7 +158,7 @@
                 <label class="form-label" for="totalPrice">Сумма к оплате</label>
               </div>
               <div class="col-8">
-                <input class="form-control" id="totalPrice" name="total_price" value="" disabled>
+                <input class="form-control totalPrice" id="totalPrice" disabled>
               </div>
             </div>
           </section>
@@ -183,9 +181,13 @@
         </div>
       </div>
       <div class="modal-footer">
+        <input type="hidden" id="orderIdForOrder" name="id">
+        <input type="hidden" class="totalPrice" name="total_price">
+        <input type="hidden" class="orderPrice" name="order_price">
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-green">OK</button>
+        <button type="submit" class="btn btn-green">OK</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
