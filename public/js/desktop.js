@@ -51713,11 +51713,12 @@ var app = new Vue({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__routes__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_router__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__beforeEach__ = __webpack_require__(293);
 
 // import store from './store'
 
 
-// import beforeEach from './beforeEach'
+
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
 
@@ -51741,7 +51742,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
         }
     }
 });
-// router.beforeEach(beforeEach)
+router.beforeEach(__WEBPACK_IMPORTED_MODULE_3__beforeEach__["a" /* default */]);
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
@@ -51788,49 +51789,85 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
     children: [{
         path: '/',
         name: 'home',
-        component: __WEBPACK_IMPORTED_MODULE_1__pages_main_Home___default.a
-        // meta: {
-        //     guest: true,
-        //     needsAuth: false
-        // }
+        component: __WEBPACK_IMPORTED_MODULE_1__pages_main_Home___default.a,
+        meta: {
+            guest: true,
+            needsAuth: false
+        }
     }, {
         path: '/profile',
         name: 'profile',
-        component: __WEBPACK_IMPORTED_MODULE_2__pages_Profile___default.a
+        component: __WEBPACK_IMPORTED_MODULE_2__pages_Profile___default.a,
+        meta: {
+            guest: false,
+            needsAuth: true
+        }
     }, {
         path: '/orders',
         name: 'orders',
-        component: __WEBPACK_IMPORTED_MODULE_3__pages_Orders___default.a
+        component: __WEBPACK_IMPORTED_MODULE_3__pages_Orders___default.a,
+        meta: {
+            guest: false,
+            needsAuth: true
+        }
     }, {
         path: '/cart',
         name: 'cart',
-        component: __WEBPACK_IMPORTED_MODULE_8__pages_Cart___default.a
+        component: __WEBPACK_IMPORTED_MODULE_8__pages_Cart___default.a,
+        meta: {
+            guest: true,
+            needsAuth: false
+        }
     }, {
         path: '/delivery',
         name: 'delivery',
-        component: __WEBPACK_IMPORTED_MODULE_4__pages_Delivery___default.a
+        component: __WEBPACK_IMPORTED_MODULE_4__pages_Delivery___default.a,
+        meta: {
+            guest: true,
+            needsAuth: false
+        }
     }, {
         path: '/:city/:slug',
         name: 'catalog',
         component: __WEBPACK_IMPORTED_MODULE_5__pages_catalog_Catalog___default.a,
+        meta: {
+            guest: true,
+            needsAuth: false
+        },
         children: [{
             path: 'cats/:sluged',
             name: 'category',
             component: __WEBPACK_IMPORTED_MODULE_6__pages_catalog_Products___default.a,
+            meta: {
+                guest: true,
+                needsAuth: false
+            },
             children: [{
                 path: ':product',
                 name: 'pp',
-                component: __WEBPACK_IMPORTED_MODULE_7__components_modals_Product___default.a
+                component: __WEBPACK_IMPORTED_MODULE_7__components_modals_Product___default.a,
+                meta: {
+                    guest: true,
+                    needsAuth: false
+                }
             }]
         }, {
             path: ':product',
             name: 'tp',
-            component: __WEBPACK_IMPORTED_MODULE_7__components_modals_Product___default.a
+            component: __WEBPACK_IMPORTED_MODULE_7__components_modals_Product___default.a,
+            meta: {
+                guest: true,
+                needsAuth: false
+            }
         }]
     }, {
         path: '*',
         name: 'notFound',
-        component: __WEBPACK_IMPORTED_MODULE_9__pages_NotFound___default.a
+        component: __WEBPACK_IMPORTED_MODULE_9__pages_NotFound___default.a,
+        meta: {
+            guest: true,
+            needsAuth: false
+        }
     }]
     // {
     //     path: '/settings',
@@ -54191,7 +54228,9 @@ var render = function() {
                               to: {
                                 name: "catalog",
                                 params: {
-                                  city: _vm.regionSlug,
+                                  city: _vm.regionSlug
+                                    ? _vm.regionSlug
+                                    : "here",
                                   slug: manager.slug
                                 }
                               }
@@ -54291,6 +54330,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_DatePicker__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_DatePicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_DatePicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(5);
 //
 //
 //
@@ -54356,16 +54396,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: { DatePicker: __WEBPACK_IMPORTED_MODULE_0__components_DatePicker___default.a },
   data: function data() {
     return {
-      form: {
-        date: null
-      }
+      user: null
+      // form: {
+      //   date: null,
+      //   phone: this.user && this.user.data ? this.user.data.phone : null
+      // }
     };
+  },
+
+  methods: {
+    saveUserData: function saveUserData() {
+      var _this = this;
+
+      axios.patch("api/clients/" + this.user.data.id + "/settings", this.user.data).then(function (response) {
+        _this.$store.dispatch("fetchUser").then(function () {
+          flash("Изменение прошло успешно!");
+        });
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    setTimeout(function () {
+      axios.get("api/me").then(function (response) {
+        _this2.user = response.data;
+        setTimeout(function () {
+          _this2.$emit("ready");
+        }, 200);
+      });
+    }, 0);
   }
 });
 
@@ -54442,7 +54510,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   props: {
-    format: { default: "DD.MM.YYYY" },
+    value: { required: true },
+    format: { default: "YYYY.MM.DD" },
     options: {}
   },
 
@@ -56031,7 +56100,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("input", { ref: "input", staticClass: "pu-input" })
+  return _c("input", {
+    ref: "input",
+    staticClass: "pu-input",
+    domProps: { value: _vm.value }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -56051,251 +56124,338 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "content-inner" }, [
-        _c("main", { staticClass: "main" }, [
-          _c("h1", { staticClass: "main-title" }, [_vm._v("Мои данние")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card" }, [
-            _c(
-              "form",
-              {
-                staticClass: "card-body needs-validation",
-                attrs: { novalidate: "" }
-              },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-3 col-form-label",
-                      attrs: { for: "profile_birthday" }
-                    },
-                    [_vm._v("Дата рождения")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-9" },
-                    [
-                      _c("DatePicker", {
-                        staticClass: "form-control",
-                        attrs: { placeholder: "DD.MM.YYYY" },
-                        model: {
-                          value: _vm.form.date,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "date", $$v)
-                          },
-                          expression: "form.date"
-                        }
-                      }),
+  return _vm.user
+    ? _c("div", { staticClass: "content" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "content-inner" }, [
+            _c("main", { staticClass: "main" }, [
+              _c("h1", { staticClass: "main-title" }, [_vm._v("Мои данние")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card" }, [
+                _c(
+                  "form",
+                  {
+                    staticClass: "card-body needs-validation",
+                    attrs: { novalidate: "" }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-3 col-form-label",
+                          attrs: { for: "profile_firstname" }
+                        },
+                        [_vm._v("Имя")]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v("Пожалуйста заполните поле")
+                      _c("div", { staticClass: "col-9" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.data.first_name,
+                              expression: "user.data.first_name"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            id: "profile_firstname",
+                            name: "profile_firstname",
+                            type: "text",
+                            placeholder: "Заполните это поле",
+                            required: ""
+                          },
+                          domProps: { value: _vm.user.data.first_name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.user.data,
+                                "first_name",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v("Пожалуйста заполните поле")
+                        ])
                       ])
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _vm._m(3),
-                _vm._v(" "),
-                _vm._m(4)
-              ]
-            )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-3 col-form-label",
+                          attrs: { for: "profile_lastname" }
+                        },
+                        [_vm._v("Фамилия")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-9" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.data.last_name,
+                              expression: "user.data.last_name"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            id: "profile_lastname",
+                            name: "profile_lastname",
+                            type: "text",
+                            placeholder: "Заполните это поле",
+                            required: ""
+                          },
+                          domProps: { value: _vm.user.data.last_name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.user.data,
+                                "last_name",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v("Пожалуйста заполните поле")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-3 col-form-label",
+                          attrs: { for: "profile_birthday" }
+                        },
+                        [_vm._v("Дата рождения")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-9" },
+                        [
+                          _c("DatePicker", {
+                            staticClass: "form-control",
+                            attrs: {
+                              value: _vm.user.data.birth_date,
+                              placeholder: "DD.MM.YYYY"
+                            },
+                            model: {
+                              value: _vm.user.data.birth_date,
+                              callback: function($$v) {
+                                _vm.$set(_vm.user.data, "birth_date", $$v)
+                              },
+                              expression: "user.data.birth_date"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Пожалуйста заполните поле")
+                          ])
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-3",
+                          attrs: { for: "profile_gender" }
+                        },
+                        [_vm._v("Пол")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-9" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "custom-control custom-radio custom-control-inline"
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.data.jender,
+                                  expression: "user.data.jender"
+                                }
+                              ],
+                              staticClass: "custom-control-input",
+                              attrs: {
+                                type: "radio",
+                                id: "profile_gender1",
+                                name: "profile_gender",
+                                value: "1",
+                                checked: "",
+                                required: ""
+                              },
+                              domProps: {
+                                checked: _vm._q(_vm.user.data.jender, "1")
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.$set(_vm.user.data, "jender", "1")
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "custom-control-label",
+                                attrs: { for: "profile_gender1" }
+                              },
+                              [_vm._v("Мужской")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "custom-control custom-radio custom-control-inline"
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.data.jender,
+                                  expression: "user.data.jender"
+                                }
+                              ],
+                              staticClass: "custom-control-input",
+                              attrs: {
+                                type: "radio",
+                                id: "profile_gender2",
+                                name: "profile_gender",
+                                value: "2",
+                                required: ""
+                              },
+                              domProps: {
+                                checked: _vm._q(_vm.user.data.jender, "2")
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.$set(_vm.user.data, "jender", "2")
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "custom-control-label",
+                                attrs: { for: "profile_gender2" }
+                              },
+                              [_vm._v("Женский")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v("Пожалуйста заполните поле")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-3 col-form-label",
+                          attrs: { for: "profile_phone" }
+                        },
+                        [_vm._v("Телефон")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-9" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.data.phone,
+                              expression: "user.data.phone"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            id: "profile_phone",
+                            name: "profile_phone",
+                            type: "text",
+                            disabled: "",
+                            required: ""
+                          },
+                          domProps: { value: _vm.user.data.phone },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.user.data,
+                                "phone",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-9 offset-3" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-green",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.saveUserData($event)
+                              }
+                            }
+                          },
+                          [_vm._v("Редактировать")]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("aside", { staticClass: "aside" })
           ])
-        ]),
-        _vm._v(" "),
-        _c("aside", { staticClass: "aside" })
+        ])
       ])
-    ])
-  ])
+    : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-3 col-form-label",
-          attrs: { for: "profile_firstname" }
-        },
-        [_vm._v("Имя")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-9" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "profile_firstname",
-            name: "profile_firstname",
-            type: "text",
-            value: "Jaloliddin",
-            required: ""
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "invalid-feedback" }, [
-          _vm._v("Пожалуйста заполните поле")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-3 col-form-label",
-          attrs: { for: "profile_lastname" }
-        },
-        [_vm._v("Фамилия")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-9" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "profile_lastname",
-            name: "profile_lastname",
-            type: "text",
-            value: "Kholmatov",
-            required: ""
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "invalid-feedback" }, [
-          _vm._v("Пожалуйста заполните поле")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c("label", { staticClass: "col-3", attrs: { for: "profile_gender" } }, [
-        _vm._v("Пол")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-9" }, [
-        _c(
-          "div",
-          { staticClass: "custom-control custom-radio custom-control-inline" },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: {
-                type: "radio",
-                id: "profile_gender1",
-                name: "profile_gender",
-                value: "1",
-                checked: "",
-                required: ""
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "custom-control-label",
-                attrs: { for: "profile_gender1" }
-              },
-              [_vm._v("Мужской")]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "custom-control custom-radio custom-control-inline" },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: {
-                type: "radio",
-                id: "profile_gender2",
-                name: "profile_gender",
-                value: "2",
-                required: ""
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "custom-control-label",
-                attrs: { for: "profile_gender2" }
-              },
-              [_vm._v("Женский")]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "invalid-feedback" }, [
-          _vm._v("Пожалуйста заполните поле")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-3 col-form-label",
-          attrs: { for: "profile_phone" }
-        },
-        [_vm._v("Телефон")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-9" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "profile_phone",
-            name: "profile_phone",
-            type: "text",
-            value: "+998903003363",
-            disabled: "",
-            required: ""
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-9 offset-3" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-green", attrs: { type: "submit" } },
-          [_vm._v("Редактировать")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -58688,6 +58848,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
+    region: "region",
+    user: "user",
     cartInfo: "cart",
     manager: "manager"
   }), {
@@ -59031,7 +59193,100 @@ var render = function() {
               _c("h1", [_vm._v("content goes here")])
             ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("aside", { staticClass: "aside" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("form", { staticClass: "card-body" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.data.first_name,
+                      expression: "user.data.first_name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Имя" },
+                  domProps: { value: _vm.user.data.first_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user.data, "first_name", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("div", { staticClass: "input-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.data.phone,
+                        expression: "user.data.phone"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Телефон" },
+                    domProps: { value: _vm.user.data.phone },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user.data, "phone", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("select", { staticClass: "custom-select" }, [
+                  _c(
+                    "option",
+                    { attrs: { value: "0", disabled: "", selected: "" } },
+                    [_vm._v(_vm._s(_vm.region.name))]
+                  ),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [
+                    _vm._v("Город Фергана")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [
+                    _vm._v("Город Маргилан")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [
+                    _vm._v("Город Киргули")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-block btn-green",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("Заказать")]
+              )
+            ])
+          ])
+        ])
       ])
     ])
   ])
@@ -59041,157 +59296,103 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("aside", { staticClass: "aside" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("form", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("div", { staticClass: "card-title" }, [_vm._v("Оформление")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Имя" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("div", { staticClass: "input-group" }, [
-              _c("div", { staticClass: "input-group-prepend" }, [
-                _c(
-                  "span",
-                  {
-                    staticClass: "input-group-text",
-                    attrs: { id: "basic-addon1" }
-                  },
-                  [_vm._v("+998")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Телефон" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("select", { staticClass: "custom-select" }, [
-              _c(
-                "option",
-                { attrs: { value: "0", disabled: "", selected: "" } },
-                [_vm._v("Регион")]
-              ),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [
-                _vm._v("Город Фергана")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [
-                _vm._v("Город Маргилан")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [_vm._v("Город Киргули")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Улица" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group form-row" }, [
-            _c("div", { staticClass: "col" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Дом" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Корп." }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Кв." }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "div",
-              {
-                staticClass: "custom-control custom-radio custom-control-inline"
-              },
-              [
-                _c("input", {
-                  staticClass: "custom-control-input",
-                  attrs: {
-                    type: "radio",
-                    id: "cart_payment_1",
-                    name: "cart_payment",
-                    value: "1",
-                    checked: ""
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "custom-control-label",
-                    attrs: { for: "cart_payment_1" }
-                  },
-                  [_vm._v("Наличными")]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "custom-control custom-radio custom-control-inline"
-              },
-              [
-                _c("input", {
-                  staticClass: "custom-control-input",
-                  attrs: {
-                    type: "radio",
-                    id: "cart_payment_2",
-                    name: "cart_payment",
-                    value: "2"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "custom-control-label",
-                    attrs: { for: "cart_payment_2" }
-                  },
-                  [_vm._v("Картой")]
-                )
-              ]
-            )
-          ]),
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "card-title" }, [_vm._v("Оформление")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "Улица" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group form-row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: "Дом" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: "Корп." }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: "Кв." }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "div",
+        { staticClass: "custom-control custom-radio custom-control-inline" },
+        [
+          _c("input", {
+            staticClass: "custom-control-input",
+            attrs: {
+              type: "radio",
+              id: "cart_payment_1",
+              name: "cart_payment",
+              value: "1",
+              checked: ""
+            }
+          }),
           _vm._v(" "),
           _c(
-            "button",
+            "label",
             {
-              staticClass: "btn btn-block btn-green",
-              attrs: { type: "submit" }
+              staticClass: "custom-control-label",
+              attrs: { for: "cart_payment_1" }
             },
-            [_vm._v("Заказать")]
+            [_vm._v("Наличными")]
           )
-        ])
-      ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "custom-control custom-radio custom-control-inline" },
+        [
+          _c("input", {
+            staticClass: "custom-control-input",
+            attrs: {
+              type: "radio",
+              id: "cart_payment_2",
+              name: "cart_payment",
+              value: "2"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "custom-control-label",
+              attrs: { for: "cart_payment_2" }
+            },
+            [_vm._v("Картой")]
+          )
+        ]
+      )
     ])
   }
 ]
@@ -62043,7 +62244,6 @@ var checkTokenExists = function checkTokenExists(_ref4, token) {
 
     return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('authtoken').then(function (token) {
         if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(token)) {
-
             return Promise.reject('NO_STORAGE_TOKEN');
         }
 
@@ -62107,6 +62307,7 @@ var setToken = function setToken(_ref9, token) {
 
     if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(token)) {
         return dispatch('checkTokenExists').then(function (token) {
+
             Object(__WEBPACK_IMPORTED_MODULE_2__helpers_index__["a" /* setHttpToken */])(token);
         });
     }
@@ -62239,7 +62440,6 @@ var langChange = function langChange(_ref16, lang) {
 // export const checkTokenExists = ({ commit, dispatch }, token) => {
 //     return localforage.getItem('authtoken').then((token) => {
 //         if (isEmpty(token)) {
-//             localforage.removeItem('phone')
 
 //             return Promise.reject('NO_STORAGE_TOKEN');
 //         }
@@ -62276,6 +62476,8 @@ var langChange = function langChange(_ref16, lang) {
 
 var setHttpToken = function setHttpToken(token) {
     if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(token)) {
+        alert('here');
+
         window.axios.defaults.headers.common['Authorization'] = null;
     }
     window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
@@ -63882,7 +64084,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
 
 
 
@@ -63906,8 +64107,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     user: "user"
   }),
   methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])({
-    // register: "auth/register",
-    // setPhone: "setPhone",
     fetchUser: "fetchUser",
     setToken: "setToken"
   }), {
@@ -63954,17 +64153,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         var data = "+998" + this.form.phone;
         axios.get("/api/sms/check?its=1&code=" + this.form.code + "&phone=" + data).then(function (response) {
           var token = response.data.meta.token;
+          $("#login").modal("hide");
           _this.setToken(token).then(function () {
             _this.fetchUser();
             // this.setPhone(response.data.data.phone);
           });
-          $("#login").modal("hide");
-          //   EventBus.$emit("fetchUserPhone", data);
-          // localforage.getItem("intended").then(response => {
-          //   if (!isEmpty(response)) {
-          //     this.$router.replace({ name: response });
-          //   }
-          // });
+          if (response.data.new == 1) {
+            _this.$router.replace({ name: "profile" });
+          }
           _this.form = {
             phone: "",
             code: ""
@@ -64078,102 +64274,115 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _vm.step == 2
-            ? _c("div", { staticClass: "modal-body" }, [
-                _c("h4", [_vm._v("+998" + _vm._s(_vm.form.phone))]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже"
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.code,
-                        expression: "form.code"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      maxlength: _vm.code,
-                      type: "text",
-                      placeholder: "Код из смс"
-                    },
-                    domProps: { value: _vm.form.code },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "code", $event.target.value)
-                      }
+            ? _c(
+                "form",
+                {
+                  staticClass: "modal-body",
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.verifyCode($event)
                     }
-                  }),
+                  }
+                },
+                [
+                  _c("h4", [_vm._v("+998" + _vm._s(_vm.form.phone))]),
                   _vm._v(" "),
-                  _vm.error
-                    ? _c("p", [_vm._v("Неправильный пароль")])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-text" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-link",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.sendSMS($event)
-                          }
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "icon" }, [_vm._v("refresh")]),
-                        _c("span", { staticClass: "text" }, [
-                          _vm._v("Отправить еще раз")
-                        ])
-                      ]
+                  _c("p", [
+                    _vm._v(
+                      "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже"
                     )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-block btn-green",
-                    attrs: {
-                      disabled:
-                        _vm.form.code == null ||
-                        (_vm.form.code && _vm.code != _vm.form.code.length)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.code,
+                          expression: "form.code"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        maxlength: _vm.code,
+                        type: "text",
+                        placeholder: "Код из смс"
+                      },
+                      domProps: { value: _vm.form.code },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "code", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error
+                      ? _c("p", [_vm._v("Неправильный пароль")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-text" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-link",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.sendSMS($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "icon" }, [_vm._v("refresh")]),
+                          _c("span", { staticClass: "text" }, [
+                            _vm._v("Отправить еще раз")
+                          ])
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-green",
+                      attrs: {
+                        type: "submit",
+                        disabled:
+                          _vm.form.code == null ||
+                          (_vm.form.code && _vm.code != _vm.form.code.length)
+                      },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.verifyCode($event)
+                        }
+                      }
                     },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.verifyCode($event)
+                    [_vm._v("Далее")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-light",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.step = 1
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Далее")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-block btn-light",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.step = 1
-                      }
-                    }
-                  },
-                  [_vm._v("Изменить номер")]
-                )
-              ])
+                    },
+                    [_vm._v("Изменить номер")]
+                  )
+                ]
+              )
             : _vm._e()
         ])
       ])
@@ -65433,6 +65642,35 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-4c4a8a94", module.exports)
   }
 }
+
+/***/ }),
+/* 292 */,
+/* 293 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__vuex__ = __webpack_require__(240);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_localforage__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_localforage__);
+
+
+
+var beforeEach = function beforeEach(to, from, next) {
+    // localforage.removeItem('intended')
+
+    __WEBPACK_IMPORTED_MODULE_0__vuex__["a" /* default */].dispatch('checkTokenExists').then(function () {
+        next();
+    }).catch(function () {
+        if (to.meta.needsAuth) {
+            next({ name: 'home' });
+            return;
+        }
+
+        next();
+    });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (beforeEach);
 
 /***/ })
 /******/ ]);

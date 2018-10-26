@@ -25,9 +25,9 @@ export const fetchUser = ({ commit }) => {
 export const checkTokenExists = ({ commit, dispatch }, token) => {
     return localforage.getItem('authtoken').then((token) => {
         if (isEmpty(token)) {
-
             return Promise.reject('NO_STORAGE_TOKEN');
         }
+
 
         return Promise.resolve(token)
     })
@@ -79,6 +79,8 @@ export const logout = ({ dispatch }) => {
 export const setToken = ({ commit, dispatch }, token) => {
     if (isEmpty(token)) {
         return dispatch('checkTokenExists').then((token) => {
+
+
             setHttpToken(token)
         })
     }
@@ -196,7 +198,6 @@ export const langChange = ({ commit, dispatch }, lang) => {
 // export const checkTokenExists = ({ commit, dispatch }, token) => {
 //     return localforage.getItem('authtoken').then((token) => {
 //         if (isEmpty(token)) {
-//             localforage.removeItem('phone')
 
 //             return Promise.reject('NO_STORAGE_TOKEN');
 //         }

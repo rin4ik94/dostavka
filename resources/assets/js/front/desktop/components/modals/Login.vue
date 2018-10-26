@@ -17,23 +17,22 @@
         
         <button @click.prevent="sendSMS" :disabled="form.phone == null || form.phone && max != form.phone.length" class="btn btn-block btn-green">Получить код для входа</button>
       </form>
-      <div class="modal-body"  v-if="step == 2">
+      <form @submit.prevent="verifyCode" class="modal-body"  v-if="step == 2">
         <h4>+998{{form.phone}}</h4>
         <p>Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже</p>
         <div class="form-group">
           <input :maxlength="code" v-model="form.code" class="form-control" type="text" placeholder="Код из смс">
           
            <p  v-if="error">Неправильный пароль</p>
-         
           <div class="form-text">
             <button @click.prevent="sendSMS" class="btn btn-link" type="button">
               <i class="icon">refresh</i><span class="text">Отправить еще раз</span>
             </button>
           </div>
         </div>
-        <button @click.prevent="verifyCode" class="btn btn-block btn-green" :disabled="form.code == null || form.code && code != form.code.length">Далее</button>
+        <button type="submit" @click.prevent="verifyCode" class="btn btn-block btn-green" :disabled="form.code == null || form.code && code != form.code.length">Далее</button>
         <button @click.prevent="step = 1" class="btn btn-block btn-light">Изменить номер</button>
-      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -61,8 +60,6 @@ export default {
   }),
   methods: {
     ...mapActions({
-      // register: "auth/register",
-      // setPhone: "setPhone",
       fetchUser: "fetchUser",
       setToken: "setToken"
     }),
@@ -82,17 +79,14 @@ export default {
           .get(`/api/sms/check?its=1&code=${this.form.code}&phone=${data}`)
           .then(response => {
             let token = response.data.meta.token;
+            $("#login").modal("hide");
             this.setToken(token).then(() => {
               this.fetchUser();
               // this.setPhone(response.data.data.phone);
             });
-            $("#login").modal("hide");
-            //   EventBus.$emit("fetchUserPhone", data);
-            // localforage.getItem("intended").then(response => {
-            //   if (!isEmpty(response)) {
-            //     this.$router.replace({ name: response });
-            //   }
-            // });
+            if (response.data.new == 1) {
+              this.$router.replace({ name: "profile" });
+            }
             this.form = {
               phone: "",
               code: ""

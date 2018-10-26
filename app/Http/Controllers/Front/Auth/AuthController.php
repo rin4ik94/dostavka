@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front\Auth;
 
+use Carbon\Carbon;
+
 use App\Models\User;
 use App\Models\Client;
 use App\Http\Controllers\Controller;
@@ -45,15 +47,15 @@ class AuthController extends Controller
 
     public function update(Request $request, Client $client)
     {
-        $client->phone = '+998' . $request->mobile;
-        $client->save();
-        $client->update($request->only('name', 'sex', 'last_name', 'region_id', 'date_birth'));
+        // $client->birth_date = Carbon::parse($request->birth_date)->format('d.m.y');
+        // $client->save();
+        $client->update($request->only('first_name', 'last_name', 'birth_date', 'jender'));
         return response($client);
     }
 
     public function logout()
     {
-        JWTAuth::invalidate(JWTAuth::getToken());
+        // JWTAuth::invalidate(JWTAuth::getToken());
         return response(null, 200);
     }
 

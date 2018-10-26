@@ -1,5 +1,5 @@
 <template>
-  <input class="pu-input" ref="input">
+  <input :value="value" class="pu-input" ref="input">
 </template>
 
 <script>
@@ -11,7 +11,8 @@ export default {
     return {};
   },
   props: {
-    format: { default: "DD.MM.YYYY" },
+    value: { required: true },
+    format: { default: "YYYY.MM.DD" },
     options: {}
   },
 

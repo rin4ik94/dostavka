@@ -129,6 +129,7 @@ class SMSController extends Controller
                     $sms->save();
                     return response()->json([
                         'data' => $client,
+                        'new' => 0,
                         'meta' => [
                             'token' => $token
                         ]
@@ -150,6 +151,7 @@ class SMSController extends Controller
                     $sms->save();
                     return response()->json([
                         'data' => $client,
+                        'new' => 1,
                         'meta' => [
                             'token' => $token
                         ]
