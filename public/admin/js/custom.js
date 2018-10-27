@@ -11,6 +11,21 @@ $(function () {
             reader.readAsDataURL(this.files[0]);
         }
     });
+
+    setInterval(function(){
+        var count = parseInt($('.new').text());
+        $.ajax({
+            type: "GET",
+            url: '/admin/checkNewOrder/'+count,
+            success: function (data) {
+                $('span.order_new_count').text(data['count']);
+            },
+            error: function (data) {
+                console.log('error');
+            }
+        });
+     }, 10000);
+
     // dropdown item change display button text
     $(".dropdown-item ").click(function () {
         $(this).closest('ul').parent().find('.btn:first-child').text($(this).text());

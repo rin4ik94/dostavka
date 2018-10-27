@@ -28,7 +28,7 @@
     <li class="nav-item"><a class="nav-link {{ Request::segment(2) === 'orders' ? 'active' : null }}" href="/admin/orders">
         <i class="icon">notifications</i>
         <span class="text">Заказы</span>
-        <span class="badge badge-red">9</span>
+      <span class="badge badge-red order_new_count">0</span>
       </a></li>
       @endcan
       @can('Отчеты')

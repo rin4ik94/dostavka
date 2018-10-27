@@ -20,4 +20,25 @@ class OrderStatusController extends Controller
         }
         return back()->with('success','successful');
     }
+
+    public function count($count){
+        $data = [];
+        $order = Order::where('order_status_id',1)->latest()->get();
+        $base_count = $order->count();
+        if($count < $base_count){
+            $data = [
+                'status' => true,
+                'count' => $base_count,
+                'data' => $order[0],
+            ];
+        }else{
+            $data = [
+                'status' => false,
+                'count' => $base_count,
+                'data' => null,
+            ];
+        }
+        // dd($data);
+        return response($data);
+    }
 }
