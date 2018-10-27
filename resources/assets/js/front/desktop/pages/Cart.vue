@@ -9,11 +9,11 @@
     <main class="main" v-if="filteredProducts.length > 0">
       <ul class="cart-items"> 
           <li class="cart-item" :key="product.id" v-for="product in filteredProducts">
-            <a class="cart-item-column cart-item-image" href="/">
+            <a class="cart-item-column cart-item-image">
               <img :src="product.image">
             </a>
             <div class="cart-item-column cart-item-desc" >
-              <a href="/">{{product.name}}</a>
+              <a>{{product.name}}</a>
             </div>
             <div class="cart-item-column cart-item-counter">
               <div class="counter-widget input-group input-group-sm">
@@ -34,7 +34,7 @@
     <main  class="main" v-else>
       <h1>content goes here</h1>
     </main>
-    <aside class="aside">
+    <aside class="aside" v-if="products.length">
 
       <div class="card">
         <form class="card-body">
@@ -42,22 +42,23 @@
             <div class="card-title">Оформление</div>
           </div>
           <div class="form-group">
-            <input class="form-control" v-model="form.user.first_name" type="text" placeholder="Имя">
+            <input class="form-control" :disabled="user.data"  v-model="form.user.first_name" type="text" placeholder="Имя">
+          </div>
+          <div class="form-group">
+            <input class="form-control" :disabled="user.data" v-model="form.user.last_name" type="text" placeholder="Фамилия">
           </div>
           <div class="form-group">
             <div class="input-group">
             <!-- <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+998</span>
             </div> -->
-            <input v-model="form.user.phone" class="form-control" type="text" placeholder="Телефон">
+            <input :disabled="user.data"  v-model="form.user.phone" class="form-control" type="text" placeholder="Телефон">
             </div>
           </div>
           <div class="form-group">
-            <select class="custom-select">
-              <option value="0" v-if="region" disabled selected>{{region.name}}</option>
-              <option value="1">Город Фергана</option>
-              <option value="2">Город Маргилан</option>
-              <option value="2">Город Киргули</option>
+            <select class="custom-select" v-model="form.region_id">
+              <option :value="region.id"  v-for="region in regions" disabled selected>{{region.name}}</option>
+               
             </select>
           </div>
           <div class="form-group">
@@ -78,7 +79,7 @@
               <label class="custom-control-label" for="cart_payment_2">Картой</label>
             </div> -->
           </div>
-          <button class="btn btn-block btn-green" type="submit">Заказать</button>
+          <button class="btn btn-block btn-green" @click.prevent="order" type="submit">Заказать</button>
         </form>
       </div>
     </aside>
@@ -96,18 +97,20 @@ export default {
     return {
       products: [],
       region: null,
+
+      regions:[],
       form:{
         user:{
           first_name:'',
           last_name:'',
           phone:'',
-
+          region_id:1
         },
         payment_type_id:1,
         delivery_address_home:'',
         delivery_address_street:'',
         delivery_address_floor:'',
-        delivery_address_apartment:'s'
+        delivery_address_apartment:''
       }
     };
   },
@@ -140,19 +143,16 @@ export default {
       immediate:true,
       handler(user){
         if(user.data && user.data.phone){ 
-
           this.form.user.first_name = user.data.first_name
           this.form.user.phone = user.data.phone
           this.form.user.last_name = user.data.last_name
-
           }else{
-            this.form = {
-              user:{
+            this.form.user={
                 first_name:'',
                 last_name:'',
                 phone:''
               }
-            }
+            
           }
       } 
     }
@@ -165,16 +165,37 @@ export default {
       if (region) {
         axios.get(`/api/regions/${region}`).then(response => {
           this.region = response.data.data;
+          this.form.region_id = this.region.id;
           this.getProducts();
         });
       }
     },
+    
     ...mapActions({
       setCart: "setCart",
       setTotal: "setTotal",
       setManager: "setManager",
       addToTotal: "addToTotal"
     }),
+    order(){
+      if(this.products.length){
+        let params = {};
+        let p;
+        this.products.map((v, k) => {
+        if (!p) {
+          return (p = v.id + '-'+ v.quantity);
+        }
+          p = p + "," + v.id + '-' + v.quantity;
+        });
+        params["products"] = p;
+        params["form"] = this.form;
+        axios.post('api/orders',{params:params}).then(response=>{
+console.log(response.data)
+        }).catch(errors=>{
+          
+        })
+      }
+    },
     cartData() {
       let total = 0;
 
@@ -268,11 +289,16 @@ export default {
     }
   },
   mounted() {
+    
     localforage.getItem("cartRegion").then(region => {
       if (!isEmpty("region")) {
         this.fetchRegion(region);
+      } 
+      axios.get('/api/regions').then(response => {
+this.regions = response.data.data   
       }
-    });
+      )
+      }) 
   }
 };
 </script>

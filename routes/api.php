@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,7 @@ use Illuminate\Http\Request;
  */
 
 Route::get('/products', 'Front\ProductController@index');
+Route::post('/orders', 'Front\OrderController@store');
 Route::get('/products/search', 'Front\ProductSearchController@index');
 Route::get('/products/{product}', 'Front\ProductController@show');
 Route::get('/categories_managers', 'Front\ManagerCategoriesController@index');
@@ -39,5 +39,4 @@ Route::group(['middleware' => 'jwt.generate'], function () {
     Route::patch('/clients/{client}/settings', 'Front\Auth\AuthController@update');
     Route::post('/proceed/checkout', 'Front\OrderController@store');
     Route::post('/logout', 'Front\Auth\AuthController@logout');
-
 });
