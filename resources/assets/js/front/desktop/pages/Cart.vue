@@ -12,7 +12,7 @@
             <a class="cart-item-column cart-item-image" href="/">
               <img :src="product.image">
             </a>
-            <div class="cart-item-column cart-item-desc">
+            <div class="cart-item-column cart-item-desc" >
               <a href="/">{{product.name}}</a>
             </div>
             <div class="cart-item-column cart-item-counter">
@@ -42,19 +42,19 @@
             <div class="card-title">Оформление</div>
           </div>
           <div class="form-group">
-            <input class="form-control" v-model="user.data.first_name" type="text" placeholder="Имя">
+            <input class="form-control" v-model="form.user.first_name" type="text" placeholder="Имя">
           </div>
           <div class="form-group">
             <div class="input-group">
             <!-- <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+998</span>
             </div> -->
-            <input v-model="user.data.phone" class="form-control" type="text" placeholder="Телефон">
+            <input v-model="form.user.phone" class="form-control" type="text" placeholder="Телефон">
             </div>
           </div>
           <div class="form-group">
             <select class="custom-select">
-              <option value="0" disabled selected>{{region.name}}</option>
+              <option value="0" v-if="region" disabled selected>{{region.name}}</option>
               <option value="1">Город Фергана</option>
               <option value="2">Город Маргилан</option>
               <option value="2">Город Киргули</option>
@@ -95,12 +95,19 @@ export default {
   data() {
     return {
       products: [],
-      region: null
+      region: null,
+      form:{
+        user:{
+          first_name:'',
+          last_name:'',
+          phone:''
+        }
+      }
     };
   },
   computed: {
     ...mapGetters({
-      region: "region",
+      // region: "region",
       user: "user",
       cartInfo: "cart",
       manager: "manager"
@@ -121,6 +128,15 @@ export default {
   watch: {
     cartInfo() {
       this.getProducts();
+    },
+    user:{
+      deep:true,
+      immediate:true,
+      handler(user){
+        if(user.data.phone){ 
+          this.form.user = user.data
+          }
+      } 
     }
     // region() {
     //   this.fetchRegion();
