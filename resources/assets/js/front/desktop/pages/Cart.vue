@@ -12,7 +12,7 @@
             <a class="cart-item-column cart-item-image" href="/">
               <img :src="product.image">
             </a>
-            <div class="cart-item-column cart-item-desc">
+            <div class="cart-item-column cart-item-desc" >
               <a href="/">{{product.name}}</a>
             </div>
             <div class="cart-item-column cart-item-counter">
@@ -42,41 +42,41 @@
             <div class="card-title">Оформление</div>
           </div>
           <div class="form-group">
-            <input class="form-control" v-model="user.data.first_name" type="text" placeholder="Имя">
+            <input class="form-control" v-model="form.user.first_name" type="text" placeholder="Имя">
           </div>
           <div class="form-group">
             <div class="input-group">
             <!-- <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+998</span>
             </div> -->
-            <input v-model="user.data.phone" class="form-control" type="text" placeholder="Телефон">
+            <input v-model="form.user.phone" class="form-control" type="text" placeholder="Телефон">
             </div>
           </div>
           <div class="form-group">
             <select class="custom-select">
-              <option value="0" disabled selected>{{region.name}}</option>
+              <option value="0" v-if="region" disabled selected>{{region.name}}</option>
               <option value="1">Город Фергана</option>
               <option value="2">Город Маргилан</option>
               <option value="2">Город Киргули</option>
             </select>
           </div>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Улица">
+            <input v-model="form.delivery_address_street" class="form-control" type="text" placeholder="Улица">
           </div>
           <div class="form-group form-row">
-            <div class="col"><input class="form-control" type="text" placeholder="Дом"></div>
-            <div class="col"><input class="form-control" type="text" placeholder="Корп."></div>
-            <div class="col"><input class="form-control" type="text" placeholder="Кв."></div>
+            <div class="col"><input v-model="form.delivery_address_home" class="form-control" type="text" placeholder="Дом"></div>
+            <div class="col"><input v-model="form.delivery_address_floor" class="form-control" type="text" placeholder="Корп."></div>
+            <div class="col"><input v-model="form.delivery_address_apartment" class="form-control" type="text" placeholder="Кв."></div>
           </div>
           <div class="form-group">
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="cart_payment_1" name="cart_payment" value="1" class="custom-control-input" checked>
+              <input v-model="form.payment_type_id" type="radio" id="cart_payment_1" name="cart_payment" value="1" class="custom-control-input" checked>
               <label class="custom-control-label" for="cart_payment_1">Наличными</label>
             </div>
-            <div class="custom-control custom-radio custom-control-inline">
+            <!-- <div class="custom-control custom-radio custom-control-inline">
               <input type="radio" id="cart_payment_2" name="cart_payment" value="2" class="custom-control-input">
               <label class="custom-control-label" for="cart_payment_2">Картой</label>
-            </div>
+            </div> -->
           </div>
           <button class="btn btn-block btn-green" type="submit">Заказать</button>
         </form>
@@ -95,12 +95,25 @@ export default {
   data() {
     return {
       products: [],
-      region: null
+      region: null,
+      form:{
+        user:{
+          first_name:'',
+          last_name:'',
+          phone:'',
+
+        },
+        payment_type_id:1,
+        delivery_address_home:'',
+        delivery_address_street:'',
+        delivery_address_floor:'',
+        delivery_address_apartment:'s'
+      }
     };
   },
   computed: {
     ...mapGetters({
-      region: "region",
+      // region: "region",
       user: "user",
       cartInfo: "cart",
       manager: "manager"
@@ -121,6 +134,27 @@ export default {
   watch: {
     cartInfo() {
       this.getProducts();
+    },
+    user:{
+      deep:true,
+      immediate:true,
+      handler(user){
+        if(user.data && user.data.phone){ 
+
+          this.form.user.first_name = user.data.first_name
+          this.form.user.phone = user.data.phone
+          this.form.user.last_name = user.data.last_name
+
+          }else{
+            this.form = {
+              user:{
+                first_name:'',
+                last_name:'',
+                phone:''
+              }
+            }
+          }
+      } 
     }
     // region() {
     //   this.fetchRegion();

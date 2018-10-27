@@ -1,4 +1,4 @@
-{
+  {
   "private": true,
   "scripts": {
     "dev": "npm run development",
@@ -12,16 +12,17 @@
   "devDependencies": {
     "axios": "^0.18",
     "bootstrap": "^4.0.0",
-    "popper.js": "^1.12",
     "cross-env": "^5.1",
     "jquery": "^3.2",
     "laravel-mix": "^2.0",
     "lodash": "^4.17.4",
+    "popper.js": "^1.12",
     "vue": "^2.5.7"
   },
   "dependencies": {
     "localforage": "^1.7.2",
-    "pikaday": "^1.7.0",
+    "moment": "^2.22.2",
+    "pikaday": "^1.8.0",
     "raf": "^3.4.0",
     "vue-router": "^3.0.1",
     "vuelidate": "^0.7.4",

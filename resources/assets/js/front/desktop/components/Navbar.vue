@@ -99,7 +99,9 @@ export default {
     signout() {
       this.logout().then(() => {
         this.phone = "";
-        this.$router.replace({ name: "home" });
+        if(!this.$route.meta.guest){
+          this.$router.replace({ name: "home" });
+        }
       });
     },
     changeLocale(lang) {
