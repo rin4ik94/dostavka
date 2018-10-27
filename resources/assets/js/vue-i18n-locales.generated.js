@@ -1,5 +1,18 @@
 export default {
     "ru": {
+        "login": {
+            "title": "Вход",
+            "pre_title": "Введите свой номер телефона",
+            "sms_info": "На указанный номер будет отправлено СМС с кодом подтверждения номера.",
+            "button_send": "Получить код для входа",
+            "phone_placeholder": "Телефон",
+            "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
+            "incorrect_password": "Неправильный код",
+            "send_again": "Отправить еще раз",
+            "next": "Далее",
+            "sms_code": "Код из смс",
+            "change_number": "Изменить номер"
+        },
         "header": {
             "title": "Быстрая доставка продуктов",
             "step1": "Выбирайте свой любимый магазин в своем регионе",
@@ -9,34 +22,6 @@ export default {
             "login": "Вход",
             "logout": "Выйти",
             "shops": "Магазины"
-        },
-        "cart": {
-            "shop": "Магазин",
-            "inCart": "Товаров в корзине",
-            "price": "На сумму",
-            "sum": "сум",
-            "cart": "Корзина",
-            "button": "Оформить заказ",
-            "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
-            "confirmTitle": "Подтвердите действие:"
-        },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
-        },
-        "auth": {
-            "failed": "These credentials do not match our records.",
-            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-        },
-        "pages": {
-            "back": "Назад к списку магазинов"
-        },
-        "pagination": {
-            "previous": "Назад",
-            "next": "Вперед"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -148,28 +133,16 @@ export default {
         "helper": {
             "yes": "Да",
             "no": "Нет"
-        }
-    },
-    "uz": {
-        "header": {
-            "title": "Mahsulotlarni tezda yetkazib beramiz",
-            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
-            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
-            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
-            "delivery": "Buyurtma",
-            "login": "Kirish",
-            "logout": "Chiqish",
-            "shops": "Do'konlar"
         },
         "cart": {
-            "shop": "Do'kon",
-            "inCart": "Savatchadagi maxsulotlar",
-            "price": "Umumiy puli",
-            "sum": "sum",
-            "cart": "Savatcha",
-            "button": "Buyurtma qilish",
-            "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
-            "confirmTitle": "Amalni tasdiqlang:"
+            "shop": "Магазин",
+            "inCart": "Товаров в корзине",
+            "price": "На сумму",
+            "sum": "сум",
+            "cart": "Корзина",
+            "button": "Оформить заказ",
+            "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
+            "confirmTitle": "Подтвердите действие:"
         },
         "passwords": {
             "password": "Passwords must be at least six characters and match the confirmation.",
@@ -182,12 +155,37 @@ export default {
             "failed": "These credentials do not match our records.",
             "throttle": "Too many login attempts. Please try again in {seconds} seconds."
         },
-        "pages": {
-            "back": "Orqaga, do'konlar ro'yhati"
-        },
         "pagination": {
-            "previous": "Orqaga",
-            "next": "Oldinga"
+            "previous": "Назад",
+            "next": "Вперед"
+        },
+        "pages": {
+            "back": "Назад к списку магазинов"
+        }
+    },
+    "uz": {
+        "login": {
+            "title": "Kirish",
+            "pre_title": "Telefon raqamingizni kiriting",
+            "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
+            "button_send": "Kodni jo'natish",
+            "phone_placeholder": "Telefon",
+            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik. Iltimos uni tepadagi kiriting",
+            "incorrect_password": "Noto'gri kod",
+            "send_again": "Yana bir maratoba jo'natish",
+            "next": "Tasdiqlash",
+            "sms_code": "SMS da kelgan kodni kiriting",
+            "change_number": "Raqamni o'zgartirish"
+        },
+        "header": {
+            "title": "Mahsulotlarni tezda yetkazib beramiz",
+            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
+            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
+            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
+            "delivery": "Buyurtma",
+            "login": "Kirish",
+            "logout": "Chiqish",
+            "shops": "Do'konlar"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -299,6 +297,34 @@ export default {
         "helper": {
             "yes": "Xa",
             "no": "Yo'q"
+        },
+        "cart": {
+            "shop": "Do'kon",
+            "inCart": "Savatchadagi maxsulotlar",
+            "price": "Umumiy puli",
+            "sum": "sum",
+            "cart": "Savatcha",
+            "button": "Buyurtma qilish",
+            "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
+            "confirmTitle": "Amalni tasdiqlang:"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "auth": {
+            "failed": "These credentials do not match our records.",
+            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
+        },
+        "pagination": {
+            "previous": "Orqaga",
+            "next": "Oldinga"
+        },
+        "pages": {
+            "back": "Orqaga, do'konlar ro'yhati"
         }
     }
 }

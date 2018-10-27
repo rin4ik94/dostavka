@@ -36774,7 +36774,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  /* background-color: #fd5646; */\n  color: black;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  /* background-color: #fd5646; */\n  color: black;\n}\n", ""]);
 
 // exports
 
@@ -36930,7 +36930,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
       this.logout().then(function () {
         _this2.phone = "";
-        _this2.$router.replace({ name: "home" });
+        if (!_this2.$route.meta.guest) {
+          _this2.$router.replace({ name: "home" });
+        }
       });
     },
     changeLocale: function changeLocale(lang) {
@@ -41758,7 +41760,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       $("#product").modal("hide");
       alert(this.productMenu);
       if (!this.productMenu.length) {
-        console.log("here");
         __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.removeItem("manager");
         this.setManager("empty");
         __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.removeItem("cart");
@@ -42262,7 +42263,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           first_name: '',
           last_name: '',
           phone: ''
-        }
+
+        },
+        payment_type_id: 1,
+        delivery_address_home: '',
+        delivery_address_street: '',
+        delivery_address_floor: '',
+        delivery_address_apartment: 's'
       }
     };
   },
@@ -42297,8 +42304,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       deep: true,
       immediate: true,
       handler: function handler(user) {
-        if (user.data.phone) {
-          this.form.user = user.data;
+        if (user.data && user.data.phone) {
+
+          this.form.user.first_name = user.data.first_name;
+          this.form.user.phone = user.data.phone;
+          this.form.user.last_name = user.data.last_name;
+        } else {
+          this.form = {
+            user: {
+              first_name: '',
+              last_name: '',
+              phone: ''
+            }
+          };
         }
       }
     }
@@ -42701,11 +42719,166 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.delivery_address_street,
+                      expression: "form.delivery_address_street"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Улица" },
+                  domProps: { value: _vm.form.delivery_address_street },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "delivery_address_street",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _vm._m(2),
+              _c("div", { staticClass: "form-group form-row" }, [
+                _c("div", { staticClass: "col" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.delivery_address_home,
+                        expression: "form.delivery_address_home"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Дом" },
+                    domProps: { value: _vm.form.delivery_address_home },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form,
+                          "delivery_address_home",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.delivery_address_floor,
+                        expression: "form.delivery_address_floor"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Корп." },
+                    domProps: { value: _vm.form.delivery_address_floor },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form,
+                          "delivery_address_floor",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.delivery_address_apartment,
+                        expression: "form.delivery_address_apartment"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Кв." },
+                    domProps: { value: _vm.form.delivery_address_apartment },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form,
+                          "delivery_address_apartment",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(3),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "custom-control custom-radio custom-control-inline"
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.payment_type_id,
+                          expression: "form.payment_type_id"
+                        }
+                      ],
+                      staticClass: "custom-control-input",
+                      attrs: {
+                        type: "radio",
+                        id: "cart_payment_1",
+                        name: "cart_payment",
+                        value: "1",
+                        checked: ""
+                      },
+                      domProps: {
+                        checked: _vm._q(_vm.form.payment_type_id, "1")
+                      },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.form, "payment_type_id", "1")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "custom-control-label",
+                        attrs: { for: "cart_payment_1" }
+                      },
+                      [_vm._v("Наличными")]
+                    )
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c(
                 "button",
@@ -42729,101 +42902,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
       _c("div", { staticClass: "card-title" }, [_vm._v("Оформление")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Улица" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group form-row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Дом" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Корп." }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Кв." }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "div",
-        { staticClass: "custom-control custom-radio custom-control-inline" },
-        [
-          _c("input", {
-            staticClass: "custom-control-input",
-            attrs: {
-              type: "radio",
-              id: "cart_payment_1",
-              name: "cart_payment",
-              value: "1",
-              checked: ""
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "custom-control-label",
-              attrs: { for: "cart_payment_1" }
-            },
-            [_vm._v("Наличными")]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "custom-control custom-radio custom-control-inline" },
-        [
-          _c("input", {
-            staticClass: "custom-control-input",
-            attrs: {
-              type: "radio",
-              id: "cart_payment_2",
-              name: "cart_payment",
-              value: "2"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "custom-control-label",
-              attrs: { for: "cart_payment_2" }
-            },
-            [_vm._v("Картой")]
-          )
-        ]
-      )
     ])
   }
 ]
@@ -45908,8 +45986,6 @@ var langChange = function langChange(_ref16, lang) {
 
 var setHttpToken = function setHttpToken(token) {
     if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(token)) {
-        alert('here');
-
         window.axios.defaults.headers.common['Authorization'] = null;
     }
     window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
@@ -46934,6 +47010,19 @@ var index = {
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     "ru": {
+        "login": {
+            "title": "Вход",
+            "pre_title": "Введите свой номер телефона",
+            "sms_info": "На указанный номер будет отправлено СМС с кодом подтверждения номера.",
+            "button_send": "Получить код для входа",
+            "phone_placeholder": "Телефон",
+            "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
+            "incorrect_password": "Неправильный код",
+            "send_again": "Отправить еще раз",
+            "next": "Далее",
+            "sms_code": "Код из смс",
+            "change_number": "Изменить номер"
+        },
         "header": {
             "title": "Быстрая доставка продуктов",
             "step1": "Выбирайте свой любимый магазин в своем регионе",
@@ -46943,34 +47032,6 @@ var index = {
             "login": "Вход",
             "logout": "Выйти",
             "shops": "Магазины"
-        },
-        "cart": {
-            "shop": "Магазин",
-            "inCart": "Товаров в корзине",
-            "price": "На сумму",
-            "sum": "сум",
-            "cart": "Корзина",
-            "button": "Оформить заказ",
-            "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
-            "confirmTitle": "Подтвердите действие:"
-        },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
-        },
-        "auth": {
-            "failed": "These credentials do not match our records.",
-            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-        },
-        "pages": {
-            "back": "Назад к списку магазинов"
-        },
-        "pagination": {
-            "previous": "Назад",
-            "next": "Вперед"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -47082,28 +47143,16 @@ var index = {
         "helper": {
             "yes": "Да",
             "no": "Нет"
-        }
-    },
-    "uz": {
-        "header": {
-            "title": "Mahsulotlarni tezda yetkazib beramiz",
-            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
-            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
-            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
-            "delivery": "Buyurtma",
-            "login": "Kirish",
-            "logout": "Chiqish",
-            "shops": "Do'konlar"
         },
         "cart": {
-            "shop": "Do'kon",
-            "inCart": "Savatchadagi maxsulotlar",
-            "price": "Umumiy puli",
-            "sum": "sum",
-            "cart": "Savatcha",
-            "button": "Buyurtma qilish",
-            "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
-            "confirmTitle": "Amalni tasdiqlang:"
+            "shop": "Магазин",
+            "inCart": "Товаров в корзине",
+            "price": "На сумму",
+            "sum": "сум",
+            "cart": "Корзина",
+            "button": "Оформить заказ",
+            "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
+            "confirmTitle": "Подтвердите действие:"
         },
         "passwords": {
             "password": "Passwords must be at least six characters and match the confirmation.",
@@ -47116,12 +47165,37 @@ var index = {
             "failed": "These credentials do not match our records.",
             "throttle": "Too many login attempts. Please try again in {seconds} seconds."
         },
-        "pages": {
-            "back": "Orqaga, do'konlar ro'yhati"
-        },
         "pagination": {
-            "previous": "Orqaga",
-            "next": "Oldinga"
+            "previous": "Назад",
+            "next": "Вперед"
+        },
+        "pages": {
+            "back": "Назад к списку магазинов"
+        }
+    },
+    "uz": {
+        "login": {
+            "title": "Kirish",
+            "pre_title": "Telefon raqamingizni kiriting",
+            "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
+            "button_send": "Kodni jo'natish",
+            "phone_placeholder": "Telefon",
+            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik. Iltimos uni tepadagi kiriting",
+            "incorrect_password": "Noto'gri kod",
+            "send_again": "Yana bir maratoba jo'natish",
+            "next": "Tasdiqlash",
+            "sms_code": "SMS da kelgan kodni kiriting",
+            "change_number": "Raqamni o'zgartirish"
+        },
+        "header": {
+            "title": "Mahsulotlarni tezda yetkazib beramiz",
+            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
+            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
+            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
+            "delivery": "Buyurtma",
+            "login": "Kirish",
+            "logout": "Chiqish",
+            "shops": "Do'konlar"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -47233,6 +47307,34 @@ var index = {
         "helper": {
             "yes": "Xa",
             "no": "Yo'q"
+        },
+        "cart": {
+            "shop": "Do'kon",
+            "inCart": "Savatchadagi maxsulotlar",
+            "price": "Umumiy puli",
+            "sum": "sum",
+            "cart": "Savatcha",
+            "button": "Buyurtma qilish",
+            "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
+            "confirmTitle": "Amalni tasdiqlang:"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "auth": {
+            "failed": "These credentials do not match our records.",
+            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
+        },
+        "pagination": {
+            "previous": "Orqaga",
+            "next": "Oldinga"
+        },
+        "pages": {
+            "back": "Orqaga, do'konlar ro'yhati"
         }
     }
 });
@@ -47516,6 +47618,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
 
 
 
@@ -47526,6 +47631,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     return {
       error: null,
       max: 9,
+      sent: false,
       code: 4,
       step: 1,
       form: {
@@ -47542,6 +47648,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     fetchUser: "fetchUser",
     setToken: "setToken"
   }), {
+    repeatSmsSend: function repeatSmsSend() {
+
+      this.sent = !this.sent;
+
+      this.sendSMS();
+    },
     sendSMS: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
         var data, response;
@@ -47555,6 +47667,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }
 
                 this.step = 2;
+
                 data = "+998" + this.form.phone;
                 _context.next = 5;
                 return axios.post("/api/sms/create", {
@@ -47638,9 +47751,9 @@ var render = function() {
         _c("div", { staticClass: "modal-content" }, [
           _vm.step == 1
             ? _c("form", { staticClass: "modal-body" }, [
-                _c("h4", [_vm._v("Вход")]),
+                _c("h4", [_vm._v(_vm._s(_vm.$t("login.title")))]),
                 _vm._v(" "),
-                _c("p", [_vm._v("Введите свой номер телефона")]),
+                _c("p", [_vm._v(_vm._s(_vm.$t("login.pre_title")))]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("div", { staticClass: "input-group" }, [
@@ -47660,7 +47773,7 @@ var render = function() {
                         maxlength: _vm.max,
                         type: "text",
                         id: "login_phone",
-                        placeholder: "Телефон"
+                        placeholder: _vm.$t("login.phone_placeholder")
                       },
                       domProps: { value: _vm.form.phone },
                       on: {
@@ -47678,9 +47791,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-text" }, [
-                    _vm._v(
-                      "На указанный номер будет отправлено СМС с кодом подтверждения номера."
-                    )
+                    _vm._v(_vm._s(_vm.$t("login.sms_info")))
                   ])
                 ]),
                 _vm._v(" "),
@@ -47700,7 +47811,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Получить код для входа")]
+                  [_vm._v(_vm._s(_vm.$t("login.button_send")))]
                 )
               ])
             : _vm._e(),
@@ -47720,11 +47831,7 @@ var render = function() {
                 [
                   _c("h4", [_vm._v("+998" + _vm._s(_vm.form.phone))]),
                   _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже"
-                    )
-                  ]),
+                  _c("p", [_vm._v(_vm._s(_vm.$t("login.sms_sent_info")))]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("input", {
@@ -47740,7 +47847,7 @@ var render = function() {
                       attrs: {
                         maxlength: _vm.code,
                         type: "text",
-                        placeholder: "Код из смс"
+                        placeholder: _vm.$t("login.sms_code")
                       },
                       domProps: { value: _vm.form.code },
                       on: {
@@ -47754,7 +47861,9 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.error
-                      ? _c("p", [_vm._v("Неправильный пароль")])
+                      ? _c("p", [
+                          _vm._v(_vm._s(_vm.$t("login.incorrect_password")))
+                        ])
                       : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-text" }, [
@@ -47762,18 +47871,28 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-link",
-                          attrs: { type: "button" },
+                          attrs: { disabled: _vm.sent, type: "button" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
-                              return _vm.sendSMS($event)
+                              return _vm.repeatSmsSend($event)
                             }
                           }
                         },
                         [
-                          _c("i", { staticClass: "icon" }, [_vm._v("refresh")]),
+                          !_vm.sent
+                            ? _c("i", { staticClass: "icon" }, [
+                                _vm._v("refresh")
+                              ])
+                            : _c("i", { staticClass: "icon" }, [
+                                _vm._v("done")
+                              ]),
+                          _vm._v(" "),
                           _c("span", { staticClass: "text" }, [
-                            _vm._v("Отправить еще раз")
+                            _vm._v(
+                              _vm._s(_vm.$t("login.send_again")) +
+                                "\n              "
+                            )
                           ])
                         ]
                       )
@@ -47797,7 +47916,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Далее")]
+                    [_vm._v(_vm._s(_vm.$t("login.next")))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -47811,7 +47930,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Изменить номер")]
+                    [_vm._v(_vm._s(_vm.$t("login.change_number")))]
                   )
                 ]
               )

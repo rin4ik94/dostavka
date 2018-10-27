@@ -61,22 +61,22 @@
             </select>
           </div>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Улица">
+            <input v-model="form.delivery_address_street" class="form-control" type="text" placeholder="Улица">
           </div>
           <div class="form-group form-row">
-            <div class="col"><input class="form-control" type="text" placeholder="Дом"></div>
-            <div class="col"><input class="form-control" type="text" placeholder="Корп."></div>
-            <div class="col"><input class="form-control" type="text" placeholder="Кв."></div>
+            <div class="col"><input v-model="form.delivery_address_home" class="form-control" type="text" placeholder="Дом"></div>
+            <div class="col"><input v-model="form.delivery_address_floor" class="form-control" type="text" placeholder="Корп."></div>
+            <div class="col"><input v-model="form.delivery_address_apartment" class="form-control" type="text" placeholder="Кв."></div>
           </div>
           <div class="form-group">
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="cart_payment_1" name="cart_payment" value="1" class="custom-control-input" checked>
+              <input v-model="form.payment_type_id" type="radio" id="cart_payment_1" name="cart_payment" value="1" class="custom-control-input" checked>
               <label class="custom-control-label" for="cart_payment_1">Наличными</label>
             </div>
-            <div class="custom-control custom-radio custom-control-inline">
+            <!-- <div class="custom-control custom-radio custom-control-inline">
               <input type="radio" id="cart_payment_2" name="cart_payment" value="2" class="custom-control-input">
               <label class="custom-control-label" for="cart_payment_2">Картой</label>
-            </div>
+            </div> -->
           </div>
           <button class="btn btn-block btn-green" type="submit">Заказать</button>
         </form>
@@ -100,8 +100,14 @@ export default {
         user:{
           first_name:'',
           last_name:'',
-          phone:''
-        }
+          phone:'',
+
+        },
+        payment_type_id:1,
+        delivery_address_home:'',
+        delivery_address_street:'',
+        delivery_address_floor:'',
+        delivery_address_apartment:'s'
       }
     };
   },
@@ -133,8 +139,20 @@ export default {
       deep:true,
       immediate:true,
       handler(user){
-        if(user.data.phone){ 
-          this.form.user = user.data
+        if(user.data && user.data.phone){ 
+
+          this.form.user.first_name = user.data.first_name
+          this.form.user.phone = user.data.phone
+          this.form.user.last_name = user.data.last_name
+
+          }else{
+            this.form = {
+              user:{
+                first_name:'',
+                last_name:'',
+                phone:''
+              }
+            }
           }
       } 
     }

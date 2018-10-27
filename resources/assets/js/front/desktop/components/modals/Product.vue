@@ -214,8 +214,7 @@ export default {
       this.productMenu.splice(index, 1);
       $("#product").modal("hide");
       alert(this.productMenu);
-      if (!this.productMenu.length) {
-        console.log("here");
+      if (!this.productMenu.length) { 
         localforage.removeItem("manager");
         this.setManager("empty");
         localforage.removeItem("cart");
