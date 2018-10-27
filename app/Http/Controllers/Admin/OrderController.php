@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\OrderStatus;
 use App\Models\Order;
 use App\Models\Courier;
 use App\Models\Region;
@@ -32,7 +33,12 @@ class OrderController extends Controller
         });
         $regions = Region::all();
         $couriers = Courier::orderBy('id','ASC')->take(5)->get();
-        return view('admin.orders.index',compact('orders','couriers','regions','delivery_price'));    
+        $count = OrderStatus::withCount('orders')->whereNotIn('id',[4,5])->pluck('orders_count','id')->toArray();
+        $s = [
+            'total_count' => array_sum($count),
+            'data' => $count,
+        ];
+        return view('admin.orders.index',compact('orders','couriers','regions','s'));    
     }
 
     public function create()
@@ -54,12 +60,13 @@ class OrderController extends Controller
     {
         $order_id = $request->id;
         $order = Order::find($order_id);
-        if($order->order_status_id == $request->status_id){
+        if($order->order_status_id != $request->order_status_id){
             $order->update($request->all());
+            $order->statuses()->attach($request->order_status_id, ['client_id' => $order->client_id]);
         }else{
             $order->update($request->all());
-            $order->statuses()->attach($request->status_id, ['client_id' => $order->client_id]);
         }
+
         if($request->productSet != null){
         $order->products()->detach();
         $keys = array('id', 'product_name', 'product_price', 'product_measurement', 'product_count');
