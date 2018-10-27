@@ -125,10 +125,5 @@
             $('.orderByDate').addClass('d-none')
         }
     });
-    
-    // setInterval("my_function();",10000); 
-    // function my_function(){
-    //     window.location = location.href;
-    // }
 </script>
 @endsection
