@@ -36,14 +36,14 @@ class CategoriesTableSeeder extends Seeder
                 'manager_id' => '2',
             ],
             [
-                'name_uz' => 'Ko`katlar',
+                'name_uz' => "Ko'katlar",
                 'name_ru' => 'Зелень',
                 'position' => '3',
                 'parent_id' => '1',
                 'manager_id' => '2',
             ],
             [
-                'name_uz' => 'Quritilgan mevalar/Yong`oqlar',
+                'name_uz' => "Quritilgan mevalar/Yong'oqlar",
                 'name_ru' => 'Сухофрукты/Орехи',
                 'position' => '4',
                 'parent_id' => '1',
@@ -123,14 +123,14 @@ class CategoriesTableSeeder extends Seeder
             ],
             // id = 16
             [
-                'name_uz' => 'Go`sht va go`sht mahsulotlari',
+                'name_uz' => "Go'sht va go'sht mahsulotlari",
                 'name_ru' => 'Говядина/Колбасные изделия',
                 'position' => '4',
                 'parent_id' => null,
                 'manager_id' => '2',
             ],
             [
-                'name_uz' => 'Mol go`shti',
+                'name_uz' => "Mol go'shti",
                 'name_ru' => 'Говядина',
                 'position' => '1',
                 'parent_id' => '16',
@@ -167,14 +167,14 @@ class CategoriesTableSeeder extends Seeder
                 'manager_id' => '5',
             ],
             [
-                'name_uz' => 'Ko`katlar',
+                'name_uz' => "Ko'katlar",
                 'name_ru' => 'Зелень',
                 'position' => '3',
                 'parent_id' => '19',
                 'manager_id' => '5',
             ],
             [
-                'name_uz' => 'Quritilgan mevalar/Yong`oqlar',
+                'name_uz' => "Quritilgan mevalar/Yong'oqlar",
                 'name_ru' => 'Сухофрукты/Орехи',
                 'position' => '4',
                 'parent_id' => '19',
@@ -254,14 +254,14 @@ class CategoriesTableSeeder extends Seeder
             ],
             // 34
             [
-                'name_uz' => 'Go`sht va go`sht mahsulotlari',
+                'name_uz' => "Go'sht va go'sht mahsulotlari",
                 'name_ru' => 'Говядина/Колбасные изделия',
                 'position' => '4',
                 'parent_id' => null,
                 'manager_id' => '5',
             ],
             [
-                'name_uz' => 'Mol go`shti',
+                'name_uz' => "Mol go'shti",
                 'name_ru' => 'Говядина',
                 'position' => '1',
                 'parent_id' => '34',
@@ -274,7 +274,7 @@ class CategoriesTableSeeder extends Seeder
                 'parent_id' => '34',
                 'manager_id' => '5',
             ],
-            // Пятёрочка 
+            // Пятёрочка
             // id = 37
             [
                 'name_uz' => 'Sabzavot va mevalar',
@@ -298,14 +298,14 @@ class CategoriesTableSeeder extends Seeder
                 'manager_id' => '6',
             ],
             [
-                'name_uz' => 'Ko`katlar',
+                'name_uz' => "Ko'katlar",
                 'name_ru' => 'Зелень',
                 'position' => '3',
                 'parent_id' => '37',
                 'manager_id' => '6',
             ],
             [
-                'name_uz' => 'Quritilgan mevalar/Yong`oqlar',
+                'name_uz' => "Quritilgan mevalar/Yong'oqlar",
                 'name_ru' => 'Сухофрукты/Орехи',
                 'position' => '4',
                 'parent_id' => '37',
@@ -385,14 +385,14 @@ class CategoriesTableSeeder extends Seeder
             ],
             // 52
             [
-                'name_uz' => 'Go`sht va go`sht mahsulotlari',
+                'name_uz' => "Go'sht va go'sht mahsulotlari",
                 'name_ru' => 'Говядина/Колбасные изделия',
                 'position' => '4',
                 'parent_id' => null,
                 'manager_id' => '6',
             ],
             [
-                'name_uz' => 'Mol go`shti',
+                'name_uz' => "Mol go'shti",
                 'name_ru' => 'Говядина',
                 'position' => '1',
                 'parent_id' => '52',
@@ -405,7 +405,7 @@ class CategoriesTableSeeder extends Seeder
                 'parent_id' => '52',
                 'manager_id' => '6',
             ],
-            // Перекресток 
+            // Перекресток
             // id = 55
             [
                 'name_uz' => 'Sabzavot va mevalar',
@@ -429,14 +429,14 @@ class CategoriesTableSeeder extends Seeder
                 'manager_id' => '7',
             ],
             [
-                'name_uz' => 'Ko`katlar',
+                'name_uz' => "Ko'katlar",
                 'name_ru' => 'Зелень',
                 'position' => '3',
                 'parent_id' => '55',
                 'manager_id' => '7',
             ],
             [
-                'name_uz' => 'Quritilgan mevalar/Yong`oqlar',
+                'name_uz' => "Quritilgan mevalar/Yong'oqlar",
                 'name_ru' => 'Сухофрукты/Орехи',
                 'position' => '4',
                 'parent_id' => '55',
@@ -516,14 +516,14 @@ class CategoriesTableSeeder extends Seeder
             ],
             // 70
             [
-                'name_uz' => 'Go`sht va go`sht mahsulotlari',
+                'name_uz' => "Go'sht va go'sht mahsulotlari",
                 'name_ru' => 'Говядина/Колбасные изделия',
                 'position' => '4',
                 'parent_id' => null,
                 'manager_id' => '7',
             ],
             [
-                'name_uz' => 'Mol go`shti',
+                'name_uz' => "Mol go'shti",
                 'name_ru' => 'Говядина',
                 'position' => '1',
                 'parent_id' => '70',
@@ -536,7 +536,7 @@ class CategoriesTableSeeder extends Seeder
                 'parent_id' => '70',
                 'manager_id' => '7',
             ],
-                // ishonch 
+                // ishonch
                 // id = 73
             [
                 'name_uz' => 'Оборудование',
@@ -622,7 +622,7 @@ class CategoriesTableSeeder extends Seeder
                 'parent_id' => null,
                 'manager_id' => '1',
             ],
-            // Ашан 
+            // Ашан
             // id = 84
             [
                 'name_uz' => 'Оборудование',
@@ -708,7 +708,7 @@ class CategoriesTableSeeder extends Seeder
                 'parent_id' => null,
                 'manager_id' => '8',
             ],
-            // Дикси 
+            // Дикси
             // id = 95
             [
                 'name_uz' => 'Оборудование',
@@ -788,7 +788,7 @@ class CategoriesTableSeeder extends Seeder
                 'parent_id' => null,
                 'manager_id' => '4',
             ],
-            // Euro Spar 
+            // Euro Spar
             // id = 106
             [
                 'name_uz' => 'Пакеты телеканалов',
