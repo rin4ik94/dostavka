@@ -137,6 +137,12 @@ class SMSController extends Controller
                 } else {
                     $client = new Client;
                     $client->phone = $phone;
+                    if ($request->has('first_name')) {
+                        $client->first_name = $request->first_name;
+                    }
+                    if ($request->has('last_name')) {
+                        $client->last_name = $request->last_name;
+                    }
                     $client->save();
                     try {
                         // attempt to verify the credentials and create a token for the user

@@ -102,7 +102,7 @@ class Order extends Model
     public static function storeClientOrder($client, $request)
     {
         $data = $request;
-        $order = self::create(['payment_type_id' => $data['payment_type_id'],  'client_id' => $client->id, 'region_id' => $data->form['region_id'],  'delivery_address_street' => $data['delivery_address_street'], 'delivery_address_home' => $data['delivery_address_home'], 'delivery_address_floor' => $data['delivery_address_floor'], 'delivery_address_apartment' => $data->form['delivery_address_apartment'], 'order_price' => $request->orderPrice, 'total_price' => $request->totalPrice, 'delivery_price' => $request->deliveryPrice
+        $order = self::create(['manager_id' => $data['manager_id'], 'order_status_id' => 1, 'payment_type_id' => $data['payment_type_id'],  'client_id' => $client->id, 'region_id' => $data['user']['region_id'],  'delivery_address_street' => $data['delivery_address_street'], 'delivery_address_home' => $data['delivery_address_home'], 'delivery_address_floor' => $data['delivery_address_floor'], 'delivery_address_apartment' => $data['delivery_address_apartment'], 'order_price' => $request['total'], 'total_price' => $request['total'] + $request['delivery_price'], 'delivery_price' => $request['delivery_price']
         ]);
         return $order;
     }

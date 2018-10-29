@@ -104,7 +104,7 @@ export default {
             "numeric": "The {attribute} must be a number.",
             "present": "The {attribute} field must be present.",
             "regex": "The {attribute} format is invalid.",
-            "required": "The {attribute} field is required.",
+            "required": "Заполните это поле.",
             "required_if": "The {attribute} field is required when {other} is {value}.",
             "required_unless": "The {attribute} field is required unless {other} is in {values}.",
             "required_with": "The {attribute} field is required when {values} is present.",
@@ -123,6 +123,9 @@ export default {
             "unique": "The {attribute} has already been taken.",
             "uploaded": "The {attribute} failed to upload.",
             "url": "The {attribute} format is invalid.",
+            "nameError": "Заполните это поле.",
+            "lastNameError": "Заполните это поле.",
+            "phoneError": "Заполните это поле.",
             "custom": {
                 "attribute-name": {
                     "rule-name": "custom-message"
@@ -268,7 +271,7 @@ export default {
             "numeric": "The {attribute} must be a number.",
             "present": "The {attribute} field must be present.",
             "regex": "The {attribute} format is invalid.",
-            "required": "The {attribute} field is required.",
+            "required": "Iltimos {attribute} kiriting.",
             "required_if": "The {attribute} field is required when {other} is {value}.",
             "required_unless": "The {attribute} field is required unless {other} is in {values}.",
             "required_with": "The {attribute} field is required when {values} is present.",
@@ -287,6 +290,9 @@ export default {
             "unique": "The {attribute} has already been taken.",
             "uploaded": "The {attribute} failed to upload.",
             "url": "The {attribute} format is invalid.",
+            "nameError": "Iltimos bu yerni to'ldiring",
+            "lastNameError": "Iltimos bu yerni to'ldiring",
+            "phoneError": "Iltimos bu yerni to'ldiring",
             "custom": {
                 "attribute-name": {
                     "rule-name": "custom-message"

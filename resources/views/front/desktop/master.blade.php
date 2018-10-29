@@ -12,6 +12,7 @@
     <script>
         window.App= {!! json_encode([
           'csrfToken' => csrf_token(),
+          'deliveryPrice'=>config('dostavka.delivery_price')
         //   'user' => Auth::user(), 
       ]) !!};
     </script>
