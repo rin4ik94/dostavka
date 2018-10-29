@@ -51650,7 +51650,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 window.Vue = __webpack_require__(8);
 
 
-var SubCategories = __webpack_require__(246);
 
 
 
@@ -51722,7 +51721,6 @@ __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setToken').then
         __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('showNavbar');
     });
 });
-Vue.component('SubCategories', Vue.extend(SubCategories));
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 
 var app = new Vue({
@@ -56768,11 +56766,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotFound__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Products__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Products___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Products__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_localforage__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_localforage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bus_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SubCategories__ = __webpack_require__(246);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SubCategories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__SubCategories__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_localforage__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_localforage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__bus_js__ = __webpack_require__(11);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -56821,6 +56821,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -56835,7 +56836,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  components: { NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a, Products: __WEBPACK_IMPORTED_MODULE_2__Products___default.a },
+  components: { NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a, Products: __WEBPACK_IMPORTED_MODULE_2__Products___default.a, SubCategories: __WEBPACK_IMPORTED_MODULE_3__SubCategories___default.a },
   watch: {
     $route: {
       immediate: true,
@@ -56912,7 +56913,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     var _this3 = this;
 
     this.getCatalog();
-    __WEBPACK_IMPORTED_MODULE_5__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
+    __WEBPACK_IMPORTED_MODULE_6__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
       // this.$emit("hidePage");
       _this3.getCatalog();
     });
@@ -58939,9 +58940,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           this.form.user.last_name = user.data.last_name;
         } else {
           this.form.user = {
-            first_name: '',
-            last_name: '',
-            phone: ''
+            first_name: null,
+            last_name: null,
+            phone: null
           };
         }
       }
@@ -58957,7 +58958,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       if (region) {
         axios.get("/api/regions/" + region).then(function (response) {
           _this2.region = response.data.data;
-          _this2.form.region_id = _this2.region.id;
+          _this2.form.user.region_id = _this2.region.id;
           _this2.getProducts();
         });
       }
@@ -59298,7 +59299,7 @@ var render = function() {
                       ],
                       staticClass: "form-control",
                       attrs: {
-                        disabled: _vm.user.data,
+                        disabled: _vm.form.user.phone,
                         type: "text",
                         placeholder: "Имя"
                       },
@@ -59330,7 +59331,7 @@ var render = function() {
                       ],
                       staticClass: "form-control",
                       attrs: {
-                        disabled: _vm.user.data,
+                        disabled: _vm.form.user.phone,
                         type: "text",
                         placeholder: "Фамилия"
                       },
@@ -59363,7 +59364,7 @@ var render = function() {
                         ],
                         staticClass: "form-control",
                         attrs: {
-                          disabled: _vm.user.data,
+                          disabled: _vm.form.user.phone,
                           type: "text",
                           placeholder: "Телефон"
                         },
@@ -59392,8 +59393,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.form.region_id,
-                            expression: "form.region_id"
+                            value: _vm.form.user.region_id,
+                            expression: "form.user.region_id"
                           }
                         ],
                         staticClass: "custom-select",
@@ -59408,7 +59409,7 @@ var render = function() {
                                 return val
                               })
                             _vm.$set(
-                              _vm.form,
+                              _vm.form.user,
                               "region_id",
                               $event.target.multiple
                                 ? $$selectedVal
@@ -62775,6 +62776,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "SubCategories",
   props: ["category", "activeIndex", "index"],
   data: function data() {
     return {
@@ -63733,14 +63735,14 @@ var index = {
         "login": {
             "title": "Вход",
             "pre_title": "Введите свой номер телефона",
-            "sms_info": "На указанный номер будет отправлено СМС с кодом подтверждения номера.",
+            "sms_info": "На указанный номер будет отправлено SMS с кодом подтверждения номера.",
             "button_send": "Получить код для входа",
             "phone_placeholder": "Телефон",
             "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
             "incorrect_password": "Неправильный код",
             "send_again": "Отправить еще раз",
             "next": "Далее",
-            "sms_code": "Код из смс",
+            "sms_code": "Код из SMS",
             "change_number": "Изменить номер"
         },
         "header": {
@@ -63900,7 +63902,7 @@ var index = {
             "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
             "button_send": "Kodni jo'natish",
             "phone_placeholder": "Telefon",
-            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik. Iltimos uni tepadagi kiriting",
+            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik",
             "incorrect_password": "Noto'gri kod",
             "send_again": "Yana bir maratoba jo'natish",
             "next": "Tasdiqlash",

@@ -42,21 +42,21 @@
             <div class="card-title">Оформление</div>
           </div>
           <div class="form-group">
-            <input class="form-control" :disabled="user.data"  v-model="form.user.first_name" type="text" placeholder="Имя">
+            <input class="form-control" :disabled="form.user.phone"  v-model="form.user.first_name" type="text" placeholder="Имя">
           </div>
           <div class="form-group">
-            <input class="form-control" :disabled="user.data" v-model="form.user.last_name" type="text" placeholder="Фамилия">
+            <input class="form-control" :disabled="form.user.phone" v-model="form.user.last_name" type="text" placeholder="Фамилия">
           </div>
           <div class="form-group">
             <div class="input-group">
             <!-- <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+998</span>
             </div> -->
-            <input :disabled="user.data"  v-model="form.user.phone" class="form-control" type="text" placeholder="Телефон">
+            <input :disabled="form.user.phone"  v-model="form.user.phone" class="form-control" type="text" placeholder="Телефон">
             </div>
           </div>
           <div class="form-group">
-            <select class="custom-select" v-model="form.region_id">
+            <select class="custom-select" v-model="form.user.region_id">
               <option :value="region.id"  v-for="region in regions" disabled selected>{{region.name}}</option>
                
             </select>
@@ -148,9 +148,9 @@ export default {
           this.form.user.last_name = user.data.last_name
           }else{
             this.form.user={
-                first_name:'',
-                last_name:'',
-                phone:''
+                first_name:null,
+                last_name:null,
+                phone:null
               }
             
           }
@@ -165,7 +165,7 @@ export default {
       if (region) {
         axios.get(`/api/regions/${region}`).then(response => {
           this.region = response.data.data;
-          this.form.region_id = this.region.id;
+          this.form.user.region_id = this.region.id;
           this.getProducts();
         });
       }

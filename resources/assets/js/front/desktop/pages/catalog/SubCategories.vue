@@ -8,7 +8,8 @@
     </li> 
 </template>
 <script>
-export default {
+export default { 
+  name: "SubCategories",
   props: ["category", "activeIndex", "index"],
   data() {
     return {

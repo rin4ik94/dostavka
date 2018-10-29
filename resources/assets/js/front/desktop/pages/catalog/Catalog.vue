@@ -40,6 +40,7 @@
 import { mapGetters } from "vuex";
 import NotFound from "../NotFound";
 import Products from "./Products";
+import SubCategories from "./SubCategories";
 import localforage from "localforage";
 import { isEmpty } from "lodash";
 import { EventBus } from "../../bus.js";
@@ -57,7 +58,7 @@ export default {
       sortByPrice: false
     };
   },
-  components: { NotFound, Products },
+  components: { NotFound, Products,SubCategories },
   watch: {
     $route: {
       immediate: true,

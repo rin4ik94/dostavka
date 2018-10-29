@@ -1,7 +1,6 @@
 window.Vue = require('vue');
 import router from './router'
-import store from './vuex'
-var SubCategories = require('./pages/catalog/SubCategories.vue');
+import store from './vuex' 
 import Vuex from 'vuex';
 import vuexI18n from 'vuex-i18n';
 import Locales from '../../vue-i18n-locales.generated.js';
@@ -76,8 +75,7 @@ store.dispatch('setToken').then(() => {
         store.dispatch('showNavbar')
     })
 
-});
-Vue.component('SubCategories', Vue.extend(SubCategories));
+}); 
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 
 const app = new Vue({

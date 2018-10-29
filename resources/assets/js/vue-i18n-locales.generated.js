@@ -3,14 +3,14 @@ export default {
         "login": {
             "title": "Вход",
             "pre_title": "Введите свой номер телефона",
-            "sms_info": "На указанный номер будет отправлено СМС с кодом подтверждения номера.",
+            "sms_info": "На указанный номер будет отправлено SMS с кодом подтверждения номера.",
             "button_send": "Получить код для входа",
             "phone_placeholder": "Телефон",
             "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
             "incorrect_password": "Неправильный код",
             "send_again": "Отправить еще раз",
             "next": "Далее",
-            "sms_code": "Код из смс",
+            "sms_code": "Код из SMS",
             "change_number": "Изменить номер"
         },
         "header": {
@@ -170,7 +170,7 @@ export default {
             "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
             "button_send": "Kodni jo'natish",
             "phone_placeholder": "Telefon",
-            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik. Iltimos uni tepadagi kiriting",
+            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik",
             "incorrect_password": "Noto'gri kod",
             "send_again": "Yana bir maratoba jo'natish",
             "next": "Tasdiqlash",
