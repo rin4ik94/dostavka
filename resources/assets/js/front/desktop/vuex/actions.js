@@ -129,11 +129,12 @@ export const setManager = ({ commit, dispatch }, manager) => {
     }
     commit('setManager', manager)
 }
-export const setRegion = ({ commit, dispatch }, regionId) => {
-
-    return localforage.getItem('region').then((regionId) => {
-        if (isEmpty(regionId)) {
-            localforage.removeItem('region')
+export const setRegion = ({ commit, dispatch }) => {
+ 
+ localforage.getItem('region').then((regionId) => {
+ 
+        if (isEmpty(regionId)) { 
+            $("#Regions").modal('show')            
             return Promise.reject('NO_REGION_CHOOSEN');
         }
         commit('setRegion', regionId)

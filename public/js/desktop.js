@@ -51705,9 +51705,7 @@ Vue.filter('toCurrency', function (value) {
 });
 
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('checkLangExists');
-__WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setRegion').catch(function () {
-    $("#Regions").modal('show');
-});
+
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setManager').then(function () {
     __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch("setCart");
     __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setTotal');
@@ -51721,6 +51719,7 @@ __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setToken').then
         __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('showNavbar');
     });
 });
+
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 
 var app = new Vue({
@@ -52013,14 +52012,21 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Footer__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Footer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Navbar__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Navbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Navbar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CartInfo__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CartInfo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_CartInfo__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bus_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_localforage__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_localforage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Footer__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Footer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Navbar__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Navbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Navbar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_CartInfo__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_CartInfo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_CartInfo__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__bus_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vuex__ = __webpack_require__(4);
 
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -52039,7 +52045,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
+
+
 // import { mapActions, mapGetters } from "vuex";
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52049,9 +52058,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     };
   },
 
-  components: { CartInfo: __WEBPACK_IMPORTED_MODULE_3__components_CartInfo___default.a, Navbar: __WEBPACK_IMPORTED_MODULE_2__components_Navbar___default.a, Footer: __WEBPACK_IMPORTED_MODULE_1__components_Footer___default.a },
-
-  methods: {
+  components: { CartInfo: __WEBPACK_IMPORTED_MODULE_5__components_CartInfo___default.a, Navbar: __WEBPACK_IMPORTED_MODULE_4__components_Navbar___default.a, Footer: __WEBPACK_IMPORTED_MODULE_3__components_Footer___default.a },
+  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_7_vuex__["b" /* mapActions */])({
+    setRegionId: 'setRegionId',
+    setRegion: 'setRegion'
+  }), {
     getRegions: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
         var response;
@@ -52080,7 +52091,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
 
       return getRegions;
-    }()
+    }(),
+    setRegionD: function setRegionD() {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (region) {
+        if (Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(region)) {
+          _this.setRegionId("1");
+        }
+      });
+    }
     // replacePage() {
     //   if (this.$route.params.sluged) {
     //     this.$router.replace({
@@ -52095,7 +52115,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     //   }
     // }
 
-  },
+  }),
   watch: {
     $route: {
       immediate: true,
@@ -52112,22 +52132,46 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
     }
   },
-  created: function created() {
-    var _this = this;
+  created: function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _this2 = this;
 
-    this.$nextTick(function () {
-      _this.getRegions();
-    });
-  },
-  mounted: function mounted() {
-    var _this2 = this;
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              this.$nextTick(function () {
+                _this2.getRegions();
+              });
+              __WEBPACK_IMPORTED_MODULE_6__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
+                _this2.getRegions();
+              });
+              // try {
+              _context2.next = 4;
+              return this.setRegion();
 
-    __WEBPACK_IMPORTED_MODULE_4__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
-      // this.$emit("hidePage");
-      _this2.getRegions();
-    });
-    // $("#product").on("hide.bs.modal", this.replacePage);
-  }
+            case 4:
+              // } catch (error) {
+              //   alert(error)
+
+              // }
+
+              $("#Regions").on("hide.bs.modal", this.setRegionD);
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    }));
+
+    function created() {
+      return _ref2.apply(this, arguments);
+    }
+
+    return created;
+  }()
 });
 
 /***/ }),
@@ -62593,14 +62637,15 @@ var setManager = function setManager(_ref13, manager) {
     }
     commit('setManager', manager);
 };
-var setRegion = function setRegion(_ref14, regionId) {
+var setRegion = function setRegion(_ref14) {
     var commit = _ref14.commit,
         dispatch = _ref14.dispatch;
 
 
-    return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (regionId) {
+    __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (regionId) {
+
         if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(regionId)) {
-            __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.removeItem('region');
+            $("#Regions").modal('show');
             return Promise.reject('NO_REGION_CHOOSEN');
         }
         commit('setRegion', regionId);

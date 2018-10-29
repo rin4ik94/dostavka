@@ -59,9 +59,7 @@ Vue.filter('toCurrency', function (value) {
 
 
 store.dispatch('checkLangExists')
-store.dispatch('setRegion').catch(() => {
-    $("#Regions").modal('show')
-});
+
 store.dispatch('setManager').then(() => {
     store.dispatch("setCart");
     store.dispatch('setTotal')
@@ -76,6 +74,7 @@ store.dispatch('setToken').then(() => {
     })
 
 }); 
+
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 
 const app = new Vue({

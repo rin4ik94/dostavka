@@ -10,11 +10,14 @@
   </div>
 </template>
 <script>
+import localforage from "localforage";
+import { isEmpty } from "lodash";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import CartInfo from "../components/CartInfo";
 // import { mapActions, mapGetters } from "vuex";
 import { EventBus } from "../bus.js";
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -23,11 +26,21 @@ export default {
     };
   },
   components: { CartInfo, Navbar, Footer },
-
   methods: {
+    ...mapActions({
+      setRegionId : 'setRegionId',
+      setRegion : 'setRegion'
+    }),
     async getRegions() {
       let response = await axios.get("/api/regions");
       this.regions = response.data.data;
+    },
+    setRegionD(){  
+      localforage.getItem('region').then((region)=>{
+        if(isEmpty(region)){
+          this.setRegionId("1")
+        }
+      })
     }
     // replacePage() {
     //   if (this.$route.params.sluged) {
@@ -49,27 +62,34 @@ export default {
       handler($route) {
         Vue.nextTick(() => {
           if ($route.name == "pp") {
-            $("#product").modal("show");
+            $("#product").modal("show"); 
+            
           } else {
             if ($route.name == "tp") {
-              $("#product").modal("show");
+              $("#product").modal("show"); 
+              
             }
           }
         });
       }
     }
   },
-  created() {
+  async created() {
     this.$nextTick(() => {
       this.getRegions();
     });
-  },
-  mounted() {
-    EventBus.$on("changeLanguage", () => {
-      // this.$emit("hidePage");
+      EventBus.$on("changeLanguage", () => {
       this.getRegions();
     });
-    // $("#product").on("hide.bs.modal", this.replacePage);
+    // try {
+      await this.setRegion()
+    // } catch (error) {
+    //   alert(error)
+      
+    // }
+    
+    $("#Regions").on("hide.bs.modal", this.setRegionD);
+
   }
 };
 </script>
