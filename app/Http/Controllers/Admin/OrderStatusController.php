@@ -21,11 +21,11 @@ class OrderStatusController extends Controller
         return back()->with('success','successful');
     }
 
-    public function count($count){
+    public function count(Request $request,$count){
         $data = [];
-        $order = Order::where('order_status_id',1)->latest()->get();
+        $order = Order::with('manager', 'branch', 'client','payment', 'statuses', 'products', 'courier', 'region', 'status')->where('order_status_id',1)->latest()->get();
         $base_count = $order->count();
-        if($count < $base_count){
+        if($count < $base_count && $order[0]->id > $request->lastOrderId){
             $data = [
                 'status' => true,
                 'count' => $base_count,
@@ -35,10 +35,11 @@ class OrderStatusController extends Controller
             $data = [
                 'status' => false,
                 'count' => $base_count,
-                'data' => null,
+                // 'data' => null,
+                'data' => $order[0],
             ];
         }
         // dd($data);
-        return response($data);
+        return response()->json($data);
     }
 }
