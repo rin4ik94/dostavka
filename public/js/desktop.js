@@ -52146,15 +52146,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               __WEBPACK_IMPORTED_MODULE_6__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
                 _this2.getRegions();
               });
-              // try {
               _context2.next = 4;
               return this.setRegion();
 
             case 4:
-              // } catch (error) {
-              //   alert(error)
-
-              // }
 
               $("#Regions").on("hide.bs.modal", this.setRegionD);
 
@@ -54063,11 +54058,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
   },
   created: function created() {
-    this.getCats();
-  },
-  mounted: function mounted() {
     var _this2 = this;
 
+    this.getCats();
     __WEBPACK_IMPORTED_MODULE_0__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
       // this.$emit("hidePage");
       _this2.getCats();
@@ -57184,7 +57177,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
     __WEBPACK_IMPORTED_MODULE_5__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
@@ -59124,7 +59117,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       });
     }
   }),
-  mounted: function mounted() {
+  created: function created() {
     var _this5 = this;
 
     __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cartRegion").then(function (region) {

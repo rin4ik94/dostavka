@@ -288,7 +288,7 @@ console.log(response.data)
       });
     }
   },
-  mounted() {
+  created() {
     
     localforage.getItem("cartRegion").then(region => {
       if (!isEmpty("region")) {

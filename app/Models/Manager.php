@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,7 @@ class Manager extends Model
             ]
         ];
     }
+
     public function getLogo()
     {
         if ($this->logo) {
@@ -27,10 +29,12 @@ class Manager extends Model
         }
         return '/desktop/img/ret_2.png';
     }
+
     public function getRouteKeyName()
     {
         return 'slug';
     }
+
     public function managerCategory()
     {
         return $this->belongsTo('App\Models\ManagerCategory');

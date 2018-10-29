@@ -97,13 +97,11 @@ export default {
   },
   created() {
     this.getCats();
-  },
-  mounted() {
     EventBus.$on("changeLanguage", () => {
       // this.$emit("hidePage");
       this.getCats();
     });
     EventBus.$on("changeRegion", this.getCats);
-  }
+  } 
 };
 </script>

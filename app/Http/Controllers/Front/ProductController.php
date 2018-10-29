@@ -21,19 +21,29 @@ class ProductController extends Controller
         if (request()->has('count')) {
             $products = Product::active()->paginate(request()->count);
             return ProductResource::collection($products);
-        } else if (request()->has('manager') && request()->has('category')) {
+        } elseif (request()->has('manager') && request()->has('category')) {
             $manager = Manager::whereSlug(request()->manager)->first();
             $category = Category::whereSlug(request()->category)->first();
             if (count($category->children) < 1) {
-                $products = Product::sortByPrice(request()->price)->ofCategory($category->id)->ofManager($manager->id)->active()->paginate(20);
-                return ProductResource::collection($products);
+                $products = Product::ofCategory($category->id)->ofManager($manager->id)->active()->paginate(20);
+                if (request()->price) {
+                    $sorted = $products->sortBy('new_price');
+                    $sorted->values()->all();
+                    return ProductResource::collection($sorted->paginate(20));
+                }
+                return ProductResource::collection($products->paginate(20));
             } else {
                 return ProductResource::collection($category->childProducts($manager->id, request()->price)->paginate(20));
             }
-        } else if (request()->has('manager')) {
+        } elseif (request()->has('manager')) {
             $manager = Manager::whereSlug(request()->manager)->first();
-            $products = Product::sortByPrice(request()->price)->ofManager($manager->id)->active()->paginate(20);
-            return ProductResource::collection($products);
+            $products = Product::ofManager($manager->id)->active()->get();
+            if (request()->price) {
+                $sorted = $products->sortBy('new_price');
+                $sorted->values()->all();
+                return ProductResource::collection($sorted->paginate(20));
+            }
+            return ProductResource::collection($products->paginate(20));
         } else {
             $products = Product::active()->get();
             return ProductResource::collection($products);

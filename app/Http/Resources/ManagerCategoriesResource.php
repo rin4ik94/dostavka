@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Manager;
 
 class ManagerCategoriesResource extends JsonResource
 {
@@ -23,7 +22,7 @@ class ManagerCategoriesResource extends JsonResource
         return [
             'id' => (string)$this->id,
             'name' => $name,
-            'managers' => Manager::collection($this->managers)
+            'managers' => Manager::collection($this->whenLoaded('managers')),
         ];
     }
 }

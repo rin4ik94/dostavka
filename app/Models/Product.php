@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,9 @@ class Product extends Model
     protected $fillable = [
         'name_uz', 'name_ru', 'slug', 'image', 'measurement', 'new_price', 'old_price', 'status', 'category_id', 'manager_id'
     ];
+    protected $casts = [
+        'new_price' => 'integer'
+        ];
 
     public function sluggable()
     {
@@ -36,21 +40,12 @@ class Product extends Model
         }
     }
 
-
     public function scopeOfCategory(Builder $builder, $categoryId)
     {
         if (!$categoryId) {
             return;
         }
         $builder->where('category_id', $categoryId);
-    }
-
-    public function scopeSortByPrice(Builder $builder, $price)
-    {
-        if (!$price) {
-            return;
-        }
-        $builder->orderBy('new_price');
     }
 
     public function scopeActive(Builder $builder)

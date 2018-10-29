@@ -80,5 +80,5 @@ store.dispatch('setToken').then(() => {
 const app = new Vue({
     store,
     el: '#desktop',
-    router
+    router       
 })

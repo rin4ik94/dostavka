@@ -86,7 +86,7 @@ export default {
       }
     }
   },
-  mounted() {
+  created() {
     EventBus.$on("changeLanguage", () => {
       // this.$emit("hidePage");
       if (this.$route.name == "category") {

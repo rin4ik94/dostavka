@@ -80,13 +80,8 @@ export default {
     });
       EventBus.$on("changeLanguage", () => {
       this.getRegions();
-    });
-    // try {
-      await this.setRegion()
-    // } catch (error) {
-    //   alert(error)
-      
-    // }
+    }); 
+    await this.setRegion() 
     
     $("#Regions").on("hide.bs.modal", this.setRegionD);
 
