@@ -73,8 +73,8 @@ class SMSController extends Controller
                 }
             }
             $transmit = new TransmitSMSArguments();
-            $transmit->username = config('delivery.sms.login');
-            $transmit->password = config('delivery.sms.password');
+            $transmit->username = config('dostavka.sms.login');
+            $transmit->password = config('dostavka.sms.password');
 
             $service = new ServiceArguments();
             $service->service = 1;
@@ -166,5 +166,4 @@ class SMSController extends Controller
             abort(404);
         }
     }
-
 }
