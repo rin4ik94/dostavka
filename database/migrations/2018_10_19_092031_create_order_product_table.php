@@ -18,11 +18,11 @@ class CreateOrderProductTable extends Migration
             $table->unsignedInteger('order_id')->nullable()->index();
             $table->unsignedInteger('product_id')->nullable()->index();
             $table->string('product_name')->nullable();
+            $table->string('product_name_uz')->nullable();
             $table->string('product_count')->nullable();
             $table->string('product_price')->nullable();
-            $table->string('product_total_price')->nullable(); 
+            $table->string('product_total_price')->nullable();
             $table->string('product_measurement')->nullable();
-            $table->timestamps();
         });
     }
 

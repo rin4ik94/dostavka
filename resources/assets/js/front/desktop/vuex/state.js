@@ -1,4 +1,5 @@
 export default {
+    delivery_price: Number(window.App.deliveryPrice),
     user: {
         authenticated: false,
         total: 0,

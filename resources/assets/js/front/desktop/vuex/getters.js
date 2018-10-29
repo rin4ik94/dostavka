@@ -16,6 +16,9 @@ export const regionSlug = (state) => {
 export const cart = (state) => {
     return state.cart
 }
+export const delivery_price = (state) => {
+    return state.delivery_price
+}
 export const totalCart = (state) => state.cart.total 
 export const manager = (state) => {
     return state.cart.manager
