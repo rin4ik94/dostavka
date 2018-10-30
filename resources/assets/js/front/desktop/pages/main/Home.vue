@@ -26,8 +26,7 @@
   </div>
 </div>
 </template>
-<script>
-import { EventBus } from "../../bus.js";
+<script> 
 
 import InnerHeader from "../../components/InnerHeader";
 import { mapGetters } from "vuex";
@@ -39,12 +38,21 @@ export default {
       category: []
     };
   },
+  watch:{
+    lang(){
+      this.getCats();      
+    },
+    regionName(){
+      this.getCats()
+    }
+  },
   components: { InnerHeader },
   computed: {
     ...mapGetters({
       region: "regionId",
       regionName: "regionName",
-      regionSlug: "regionSlug"
+      regionSlug: "regionSlug",
+      lang: "locale"
     }),
     filtered() {
       let data = [];
@@ -94,12 +102,7 @@ export default {
     }
   },
   created() {
-    this.getCats();
-    EventBus.$on("changeLanguage", () => {
-      // this.$emit("hidePage");
-      this.getCats();
-    });
-    EventBus.$on("changeRegion", this.getCats);
+    this.getCats();  
   } 
 };
 </script>

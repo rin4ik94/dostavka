@@ -46,8 +46,7 @@
 import localforage from "localforage";
 import { isEmpty } from "lodash";
 import { mapActions, mapGetters } from "vuex";
-import Pagination from "../../components/Pagination";
-import { EventBus } from "../../bus.js";
+import Pagination from "../../components/Pagination"; 
 
 export default {
   props: ["price", "branch"],
@@ -85,18 +84,15 @@ export default {
         this.cartEvent();
         this.productMenu = [];
       }
-    }
-  },
-  created() {
-    EventBus.$on("changeLanguage", () => {
-      // this.$emit("hidePage");
+    },
+    lang(){
       if (this.$route.name == "category") {
         this.fetchItems();
       } else {
         this.allProducts();
       }
-    });
-  },
+    }
+  }, 
   async beforeMount() {
     $("#product").on("hide.bs.modal", this.replacePage);
 
@@ -109,7 +105,8 @@ export default {
   computed: mapGetters({
     totalCart: "totalCart",
     manager: "manager",
-    cart: "cart"
+    cart: "cart",
+    lang: "locale"
   }),
   methods: {
     replacePage() {
@@ -128,7 +125,7 @@ export default {
     async allProducts() { 
       if(this.scrolled){
           return new Promise((resolve, reject) => {
-            $("html, body").animate({ scrollTop: 190 }, 600);
+            $("html, body").animate({ scrollTop: 140 }, 600);
           })
       }
       this.scrolled = true
@@ -147,15 +144,13 @@ export default {
       );
       this.products = await response.data.data;
       this.pagination = await response.data.meta;  
-        
-            this.fetchProducts();
-          
+      this.fetchProducts();
     }
     ,
     async fetchItems() {
         if(this.scrolled){
           return new Promise((resolve, reject) => {
-            $("html, body").animate({ scrollTop: 190 }, 600);
+            $("html, body").animate({ scrollTop: 140 }, 600);
           }) 
         }
       this.scrolled = true

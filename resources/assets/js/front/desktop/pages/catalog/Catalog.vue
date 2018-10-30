@@ -42,8 +42,7 @@ import NotFound from "../NotFound";
 import Products from "./Products";
 import SubCategories from "./SubCategories";
 import localforage from "localforage";
-import { isEmpty } from "lodash";
-import { EventBus } from "../../bus.js";
+import { isEmpty } from "lodash"; 
 
 export default {
   data() {
@@ -68,6 +67,9 @@ export default {
           this.active = 0;
         }
       }
+    },
+    lang(){
+      this.getCatalog();      
     }
     // regionSlug: {
     //   handler(region) {
@@ -133,15 +135,12 @@ export default {
     ...mapGetters({
       region: "regionId",
       regionName: "regionName",
-      regionSlug: "regionSlug"
+      regionSlug: "regionSlug",
+      lang: "locale"
     })
   },
   async created(){
-    this.getCatalog();
-    EventBus.$on("changeLanguage", () => {
-      // this.$emit("hidePage");
-      this.getCatalog();
-    });
+    this.getCatalog(); 
   }
 };
 </script>

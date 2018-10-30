@@ -43,8 +43,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { isEmpty } from "lodash";
-import localforage from "localforage";
-import { EventBus } from "../../bus.js";
+import localforage from "localforage"; 
 export default {
   data() {
     return {

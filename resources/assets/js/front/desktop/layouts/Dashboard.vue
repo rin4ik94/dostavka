@@ -15,9 +15,7 @@ import { isEmpty } from "lodash";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import CartInfo from "../components/CartInfo";
-// import { mapActions, mapGetters } from "vuex";
-import { EventBus } from "../bus.js";
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from "vuex"; 
 
 export default {
   data() {
@@ -26,6 +24,11 @@ export default {
     };
   },
   components: { CartInfo, Navbar, Footer },
+  computed:{
+    ...mapGetters({
+          lang : 'locale'
+    })
+  },
   methods: {
     ...mapActions({
       setRegionId : 'setRegionId',
@@ -38,7 +41,7 @@ export default {
     async setRegionD(){  
       await localforage.getItem('region').then((region)=>{
         if(isEmpty(region)){
-           this.setRegionId("1")
+          this.setRegionId("1")
         }
       })
     }
@@ -72,16 +75,16 @@ export default {
           }
         });
       }
+    },
+    lang(){
+      this.getRegions();
     }
   },
   async created() {
     this.$nextTick(() => {
       this.getRegions();
-    });
-      EventBus.$on("changeLanguage", () => {
-      this.getRegions();
     }); 
-    this.setRegion() 
+    await this.setRegion() 
     
     $("#Regions").on("hide.bs.modal", this.setRegionD);
 

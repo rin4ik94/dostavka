@@ -99,8 +99,7 @@
 </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
-import { EventBus } from "../bus.js";
+import { mapGetters, mapActions } from "vuex"; 
 import ModalStep from '../components/modals/ModalStep'
 import localforage from "localforage";
 import { isEmpty } from "lodash";
@@ -139,7 +138,8 @@ export default {
       user: "user",
       cartInfo: "cart",
       delivery_price: "delivery_price",
-      manager: "manager"
+      manager: "manager",
+      lang: "locale",
     }),
     filteredProducts() {
       let d = [];
@@ -163,6 +163,9 @@ export default {
       handler(){
         // this.getProducts();        
       }
+    },
+    lang(){
+      this.getRegions(); 
     },
     user:{
       deep:true,
@@ -365,12 +368,7 @@ localforage.removeItem("cart");
       }
     }
   },
-  created() {
-    
-    EventBus.$on("changeLanguage", () => { 
-      this.getRegions(); 
-      
-    }); 
+  created() { 
     this.getProducts()
     localforage.getItem("cartRegion").then(region => {
       if (!isEmpty("region")) {
