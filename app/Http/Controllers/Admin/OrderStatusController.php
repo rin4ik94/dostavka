@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -25,7 +24,7 @@ class OrderStatusController extends Controller
         $data = [];
         $order = Order::with('manager', 'branch', 'client','payment', 'statuses', 'products', 'courier', 'region', 'status')->where('order_status_id',1)->latest()->get();
         $base_count = $order->count();
-        if($count < $base_count && $order[0]->id > $request->lastOrderId){
+        if($count < $base_count){
             $data = [
                 'status' => true,
                 'count' => $base_count,
@@ -35,8 +34,7 @@ class OrderStatusController extends Controller
             $data = [
                 'status' => false,
                 'count' => $base_count,
-                // 'data' => null,
-                'data' => $order[0],
+                'data' => null,
             ];
         }
         // dd($data);
