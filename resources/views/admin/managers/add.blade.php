@@ -1,6 +1,6 @@
 <div class="modal fade" id="newStore" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form class="modal-content needs-validation" action="{{route('managers.store')}}" method="POST" enctype="multipart/form-data" novalidate>
+    <form action="{{route('managers.store')}}" method="POST" enctype="multipart/form-data" class="modal-content needs-validation" novalidate>
       <div class="modal-header">
         <h5 class="modal-title">Новый магазин</h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
@@ -17,8 +17,8 @@
               <input type="file" class="custom-file-input file" id="storeFile" name="file" accept="image/jpeg" required>
               <label class="custom-file-label" for="storeFile">Загрузить</label>
               <div class="custom-image">
-                <img src="#" alt="dostavka">
-                <span class="custom-image-close">&times;</span>
+                <img src="#" alt="">
+                <button class="btn btn-sm btn-light custom-image-close" type="button">Удалить</button>
               </div>
             </div>
           </div>
@@ -57,9 +57,9 @@
         </div>
       </div>
       <div class="modal-footer">
+        @csrf
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-green">OK</button>
-        @csrf
       </div>
     </form>
   </div>

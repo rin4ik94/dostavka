@@ -974,7 +974,8 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 }
 .form-text {
   display: block;
-  margin-top: 0.25rem;
+  margin-top: 6px;
+  font-size: 13px;
 }
 
 .form-row {

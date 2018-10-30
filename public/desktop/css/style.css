@@ -1,4 +1,8 @@
 /* fallback */
+body {
+  min-width: 1236px;
+}
+
 
 @font-face {
   font-family: 'Material Icons';
@@ -23,7 +27,12 @@
   -moz-font-feature-settings: 'liga';
   -moz-osx-font-smoothing: grayscale;
 }
-
+.loader {
+  min-height: calc(100vh - 96px);
+  flex: 1;
+  background: #fff url("/img/loader.svg") no-repeat center center;
+  z-index: 2;
+}
 
 
 
@@ -177,7 +186,7 @@
 
 .header-search  {
   margin-left: 42px;
-  max-width: 420px;
+  max-width: 380px;
 }
 .header-search .form-control:focus ~ .input-group-append .btn {
   background-color: #27ae61;

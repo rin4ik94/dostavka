@@ -35,8 +35,8 @@ class OrderStatusController extends Controller
             $data = [
                 'status' => false,
                 'count' => $base_count,
-                // 'data' => null,
-                'data' => $order[0],
+                 'data' => null,
+//                'data' => $order[0],
             ];
         }
         // dd($data);

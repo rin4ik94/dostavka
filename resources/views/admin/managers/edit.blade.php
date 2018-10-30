@@ -1,8 +1,7 @@
 <div class="modal fade" id="editManager" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form class="modal-content needs-validation" method='POST' action="/admin/managers/2" enctype="multipart/form-data" novalidate>
-       {{ method_field('PUT') }}
-          @csrf
+     
+    <form method='POST' action="/admin/managers/2" enctype="multipart/form-data" class="modal-content needs-validation" novalidate>
       <div class="modal-header">
         <h5 class="modal-title">Редактировать магазин</h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
@@ -19,8 +18,8 @@
               <input type="file" class="custom-file-input file" id="editManagerImage" name="file" accept="image/jpeg">
               <label class="custom-file-label" for="editManagerImage">Загрузить</label>
               <div class="custom-image">
-                <img src="#" id="image_show" alt="dostavka">
-                <span class="custom-image-close">&times;</span>
+                <img src="#" id="image_show" alt="">
+                <button class="btn btn-sm btn-light custom-image-close" type="button">Удалить</button>
               </div>
             </div>
           </div>
@@ -59,10 +58,12 @@
         </div>
       </div>
       <div class="modal-footer">
-          <a href="#" class="deleteManager delete btn btn-outline-red" data-id="" data-token="{{ csrf_token() }}" >Удалить</a>
-          <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
-          <button type="submit" class="btn btn-green">OK</button>
-          <input type="hidden" name="id" id="manager_id" value="">
+        <a href="#" class="deleteManager delete btn btn-outline-red mr-auto" data-id="" data-token="{{ csrf_token() }}">Удалить</a>
+        <input type="hidden" name="id" id="manager_id" value="">
+        {{ method_field('PUT') }}
+        @csrf
+        <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-green">OK</button>
       </div>
     </form>
   </div>
