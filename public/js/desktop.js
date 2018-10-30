@@ -59319,12 +59319,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }
   }),
   watch: {
-    cartInfo: {
-      deep: true,
-      handler: function handler() {
-        // this.getProducts();        
-      }
-    },
     lang: function lang() {
       this.getRegions();
     },
@@ -59347,9 +59341,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }
       }
     }
-    // region() {
-    //   this.fetchRegion();
-    // }
   },
   methods: _extends({
     fetchRegion: function fetchRegion(region) {

@@ -157,13 +157,7 @@ export default {
       return d;
     }
   },
-  watch: {
-    cartInfo: {
-      deep:true,
-      handler(){
-        // this.getProducts();        
-      }
-    },
+  watch: { 
     lang(){
       this.getRegions(); 
     },
@@ -185,10 +179,7 @@ export default {
             
           }
       } 
-    }
-    // region() {
-    //   this.fetchRegion();
-    // }
+    } 
   },
   methods: {
     fetchRegion(region) {
