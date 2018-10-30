@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" media="print" href="/print.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700" rel="stylesheet">
+    
     @include('front.desktop.layouts.css')
     <script>
         window.App= {!! json_encode([
@@ -24,8 +24,9 @@
 
     <div id="desktop" class="desktop">
 
-        <router-view></router-view>
-
+        <router-view @ready="pageReady" v-show="showPage"></router-view>
+        <div  v-show="!showPage" class="loader"><div class="loader-container"></div></div>
+        
         {{--
         <awesome-spinner v-show="!showPage"></awesome-spinner> --}}
     </div>

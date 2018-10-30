@@ -18,11 +18,14 @@ const router = new VueRouter({
 
             return savedPosition;
         } else {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    // resolve({ x: 0, y: 0 })
-                }, 500)
-            })
+            if(to.name != 'category' && to.name != 'catalog' && to.name != 'tp' && to.name != 'cp'){
+                // alert(to.name)
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve({ x: 0, y: 0 })
+                    }, 500)
+                })
+            }
         }
     }
 
