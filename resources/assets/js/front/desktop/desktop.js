@@ -48,7 +48,7 @@ if (token) {
 
 localforage.config({
     driver: localforage.LOCALSTORAGE,
-    storeName: 'delivery'
+    // storeName: 'delivery'
 })
 Vue.filter('toCurrency', function (value) {
     if (typeof value !== "number") {

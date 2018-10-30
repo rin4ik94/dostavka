@@ -46,8 +46,7 @@
 import localforage from "localforage";
 import { isEmpty } from "lodash";
 import { mapActions, mapGetters } from "vuex";
-import Pagination from "../../components/Pagination";
-import { EventBus } from "../../bus.js";
+import Pagination from "../../components/Pagination"; 
 
 export default {
   props: ["price", "branch"],
@@ -65,6 +64,14 @@ export default {
   },
 
   watch: {
+     lang(lang){ 
+      if (this.$route.name == "category") { 
+      
+        this.fetchItems();
+      } else {
+        this.allProducts();
+      }
+    },
     $route(route) {
       if (route.name == "category") {
         this.fetchItems();
@@ -85,19 +92,10 @@ export default {
         this.cartEvent();
         this.productMenu = [];
       }
-    }
-  },
-  created() {
-    EventBus.$on("changeLanguage", () => {
-      // this.$emit("hidePage");
-      if (this.$route.name == "category") {
-        this.fetchItems();
-      } else {
-        this.allProducts();
-      }
-    });
-  },
-  beforeMount: async function() {
+    },
+   
+  }, 
+  async beforeMount() {
     $("#product").on("hide.bs.modal", this.replacePage);
 
     if (!this.$route.params.sluged) {
@@ -109,7 +107,8 @@ export default {
   computed: mapGetters({
     totalCart: "totalCart",
     manager: "manager",
-    cart: "cart"
+    cart: "cart",
+    lang: "locale"
   }),
   methods: {
     replacePage() {
@@ -127,8 +126,8 @@ export default {
     },
     async allProducts() { 
       if(this.scrolled){
-          return new Promise((resolve, reject) => {
-            $("html, body").animate({ scrollTop: 190 }, 600);
+          new Promise((resolve, reject) => {
+            $("html, body").animate({ scrollTop: 140 }, 600);
           })
       }
       this.scrolled = true
@@ -147,15 +146,13 @@ export default {
       );
       this.products = await response.data.data;
       this.pagination = await response.data.meta;  
-        
-            this.fetchProducts();
-          
+      this.fetchProducts();
     }
     ,
     async fetchItems() {
         if(this.scrolled){
-          return new Promise((resolve, reject) => {
-            $("html, body").animate({ scrollTop: 190 }, 600);
+          new Promise((resolve, reject) => {
+            $("html, body").animate({ scrollTop: 140 }, 600);
           }) 
         }
       this.scrolled = true
@@ -165,15 +162,16 @@ export default {
       }
       if (this.pagination) {
         params["page"] = this.pagination.current_page;
-      }
+      } 
+      
       let response = await axios.get(
         `/api/products?manager=${this.$route.params.slug}&category=${
           this.$route.params.sluged
         }`,
         { params: params }
       );
-      this.products = response.data.data;
-      this.pagination = response.data.meta;  
+      this.products = await response.data.data;
+      this.pagination =await response.data.meta;  
       this.fetchProducts();
     },
     ...mapActions({
@@ -202,9 +200,9 @@ export default {
 
       this.cartData(this.productMenu);
     },
-    fetchProducts() {
+     fetchProducts() {
       this.$nextTick(() => {
-        localforage.getItem("cart").then(response => {
+       localforage.getItem("cart").then(response => {
           if (!isEmpty(response)) {
             this.productMenu = response;
             this.products.map((v, k) => {
