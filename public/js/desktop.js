@@ -52160,15 +52160,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               this.$nextTick(function () {
                 _this2.getRegions();
               });
-              window.alert('awd');
-              _context3.next = 4;
+              _context3.next = 3;
               return this.setRegion();
 
-            case 4:
+            case 3:
 
               $("#Regions").on("hide.bs.modal", this.setRegionD);
 
-            case 5:
+            case 4:
             case "end":
               return _context3.stop();
           }
@@ -63473,8 +63472,6 @@ var setRegion = function setRegion(_ref14) {
             $("#Regions").modal('show');
             return Promise.reject('NO_REGION_CHOOSEN');
         } else {
-            alert(regionId);
-
             commit('setRegion', regionId);
             return Promise.resolve(regionId);
         }

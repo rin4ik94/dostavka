@@ -135,9 +135,7 @@ export const setRegion = ({ commit, dispatch }) => {
         if (isEmpty(regionId)) { 
             $("#Regions").modal('show')            
             return Promise.reject('NO_REGION_CHOOSEN');
-        }else{
- alert(regionId)
- 
+        }else{ 
             commit('setRegion', regionId)
             return Promise.resolve(regionId)
         }
