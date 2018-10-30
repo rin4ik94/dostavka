@@ -62,7 +62,6 @@ class ManagerController extends Controller
       'name' => 'required|unique:managers',
       'manager_category_id' => 'required',
       'logo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-      'store_status' => 'required',
       'status' => 'required'
     ]);
     $filenametostore = '';
@@ -75,7 +74,7 @@ class ManagerController extends Controller
       Storage::put('public/logos/' . $filenametostore, fopen($file, 'r+'));
       $mainimagepath = public_path('storage/logos/' . $filenametostore);
       $mainImage = Image::make($mainimagepath);
-      $ratio = 4 / 3;
+      $ratio = 1/1;
       if (intval($mainImage->width() / $ratio > $mainImage->height())) {
         $mainImage->fit(intval($mainImage->height() * $ratio), $mainImage->height());
       } else {
@@ -86,9 +85,11 @@ class ManagerController extends Controller
       });
       $mainImage->save($mainimagepath);
     }
-    $manager = Manager::create($request->all());
+    $input = $request->all();
+    $input['logo'] = $filenametostore;
+    $manager = Manager::create($input);
     return redirect()->route('managers.index')
-                    ->with('success','Manager created successfully');
+                    ->with('success','Магазин успешно создан!');
   }
     /**
      * Update the specified resource in storage.
@@ -117,7 +118,7 @@ class ManagerController extends Controller
         Storage::put('public/logos/' . $filenametostore, fopen($file, 'r+'));
         $mainimagepath = public_path('storage/logos/' . $filenametostore);
         $mainImage = Image::make($mainimagepath);
-        $ratio = 4 / 3;
+        $ratio = 1/1;
         if (intval($mainImage->width() / $ratio > $mainImage->height())) {
           $mainImage->fit(intval($mainImage->height() * $ratio), $mainImage->height());
         } else {
@@ -130,10 +131,9 @@ class ManagerController extends Controller
         $manager->logo = $filenametostore;
         $manager->save();
       }
-
-      $manager->update($request->all());
+      $manager->update($request->only('name','manager_category_id','status'));
       return redirect()->route('managers.index')
-        ->with('success', 'Manager updated successfully');
+        ->with('success', 'Магазин успешно обновлен!');
     }
     /**
      * Remove the specified resource from storage.
@@ -143,16 +143,8 @@ class ManagerController extends Controller
      */
     public function destroy($id)
     {
-      $idManager = response()->id;
-      // ->delete()
-      Manager::findOrFail($idManager);
-      return redirect()->route('managers.index')
-        ->with('success', 'Manager deleted successfully');
-    }
-
-    public function delete(Request $request){
-
-        Manager::find($request->id)->delete();
-        return response()->json($request->id);
+      $manager = Manager::find($id)->delete();
+      session()->flash('success','Магазин удален успешно!');
+      return response()->json('success',200);
     }
   }

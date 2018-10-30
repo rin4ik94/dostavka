@@ -65,15 +65,14 @@ class ManagerGroupController extends Controller
     {
         $manager = ManagerCategory::whereHas('managers',function($query) use($id){
             $query->where('manager_category_id',$id);
-        })
-        ->first();
+        })->first();
         if($manager){
-        return redirect()->route('managers.group.index')
-                        ->with('warning','В этой категории есть магазин!');
+            session()->flash('warning','В этой категории есть магазин!');
+            return response()->json('falid', 200);
         }else{
             ManagerCategory::findOrFail($id)->delete();
-            return redirect()->route('managers.group.index')
-                        ->with('success','Группа категорий удалена успешно.');
+            session()->flash('success','Группа категорий удалена успешно!');
+            return response()->json('success', 200);
         }   
     }
 }

@@ -1,4 +1,9 @@
 $(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     // cheack new order added
     setInterval(function(){
     var count = parseInt($('.new').text());
@@ -92,35 +97,27 @@ $(function () {
         $('#image_show').attr('src', "/storage/logos/" + logo);
         $('#image_show').parent().show().prevAll().hide();
         $('#edit_name').val(name);
-        $("#edit_managerCatId").val(category);
+        $("#edit_manager_cat_id").val(category);
         $('#manager_id').val(id);
         $('#edit_status').val(status);
-        $('.deleteManager').attr('data-id', id);
+        $('.delete_manager').data('destroy', id);
     });
     // delete manager via ajax
-    $(".deleteManager").click(function () {
-        var id = $(this).data('id');
-        if ($result) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    $(".delete_manager").click(function (e) {
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        console.log(id);
             $.ajax({
-                url: '/admin/managers/delete',
-                type: 'post',
-                data: {
-                    id: id
-                },
+                url: '/admin/managers/'+id,
+                type: 'delete',
                 success: function (result) {
-                    location.reload();
-                }
-            });
-        }
+                location.reload();
+            }
+        });
     });
 
     //actions for manager-group
-    $('.managergr_action').on('click', function (e) {
+    $('.manager_group_action').on('click', function (e) {
         e.preventDefault(e);
         var id = $(this).closest('tr').data('id');
         var name_ru = $(this).closest('tr').data('nameru');
@@ -128,9 +125,20 @@ $(function () {
         $('#name_ru').val(name_ru);
         $('#name_uz').val(name_uz);
         $('#editManagerGr').val(id);
-        $('.deleteManagerGroup').attr('data-id', id);
+        $('.delete_manager_group').data('destroy', id);
     });
 
+    $('.delete_manager_group').on('click', function (e) {
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        $.ajax({
+            url: '/admin/managers/group/'+id,
+            type: 'delete',
+            success: function (result) {
+                location.reload();
+            }
+        });
+    });
     //actions for employee-group
     $('.editEmployeGroup a').on('click', function (e) {
         e.preventDefault(e);
