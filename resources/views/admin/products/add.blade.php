@@ -1,14 +1,12 @@
 <div class="modal fade" id="newProduct" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
+    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data" class="modal-content needs-validation" novalidate> 
       <div class="modal-header">
         <h5 class="modal-title">Новый продукт</h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate> 
-        @csrf
       <div class="modal-body">
         <div class="row">
           <div class="col-5">
@@ -101,8 +99,8 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-green">OK</button>
+        @csrf
       </div>
-      </form>
-    </div>
+    </form>
   </div>
 </div>
