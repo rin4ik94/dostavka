@@ -40,7 +40,7 @@
     </div>
 </div>
 @if(count($orders) > 0)
-<table class="table table-bordered table-hover table-striped">
+<table class="table table-bordered table-hover table-striped order_new_add">
     <thead>
         <tr>
             <th class="col-auto">№</th>
