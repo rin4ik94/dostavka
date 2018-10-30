@@ -17,7 +17,7 @@ class OrderController extends Controller
 
         $client = Client::where('phone', $form['user']['phone'])->first();
 
-        $client->update(['first_name' => $form['user']['first_name'], 'last_name' => $form['user']['last_name']]);
+        $client->updateClient($form['user']);
         preg_match_all('/([^-]*?)-([^,]*),?/', $products, $matches);
         $output = array_combine($matches[1], $matches[2]);
         $order = Order::storeClientOrder($client, $form);
