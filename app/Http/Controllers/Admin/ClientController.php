@@ -56,7 +56,7 @@ class ClientController extends Controller
         $this->validate($request,[
             'first_name' => 'required',
             'last_name' => 'required',
-            'mobile' => 'required',
+            'phone' => 'required',
             'birth_date' => 'required',
             'jender' => 'required',
             'password' => 'required',
@@ -64,7 +64,7 @@ class ClientController extends Controller
             'region_id' => 'required',
         ]);
         $client = Client::create($request->all());
-				return back();
+        return back();
     }
     /**
      * Update the specified resource in storage.
@@ -78,7 +78,7 @@ class ClientController extends Controller
 			$this->validate($request,[
 				'first_name' => 'required',
 				'last_name' => 'required',
-				'mobile' => 'required',
+				'phone' => 'required',
 				'birth_date' => 'required',
 				'jender' => 'required',
 				'status' => 'required',
@@ -90,8 +90,6 @@ class ClientController extends Controller
 			}else{
 				$input = array_merge($input, ['blacklist' => 0]);
 			}
-		
-		
 			$client = Client::find($input['id'])
 			->update($input);
 			return back();

@@ -50,7 +50,7 @@
     <tbody>
         @foreach ($clients as $client)
         <tr data-id="{{ $client->id }}" data-fname="{{ $client->first_name }}" data-lname="{{ $client->last_name }}"
-            data-mobile="{{ $client->mobile }}" data-bdate={{ $client->birth_date }} data-jender="{{ $client->jender }}"
+            data-phone="{{ $client->phone }}" data-bdate={{ $client->birth_date }} data-jender="{{ $client->jender }}"
             data-status="{{ $client->status }}" data-region="{{ $client->region->id }}" data-blist="{{ $client->blacklist }}">
             <td>{{ $client->id }}</td>
             <td> {{ $client->first_name }} {{ $client->last_name }}</td>

@@ -23,7 +23,7 @@
         <div class="form-row">
           <div class="col">
             <label class="form-label" for="editMobile">Телефон *</label>
-            <input class="form-control" type="text" id="editMobile" name="mobile" required>
+            <input class="form-control" type="text" id="editMobile" name="phone" required>
           </div>
           <div class="col">
             <div class="form-group">
