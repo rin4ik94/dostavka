@@ -1,6 +1,8 @@
 <template>
     <div class="content">
-  <div class="container">
+    <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+
+  <div class="container" v-else>
     <div class="main-actions">
       <router-link class="btn btn-outline-green" :to="{name:'home'}" exact>&#8592;  {{$t('pages.back')}}</router-link>
     </div>
@@ -110,6 +112,7 @@ export default {
       products: [],
       region: null,
       errors:[],
+      showPage:false,
       nameError:null,
       phoneError:null,
       lastNameError:null,
@@ -194,6 +197,7 @@ export default {
     getRegions(){
         axios.get('/api/regions').then(response => {
           this.regions = response.data.data   
+          this.showPage = true 
         }
       )
     },
@@ -340,6 +344,7 @@ localforage.removeItem("cart");
           .get(`/api/managers/${this.manager.slug}/products/cart`, {
             params: params
           }) 
+
             this.products = response.data.data;
         }
       // });
@@ -364,8 +369,10 @@ localforage.removeItem("cart");
     localforage.getItem("cartRegion").then(region => {
       if (!isEmpty("region")) {
         this.fetchRegion(region);
-      } 
-      this.getRegions()      
+      this.getRegions()
+      }else{
+         this.showPage = true        
+      }
       }) 
   }
 };

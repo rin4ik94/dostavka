@@ -5,16 +5,26 @@
           <div class="col-3">
             <h5 class="title">Покупателям</h5>
             <ul class="nav footer-nav">
-              <li class="nav-item"><a class="nav-link" href="/conditions.php">Доставка и оплата</a></li>
-              <li class="nav-item"><a class="nav-link" href="/return.php">Возврат</a></li>
+              <li class="nav-item">
+                <router-link :to="{name:'delivery'}">
+                  Доставка и оплата
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link :to="{name:'return'}">
+                  Возврат 
+                </router-link>
+              </li>
 
             </ul>
           </div>
           <div class="col-3">
             <h5 class="title">Магазинам</h5>
             <ul class="nav footer-nav">
-              <li class="nav-item"><a class="nav-link"  href="/">Как начать сотрудничество</a></li>
-              <li class="nav-item"><a class="nav-link"  href="/">Войти в личный кабинет</a></li>
+              <li class="nav-item"><router-link :to="{name: 'partners'}">
+                Как начать сотрудничество
+                </router-link></li>
+              <li class="nav-item"><a class="nav-link"  href="/cp">Войти в личный кабинет</a></li>
 
             </ul>
           </div>

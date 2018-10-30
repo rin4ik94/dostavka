@@ -1,12 +1,15 @@
-<template>
-  <div class="content">
-  <InnerHeader />
-  <div class="container">   
+<template> 
+  <div class="content"> 
+        <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+<div v-else>
+
+      <InnerHeader />
+      <div class="container">   
     <h1 class="main-title">Магазины и сети {{regionName}}</h1>
     <div class="content-inner">
       <main class="main">
           <div class="main-sorter btn-group btn-group-sm btn-group-toggle">
-            <a class="btn btn-outline-light" :class="{'active' : active == 0}" @click.prevent="updateList('all')">Все</a>
+            <a class="btn btn-outline-light" :class="{'active' : active == 0}" @click.prevent="updateList('all')">Все</a> 
             <a :class="{'active' : active == category.id}" @click.prevent="updateList(category)" v-for="category in categories" :key="category.id" class="btn btn-outline-light">{{category.name}}</a> 
           </div>
           <ul class="partners" v-if="filtered.length > 0">
@@ -23,8 +26,10 @@
           </ul>
       </main>
     </div>
-  </div>
+  </div> 
 </div>
+</div> 
+
 </template>
 <script> 
 
@@ -35,7 +40,8 @@ export default {
     return {
       categories: [],
       active: 0,
-      category: []
+      category: [],
+      showPage:false
     };
   },
   watch:{
@@ -71,7 +77,6 @@ export default {
           });
         });
       }
-
       return data;
     }
   },
@@ -81,6 +86,7 @@ export default {
        let response = await axios
           .get(`api/categories_managers?withManagers&region=${this.region}`) 
             this.categories = response.data.data;
+            this.showPage = await true
             if (this.active != 0) {
               this.categories.map((value, key) => {
                 if (this.category.id == value.id) {

@@ -4,6 +4,8 @@ import Home from '../pages/main/Home'
 import Profile from '../pages/Profile'
 import Orders from '../pages/Orders'
 import Delivery from '../pages/Delivery'
+import Return from '../pages/Return'
+import Partners from '../pages/Partners'
 import Catalog from '../pages/catalog/Catalog'
 import Products from '../pages/catalog/Products'
 import ProductModal from '../components/modals/Product'
@@ -46,6 +48,24 @@ export default [
             path: '/cart',
             name: 'cart',
             component: Cart,
+            meta: {
+                guest: true,
+                needsAuth: false
+            }
+        },
+        {
+            path: '/return',
+            name: 'return',
+            component: Return,
+            meta: {
+                guest: true,
+                needsAuth: false
+            }
+        },
+        {
+            path: '/partners',
+            name: 'partners',
+            component: Partners,
             meta: {
                 guest: true,
                 needsAuth: false

@@ -1,38 +1,51 @@
 <template>
     <div class="content">
-  <div class="container">
-    <h1 class="main-title">Мои заказы</h1>
-    <div class="content-inner">
-    <main class="main">
-      <ul class="orders">
-        <li class="order">
-          <div class="order-inner">
-            <div class="order-column order-store">
-              <img src="/desktop/img/makrologo.jpg">
-            </div>
-            <div class="order-column order-info">
-              <div>Номер заказа</div>
-              <div>Дата и время заказа</div>
-              <div>Статус заказа</div>
-            </div>
-            <div class="order-column order-products">
-              <a href="/order.php">
-                <div>15</div>
-                <div>Товаров</div>
-              </a>
-            </div>
-            <div class="order-column order-sum">
-              <div class="order-sum-number">5 2000 сум</div>
-              <div class="order-sum-text">Общая сумма</div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </main>
-    <aside class="aside">
+      <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+      <div class="container" v-else>
+        <h1 class="main-title">Мои заказы</h1>
+        <div class="content-inner">
+        <main class="main">
+          <ul class="orders">
+            <li class="order">
+              <div class="order-inner">
+                <div class="order-column order-store">
+                  <img src="/desktop/img/makrologo.jpg">
+                </div>
+                <div class="order-column order-info">
+                  <div>Номер заказа</div>
+                  <div>Дата и время заказа</div>
+                  <div>Статус заказа</div>
+                </div>
+                <div class="order-column order-products">
+                  <a href="/order.php">
+                    <div>15</div>
+                    <div>Товаров</div>
+                  </a>
+                </div>
+                <div class="order-column order-sum">
+                  <div class="order-sum-number">5 2000 сум</div>
+                  <div class="order-sum-text">Общая сумма</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </main>
+        <aside class="aside">
 
-    </aside>
-    </div>
+        </aside>
+        </div>
   </div>
 </div>
 </template>
+<script>
+export default {
+  data(){
+    return{
+      showPage:false
+    }
+  },
+  mounted(){
+    this.showPage = true
+  }
+}
+</script>
