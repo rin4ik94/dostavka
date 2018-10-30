@@ -2,7 +2,7 @@
 <div>
     <ul class="products"> 
               <li class="product" :key="product.id" v-for="product in products">
-        <div class="product-inner">
+        <div class="product-inner" >
         <router-link v-if="$route.name == 'catalog' | $route.name == 'tp'" :to="{name: 'tp', params:{product : product.slug}}">
               <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
             <div class="product-image"><img :src="product.image"></div>
@@ -59,7 +59,8 @@ export default {
       product: "",
       productMenu: [],
       products: [],
-      active: false
+      active: false,
+      scrolled:false
     };
   },
 
@@ -124,14 +125,20 @@ export default {
         });
       }
     },
-    async allProducts() {
+    async allProducts() { 
+      if(this.scrolled){
+          return new Promise((resolve, reject) => {
+            $("html, body").animate({ scrollTop: 190 }, 600);
+          })
+      }
+      this.scrolled = true
       let params = {};
       if (this.price) {
         params["price"] = this.price;
       }
       if (this.pagination) {
         params["page"] = this.pagination.current_page;
-      }
+      } 
       let response = await axios.get(
         `/api/products?manager=${this.$route.params.slug}`,
         {
@@ -139,11 +146,19 @@ export default {
         }
       );
       this.products = await response.data.data;
-      this.pagination = await response.data.meta;
-
-      this.fetchProducts();
-    },
+      this.pagination = await response.data.meta;  
+        
+            this.fetchProducts();
+          
+    }
+    ,
     async fetchItems() {
+        if(this.scrolled){
+          return new Promise((resolve, reject) => {
+            $("html, body").animate({ scrollTop: 190 }, 600);
+          }) 
+        }
+      this.scrolled = true
       let params = {};
       if (this.price) {
         params["price"] = this.price;
@@ -158,7 +173,7 @@ export default {
         { params: params }
       );
       this.products = response.data.data;
-      this.pagination = response.data.meta;
+      this.pagination = response.data.meta;  
       this.fetchProducts();
     },
     ...mapActions({
