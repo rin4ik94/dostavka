@@ -50,8 +50,7 @@
 </header>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
-import { EventBus } from "../bus.js";
+import { mapActions, mapGetters } from "vuex"; 
 import _ from "lodash";
 export default {
   props: ["regions"],
@@ -91,8 +90,7 @@ export default {
       this.regions.map((value, key) => {
         if (value.id == this.regionId) {
           this.region = value;
-          this.setRegionName(value);
-          EventBus.$emit("changeRegion", this.region);
+          this.setRegionName(value); 
         }
       });
     },
@@ -106,9 +104,7 @@ export default {
     },
     changeLocale(lang) {
       if (lang != this.locale) {
-        this.langChange(lang).then(() => {
-          EventBus.$emit("changeLanguage");
-        });
+        this.langChange(lang)
       }
     }
   },

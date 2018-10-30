@@ -99,8 +99,7 @@
 </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
-import { EventBus } from "../bus.js";
+import { mapGetters, mapActions } from "vuex"; 
 import ModalStep from '../components/modals/ModalStep'
 import localforage from "localforage";
 import { isEmpty } from "lodash";
@@ -139,7 +138,8 @@ export default {
       user: "user",
       cartInfo: "cart",
       delivery_price: "delivery_price",
-      manager: "manager"
+      manager: "manager",
+      lang: "locale",
     }),
     filteredProducts() {
       let d = [];
@@ -157,12 +157,9 @@ export default {
       return d;
     }
   },
-  watch: {
-    cartInfo: {
-      deep:true,
-      handler(){
-        // this.getProducts();        
-      }
+  watch: { 
+    lang(){
+      this.getRegions(); 
     },
     user:{
       deep:true,
@@ -173,7 +170,7 @@ export default {
           this.form.user.phone = user.data.phone.substr(4, 12);
           this.form.user.last_name = user.data.last_name
           }else{
-            this.form.user={
+            this.form.user= {
                 first_name:null,
                 last_name:null,
                 phone:null,
@@ -182,10 +179,7 @@ export default {
             
           }
       } 
-    }
-    // region() {
-    //   this.fetchRegion();
-    // }
+    } 
   },
   methods: {
     fetchRegion(region) {
@@ -329,8 +323,8 @@ localforage.removeItem("cart");
 
       this.cartData();
     },
-    getProducts() {
-      this.$nextTick(() => {
+    async getProducts() {
+      // this.$nextTick(() => {
         let params = {};
         let p;
         this.form.total = this.cartInfo.total
@@ -342,15 +336,13 @@ localforage.removeItem("cart");
           p = p + "," + v.id;
         });
         params["ids"] = p;
-        axios
+        let response = await axios
           .get(`/api/managers/${this.manager.slug}/products/cart`, {
             params: params
-          })
-          .then(response => {
+          }) 
             this.products = response.data.data;
-          });
         }
-      });
+      // });
        
     },
       isNumber: function(evt) {
@@ -367,18 +359,13 @@ localforage.removeItem("cart");
       }
     }
   },
-  created() {
-    EventBus.$on("changeLanguage", () => { 
-      this.getRegions(); 
-      
-    }); 
+  created() { 
     this.getProducts()
     localforage.getItem("cartRegion").then(region => {
       if (!isEmpty("region")) {
         this.fetchRegion(region);
       } 
       this.getRegions()      
-            
       }) 
   }
 };

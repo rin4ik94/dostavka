@@ -42,8 +42,7 @@ import NotFound from "../NotFound";
 import Products from "./Products";
 import SubCategories from "./SubCategories";
 import localforage from "localforage";
-import { isEmpty } from "lodash";
-import { EventBus } from "../../bus.js";
+import { isEmpty } from "lodash"; 
 
 export default {
   data() {
@@ -68,6 +67,9 @@ export default {
           this.active = 0;
         }
       }
+    },
+    lang(){
+      this.getCatalog();      
     }
     // regionSlug: {
     //   handler(region) {
@@ -80,12 +82,12 @@ export default {
       this.active = id;
       this.id = id;
     },
-    getCatalog() {
-      setTimeout(() => {
+    async getCatalog() {
+      // setTimeout(() => {
         let uri = `/api/managers/${
           this.$route.params.slug
         }?withManagers&region=${this.$route.params.city}`;
-        let response = axios
+        let response = await axios
           .get(uri)
           .then(response => {
             this.catalog = response.data.data;
@@ -101,13 +103,13 @@ export default {
 
             // this.$router.push({ name: "notFound" });
           });
-      }, 0);
+      // }, 0);
     },
-    getCategories() {
-      this.$nextTick(() => {
-        axios
+    async getCategories() {
+      // this.$nextTick(() => {
+    let response =   await axios
           .get(`/api/categories?withManager&manager=${this.catalog.id}`)
-          .then(response => {
+          // .then(response => {
             this.categories = response.data.data;
             this.categories.map((v, k) => {
               if (v.children.length == 0) {
@@ -125,23 +127,20 @@ export default {
                 });
               }
             });
-          });
-      });
+          // });
+      // });
     }
   },
   computed: {
     ...mapGetters({
       region: "regionId",
       regionName: "regionName",
-      regionSlug: "regionSlug"
+      regionSlug: "regionSlug",
+      lang: "locale"
     })
   },
-  created() {
-    this.getCatalog();
-    EventBus.$on("changeLanguage", () => {
-      // this.$emit("hidePage");
-      this.getCatalog();
-    });
+  async created(){
+    this.getCatalog(); 
   }
 };
 </script>

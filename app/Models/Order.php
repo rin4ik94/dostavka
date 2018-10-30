@@ -106,4 +106,12 @@ class Order extends Model
         ]);
         return $order;
     }
+
+    public function attachProducts($quantity, $product, $productId)
+    {
+        $this->products()->attach($productId, ['product_count' => $quantity, 'product_name' => $product->name_ru, 'product_name_uz' => $product->name_uz, 'product_price' => $product->new_price, 'product_total_price' => $product->new_price * $quantity,
+        'product_measurement' => $product->measurement
+        ]);
+        return;
+    }
 }

@@ -17,18 +17,15 @@ class OrderController extends Controller
 
         $client = Client::where('phone', $form['user']['phone'])->first();
 
-        $client->update(['first_name' => $form['user']['first_name'], 'last_name' => $form['user']['last_name']]);
+        $client->updateClient($form['user']);
         preg_match_all('/([^-]*?)-([^,]*),?/', $products, $matches);
         $output = array_combine($matches[1], $matches[2]);
         $order = Order::storeClientOrder($client, $form);
 
-        foreach ($matches[1] as $key => $product) {
-            $productset = Product::find($product);
-            $order->products()->attach($product, ['product_count' => $matches[2][$key], 'product_name' => $productset->name_ru, 'product_name_uz' => $productset->name_uz, 'product_price' => $productset->new_price, 'product_total_price' => $productset->new_price * $matches[2][$key],
-            'product_measurement' => $productset->measurement
-            ]);
+        foreach ($matches[1] as $key => $productId) {
+            $product = Product::find($productId);
+            $order->attachProducts($matches[2][$key], $product, $productId, $key);
         }
         return;
-        return $user;
     }
 }
