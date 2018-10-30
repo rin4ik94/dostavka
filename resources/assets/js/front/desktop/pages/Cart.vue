@@ -173,7 +173,7 @@ export default {
           this.form.user.phone = user.data.phone.substr(4, 12);
           this.form.user.last_name = user.data.last_name
           }else{
-            this.form.user={
+            this.form.user= {
                 first_name:null,
                 last_name:null,
                 phone:null,
