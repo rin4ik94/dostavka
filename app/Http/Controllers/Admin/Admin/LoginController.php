@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/dashboard';
+    protected $redirectTo = 'admin/dashboard';
 
     /**
      * Create a new controller instance.
@@ -57,10 +57,9 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $this->guard()->logout();
-
         $request->session()->invalidate();
-
-        return $this->loggedOut($request) ?: redirect('/cp');
+        return redirect('/cp');
+        // return $this->loggedOut($request) ?: redirect('/cp');
     }
 
     protected function guard()

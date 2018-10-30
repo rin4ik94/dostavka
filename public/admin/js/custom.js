@@ -18,15 +18,10 @@ $(function () {
             type: "GET",
             url: '/admin/checkNewOrder/'+count+'?lastOrderId='+getLastOrderId,
             success: function (data) {
-                console.log(data);
                 if(data['status']){
-                    
                     $('span.order_new_count').text(data['count']);
                     $('table.order_new_add').find('tbody').prepend("<tr data-id='"+data.data.id+"'><td>"+ data.data.id +"</td><td>"+ dateFormat(data.data.created_at) +"</td><td>"+data.data.manager.name+"</td><td>"+data.data.branch_id+"</td><td>"+data.data.client.first_name+"</td><td>"+data.data.delivery_address_street+"</td><td>"+data.data.courier_id+"</td><td>"+data.data.total_price+"</td><td>"+data.data.order_status_id+"</td><td>"+data['data']['id']+"</td><tr>");
-                }else{
-                    
                 }
-
             },
             error: function (data) {
                 console.log('error');

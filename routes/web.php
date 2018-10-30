@@ -11,7 +11,7 @@ Route::get('/neworder', function () {
 });
 Route::get('cp', 'Admin\Admin\LoginController@showLoginForm')->name('admin.login');
 Route::post('cp', 'Admin\Admin\LoginController@login');
-Route::post('logout', 'Admin\Admin\LoginController@logout')->name('logout');
+Route::post('logout', 'Admin\Admin\LoginController@logout')->name('admin.logout');
 Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',

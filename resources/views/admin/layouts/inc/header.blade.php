@@ -57,7 +57,7 @@
    <li class="nav-item" data-toggle="modal" data-target="#confirm">
     <a class="nav-link" data-toggle="tooltip" href="#" data-placement="bottom" title="Выйти" onclick="event.preventDefault();
     document.getElementById('logout-form').submit();">
-       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+       <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
          @csrf
        </form>
       <i class="icon">exit_to_app</i>
