@@ -40,5 +40,6 @@ Route::group([
     Route::get('settings/orders', 'SettingController@orders')->name('settings.orders');
     Route::get('settings/goto', 'SettingController@goto')->name('settings.goto');
     Route::get('settings/payment', 'SettingController@payment')->name('settings.payment');
+    Route::get('settings/gateway', 'SettingController@gateway')->name('settings.gateway');
 });
 Route::get('/{any?}', 'Front\HomeController@index')->where('any', '^(?!api).*$');

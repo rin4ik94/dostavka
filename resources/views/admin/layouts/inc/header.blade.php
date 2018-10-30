@@ -38,6 +38,8 @@
       <a class="nav-link {{ collect(request()->segments())->last()==='goto' ? 'active' : '' }}" href="/admin/settings/goto">Доставка</a></li>
       <li class="nav-item">
       <a class="nav-link {{ collect(request()->segments())->last()==='payment' ? 'active' : '' }}" href="/admin/settings/payment">Оплата</a></li>
+      <li class="nav-item">
+      <a class="nav-link {{ collect(request()->segments())->last()==='gateway' ? 'active' : '' }}" href="/admin/settings/gateway">Смс Шлюз</a></li>
     @endif
   </ul>
   <ul class="nav header-profile-nav">

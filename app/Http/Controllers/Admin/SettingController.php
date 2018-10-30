@@ -34,7 +34,10 @@ class SettingController extends Controller
         return view('admin.settings.payment');
     }
 
-
+    public function gateway()
+    {
+        return view('admin.settings.sms');
+    }
     public function update(Request $request)
     {
         if ($request->has('delivery_price')) {
