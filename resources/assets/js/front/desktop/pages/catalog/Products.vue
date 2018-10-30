@@ -64,6 +64,14 @@ export default {
   },
 
   watch: {
+     lang(lang){ 
+      if (this.$route.name == "category") { 
+      
+        this.fetchItems();
+      } else {
+        this.allProducts();
+      }
+    },
     $route(route) {
       if (route.name == "category") {
         this.fetchItems();
@@ -85,13 +93,7 @@ export default {
         this.productMenu = [];
       }
     },
-    lang(){
-      if (this.$route.name == "category") {
-        this.fetchItems();
-      } else {
-        this.allProducts();
-      }
-    }
+   
   }, 
   async beforeMount() {
     $("#product").on("hide.bs.modal", this.replacePage);
@@ -124,7 +126,7 @@ export default {
     },
     async allProducts() { 
       if(this.scrolled){
-          return new Promise((resolve, reject) => {
+          new Promise((resolve, reject) => {
             $("html, body").animate({ scrollTop: 140 }, 600);
           })
       }
@@ -149,7 +151,7 @@ export default {
     ,
     async fetchItems() {
         if(this.scrolled){
-          return new Promise((resolve, reject) => {
+          new Promise((resolve, reject) => {
             $("html, body").animate({ scrollTop: 140 }, 600);
           }) 
         }
@@ -160,15 +162,16 @@ export default {
       }
       if (this.pagination) {
         params["page"] = this.pagination.current_page;
-      }
+      } 
+      
       let response = await axios.get(
         `/api/products?manager=${this.$route.params.slug}&category=${
           this.$route.params.sluged
         }`,
         { params: params }
       );
-      this.products = response.data.data;
-      this.pagination = response.data.meta;  
+      this.products = await response.data.data;
+      this.pagination =await response.data.meta;  
       this.fetchProducts();
     },
     ...mapActions({
@@ -198,7 +201,7 @@ export default {
       this.cartData(this.productMenu);
     },
      fetchProducts() {
-      // this.$nextTick(() => {
+      this.$nextTick(() => {
        localforage.getItem("cart").then(response => {
           if (!isEmpty(response)) {
             this.productMenu = response;
@@ -219,7 +222,7 @@ export default {
             });
           }
         });
-      // });
+      });
     },
     decreaseQuantity(product) {
       let index = this.productMenu.findIndex(prod => {

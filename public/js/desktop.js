@@ -54208,10 +54208,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "intro-item-icon" }, [
       _c("img", {
         staticClass: "p-cashbacks__tutorial-img",
-        attrs: {
-          src:
-            "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
-        }
+        attrs: { src: "/img/ill-1.svg" }
       })
     ])
   },
@@ -54222,10 +54219,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "intro-item-icon" }, [
       _c("img", {
         staticClass: "p-cashbacks__tutorial-img",
-        attrs: {
-          src:
-            "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
-        }
+        attrs: { src: "/img/ill-2.svg" }
       })
     ])
   },
@@ -54236,10 +54230,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "intro-item-icon" }, [
       _c("img", {
         staticClass: "p-cashbacks__tutorial-img",
-        attrs: {
-          src:
-            "https://yastatic.net/s3/edadeal-public-static/web-app/v2-5-2/static/img/cashback-tutorial/ill-1.svg"
-        }
+        attrs: { src: "/img/ill-3.svg" }
       })
     ])
   }
@@ -57265,6 +57256,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
   watch: {
+    lang: function lang(_lang) {
+      if (this.$route.name == "category") {
+
+        this.fetchItems();
+      } else {
+        this.allProducts();
+      }
+    },
     $route: function $route(route) {
       if (route.name == "category") {
         this.fetchItems();
@@ -57286,14 +57285,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         this.cartEvent();
         this.productMenu = [];
       }
-    },
-    lang: function lang() {
-      if (this.$route.name == "category") {
-        this.fetchItems();
-      } else {
-        this.allProducts();
-      }
     }
+
   },
   beforeMount: function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -57351,16 +57344,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!this.scrolled) {
-                  _context2.next = 2;
-                  break;
+                if (this.scrolled) {
+                  new Promise(function (resolve, reject) {
+                    $("html, body").animate({ scrollTop: 140 }, 600);
+                  });
                 }
-
-                return _context2.abrupt("return", new Promise(function (resolve, reject) {
-                  $("html, body").animate({ scrollTop: 140 }, 600);
-                }));
-
-              case 2:
                 this.scrolled = true;
                 params = {};
 
@@ -57370,27 +57358,27 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 if (this.pagination) {
                   params["page"] = this.pagination.current_page;
                 }
-                _context2.next = 8;
+                _context2.next = 7;
                 return axios.get("/api/products?manager=" + this.$route.params.slug, {
                   params: params
                 });
 
-              case 8:
+              case 7:
                 response = _context2.sent;
-                _context2.next = 11;
+                _context2.next = 10;
                 return response.data.data;
 
-              case 11:
+              case 10:
                 this.products = _context2.sent;
-                _context2.next = 14;
+                _context2.next = 13;
                 return response.data.meta;
 
-              case 14:
+              case 13:
                 this.pagination = _context2.sent;
 
                 this.fetchProducts();
 
-              case 16:
+              case 15:
               case "end":
                 return _context2.stop();
             }
@@ -57411,16 +57399,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                if (!this.scrolled) {
-                  _context3.next = 2;
-                  break;
+                if (this.scrolled) {
+                  new Promise(function (resolve, reject) {
+                    $("html, body").animate({ scrollTop: 140 }, 600);
+                  });
                 }
-
-                return _context3.abrupt("return", new Promise(function (resolve, reject) {
-                  $("html, body").animate({ scrollTop: 140 }, 600);
-                }));
-
-              case 2:
                 this.scrolled = true;
                 params = {};
 
@@ -57430,17 +57413,26 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 if (this.pagination) {
                   params["page"] = this.pagination.current_page;
                 }
-                _context3.next = 8;
+
+                _context3.next = 7;
                 return axios.get("/api/products?manager=" + this.$route.params.slug + "&category=" + this.$route.params.sluged, { params: params });
 
-              case 8:
+              case 7:
                 response = _context3.sent;
+                _context3.next = 10;
+                return response.data.data;
 
-                this.products = response.data.data;
-                this.pagination = response.data.meta;
+              case 10:
+                this.products = _context3.sent;
+                _context3.next = 13;
+                return response.data.meta;
+
+              case 13:
+                this.pagination = _context3.sent;
+
                 this.fetchProducts();
 
-              case 12:
+              case 15:
               case "end":
                 return _context3.stop();
             }
@@ -57483,28 +57475,28 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     fetchProducts: function fetchProducts() {
       var _this = this;
 
-      // this.$nextTick(() => {
-      __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cart").then(function (response) {
-        if (!Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(response)) {
-          _this.productMenu = response;
-          _this.products.map(function (v, k) {
-            v.quantity = 1;
-            _this.productMenu.map(function (l, o) {
-              if (v.id == l.id) {
-                v.quantity = l.quantity;
-                Vue.set(_this.products, k, v);
-                l = v;
-                Vue.set(_this.productMenu, o, l);
-              } else {
-                if (!l.new_price) {
-                  // this.productMenu.splice(o, 1);
+      this.$nextTick(function () {
+        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cart").then(function (response) {
+          if (!Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(response)) {
+            _this.productMenu = response;
+            _this.products.map(function (v, k) {
+              v.quantity = 1;
+              _this.productMenu.map(function (l, o) {
+                if (v.id == l.id) {
+                  v.quantity = l.quantity;
+                  Vue.set(_this.products, k, v);
+                  l = v;
+                  Vue.set(_this.productMenu, o, l);
+                } else {
+                  if (!l.new_price) {
+                    // this.productMenu.splice(o, 1);
+                  }
                 }
-              }
+              });
             });
-          });
-        }
+          }
+        });
       });
-      // });
     },
     decreaseQuantity: function decreaseQuantity(product) {
       var index = this.productMenu.findIndex(function (prod) {
