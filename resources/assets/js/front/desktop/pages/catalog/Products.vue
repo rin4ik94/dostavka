@@ -156,8 +156,7 @@ export default {
       this.pagination = response.data.meta;  
       this.showPage = await true 
       this.fetchProducts();
-    }
-    ,
+    },
     async fetchItems() {
         if(this.scrolled){
           new Promise((resolve, reject) => {

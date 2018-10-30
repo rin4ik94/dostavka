@@ -51760,13 +51760,14 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 
             return savedPosition;
         } else {
-            // if(to.name != 'category' || to.name != 'catalog' || to.name != 'tp' || to.name != 'cp'){
-            return new Promise(function (resolve, reject) {
-                setTimeout(function () {
-                    resolve({ x: 0, y: 0 });
-                }, 500);
-            });
-            // }
+            if (to.name != 'category' && to.name != 'catalog' && to.name != 'tp' && to.name != 'cp') {
+                // alert(to.name)
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        resolve({ x: 0, y: 0 });
+                    }, 500);
+                });
+            }
         }
     }
 });
