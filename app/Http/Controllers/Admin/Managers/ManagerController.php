@@ -60,14 +60,14 @@ class ManagerController extends Controller
   {
     $this->validate($request, [
       'name' => 'required|unique:managers',
-      'store_managerCatId' => 'required',
-      'file' => 'image|mimes:jpeg,png,jpg|max:2048',
+      'manager_category_id' => 'required',
+      'logo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
       'store_status' => 'required',
+      'status' => 'required'
     ]);
-
     $filenametostore = '';
-    if ($request->hasFile('file')) {
-      $file = $request->file('file');
+    if ($request->hasFile('logo')) {
+      $file = $request->file('logo');
       $filenamewithextension = $file->getClientOriginalName();
       $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
       $extension = $file->getClientOriginalExtension();
@@ -86,13 +86,7 @@ class ManagerController extends Controller
       });
       $mainImage->save($mainimagepath);
     }
-  
-  $manager = Manager::create([
-    'name' => $request->input('name'),
-    'logo' => $filenametostore,
-    'manager_category_id' => $request->input('store_managerCatId'),
-    'status' => $request->input('store_status'),
-    ]);
+    $manager = Manager::create($request->all());
     return redirect()->route('managers.index')
                     ->with('success','Manager created successfully');
   }
@@ -107,14 +101,15 @@ class ManagerController extends Controller
     {
       $manager = Manager::find($request->id);
       $this->validate($request, [
-        'name' => 'required',
+        'name' => 'required|unique:managers',
         'manager_category_id' => 'required',
+        'logo' => 'image|mimes:jpeg,png,jpg|max:2048',
         'status' => 'required',
       ]);
 
       $filenametostore = '';
-      if ($request->hasFile('file')) {
-        $file = $request->file('file');
+      if ($request->hasFile('logo')) {
+        $file = $request->file('logo');
         $filenamewithextension = $file->getClientOriginalName();
         $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
         $extension = $file->getClientOriginalExtension();
