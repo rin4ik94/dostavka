@@ -1,4 +1,22 @@
 $(function () {
+    // cheack new order added
+    setInterval(function(){
+    var count = parseInt($('.new').text());
+    var getLastOrderId = $('.table').find('tbody').children('tr:first').data('id');
+    $.ajax({
+        type: "GET",
+        url: '/api/checkNewOrder/'+count+'?lastOrderId='+getLastOrderId,
+        success: function (data) {
+            if(data['status']){
+                $('span.order_new_count').text(data['count']);
+                $('table.order_new_add').find('tbody').prepend("<tr data-id='"+data.data.id+"'><td>"+ data.data.id +"</td><td>"+ dateFormat(data.data.created_at) +"</td><td>"+data.data.manager.name+"</td><td>"+data.data.branch_id+"</td><td>"+data.data.client.first_name+"</td><td>"+data.data.delivery_address_street+"</td><td>"+data.data.courier_id+"</td><td>"+data.data.total_price+"</td><td>"+data.data.order_status_id+"</td><td>"+data['data']['id']+"</td><tr>");
+            }
+        },
+        error: function (data) {
+            console.log('error');
+        }
+    });
+    }, 10000);
     // image preview
     $(".custom-file-input").change(function () {
         if (this.files && this.files[0]) {
@@ -11,34 +29,6 @@ $(function () {
             reader.readAsDataURL(this.files[0]);
         }
     });
-        setInterval(function(){
-        var count = parseInt($('.new').text());
-        var getLastOrderId = $('.table').find('tbody').children('tr:first').data('id');
-        $.ajax({
-            type: "GET",
-            url: '/admin/checkNewOrder/'+count+'?lastOrderId='+getLastOrderId,
-            success: function (data) {
-                if(data['status']){
-                    $('span.order_new_count').text(data['count']);
-                    $('table.order_new_add').find('tbody').prepend("<tr data-id='"+data.data.id+"'><td>"+ data.data.id +"</td><td>"+ dateFormat(data.data.created_at) +"</td><td>"+data.data.manager.name+"</td><td>"+data.data.branch_id+"</td><td>"+data.data.client.first_name+"</td><td>"+data.data.delivery_address_street+"</td><td>"+data.data.courier_id+"</td><td>"+data.data.total_price+"</td><td>"+data.data.order_status_id+"</td><td>"+data['data']['id']+"</td><tr>");
-                }
-            },
-            error: function (data) {
-                console.log('error');
-            }
-        });
-     }, 5000);
-
-     function setCookie(name,value,days) {
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "")  + expires + ";";
-     }
-
     // dropdown item change display button text
     $(".dropdown-item ").click(function () {
         $(this).closest('ul').parent().find('.btn:first-child').text($(this).text());
@@ -608,3 +598,13 @@ function number_format(number, decimals = '2', dec_point = ',', thousands_sep = 
         x1 = x1.replace(rgx, '$1' + thousands_sep + '$2');
     return x1 + x2;
 };
+
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + ";";
+    }

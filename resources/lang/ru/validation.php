@@ -143,5 +143,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'name',
+        'manager_category_id' => 'manager_category_id',
+        'logo' => 'logo',
+        'status' => 'status',
+    ],
 ];

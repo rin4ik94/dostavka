@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\OrderStatus;
@@ -8,18 +8,6 @@ use Illuminate\Http\Request;
 
 class OrderStatusController extends Controller
 {
-    public function update(Request $request, $id){
-        $order_id = $request->id;
-        $order = Order::findOrFail($order_id);
-        $status_id = $request->order_status_id;
-        if($order->order_status_id != $status_id){
-            $order->order_status_id = $status_id;
-            $order->save();
-            $order->statuses()->attach($status_id, ['client_id' => $order->client_id]);
-        }
-        return back()->with('success','successful');
-    }
-
     public function count(Request $request,$count){
         $data = [];
         $order = Order::with('manager', 'branch', 'client','payment', 'statuses', 'products', 'courier', 'region', 'status')->where('order_status_id',1)->latest()->get();
@@ -37,7 +25,6 @@ class OrderStatusController extends Controller
                 'data' => null,
             ];
         }
-        // dd($data);
         return response($data,200);
     }
 }
