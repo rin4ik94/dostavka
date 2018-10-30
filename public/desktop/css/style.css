@@ -788,3 +788,36 @@ flex-direction: column;
   width: 33.3333%;
 
 }
+.intro-item {
+  display: flex;
+  align-items: center;
+}
+.intro-item-text {
+  padding-left: 12px;
+  font-size: 16px;
+}
+.intro-item-icon {
+  position: relative;
+}
+.intro-item-icon .icon-number {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  color: #3A0299;
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 80px;
+}
+.intro-item-icon .icon-shadow {
+  width: 92px;
+  height: 92px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.intro-item-icon .icon-shadow .icon {
+  position: relative;
+  z-index: 3;
+  margin: 22px;
+  font-size: 48px;
+  color: #267af2;
+}

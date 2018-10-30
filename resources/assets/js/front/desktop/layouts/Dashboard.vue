@@ -84,6 +84,7 @@ export default {
     this.$nextTick(() => {
       this.getRegions();
     }); 
+   window.alert('awd')
     await this.setRegion() 
     
     $("#Regions").on("hide.bs.modal", this.setRegionD);

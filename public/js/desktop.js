@@ -52160,14 +52160,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               this.$nextTick(function () {
                 _this2.getRegions();
               });
-              _context3.next = 3;
+              window.alert('awd');
+              _context3.next = 4;
               return this.setRegion();
 
-            case 3:
+            case 4:
 
               $("#Regions").on("hide.bs.modal", this.setRegionD);
 
-            case 4:
+            case 5:
             case "end":
               return _context3.stop();
           }
@@ -54206,10 +54207,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "intro-item-icon" }, [
-      _c("img", {
-        staticClass: "p-cashbacks__tutorial-img",
-        attrs: { src: "/img/ill-1.svg" }
-      })
+      _c("div", { staticClass: "icon-number" }, [_vm._v("1")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "icon-shadow" }, [
+        _c("i", { staticClass: "icon" }, [_vm._v("store")])
+      ])
     ])
   },
   function() {
@@ -54217,10 +54219,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "intro-item-icon" }, [
-      _c("img", {
-        staticClass: "p-cashbacks__tutorial-img",
-        attrs: { src: "/img/ill-2.svg" }
-      })
+      _c("div", { staticClass: "icon-number" }, [_vm._v("2")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "icon-shadow" }, [
+        _c("i", { staticClass: "icon" }, [_vm._v("shopping_cart")])
+      ])
     ])
   },
   function() {
@@ -54228,10 +54231,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "intro-item-icon" }, [
-      _c("img", {
-        staticClass: "p-cashbacks__tutorial-img",
-        attrs: { src: "/img/ill-3.svg" }
-      })
+      _c("div", { staticClass: "icon-number" }, [_vm._v("3")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "icon-shadow" }, [
+        _c("i", { staticClass: "icon" }, [_vm._v("local_shipping")])
+      ])
     ])
   }
 ]
@@ -63465,13 +63469,15 @@ var setRegion = function setRegion(_ref14) {
 
 
     __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (regionId) {
-
         if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(regionId)) {
             $("#Regions").modal('show');
             return Promise.reject('NO_REGION_CHOOSEN');
+        } else {
+            alert(regionId);
+
+            commit('setRegion', regionId);
+            return Promise.resolve(regionId);
         }
-        commit('setRegion', regionId);
-        return Promise.resolve(regionId);
     });
 };
 
