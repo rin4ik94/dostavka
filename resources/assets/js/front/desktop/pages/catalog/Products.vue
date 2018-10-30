@@ -97,7 +97,7 @@ export default {
       }
     });
   },
-  beforeMount: async function() {
+  async beforeMount() {
     $("#product").on("hide.bs.modal", this.replacePage);
 
     if (!this.$route.params.sluged) {
@@ -202,9 +202,9 @@ export default {
 
       this.cartData(this.productMenu);
     },
-    fetchProducts() {
-      this.$nextTick(() => {
-        localforage.getItem("cart").then(response => {
+     fetchProducts() {
+      // this.$nextTick(() => {
+       localforage.getItem("cart").then(response => {
           if (!isEmpty(response)) {
             this.productMenu = response;
             this.products.map((v, k) => {
@@ -224,7 +224,7 @@ export default {
             });
           }
         });
-      });
+      // });
     },
     decreaseQuantity(product) {
       let index = this.productMenu.findIndex(prod => {

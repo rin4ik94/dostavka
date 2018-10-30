@@ -35,10 +35,10 @@ export default {
       let response = await axios.get("/api/regions");
       this.regions = response.data.data;
     },
-    setRegionD(){  
-      localforage.getItem('region').then((region)=>{
+    async setRegionD(){  
+      await localforage.getItem('region').then((region)=>{
         if(isEmpty(region)){
-          this.setRegionId("1")
+           this.setRegionId("1")
         }
       })
     }
@@ -81,7 +81,7 @@ export default {
       EventBus.$on("changeLanguage", () => {
       this.getRegions();
     }); 
-    await this.setRegion() 
+    this.setRegion() 
     
     $("#Regions").on("hide.bs.modal", this.setRegionD);
 

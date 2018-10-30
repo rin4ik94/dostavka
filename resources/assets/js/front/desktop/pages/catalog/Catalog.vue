@@ -80,12 +80,12 @@ export default {
       this.active = id;
       this.id = id;
     },
-    getCatalog() {
-      setTimeout(() => {
+    async getCatalog() {
+      // setTimeout(() => {
         let uri = `/api/managers/${
           this.$route.params.slug
         }?withManagers&region=${this.$route.params.city}`;
-        let response = axios
+        let response = await axios
           .get(uri)
           .then(response => {
             this.catalog = response.data.data;
@@ -101,13 +101,13 @@ export default {
 
             // this.$router.push({ name: "notFound" });
           });
-      }, 0);
+      // }, 0);
     },
-    getCategories() {
-      this.$nextTick(() => {
-        axios
+    async getCategories() {
+      // this.$nextTick(() => {
+    let response =   await axios
           .get(`/api/categories?withManager&manager=${this.catalog.id}`)
-          .then(response => {
+          // .then(response => {
             this.categories = response.data.data;
             this.categories.map((v, k) => {
               if (v.children.length == 0) {
@@ -125,8 +125,8 @@ export default {
                 });
               }
             });
-          });
-      });
+          // });
+      // });
     }
   },
   computed: {
@@ -136,7 +136,7 @@ export default {
       regionSlug: "regionSlug"
     })
   },
-  created() {
+  async created(){
     this.getCatalog();
     EventBus.$on("changeLanguage", () => {
       // this.$emit("hidePage");

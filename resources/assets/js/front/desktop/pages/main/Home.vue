@@ -68,11 +68,10 @@ export default {
     }
   },
   methods: {
-    getCats() {
+    async getCats() {
       if (this.region) {
-        axios
-          .get(`api/categories_managers?withManagers&region=${this.region}`)
-          .then(response => {
+       let response = await axios
+          .get(`api/categories_managers?withManagers&region=${this.region}`) 
             this.categories = response.data.data;
             if (this.active != 0) {
               this.categories.map((value, key) => {
@@ -82,8 +81,7 @@ export default {
               });
             } else {
               this.category = [];
-            }
-          });
+            } 
       }
     },
     updateList(category) {

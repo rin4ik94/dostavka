@@ -329,8 +329,8 @@ localforage.removeItem("cart");
 
       this.cartData();
     },
-    getProducts() {
-      this.$nextTick(() => {
+    async getProducts() {
+      // this.$nextTick(() => {
         let params = {};
         let p;
         this.form.total = this.cartInfo.total
@@ -342,15 +342,13 @@ localforage.removeItem("cart");
           p = p + "," + v.id;
         });
         params["ids"] = p;
-        axios
+        let response = await axios
           .get(`/api/managers/${this.manager.slug}/products/cart`, {
             params: params
-          })
-          .then(response => {
+          }) 
             this.products = response.data.data;
-          });
         }
-      });
+      // });
        
     },
       isNumber: function(evt) {
@@ -368,6 +366,7 @@ localforage.removeItem("cart");
     }
   },
   created() {
+    
     EventBus.$on("changeLanguage", () => { 
       this.getRegions(); 
       
@@ -378,7 +377,6 @@ localforage.removeItem("cart");
         this.fetchRegion(region);
       } 
       this.getRegions()      
-            
       }) 
   }
 };

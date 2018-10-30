@@ -52096,15 +52096,35 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       return getRegions;
     }(),
-    setRegionD: function setRegionD() {
-      var _this = this;
+    setRegionD: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var _this = this;
 
-      __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (region) {
-        if (Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(region)) {
-          _this.setRegionId("1");
-        }
-      });
-    }
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (region) {
+                  if (Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(region)) {
+                    _this.setRegionId("1");
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function setRegionD() {
+        return _ref2.apply(this, arguments);
+      }
+
+      return setRegionD;
+    }()
     // replacePage() {
     //   if (this.$route.params.sluged) {
     //     this.$router.replace({
@@ -52137,12 +52157,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }
   },
   created: function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
       var _this2 = this;
 
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               this.$nextTick(function () {
                 _this2.getRegions();
@@ -52150,23 +52170,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               __WEBPACK_IMPORTED_MODULE_6__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
                 _this2.getRegions();
               });
-              _context2.next = 4;
-              return this.setRegion();
-
-            case 4:
+              this.setRegion();
 
               $("#Regions").on("hide.bs.modal", this.setRegionD);
 
-            case 5:
+            case 4:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2, this);
+      }, _callee3, this);
     }));
 
     function created() {
-      return _ref2.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     }
 
     return created;
@@ -53958,11 +53975,17 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_InnerHeader__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_InnerHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_InnerHeader__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bus_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_InnerHeader__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_InnerHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_InnerHeader__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(3);
+
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 //
 //
@@ -54006,8 +54029,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  components: { InnerHeader: __WEBPACK_IMPORTED_MODULE_1__components_InnerHeader___default.a },
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapGetters */])({
+  components: { InnerHeader: __WEBPACK_IMPORTED_MODULE_2__components_InnerHeader___default.a },
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])({
     region: "regionId",
     regionName: "regionName",
     regionSlug: "regionSlug"
@@ -54034,24 +54057,51 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
   }),
   methods: {
-    getCats: function getCats() {
-      var _this = this;
+    getCats: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _this = this;
 
-      if (this.region) {
-        axios.get("api/categories_managers?withManagers&region=" + this.region).then(function (response) {
-          _this.categories = response.data.data;
-          if (_this.active != 0) {
-            _this.categories.map(function (value, key) {
-              if (_this.category.id == value.id) {
-                _this.category = value;
-              }
-            });
-          } else {
-            _this.category = [];
+        var response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!this.region) {
+                  _context.next = 6;
+                  break;
+                }
+
+                _context.next = 3;
+                return axios.get("api/categories_managers?withManagers&region=" + this.region);
+
+              case 3:
+                response = _context.sent;
+
+                this.categories = response.data.data;
+                if (this.active != 0) {
+                  this.categories.map(function (value, key) {
+                    if (_this.category.id == value.id) {
+                      _this.category = value;
+                    }
+                  });
+                } else {
+                  this.category = [];
+                }
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
           }
-        });
+        }, _callee, this);
+      }));
+
+      function getCats() {
+        return _ref.apply(this, arguments);
       }
-    },
+
+      return getCats;
+    }(),
     updateList: function updateList(category) {
       if (category == "all") {
         this.active = 0;
@@ -54065,11 +54115,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     var _this2 = this;
 
     this.getCats();
-    __WEBPACK_IMPORTED_MODULE_0__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
+    __WEBPACK_IMPORTED_MODULE_1__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
       // this.$emit("hidePage");
       _this2.getCats();
     });
-    __WEBPACK_IMPORTED_MODULE_0__bus_js__["a" /* EventBus */].$on("changeRegion", this.getCats);
+    __WEBPACK_IMPORTED_MODULE_1__bus_js__["a" /* EventBus */].$on("changeRegion", this.getCats);
   }
 });
 
@@ -56802,19 +56852,25 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotFound__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Products__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Products___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Products__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SubCategories__ = __webpack_require__(234);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SubCategories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__SubCategories__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_localforage__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_localforage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__bus_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__NotFound__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__NotFound__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Products__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Products___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Products__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SubCategories__ = __webpack_require__(234);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SubCategories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__SubCategories__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_localforage__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_localforage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__bus_js__ = __webpack_require__(8);
+
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 //
 //
@@ -56877,7 +56933,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  components: { NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a, Products: __WEBPACK_IMPORTED_MODULE_2__Products___default.a, SubCategories: __WEBPACK_IMPORTED_MODULE_3__SubCategories___default.a },
+  components: { NotFound: __WEBPACK_IMPORTED_MODULE_2__NotFound___default.a, Products: __WEBPACK_IMPORTED_MODULE_3__Products___default.a, SubCategories: __WEBPACK_IMPORTED_MODULE_4__SubCategories___default.a },
   watch: {
     $route: {
       immediate: true,
@@ -56899,66 +56955,133 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.active = id;
       this.id = id;
     },
-    getCatalog: function getCatalog() {
-      var _this = this;
+    getCatalog: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _this = this;
 
-      setTimeout(function () {
-        var uri = "/api/managers/" + _this.$route.params.slug + "?withManagers&region=" + _this.$route.params.city;
-        var response = axios.get(uri).then(function (response) {
-          _this.catalog = response.data.data;
-          if (_this.catalog.branches.length > 0) {
-            _this.branchName = _this.catalog.branches[0].region_name;
-          } else {
-            // this.$router.replace({ name: "notFound" });
-          }
-          _this.getCategories();
-        }).catch(function () {
-          _this.notFound = true;
+        var uri, response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                // setTimeout(() => {
+                uri = "/api/managers/" + this.$route.params.slug + "?withManagers&region=" + this.$route.params.city;
+                _context.next = 3;
+                return axios.get(uri).then(function (response) {
+                  _this.catalog = response.data.data;
+                  if (_this.catalog.branches.length > 0) {
+                    _this.branchName = _this.catalog.branches[0].region_name;
+                  } else {
+                    // this.$router.replace({ name: "notFound" });
+                  }
+                  _this.getCategories();
+                }).catch(function () {
+                  _this.notFound = true;
 
-          // this.$router.push({ name: "notFound" });
-        });
-      }, 0);
-    },
-    getCategories: function getCategories() {
-      var _this2 = this;
+                  // this.$router.push({ name: "notFound" });
+                });
 
-      this.$nextTick(function () {
-        axios.get("/api/categories?withManager&manager=" + _this2.catalog.id).then(function (response) {
-          _this2.categories = response.data.data;
-          _this2.categories.map(function (v, k) {
-            if (v.children.length == 0) {
-              if (_this2.$route.params.sluged == v.slug) {
-                _this2.setActive(v.id);
-              }
-            } else {
-              if (_this2.$route.params.sluged == v.slug) {
-                _this2.setActive(v.id);
-              }
-              v.children.map(function (ve, ke) {
-                if (_this2.$route.params.sluged == ve.slug) {
-                  _this2.setActive(ve.id);
-                }
-              });
+              case 3:
+                response = _context.sent;
+
+              case 4:
+              case "end":
+                return _context.stop();
             }
-          });
-        });
-      });
-    }
+          }
+        }, _callee, this);
+      }));
+
+      function getCatalog() {
+        return _ref.apply(this, arguments);
+      }
+
+      return getCatalog;
+    }(),
+    getCategories: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var _this2 = this;
+
+        var response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get("/api/categories?withManager&manager=" + this.catalog.id);
+
+              case 2:
+                response = _context2.sent;
+
+                // .then(response => {
+                this.categories = response.data.data;
+                this.categories.map(function (v, k) {
+                  if (v.children.length == 0) {
+                    if (_this2.$route.params.sluged == v.slug) {
+                      _this2.setActive(v.id);
+                    }
+                  } else {
+                    if (_this2.$route.params.sluged == v.slug) {
+                      _this2.setActive(v.id);
+                    }
+                    v.children.map(function (ve, ke) {
+                      if (_this2.$route.params.sluged == ve.slug) {
+                        _this2.setActive(ve.id);
+                      }
+                    });
+                  }
+                });
+                // });
+                // });
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getCategories() {
+        return _ref2.apply(this, arguments);
+      }
+
+      return getCategories;
+    }()
   },
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])({
     region: "regionId",
     regionName: "regionName",
     regionSlug: "regionSlug"
   })),
-  created: function created() {
-    var _this3 = this;
+  created: function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+      var _this3 = this;
 
-    this.getCatalog();
-    __WEBPACK_IMPORTED_MODULE_6__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
-      // this.$emit("hidePage");
-      _this3.getCatalog();
-    });
-  }
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              this.getCatalog();
+              __WEBPACK_IMPORTED_MODULE_7__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
+                // this.$emit("hidePage");
+                _this3.getCatalog();
+              });
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    }));
+
+    function created() {
+      return _ref3.apply(this, arguments);
+    }
+
+    return created;
+  }()
 });
 
 /***/ }),
@@ -57194,7 +57317,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
     });
   },
-
   beforeMount: function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
       return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
@@ -57223,6 +57345,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
     return beforeMount;
   }(),
+
   computed: Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])({
     totalCart: "totalCart",
     manager: "manager",
@@ -57382,28 +57505,28 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     fetchProducts: function fetchProducts() {
       var _this2 = this;
 
-      this.$nextTick(function () {
-        __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cart").then(function (response) {
-          if (!Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(response)) {
-            _this2.productMenu = response;
-            _this2.products.map(function (v, k) {
-              v.quantity = 1;
-              _this2.productMenu.map(function (l, o) {
-                if (v.id == l.id) {
-                  v.quantity = l.quantity;
-                  Vue.set(_this2.products, k, v);
-                  l = v;
-                  Vue.set(_this2.productMenu, o, l);
-                } else {
-                  if (!l.new_price) {
-                    // this.productMenu.splice(o, 1);
-                  }
+      // this.$nextTick(() => {
+      __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem("cart").then(function (response) {
+        if (!Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(response)) {
+          _this2.productMenu = response;
+          _this2.products.map(function (v, k) {
+            v.quantity = 1;
+            _this2.productMenu.map(function (l, o) {
+              if (v.id == l.id) {
+                v.quantity = l.quantity;
+                Vue.set(_this2.products, k, v);
+                l = v;
+                Vue.set(_this2.productMenu, o, l);
+              } else {
+                if (!l.new_price) {
+                  // this.productMenu.splice(o, 1);
                 }
-              });
+              }
             });
-          }
-        });
+          });
+        }
       });
+      // });
     },
     decreaseQuantity: function decreaseQuantity(product) {
       var index = this.productMenu.findIndex(function (prod) {
@@ -59042,15 +59165,21 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bus_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_modals_ModalStep__ = __webpack_require__(242);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_modals_ModalStep___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_modals_ModalStep__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_localforage__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_localforage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bus_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_modals_ModalStep__ = __webpack_require__(242);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_modals_ModalStep___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_modals_ModalStep__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_localforage__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_localforage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash__);
+
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 //
 //
@@ -59159,7 +59288,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: { ModalStep: __WEBPACK_IMPORTED_MODULE_2__components_modals_ModalStep___default.a },
+  components: { ModalStep: __WEBPACK_IMPORTED_MODULE_3__components_modals_ModalStep___default.a },
   data: function data() {
     return {
       products: [],
@@ -59188,7 +59317,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])({
     // region: "region",
     user: "user",
     cartInfo: "cart",
@@ -59260,7 +59389,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         _this3.regions = response.data.data;
       });
     }
-  }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])({
+  }, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])({
     setCart: "setCart",
     setTotal: "setTotal",
     setManager: "setManager",
@@ -59332,7 +59461,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           cart.unshift(data);
         }
       });
-      __WEBPACK_IMPORTED_MODULE_3_localforage___default.a.setItem("cart", cart);
+      __WEBPACK_IMPORTED_MODULE_4_localforage___default.a.setItem("cart", cart);
       this.setCart(cart);
       // this.setTotal(total);
     },
@@ -59346,10 +59475,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.cartData();
     },
     setEmpty: function setEmpty() {
-      __WEBPACK_IMPORTED_MODULE_3_localforage___default.a.removeItem("cart");
-      __WEBPACK_IMPORTED_MODULE_3_localforage___default.a.removeItem("manager");
-      __WEBPACK_IMPORTED_MODULE_3_localforage___default.a.removeItem("cartRegion");
-      __WEBPACK_IMPORTED_MODULE_3_localforage___default.a.removeItem("totalCart");
+      __WEBPACK_IMPORTED_MODULE_4_localforage___default.a.removeItem("cart");
+      __WEBPACK_IMPORTED_MODULE_4_localforage___default.a.removeItem("manager");
+      __WEBPACK_IMPORTED_MODULE_4_localforage___default.a.removeItem("cartRegion");
+      __WEBPACK_IMPORTED_MODULE_4_localforage___default.a.removeItem("totalCart");
       this.setManager("empty");
       this.setCart("empty");
       this.products = [];
@@ -59389,29 +59518,55 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
       this.cartData();
     },
-    getProducts: function getProducts() {
-      var _this6 = this;
+    getProducts: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var params, p, response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                // this.$nextTick(() => {
+                params = {};
+                p = void 0;
 
-      this.$nextTick(function () {
-        var params = {};
-        var p = void 0;
-        _this6.form.total = _this6.cartInfo.total;
-        if (_this6.cartInfo.prods.length) {
-          _this6.cartInfo.prods.map(function (v, k) {
-            if (!p) {
-              return p = v.id;
+                this.form.total = this.cartInfo.total;
+
+                if (!this.cartInfo.prods.length) {
+                  _context.next = 10;
+                  break;
+                }
+
+                this.cartInfo.prods.map(function (v, k) {
+                  if (!p) {
+                    return p = v.id;
+                  }
+                  p = p + "," + v.id;
+                });
+                params["ids"] = p;
+                _context.next = 8;
+                return axios.get("/api/managers/" + this.manager.slug + "/products/cart", {
+                  params: params
+                });
+
+              case 8:
+                response = _context.sent;
+
+                this.products = response.data.data;
+
+              case 10:
+              case "end":
+                return _context.stop();
             }
-            p = p + "," + v.id;
-          });
-          params["ids"] = p;
-          axios.get("/api/managers/" + _this6.manager.slug + "/products/cart", {
-            params: params
-          }).then(function (response) {
-            _this6.products = response.data.data;
-          });
-        }
-      });
-    },
+          }
+        }, _callee, this);
+      }));
+
+      function getProducts() {
+        return _ref.apply(this, arguments);
+      }
+
+      return getProducts;
+    }(),
 
     isNumber: function isNumber(evt) {
       evt = evt ? evt : window.event;
@@ -59424,17 +59579,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
   }),
   created: function created() {
-    var _this7 = this;
+    var _this6 = this;
 
-    __WEBPACK_IMPORTED_MODULE_1__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
-      _this7.getRegions();
+    __WEBPACK_IMPORTED_MODULE_2__bus_js__["a" /* EventBus */].$on("changeLanguage", function () {
+      _this6.getRegions();
     });
     this.getProducts();
-    __WEBPACK_IMPORTED_MODULE_3_localforage___default.a.getItem("cartRegion").then(function (region) {
-      if (!Object(__WEBPACK_IMPORTED_MODULE_4_lodash__["isEmpty"])("region")) {
-        _this7.fetchRegion(region);
+    __WEBPACK_IMPORTED_MODULE_4_localforage___default.a.getItem("cartRegion").then(function (region) {
+      if (!Object(__WEBPACK_IMPORTED_MODULE_5_lodash__["isEmpty"])("region")) {
+        _this6.fetchRegion(region);
       }
-      _this7.getRegions();
+      _this6.getRegions();
     });
   }
 });
