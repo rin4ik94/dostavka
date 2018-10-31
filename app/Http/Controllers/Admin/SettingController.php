@@ -39,6 +39,11 @@ class SettingController extends Controller
         return view('admin.settings.sms');
     }
 
+    public function regions()
+    {
+        return view('admin.settings.region');
+    }
+
     public function update(Request $request)
     {
         if ($request->has('delivery_price')) {

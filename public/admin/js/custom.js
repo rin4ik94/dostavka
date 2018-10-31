@@ -10,13 +10,13 @@ $(function () {
             type: "GET",
             url: '/api/checkNewOrder',
             success: function (data) {
-							console.log(data);
+                console.log(data);
                 if (data['status']) {
                     $('span.order_new_count').text(data['count']);
-                    $('table.order_new_add').find('tbody').prepend("<tr data-id='" + data.data.id + "'><td>" + data.data.id + "</td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td>" + data.data.branch_id + "</td><td>" + data.data.client.first_name + "</td><td>" + data.data.delivery_address_street + "</td><td>" + data.data.courier_id + "</td><td>" + data.data.total_price + "</td><td>" + data.data.order_status_id + "</td><td>" + data['data']['id'] + "</td><tr>");
-								}else{
-									$('span.order_new_count').text(data['count']);
-								}
+                    $('table.order_new_add').find('tbody').prepend("<tr data-id='" + data.data.id + "' data-id='" + data.data.id + "' data-mname='" + data.data.manager_id + "' data-omanager='" + data.data.manager_id + "' data-bname='" + data.data.branch_id + "' data-branch='" + data.data.branch_id + "' data-region='" + data.data.region_id + "' data-cname='" + data.data.client_id + "' data-cmobile='" + data.data.client_id + "' data-status='" + data.data.order_status_id + "' data-ostreet='" + data.data.delivery_address_street + "'  data-ohome='" + data.data.delivery_address_home + "' data-ofloor='" + data.data.delivery_address_floor + "' data-oapartment='" + data.data.delivery_address_apartment + "' data-oremark='" + data.data.delivery_address_remark + "' data-odeliver='5000' data-payment='" + data.data.payment.name_ru + "' data-oprice='" + data.data.order_price + "' data-tprice='" + data.data.total_price + "' data-branches='" + data.data.getBranches + "' data-products='" + data.data.products + "' data-statuses='" + data.data.statuses + "'><td><a class='text-red' href='#' data-toggle='modal' data-target='#Order'>"+ data.data.id +"</a></td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td>" + data.data.branch_id + "</td><td>" + data.data.client.first_name + "</td><td>" + data.data.delivery_address_street + "</td><td>" + data.data.courier_id + "</td><td>" + data.data.total_price + "</td><td>" + data.data.order_status_id + "</td><td>" + data['data']['id'] + "</td><tr>");
+                    }else{
+                    $('span.order_new_count').text(data['count']);
+                   }
             },
             error: function (data) {
                 console.log('error');
@@ -268,19 +268,19 @@ $(function () {
 		});
 
     // actions for products
-    $('.product_action a').on('click', function (e) {
+    $('.product_action').on('click', function (e) {
         e.preventDefault(e);
         $(this).closest('tr').each(function () {
-            var id = $(this).children('td:first').text();
-            var image = $(this).children('td:eq(0)').attr('data-image');
-            var name_ru = $(this).children('td:eq(1)').text();
-            var name_uz = $(this).children('td:eq(1)').attr('data-name');
-            var manager_id = $(this).children('td:eq(2)').attr('data-manager');
-            var category_id = $(this).children('td:eq(3)').attr('data-category');
-            var new_price = $(this).children('td:eq(4)').attr('data-newprice');
-            var old_price = $(this).children('td:eq(5)').attr('data-oldprice');
-            var measurement = $(this).children('td:eq(6)').attr('data-measurement');
-            var status = $(this).children('td:eq(7)').attr('data-status');
+            var id = $(this).data('id');
+            var image = $(this).data('image');
+            var name_ru = $(this).data('nameru');
+            var name_uz = $(this).data('nameuz');
+            var manager_id = $(this).data('manager');;
+            var category_id = $(this).data('category');
+            var new_price = $(this).data('newprice');
+            var old_price = $(this).data('oldprice');
+            var measurement = $(this).data('measurement');
+            var status = $(this).data('status');
             $('#image_show').attr('src', "/storage/products/" + image);
             $('#image_show').parent().show().prevAll().hide();
             $('#editNameUz').val(name_uz);
@@ -292,6 +292,7 @@ $(function () {
             $('.category_id').val(category_id);
             $('.measurement').val(measurement);
             $('.status').val(status);
+            $('.delete_porduct').data('destroy',id);
         });
     });
     // actions for orders
@@ -477,12 +478,11 @@ $(function () {
         var orderId = $(this).closest('tr').data('id');
         var statusId = $(this).closest('tr').data('status');
         var branchId = $(this).closest('tr').data('bname');
-
         $(".form-status input[value = " + statusId + "]").prop("checked", true);
         $('#editOrderStatus').val(orderId);
     });
     // actions for couriers
-    $('.courier_action a').on('click', function (e) {
+    $('.courier_action').on('click', function (e) {
         e.preventDefault(e);
         $(this).closest('tr').each(function () {
             var id = $(this).data('id');
@@ -495,16 +495,31 @@ $(function () {
             $('#editPass').val(pass);
             $('#editMobile').val(mobile);
             $('#editStatus').val(status);
+            $('.delete_courier').data('destroy',id);
         });
     });
+
+    $(".delete_courier").click(function (e) {
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        if (confirmations('курьер')) {
+            $.ajax({
+                url: '/admin/couriers/' + id,
+                type: 'delete',
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        }
+    });
     // actions for clients
-    $('.client_action a').on('click', function (e) {
+    $('.client_action').on('click', function (e) {
         e.preventDefault(e);
         $(this).closest('tr').each(function () {
             var id = $(this).data('id');
             var first_name = $(this).data('fname');
             var last_name = $(this).data('lname');
-            var mobile = $(this).data('mobile');
+            var phone = $(this).data('phone');
             var birth_date = $(this).data('bdate');
             var jender = $(this).data('jender');
             var region = $(this).data('region');
@@ -513,18 +528,32 @@ $(function () {
             $('#editId').val(id);
             $('#editFirstName').val(first_name);
             $('#editLastName').val(last_name);
-            $('#editMobile').val(mobile);
+            $('#editMobile').val(phone);
             $('#editDate').val(birth_date);
             $('#editJender').val(jender);
             $('#editRegion').val(region);
             $('#editStatus').val(status);
+            $('.delete_client').data('destroy',id);
             if (blacklist == '1') {
                 $('#editBlackList').prop('checked', true);
             } else {
                 $('#editBlackList').prop('checked', false);
             }
-
         });
+    });
+
+    $(".delete_client").click(function (e) {
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        if (confirmations('клиент')) {
+            $.ajax({
+                url: '/admin/clients/' + id,
+                type: 'delete',
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        }
     });
     // checkbox button click disable input {working_time} select
     $('.custom-control-input').click(function () {

@@ -34,11 +34,13 @@ Route::group([
     Route::resource('categories', 'CategoryController')->except(['show', 'create']);
     Route::resource('clients', 'ClientController')->except(['show', 'create', 'edit']);
     Route::resource('products', 'ProductController')->except(['show', 'create', 'edit']);
+    Route::resource('transactions', 'TransactionController')->except(['show', 'create', 'edit']);
     Route::get('settings', 'SettingController@index')->name('settings');
     Route::patch('/settings/update', 'SettingController@update'); 
     Route::get('settings/orders', 'SettingController@orders')->name('settings.orders');
     Route::get('settings/goto', 'SettingController@goto')->name('settings.goto');
     Route::get('settings/payment', 'SettingController@payment')->name('settings.payment');
     Route::get('settings/gateway', 'SettingController@gateway')->name('settings.gateway');
+    Route::get('settings/regions', 'SettingController@regions')->name('settings.regions');
 });
 Route::get('/{any?}', 'Front\HomeController@index')->where('any', '^(?!api).*$');

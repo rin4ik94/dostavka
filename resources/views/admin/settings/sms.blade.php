@@ -1,8 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('content')
 <div class="main-top">
-  <h1 class="main-title">Настройки смс шлюз</h1>
-  {{-- sms gateway --}}
+  <h1 class="main-title">Настройки шлюза SMS</h1>
 </div>
 <form action="/admin/settings/update" method="POST">
   @method('PATCH')
@@ -10,11 +9,12 @@
   <div class="form-group form-row">
     <label class="col-3 col-form-label" for="settings_sms_login">Авторизоваться</label>
     <div class="col-9">
-    <input class="form-control" id="settings_sms_login" name="sms_login " value="youcloud" type="text">
+      <input class="form-control" id="settings_sms_login" name="sms_login " value="youcloud" type="text">
     </div>
+  </div>
     <div class="form-group form-row">
-        <label class="col-3 col-form-label" for="settings_sms_password">Пароль</label>
-        <div class="col-9">
+      <label class="col-3 col-form-label" for="settings_sms_password">Пароль</label>
+      <div class="col-9">
         <input class="form-control" id="settings_sms_password" name="sms_password" value="y43ql9$9" type="text">
     </div>
   </div>

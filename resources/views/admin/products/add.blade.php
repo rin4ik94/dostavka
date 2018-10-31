@@ -10,7 +10,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-5">
-            <label class="form-label" for="product_image">Фото *</label>
+            <label class="form-label" for="product_image">Фото <span class="text-red">*</span></label>
             <div class="custom-file">
               <input type="file" class="custom-file-input file" id="product_image" name="image" accept="image/jpeg" required>
               <label class="custom-file-label" for="product_image">Загрузить</label>
@@ -29,17 +29,17 @@
 
           <div class="col-7">
             <div class="form-group">
-              <label class="form-label" for="productNameUz">Название (Узб) *</label>
+              <label class="form-label" for="productNameUz">Название (Узб) <span class="text-red">*</span></label>
               <input class="form-control" type="text" id="productNameUz" name="name_uz" required>
             </div>
              <div class="form-group">
-              <label class="form-label" for="productNameRu">Название (Рус) *</label>
+              <label class="form-label" for="productNameRu">Название (Рус) <span class="text-red">*</span></label>
               <input class="form-control" type="text" id="productNameRu" name="name_ru" required>
             </div>
             <div class="form-row">
               <div class="col">
                 <div class="form-group">
-                  <label class="form-label" for="productManager">Магазин *</label>
+                  <label class="form-label" for="productManager">Магазин <span class="text-red">*</span></label>
                   <select class="custom-select apiManager" name="manager_id" required>
                     <option value="" selected disabled>Не выбран</option>
                     @foreach($managers as $manager)
@@ -50,7 +50,7 @@
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label class="form-label" for="productCategory">Категория *</label>
+                  <label class="form-label" for="productCategory">Категория <span class="text-red">*</span></label>
                   <select class="custom-select apiCategory" name="category_id" required disabled>
                     <option value="" selected disabled>Не выбран</option>
                     @foreach($categories as $category)
@@ -66,7 +66,7 @@
             <div class="form-row">
               <div class="col">
                 <div class="form-group">
-                  <label class="form-label" for="productNewPrice">Ценна *</label>
+                  <label class="form-label" for="productNewPrice">Ценна <span class="text-red">*</span></label>
                   <input class="form-control" type="text" id="productNewPrice" name="new_price" required>
                 </div>
               </div>
@@ -78,12 +78,10 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="productMeasurement">Единица измерения *</label>
+              <label class="form-label" for="productMeasurement">Единица измерения <span class="text-red">*</span></label>
               <select class="custom-select" name="measurement" required>
                 <option value="1" selected>шт</option>
                 <option value="2">кг</option>
-                <option value="3">м</option>
-                <option value="4">кв^2</option>
               </select>
             </div>
             <div class="form-group">

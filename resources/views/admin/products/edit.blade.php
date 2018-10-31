@@ -13,7 +13,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-5">
-            <label class="form-label" for="editProductImage">Фото *</label>
+            <label class="form-label" for="editProductImage">Фото <span class="text-red">*</span></label>
             <div class="custom-file">
               <input type="file" class="custom-file-input file" id="editProductImage" name="image" accept="image/jpeg">
               <label class="custom-file-label" for="editProductImage">Загрузить</label>
@@ -30,17 +30,17 @@
           <input type="hidden" name="id" class="editProduct_id">
           <div class="col-7">
             <div class="form-group">
-              <label class="form-label" for="editNameUz">Название (Узб) *</label>
+              <label class="form-label" for="editNameUz">Название (Узб) <span class="text-red">*</span></label>
               <input class="form-control" type="text" id="editNameUz" name="name_uz" required>
             </div>
             <div class="form-group">
-              <label class="form-label" for="editNameRu">Название (Рус) *</label>
+              <label class="form-label" for="editNameRu">Название (Рус) <span class="text-red">*</span></label>
               <input class="form-control name_ru" type="text" id="editNameRu" name="name_ru" required>
             </div>
             <div class="form-row">
               <div class="col">
                 <div class="form-group">
-                  <label class="form-label" for="editManager">Магазин *</label>
+                  <label class="form-label" for="editManager">Магазин <span class="text-red">*</span></label>
                   <select class="custom-select manager_id" name="manager_id" required>
                     @foreach($managers as $manager)
                       <option value="{{ $manager->id }}">{{ $manager->name }}</option>
@@ -50,7 +50,7 @@
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label class="form-label" for="editCat">Категория *</label>
+                  <label class="form-label" for="editCat">Категория <span class="text-red">*</span></label>
                   <select class="custom-select category_id" name="category_id" required>
                     @foreach($categories as $category)
                       <option value="{{ $category->id }}" disabled>{{ $category->name_ru }}</option>
@@ -65,7 +65,7 @@
             <div class="form-row">
               <div class="col">
                 <div class="form-group">
-                  <label class="form-label" for="editNewPrice">Ценна *</label>
+                  <label class="form-label" for="editNewPrice">Ценна <span class="text-red">*</span></label>
                   <input class="form-control" type="text" id="editNewPrice" name="new_price" required>
                 </div>
               </div>
@@ -77,12 +77,10 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="editMeasurement">Единица измерения *</label>
+              <label class="form-label" for="editMeasurement">Единица измерения <span class="text-red">*</span></label>
               <select class="custom-select measurement" name="measurement" required>
-                <option value="1" selected>шт</option>
+                <option value="1">шт</option>
                 <option value="2">кг</option>
-                <option value="3">м</option>
-                <option value="4">кв^2</option>
               </select>
             </div>
             <div class="form-group">
@@ -96,6 +94,7 @@
         </div>
       </div>
       <div class="modal-footer">
+        <a href="#" class="delete_porduct btn btn-outline-red mr-auto" data-destroy="">Удалить</a>
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-green">OK</button>
       </div>

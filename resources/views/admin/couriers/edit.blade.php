@@ -13,13 +13,13 @@
       <div class="modal-body">
         <div class="form-group">
           <input type="hidden" id="editId" name="id">
-          <label class="form-label" for="editFio">ФИО *</label>
+          <label class="form-label" for="editFio">ФИО <span class="text-red">*</span></label>
           <input class="form-control" type="text" id="editFio" name="fio" required>
         </div>
         <div class="form-row">
           <div class="col">
             <div class="form-group">
-              <label class="form-label" for="editMobile">Телефон *</label>
+              <label class="form-label" for="editMobile">Телефон <span class="text-red">*</span></label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">+998</span>
@@ -30,7 +30,7 @@
           </div>
           <div class="col">
             <div class="form-group">
-              <label class="form-label" for="editPass">Пароль *</label>
+              <label class="form-label" for="editPass">Пароль <span class="text-red">*</span></label>
               <input class="form-control" type="text" id="editPass" name="password" required>
             </div>
           </div>
@@ -44,6 +44,7 @@
         </div>
       </div>
       <div class="modal-footer">
+          <a href="#" class="delete_courier btn btn-outline-red mr-auto" data-destroy="">Удалить</a>
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-green">OK</button>
       </div>

@@ -38,7 +38,7 @@
       </a></li>
       @endcan
       @can('Транзакции')
-    <li class="nav-item"><a class="nav-link {{ Request::segment(2) === 'transactions' ? 'active' : null }}" href="/admin/orders">
+    <li class="nav-item"><a class="nav-link {{ Request::segment(2) === 'transactions' ? 'active' : null }}" href="/admin/transactions">
         <i class="icon">attach_money</i>
         <span class="text">Транзакции</span>
       </a></li>
