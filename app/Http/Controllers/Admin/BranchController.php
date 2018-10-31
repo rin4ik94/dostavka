@@ -130,7 +130,8 @@ class BranchController extends Controller
    */
   public function destroy($id)
   {
-      Branch::findOrFail($id)->delete();
-      return back()->with('success','Филиал удален.');
+    $branchs = Branch::find($id)->delete();
+    session()->flash('success','Филиал удален успешно!');
+    return response()->json('success',200);
   }
 }

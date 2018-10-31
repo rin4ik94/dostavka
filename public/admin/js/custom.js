@@ -196,7 +196,7 @@ $(function () {
         });
     });
     // edit branches
-    $('.branchs_action').on('click', function (e) {
+    $('.branch_action').on('click', function (e) {
         e.preventDefault(e);
         var arr = [];
         var uri = $(this).attr('href');
@@ -211,6 +211,7 @@ $(function () {
                 $("#editManagerName").val(data.branch.manager_id);
                 $("#editRegionName").val(data.branch.region_id);
                 $("#editAddress").val(data.branch.address);
+                $('.delete_branch').data('destroy', data.branch.id);
                 $('.branCheckbox').find('.custom-control-input').each(function () {
                     var input = $(this);
                     checkboxActive(input);
@@ -230,6 +231,20 @@ $(function () {
             }
         });
     });
+    $('.delete_branch').on('click',function(e){
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        if(confirmations('филиал')){
+            $.ajax({
+                url: '/admin/branchs/' + id,
+                type: 'delete',
+                success: function (result) {
+                    console.log(result);
+                    location.reload();
+                }
+            });
+        }
+    });
     // actions for category
     $('.action-edit a').on('click', function (e) {
         e.preventDefault(e);
@@ -246,6 +261,7 @@ $(function () {
         $('.editCatParent').val(parent_id);
         $('.editCatManager').val(manager_id);
     });
+    
     // actions for products
     $('.product_action a').on('click', function (e) {
         e.preventDefault(e);

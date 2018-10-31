@@ -27,15 +27,15 @@
     </div>
   </form>
   <div class="ml-auto form-row">
-    <div class="col-auto">
+    <div class="ml-auto form-row">
       @include('admin.components.search')
-    </div>
     <div class="col-auto">
       <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
 		<i class="icon">add</i>
 		<span class="text">Добавить филиал</span>
 	 </button>
     </div>
+  </div>
   </div>
 </div>
 @if(count($branches) > 0)
@@ -53,7 +53,7 @@
     @foreach($branches as $branch)
     <tr>
       <td>{{ $branch->id }}</td>
-      <td><a class="text-green" href="#" data-toggle="modal" data-target="#editBranch">{{ $branch->name }}</a></td>
+      <td><a class="text-green branch_action" href="/admin/branchs/{{ $branch->id }}/edit" data-toggle="modal" data-target="#editBranch">{{ $branch->name }}</a></td>
       <td>{{ $branch->manager->name }}</td>
       <td>{{ $branch->region->name_ru }}</td>
       <td>{{ $branch->address }}</td>

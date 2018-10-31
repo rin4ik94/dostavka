@@ -28,7 +28,7 @@
         </div>
       </div>
         <div class="modal-footer">
-          <a href="#" class="delete delete_manager_group btn btn-outline-red mr-auto" data-destroy="">Удалить</a>
+          <a href="#" class="delete_manager_group btn btn-outline-red mr-auto" data-destroy="">Удалить</a>
           <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
           <button type="submit" class="btn btn-green">OK</button>
         </div>
