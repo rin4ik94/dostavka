@@ -11,7 +11,7 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
-Route::get('/checkNewOrder/{count}', 'Front\OrderStatusController@count');
+Route::get('/checkNewOrder', 'Front\OrderStatusController@count');
 Route::get('/products', 'Front\ProductController@index');
 Route::post('/orders', 'Front\OrderController@store');
 Route::get('/products/search', 'Front\ProductSearchController@index');

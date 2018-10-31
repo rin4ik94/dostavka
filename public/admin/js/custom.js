@@ -6,16 +6,17 @@ $(function () {
     });
     // cheack new order added
     setInterval(function () {
-        var count = parseInt($('.new').text());
-        var getLastOrderId = $('.table').find('tbody').children('tr:first').data('id');
         $.ajax({
             type: "GET",
-            url: '/api/checkNewOrder/' + count + '?lastOrderId=' + getLastOrderId,
+            url: '/api/checkNewOrder',
             success: function (data) {
+							console.log(data);
                 if (data['status']) {
                     $('span.order_new_count').text(data['count']);
                     $('table.order_new_add').find('tbody').prepend("<tr data-id='" + data.data.id + "'><td>" + data.data.id + "</td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td>" + data.data.branch_id + "</td><td>" + data.data.client.first_name + "</td><td>" + data.data.delivery_address_street + "</td><td>" + data.data.courier_id + "</td><td>" + data.data.total_price + "</td><td>" + data.data.order_status_id + "</td><td>" + data['data']['id'] + "</td><tr>");
-                }
+								}else{
+									$('span.order_new_count').text(data['count']);
+								}
             },
             error: function (data) {
                 console.log('error');
@@ -82,7 +83,7 @@ $(function () {
 
     // image close button {image Preview}
     $('.custom-image-close').on('click', function () {
-        if(confirmations('логотип')){
+        if (confirmations('логотип')) {
             $(this).parent().hide().prev().show();
             $(this).parents(':eq(1)').show().find('input').val('');
         }
@@ -231,10 +232,10 @@ $(function () {
             }
         });
     });
-    $('.delete_branch').on('click',function(e){
+    $('.delete_branch').on('click', function (e) {
         e.preventDefault(e);
         var id = $(this).data('destroy');
-        if(confirmations('филиал')){
+        if (confirmations('филиал')) {
             $.ajax({
                 url: '/admin/branchs/' + id,
                 type: 'delete',
@@ -246,7 +247,7 @@ $(function () {
         }
     });
     // actions for category
-    $('.action-edit a').on('click', function (e) {
+    $('.category_action a').on('click', function (e) {
         e.preventDefault(e);
         var cat_id = $(this).closest('a').attr('data');
         var status = $(this).closest('a').parents(':eq(1)').attr('data');
@@ -261,7 +262,11 @@ $(function () {
         $('.editCatParent').val(parent_id);
         $('.editCatManager').val(manager_id);
     });
-    
+
+		$('.delete_category').on('click',function(){
+			confirmations('категория');
+		});
+
     // actions for products
     $('.product_action a').on('click', function (e) {
         e.preventDefault(e);
@@ -547,7 +552,7 @@ $(function () {
     });
 }); // end main functions
 function confirmations(param = '') {
-    var result = confirm("Вы уверены, что хотите удалить "+param+"?");
+    var result = confirm("Вы уверены, что хотите удалить " + param + "?");
     return result;
 };
 
