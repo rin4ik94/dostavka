@@ -15,7 +15,7 @@ class SettingController extends Controller
     public function index()
     {
         $settings = config('dostavka');
-        return view('admin.settings.index',compact('settings'));
+        return view('admin.settings.index', compact('settings'));
     }
 
     public function orders()
@@ -26,7 +26,7 @@ class SettingController extends Controller
     public function goto()
     {
         $delivery_price = config('dostavka.delivery_price');
-        return view('admin.settings.goto',compact('delivery_price'));
+        return view('admin.settings.goto', compact('delivery_price'));
     }
 
     public function payment()
@@ -38,6 +38,7 @@ class SettingController extends Controller
     {
         return view('admin.settings.sms');
     }
+
     public function update(Request $request)
     {
         if ($request->has('delivery_price')) {
@@ -55,6 +56,7 @@ class SettingController extends Controller
             'dostavka.message' => $request->message,
             'dostavka.status' => $request->status ? 1 : 0,
             ]);
+            $request->status ? \Artisan::call('down') : \Artisan::call('up');
             $fp = fopen(base_path() . '/config/dostavka.php', 'w');
             fwrite($fp, '<?php return ' . var_export(config('dostavka'), true) . ';');
             fclose($fp);
