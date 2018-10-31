@@ -5,22 +5,22 @@ $(function () {
         }
     });
     // cheack new order added
-    setInterval(function(){
-    var count = parseInt($('.new').text());
-    var getLastOrderId = $('.table').find('tbody').children('tr:first').data('id');
-    $.ajax({
-        type: "GET",
-        url: '/api/checkNewOrder/'+count+'?lastOrderId='+getLastOrderId,
-        success: function (data) {
-            if(data['status']){
-                $('span.order_new_count').text(data['count']);
-                $('table.order_new_add').find('tbody').prepend("<tr data-id='"+data.data.id+"'><td>"+ data.data.id +"</td><td>"+ dateFormat(data.data.created_at) +"</td><td>"+data.data.manager.name+"</td><td>"+data.data.branch_id+"</td><td>"+data.data.client.first_name+"</td><td>"+data.data.delivery_address_street+"</td><td>"+data.data.courier_id+"</td><td>"+data.data.total_price+"</td><td>"+data.data.order_status_id+"</td><td>"+data['data']['id']+"</td><tr>");
+    setInterval(function () {
+        var count = parseInt($('.new').text());
+        var getLastOrderId = $('.table').find('tbody').children('tr:first').data('id');
+        $.ajax({
+            type: "GET",
+            url: '/api/checkNewOrder/' + count + '?lastOrderId=' + getLastOrderId,
+            success: function (data) {
+                if (data['status']) {
+                    $('span.order_new_count').text(data['count']);
+                    $('table.order_new_add').find('tbody').prepend("<tr data-id='" + data.data.id + "'><td>" + data.data.id + "</td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td>" + data.data.branch_id + "</td><td>" + data.data.client.first_name + "</td><td>" + data.data.delivery_address_street + "</td><td>" + data.data.courier_id + "</td><td>" + data.data.total_price + "</td><td>" + data.data.order_status_id + "</td><td>" + data['data']['id'] + "</td><tr>");
+                }
+            },
+            error: function (data) {
+                console.log('error');
             }
-        },
-        error: function (data) {
-            console.log('error');
-        }
-    });
+        });
     }, 10000);
     // image preview
     $(".custom-file-input").change(function () {
@@ -82,8 +82,10 @@ $(function () {
 
     // image close button {image Preview}
     $('.custom-image-close').on('click', function () {
-        $(this).parent().hide().prev().show();
-        $(this).parents(':eq(1)').show().find('input').val('');
+        if(confirmations('логотип')){
+            $(this).parent().hide().prev().show();
+            $(this).parents(':eq(1)').show().find('input').val('');
+        }
     });
 
     //actions for manager
@@ -106,14 +108,15 @@ $(function () {
     $(".delete_manager").click(function (e) {
         e.preventDefault(e);
         var id = $(this).data('destroy');
-        console.log(id);
+        if (confirmations('магазин')) {
             $.ajax({
-                url: '/admin/managers/'+id,
+                url: '/admin/managers/' + id,
                 type: 'delete',
                 success: function (result) {
-                location.reload();
-            }
-        });
+                    location.reload();
+                }
+            });
+        }
     });
 
     //actions for manager-group
@@ -131,13 +134,15 @@ $(function () {
     $('.delete_manager_group').on('click', function (e) {
         e.preventDefault(e);
         var id = $(this).data('destroy');
-        $.ajax({
-            url: '/admin/managers/group/'+id,
-            type: 'delete',
-            success: function (result) {
-                location.reload();
-            }
-        });
+        if (confirmations('категория')) {
+            $.ajax({
+                url: '/admin/managers/group/' + id,
+                type: 'delete',
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        }
     });
     //actions for employee-group
     $('.editEmployeGroup a').on('click', function (e) {
@@ -516,9 +521,6 @@ $(function () {
         $('.myForm').submit();
     });
     // from action delete show confirmations
-    $(".delete").on("click", function () {
-        return confirm("Are you sure?");
-    });
     // modal close reset from values
     $('.modal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
@@ -528,6 +530,10 @@ $(function () {
         $(this).delay(2500).fadeOut();
     });
 }); // end main functions
+function confirmations(param = '') {
+    var result = confirm("Вы уверены, что хотите удалить "+param+"?");
+    return result;
+};
 
 // custom functions
 function disable(input) {
@@ -607,12 +613,12 @@ function number_format(number, decimals = '2', dec_point = ',', thousands_sep = 
     return x1 + x2;
 };
 
-function setCookie(name,value,days) {
+function setCookie(name, value, days) {
     var expires = "";
     if (days) {
         var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires + ";";
-    }
+    document.cookie = name + "=" + (value || "") + expires + ";";
+}
