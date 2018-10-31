@@ -25,7 +25,7 @@
               </div>
               <div class="f-product-quantity">{{product.new_price | toCurrency}} сум за 1 шт</div>
               <div class="f-product-price">
-                <div class="f-product-price-new">{{product.new_price | toCurrency}} сум</div>
+                <div class="f-product-price-new">{{product.new_price * quantity | toCurrency}} сум</div>
                 <div class="f-product-price-old"></div>
               </div>
               <div class="row mt-auto">

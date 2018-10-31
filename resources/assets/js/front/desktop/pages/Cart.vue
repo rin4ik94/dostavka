@@ -25,10 +25,15 @@
                 <input class="form-control" type="text" :value="`${product.quantity} ${product.measure}`" disabled>
                 <div class="input-group-append"><button class="btn btn-outline-green" type="button" @click="addToCart(product)"><i class="icon">add</i></button></div>
               </div>
+              <span v-if="product.quantity > 1">
+               {{ product.new_price | toCurrency }} за 1{{product.measure}}
+              </span> 
+              
             </div>
               <div class="cart-item-column cart-item-price">
               <div class="cart-item-price-new">{{product.new_price * product.quantity | toCurrency}} сум</div>
-              <div class="cart-item-price-old" v-if="product.new_price < product.old_price">{{product.old_price | toCurrency}} сум</div>
+              
+              <div class="cart-item-price-old" v-if="product.new_price < product.old_price">{{product.old_price * product.quantity | toCurrency}} сум</div>
             </div>
           </li> 
         </ul>

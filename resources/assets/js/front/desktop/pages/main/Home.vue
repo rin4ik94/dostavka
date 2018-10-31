@@ -1,5 +1,5 @@
 <template> 
-  <div class="content"> 
+  <div class="content">  
         <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
 <div v-else>
 
