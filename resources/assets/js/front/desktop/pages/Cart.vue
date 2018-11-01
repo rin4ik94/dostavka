@@ -167,7 +167,10 @@ export default {
   },
   watch: { 
     lang(){
+      this.showPage = false;
       this.getRegions(); 
+      this.fetchRegion(this.region.slug)
+
     },
     user:{
       deep:true,

@@ -40,6 +40,7 @@ export default {
     async getRegions() {
       let response = await axios.get("/api/regions");
       this.regions = response.data.data;
+      await this.$emit("ready");
     },
     async setRegionD(){  
       await localforage.getItem('region').then((region)=>{
@@ -92,7 +93,6 @@ export default {
       this.getRegions();
     });  
     await this.setRegion() 
-    await this.$emit("ready");
     $("#Regions").on("hide.bs.modal", this.setRegionD);
 
   }
