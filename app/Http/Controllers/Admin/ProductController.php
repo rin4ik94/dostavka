@@ -112,8 +112,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
+      // dd($request->all());
+      $this->validate($request,[
+          'name_uz' => 'required',
+          'name_ru' => 'required',
+          'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+          'measurement' => 'required',
+          'new_price' => 'required',
+          'category_id' => 'required',
+          'manager_id' => 'required',
+          'status' => 'required',
+      ]);
+      
        $filenametostore = '';
         if ($request->hasFile('image')) {
             $file = $request->file('image');
