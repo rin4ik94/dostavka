@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method='POST' action="/admin/products/2" enctype="multipart/form-data" class="needs-validation" novalidate>
+      <form method='POST' action="/admin/products/1" enctype="multipart/form-data" id="productEdit" class="needs-validation" novalidate>
          {{ method_field('PUT') }}
         @csrf
       <div class="modal-body">
@@ -27,7 +27,7 @@
                 Разрешенные типы файлов: jpg, png, jpeg.
             </div>
           </div>
-          <input type="hidden" name="id" class="editProduct_id">
+          <input type="hidden" name="id" class="edit_product_id">
           <div class="col-7">
             <div class="form-group">
               <label class="form-label" for="editNameUz">Название (Узб) <span class="text-red">*</span></label>
@@ -41,7 +41,7 @@
               <div class="col">
                 <div class="form-group">
                   <label class="form-label" for="editManager">Магазин <span class="text-red">*</span></label>
-                  <select class="custom-select manager_id" name="manager_id" required>
+                  <select class="custom-select api_manager" id="editManager" name="manager_id" required>
                     @foreach($managers as $manager)
                       <option value="{{ $manager->id }}">{{ $manager->name }}</option>
                     @endforeach
@@ -51,7 +51,7 @@
               <div class="col">
                 <div class="form-group">
                   <label class="form-label" for="editCat">Категория <span class="text-red">*</span></label>
-                  <select class="custom-select category_id" name="category_id" required>
+                  <select class="custom-select api_category" id="editCat" name="category_id" required>
                     @foreach($categories as $category)
                       <option value="{{ $category->id }}" disabled>{{ $category->name_ru }}</option>
                       @foreach($category->children as $child)
