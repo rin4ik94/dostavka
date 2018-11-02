@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             'throttle:60,1',
+            \Barryvdh\Cors\HandleCors::class,
             'bindings',
         ],
     ];
@@ -61,6 +62,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
-        'jwt.generate' => \App\Http\Middleware\JWTGenerate::class
+        'jwt.generate' => \App\Http\Middleware\JWTGenerate::class,
+        // 'cors' => \App\Http\Middleware\Cors::class,
     ];
 }

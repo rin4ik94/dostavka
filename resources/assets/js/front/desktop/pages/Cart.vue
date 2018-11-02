@@ -167,7 +167,10 @@ export default {
   },
   watch: { 
     lang(){
+      this.showPage = false;
       this.getRegions(); 
+      this.fetchRegion(this.region.slug)
+
     },
     user:{
       deep:true,
@@ -206,12 +209,12 @@ export default {
         }
       )
     },
-    ...mapActions({
-      setCart: "setCart",
-      setTotal: "setTotal",
-      setManager: "setManager",
-      addToTotal: "addToTotal"
-    }),
+      ...mapActions({
+        setCart: "setCart",
+        setTotal: "setTotal",
+        setManager: "setManager",
+        addToTotal: "addToTotal"
+      }),
     proceedOrder(){
         this.form.manager_id = this.manager.id
         this.form.delivery_price = this.delivery_price
@@ -230,7 +233,7 @@ export default {
         axios.post('api/orders',{params:params}).then(response=>{
           this.setEmpty()
         }).catch(error=>{
-            this.errors =error.response.data.errors
+            this.errors = error.response.data.errors
         })
     },
     order(){

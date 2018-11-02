@@ -51759,7 +51759,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 
             return savedPosition;
         } else {
-            if (to.name != 'category' && to.name != 'catalog' && to.name != 'tp' && to.name != 'cp') {
+            if (to.name != 'category' && to.name != 'catalog' && to.name != 'tp' && to.name != 'pp') {
                 // alert(to.name)
                 return new Promise(function (resolve, reject) {
                     setTimeout(function () {
@@ -52106,8 +52106,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 response = _context.sent;
 
                 this.regions = response.data.data;
+                _context.next = 6;
+                return this.$emit("ready");
 
-              case 4:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -52203,13 +52205,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               return this.setRegion();
 
             case 4:
-              _context3.next = 6;
-              return this.$emit("ready");
-
-            case 6:
               $("#Regions").on("hide.bs.modal", this.setRegionD);
 
-            case 7:
+            case 5:
             case "end":
               return _context3.stop();
           }
@@ -59779,7 +59777,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   }),
   watch: {
     lang: function lang() {
+      this.showPage = false;
       this.getRegions();
+      this.fetchRegion(this.region.slug);
     },
 
     user: {
