@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Отчеты');
+    }
     /**
      * Display a listing of the resource.
      *

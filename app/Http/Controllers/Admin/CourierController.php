@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 
 class CourierController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Курьеры');
+    }
     /**
      * Display a listing of the resource.
      *
