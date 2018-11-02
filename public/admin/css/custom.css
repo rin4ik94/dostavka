@@ -38,3 +38,38 @@ div.noteAlt
    padding: 10px 10px 10px 33px;
    margin-top: 25px;
 }
+
+.btn-primary {
+  color: #fff;
+  background-color: #3490dc;
+  border-color: #3490dc;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #38c172;
+  border-color: #38c172;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #6cb2eb;
+  border-color: #6cb2eb;
+}
+
+.btn-warning {
+  color: #fff;
+  background-color: #ffed4a;
+  border-color: #ffed4a;
+}
+.btn-danger {
+  color: #fff;
+  background-color: #e3342f;
+  border-color: #e3342f;
+}

@@ -1,24 +1,24 @@
 @extends('admin.layouts.dashboard')
 @section('content')
-<div class="toolbar d-flex">
+<div class="toolbar">
     <form method="GET" class="form-row status-filter" data-fetch="{{ Request::get('status') ?? '' }}">
         <div class="col-auto">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-outline-green @if(request()->status < 1) active @endif">
                     <input type="radio" name="status" value="0" @if(request()->status < 1) checked @endif onchange="this.form.submit()">Все<span
-                class="badge count_all">{{ $s['total_count'] or '' }}</span>
+                            class="badge count_all">{{ $s['total_count'] or '' }}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='1') active @endif">
                     <input type="radio" name="status" value="1" @if(request()->status=='1') checked @endif
-                onchange="this.form.submit()">Новый<span class="badge new">{{ $s['data'][1] or ''}}</span>
+                    onchange="this.form.submit()">Новый<span class="badge new">{{ $s['data'][1] or ''}}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='2') active @endif">
                     <input type="radio" name="status" value="2" @if(request()->status=='2') checked @endif
-                onchange="this.form.submit()">Формируется<span class="badge is_formed">{{ $s['data'][2] or ''}}</span>
+                    onchange="this.form.submit()">Формируется<span class="badge is_formed">{{ $s['data'][2] or ''}}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='3') active @endif">
                     <input type="radio" name="status" value="3" @if(request()->status=='3') checked @endif
-                onchange="this.form.submit()">В пути<span class="badge on_way">{{ $s['data'][3] or '' }}</span>
+                    onchange="this.form.submit()">В пути<span class="badge on_way">{{ $s['data'][3] or '' }}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='4') active @endif">
                     <input type="radio" name="status" value="4" @if(request()->status=='4') checked @endif
@@ -38,6 +38,9 @@
     <div class="ml-auto form-row">
         @include('admin.components.search')
     </div>
+</div>
+<div class="alert alert-info d-none" role="alert">
+    <a href="#" class="text-green" id="display_new_order" onClick="window.location.reload()">&#x21BA;</a>
 </div>
 @if(count($orders) > 0)
 <table class="table table-bordered table-hover table-striped order_new_add">
@@ -86,8 +89,8 @@
             @endif
             <td>{{ number_format($order->total_price,'0',' ',' ') }}</td>
             <td>{{ $order->payment->name_ru }}</td>
-            <td><a class="{{ $order->status->color }} order_status" href="#" data-toggle="modal" data-target="#orderStatus">{{
-                    $order->status->name }} {{ $order->status_count }}</a></td>
+            <td><a class="btn {{ $order->status->color }} order_status" href="#" data-toggle="modal" data-target="#orderStatus">{{
+                    $order->status->name }}</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -115,15 +118,16 @@
 @endif
 <script>
     $(document).ready(function () {
-    
+
         $statusid = $('.status-filter').data('fetch');
         if ($statusid == 4 || $statusid == 5) {
-            $('.orderByDate').prop('disabled',false);
+            $('.orderByDate').prop('disabled', false);
             $('.orderByDate').removeClass('d-none');
         } else {
-            $('.orderByDate').prop('disabled',true);
+            $('.orderByDate').prop('disabled', true);
             $('.orderByDate').addClass('d-none')
         }
     });
+
 </script>
 @endsection

@@ -98,10 +98,8 @@ class BranchController extends Controller
    */
   public function edit($id)
   {
-    $branch = Branch::findOrFail($id);
-    $branchWorkdays = DB::table("branch_working_mode")->where("branch_id",$id)
-            ->pluck('branch_working_mode.working_mode_id','branch_working_mode.working_mode_id')
-            ->all();
+    $branch = Branch::whereId($id)->with('workingModes')->get();
+    $branchWorkdays = DB::table("branch_working_mode")->where("branch_id",$id)->all();
     return response()->json([
          'branch'=> $branch,
          'branchWorkdays' => $branchWorkdays

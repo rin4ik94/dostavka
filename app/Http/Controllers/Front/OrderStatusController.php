@@ -20,6 +20,7 @@ class OrderStatusController extends Controller
                 $data = [
                     'status' => true,
                     'count' => $base_count,
+                    'new' => $base_count - $count,
                     'data' => $order[0],
                 ];
             }else{

@@ -6,14 +6,16 @@ $(function () {
     });
     // cheack new order added
     setInterval(function () {
+        var default_count = $('span.new').text();
         $.ajax({
             type: "GET",
             url: '/api/checkNewOrder',
             success: function (data) {
-                console.log(data);
                 if (data['status']) {
                     $('span.order_new_count').text(data['count']);
-                    $('table.order_new_add').find('tbody').prepend("<tr data-id='" + data.data.id + "' data-id='" + data.data.id + "' data-mname='" + data.data.manager_id + "' data-omanager='" + data.data.manager_id + "' data-bname='" + data.data.branch_id + "' data-branch='" + data.data.branch_id + "' data-region='" + data.data.region_id + "' data-cname='" + data.data.client_id + "' data-cmobile='" + data.data.client_id + "' data-status='" + data.data.order_status_id + "' data-ostreet='" + data.data.delivery_address_street + "'  data-ohome='" + data.data.delivery_address_home + "' data-ofloor='" + data.data.delivery_address_floor + "' data-oapartment='" + data.data.delivery_address_apartment + "' data-oremark='" + data.data.delivery_address_remark + "' data-odeliver='5000' data-payment='" + data.data.payment.name_ru + "' data-oprice='" + data.data.order_price + "' data-tprice='" + data.data.total_price + "' data-branches='" + data.data.getBranches + "' data-products='" + data.data.products + "' data-statuses='" + data.data.statuses + "'><td><a class='text-red' href='#' data-toggle='modal' data-target='#Order'>" + data.data.id + "</a></td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td>" + data.data.branch_id + "</td><td>" + data.data.client.first_name + "</td><td>" + data.data.delivery_address_street + "</td><td>" + data.data.courier_id + "</td><td>" + data.data.total_price + "</td><td>" + data.data.order_status_id + "</td><td>" + data['data']['id'] + "</td><tr>");
+                    $('#display_new_order').text('у вас есть новый заказ!!');
+                    $('#display_new_order').parent().removeClass('d-none');
+                    // $('table.order_new_add').find('tbody').prepend("<tr><td><a class='text-red new_order_id' data-id='" + data.data.id + "' href='#' data-toggle='modal' data-target='#Order'>" + data.data.id + "</a></td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td><a class='text-red new_order_branch' href='#' data-toggle='modal' data-target='#orderBranch'>Выбрать</a></td><td><a class='text-green new_order_client' href='#' data-toggle='modal' data-target='#Client'>" + data.data.client.first_name + ' ' + data.data.client.last_name + "</a></td><td>" + data.data.delivery_address_street + "</td><td><a class='text-red new_order_courier' href='#' data-toggle='modal' data-target='#orderCourier'>Назначить</a></td><td>" + number_format(data.data.total_price) + "</td><td>" + data.data.payment.name_ru + "</td><td><a class='btn btn-info new_order_status' href='#' data-toggle='modal' data-target='#orderStatus'>Новый</td><tr>");
                 } else {
                     $('span.order_new_count').text(data['count']);
                 }
@@ -207,6 +209,7 @@ $(function () {
             url: uri,
             dataType: 'json',
             success: function (data) {
+                console.log(data);
                 $('#branchId').val(data.branch.id);
                 $('#editBranchName').val(data.branch.name);
                 $("#editManagerName").val(data.branch.manager_id);
@@ -665,7 +668,8 @@ function dateFormat($date) {
     return $d + "." + $m + "." + $y + " " + $h + ":" + $min;
 };
 
-function number_format(number, decimals = '2', dec_point = ',', thousands_sep = ' ') {
+function number_format(number, decimals = '0', dec_point = ' ', thousands_sep = ' ') {
+    number = parseInt(number);
     number = number.toFixed(decimals);
 
     var nstr = number.toString();
@@ -688,3 +692,7 @@ function setCookie(name, value, days) {
     }
     document.cookie = name + "=" + (value || "") + expires + ";";
 }
+
+Element.prototype.prependChild = function (newElement) {
+    return this.insertBefore(newElement, this.firstChild);
+};
