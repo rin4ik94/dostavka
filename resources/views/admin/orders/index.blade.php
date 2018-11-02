@@ -39,8 +39,8 @@
         @include('admin.components.search')
     </div>
 </div>
-<div class="alert alert-info d-none" role="alert">
-    <a href="#" class="text-green" id="display_new_order" onClick="window.location.reload()">&#x21BA;</a>
+<div class="alert alert-info d-none" role="alert" id="display_new_order" onClick="window.location.reload()">
+    <span class="text-green"></span>
 </div>
 @if(count($orders) > 0)
 <table class="table table-bordered table-hover table-striped order_new_add">
@@ -72,10 +72,10 @@
             <td>{{ $order->getTime()}}</td>
             <td>{{ $order->manager->name }}</td>
             @if($order->branch_id != '')
-            <td><a class="text-green order_branch" href="#" data-toggle="modal" data-target="#orderBranch">{{
+            <td><a class="text-green order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id }}">{{
                     $order->branch->name }}</a></td>
             @else
-            <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch">Выбрать</a></td>
+            <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id }}">Выбрать</a></td>
             @endif
             <td><a class="text-green order_client" href="#" data-toggle="modal" data-target="#Client" data-client="{{ $order->client_id }}">{{
                     $order->client->getFullname() }}</a></td>
@@ -84,7 +84,7 @@
             <td><a class="text-green order_courier" href="#" data-toggle="modal" data-target="#orderCourier"
                     data-courier="{{ $order->courier_id }}">{{ $order->courier->fio }}</a></td>
             @else
-            <td><a class="text-red order_courier" href="#" data-toggle="modal" data-target="#orderCourier" data-courier="0">{{
+            <td><a class="text-red order_courier" href="#" data-toggle="modal" data-target="#orderCourier" data-courier="{{ $order->courier_id }}">{{
                     __('Назначить') }}</a></td>
             @endif
             <td>{{ number_format($order->total_price,'0',' ',' ') }}</td>
@@ -118,7 +118,6 @@
 @endif
 <script>
     $(document).ready(function () {
-
         $statusid = $('.status-filter').data('fetch');
         if ($statusid == 4 || $statusid == 5) {
             $('.orderByDate').prop('disabled', false);

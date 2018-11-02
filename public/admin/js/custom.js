@@ -11,10 +11,11 @@ $(function () {
             type: "GET",
             url: '/api/checkNewOrder',
             success: function (data) {
+                console.log(data);
                 if (data['status']) {
                     $('span.order_new_count').text(data['count']);
-                    $('#display_new_order').text('у вас есть новый заказ!!');
-                    $('#display_new_order').parent().removeClass('d-none');
+                    $('#display_new_order').find('span').text('у вас есть новый заказ!!');
+                    $('#display_new_order').removeClass('d-none');
                     // $('table.order_new_add').find('tbody').prepend("<tr><td><a class='text-red new_order_id' data-id='" + data.data.id + "' href='#' data-toggle='modal' data-target='#Order'>" + data.data.id + "</a></td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td><a class='text-red new_order_branch' href='#' data-toggle='modal' data-target='#orderBranch'>Выбрать</a></td><td><a class='text-green new_order_client' href='#' data-toggle='modal' data-target='#Client'>" + data.data.client.first_name + ' ' + data.data.client.last_name + "</a></td><td>" + data.data.delivery_address_street + "</td><td><a class='text-red new_order_courier' href='#' data-toggle='modal' data-target='#orderCourier'>Назначить</a></td><td>" + number_format(data.data.total_price) + "</td><td>" + data.data.payment.name_ru + "</td><td><a class='btn btn-info new_order_status' href='#' data-toggle='modal' data-target='#orderStatus'>Новый</td><tr>");
                 } else {
                     $('span.order_new_count').text(data['count']);
@@ -471,7 +472,16 @@ $(function () {
             return;
         }
     });
-
+    // before appointing courier cheack branch value
+    $('.check_branch').on('click', function (e) {
+        e.preventDefault(e);
+        var order_branch = $('.order_branch').data('branch');
+        if (order_branch) {
+            $('.form-courier').submit();
+        } else {
+            alert('Перед выбором курьер должен быть проверен филиалом!');
+        }
+    });
     $('.order_client').on('click', function (e) {
         e.preventDefault(e);
         var clientName = $(this).closest('tr').data('cname');
@@ -500,6 +510,17 @@ $(function () {
         $(".form-status input[value = " + statusId + "]").prop("checked", true);
         $('#editOrderStatus').val(orderId);
     });
+    // before appointing status cheack branch and courier values
+    $('.check_branch_courier').on('click', function (e) {
+        e.preventDefault(e);
+        var order_branch = $('.order_branch').data('branch');
+        var order_courier = $('.order_courier').data('courier');
+        if (order_branch && order_courier) {
+            $('.form-status').submit();
+        } else {
+            alert('Перед изменением статуса необходимо проверить филиал и курьер!');
+        }
+    });
     // actions for couriers
     $('.courier_action').on('click', function (e) {
         e.preventDefault(e);
@@ -517,7 +538,6 @@ $(function () {
             $('.delete_courier').data('destroy', id);
         });
     });
-
     $(".delete_courier").click(function (e) {
         e.preventDefault(e);
         var id = $(this).data('destroy');
