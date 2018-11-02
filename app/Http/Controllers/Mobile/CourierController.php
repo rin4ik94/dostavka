@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Courier;
 
 class CourierController extends Controller
 {
@@ -19,6 +20,16 @@ class CourierController extends Controller
 
     public function signin()
     {
+        request()->validate([
+            'form.mobile' => 'required',
+            'form.password' => 'required'
+        ]);
+        $courier = Courier::whereMobile(request()->form['mobile'])->first();
+        if (request()->form['password'] == $courier->password) {
+            return $courier;
+        } else {
+            return response('error', 404);
+        }
     }
 
     /**
