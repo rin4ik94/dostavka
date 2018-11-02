@@ -4,7 +4,7 @@ $(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    // cheack new order added
+    // check new order added
     setInterval(function () {
         var default_count = $('span.new').text();
         $.ajax({
@@ -451,8 +451,26 @@ $(function () {
             }
             return;
         }
-    });
-
+		});
+		// before appointing order check status and branch to change only 2-nd if courier value has can choose 3-th status
+    $('.check_order').on('click', function (e) {
+			e.preventDefault(e);
+			var order_branch = $('#orderBranches').val();
+			var order_status = $('#statusOrder').val();
+			var order_courier = $('.order_courier').data('courier');
+			if (order_branch > 0 && order_status <= 2 || order_status == 5) {
+					$('.form-order').submit();
+			} else if(order_branch > 0 && order_status == 3 || order_status == 4) {
+				if(order_courier){
+					$('.form-order').submit();
+				}else{
+					alert('Прежде чем выбрать статус '+getStatusName(order_status)+', необходимо назначить курьера!');
+				}
+			}else{
+				alert('Перед изменением заказ необходимо проверить статус и филиал!');
+			}
+	});
+	
     $('.order_branch').on('click', function (e) {
         e.preventDefault(e);
         var branches = $(this).closest('tr').data('branches');
@@ -472,7 +490,7 @@ $(function () {
             return;
         }
     });
-    // before appointing courier cheack branch value
+    // before appointing courier check branch value
     $('.check_branch').on('click', function (e) {
         e.preventDefault(e);
         var order_branch = $('.order_branch').data('branch');
@@ -494,12 +512,12 @@ $(function () {
         e.preventDefault(e);
         var orderId = $(this).closest('tr').data('id');
         var orderCourierId = $(this).data('courier');
-        if (orderCourierId == null) {
+        if (!orderCourierId) {
             orderCourierId = '0'
         }
         $(".form-courier #orderCourier_" + orderCourierId).prop("checked", true);
         $('#editOrderCourier').val(orderId);
-        $('span.orderIdForCourier').html(orderId);
+        $('span.order_id_for_courier').html(orderId);
     });
 
     $('.order_status').on('click', function (e) {
@@ -510,14 +528,17 @@ $(function () {
         $(".form-status input[value = " + statusId + "]").prop("checked", true);
         $('#editOrderStatus').val(orderId);
     });
-    // before appointing status cheack branch and courier values
+    // before appointing status check branch and courier values
     $('.check_branch_courier').on('click', function (e) {
-        e.preventDefault(e);
-        var order_branch = $('.order_branch').data('branch');
-        var order_courier = $('.order_courier').data('courier');
+				e.preventDefault(e);
+				var order_branch = $('.order_branch').data('branch');
+				var order_courier = $('.order_courier').data('courier');
+				var status_value = $('input[name=order_status_id]:checked').val();
         if (order_branch && order_courier) {
-            $('.form-status').submit();
-        } else {
+					$('.form-status').submit();
+				}else if(status_value == 5){
+					$('.form-status').submit();
+				}else{
             alert('Перед изменением статуса необходимо проверить филиал и курьер!');
         }
     });
@@ -630,6 +651,7 @@ function disable(input) {
 };
 
 function getStatusName($status) {
+	$status = parseInt($status);
     switch ($status) {
         case 2:
             return 'Формируется';
@@ -713,6 +735,8 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + (value || "") + expires + ";";
 }
 
-Element.prototype.prependChild = function (newElement) {
-    return this.insertBefore(newElement, this.firstChild);
-};
+function inRange(n, nStart, nEnd)
+{
+    if(n>=nStart && n<nEnd) return true;
+    else return false;
+}
