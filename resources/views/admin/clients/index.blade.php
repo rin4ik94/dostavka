@@ -55,7 +55,7 @@
             <td>{{ $client->id }}</td>
             <td> {{ $client->first_name }} {{ $client->last_name }}</td>
             <td> {{ $client->region->name_ru }} </td>
-            <td>+998{{ $client->mobile }}</td>
+            <td>+998{{ $client->phone }}</td>
             <td>{{ $client->birth_date }}</td>
             <td>
                 <div class="btn-group btn-group-sm client_action">

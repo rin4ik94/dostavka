@@ -28,7 +28,7 @@
         </div>
       </div>
         <div class="modal-footer">
-          <a href="#" class="deleteManagerGroup delete btn btn-outline-red" data-id="" data-token="{{ csrf_token() }}" >Удалить</a>
+          <a href="#" class="deleteManagerGroup delete btn btn-outline-red mr-auto" data-id="" data-token="{{ csrf_token() }}" >Удалить</a>
           <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
           <button type="submit" class="btn btn-green">OK</button>
         </div>

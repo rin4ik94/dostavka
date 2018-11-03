@@ -31,7 +31,7 @@
             <label class="form-label" for="storeMobile">Телефон *</label>
           </div>
           <div class="col-8">
-            <input class="form-control" type="text" id="storeMobile" name="phone" value="{{old('mobile')}}" required>
+            <input class="form-control" type="text" id="storeMobile" name="phone" value="{{old('phone')}}" required>
           </div>
         </div>
         <div class="form-group form-row">
