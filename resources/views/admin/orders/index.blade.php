@@ -62,7 +62,7 @@
         @foreach($orders as $order)
         <tr data-id="{{ $order->id }}" data-mname="{{ $order->manager->name }}" data-omanager="{{ $order->manager_id }}"
             data-bname="{{ $order->branch->name ?? '' }}" data-branch="{{ $order->branch_id ?? 0 }}" data-region="{{ $order->region_id }}"
-            data-cname="{{ $order->client->getFullname() }}" data-cmobile="{{ $order->client->mobile }}" data-status="{{  $order->order_status_id }}"
+            data-cname="{{ $order->client->getFullname() }}" data-cmobile="{{ $order->client->phone }}" data-status="{{  $order->order_status_id }}"
             data-ostreet="{{  $order->delivery_address_street }}" data-ohome="{{  $order->delivery_address_home }}"
             data-ofloor="{{  $order->delivery_address_floor }}" data-oapartment="{{  $order->delivery_address_apartment }}"
             data-oremark="{{  $order->delivery_address_remark }}" data-odeliver="5000" data-payment="{{ $order->payment->name_ru}}"
