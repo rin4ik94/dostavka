@@ -1,6 +1,6 @@
 <div class="modal fade" id="newStore" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form class="modal-content needs-validation" action="{{route('managers.store')}}" method="POST" enctype="multipart/form-data" novalidate>
+    <form action="{{route('managers.store')}}" method="POST" enctype="multipart/form-data" class="modal-content needs-validation" novalidate>
       @csrf
       <div class="modal-header">
         <h5 class="modal-title">Новый магазин </h5>
