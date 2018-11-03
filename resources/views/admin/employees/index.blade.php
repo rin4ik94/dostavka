@@ -1,96 +1,85 @@
 @extends('admin.layouts.dashboard')
 @section('content')
-<div class="main-top d-flex align-items-center">
-  <h1 class="main-title">Список сотрудников</h1>
-  <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newEmployee">
-    <i class="icon">add</i>
-    <span class="text">Добавить сотрудника</span>
-  </button>
+<div class="toolbar">
+    <form class="form-row" method="GET">
+        <div class="col-auto">
+            <select name="manager" class="custom-select">
+                <option value="all">Все магазины</option>
+                @foreach($managers as $manager)
+                <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-auto">
+            <select class="custom-select" name="group">
+                <option value="all">Все группы</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <select class="custom-select" name="status">
+                <option value="all">Все статуси</option>
+                <option value="1">Активен</option>
+                <option value="0">Неактивен</option>
+            </select>
+        </div>
+    </form>
+    <div class="ml-auto form-row">
+        @include('admin.components.search')
+        <div class="col-auto">
+            <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newEmployee">
+                <i class="icon">add</i>
+                <span class="text">Добавить сотрудника</span>
+            </button>
+        </div>
+    </div>
 </div>
-@if($emoloyees)
-<div class="toolbar d-flex">
-<form method="GET">
-  <div class="form-row">
-    <div class="col-auto">
-      <select name="manager" class="custom-select">
-        <option value="all">Все магазины</option>
-        <option value="2">Makro</option>
-        <option value="1">Sunday</option>
-      </select>
-    </div>
-    <div class="col-auto">
-      <select class="custom-select" name="group">
-        <option value="all">Все группы</option>
-        <option value="1">Администратори</option>
-        <option value="0">Менеджери</option>
-      </select>
-    </div>
-    <div class="col-auto">
-      <select class="custom-select" name="status">
-        <option value="all">Все статуси</option>
-        <option value="1">Активен</option>
-        <option value="2">Неактивен</option>
-      </select>
-    </div>
-  </div>
-  </form>
-  @include('admin.components.search')
-</div>
-  <table class="table table-bordered table-hover table-stiped">
+@if(count($emoloyees) > 0)
+<table class="table table-bordered table-hover table-stiped">
     <thead>
-      <tr>
-        <th class="col-auto">№</th>
-        <th class="col-6">ФИО</th>
-        <th class="col-6">Магазын</th>
-        <th class="col-2">Группа</th>
-        <th class="col-2">Телефон</th>
-        <th class="col-2">Статус</th>
-        <th class="col-auto"></th>
-      </tr>
+        <tr>
+            <th width="54px;">№</th>
+            <th>ФИО</th>
+            <th width="154px;">Магазын</th>
+            <th width="154px;">Группа</th>
+            <th width="154px;">Телефон</th>
+            <th width="154px;">Статус</th>
+        </tr>
     </thead>
     <tbody class="emoloyees-table" data-count="{{ count($emoloyees) }}">
-      @foreach($emoloyees as $employee)
-      <tr data-target="{{ $employee->id }}">
-        <td data-id="{{ $employee->id }}">{{ $employee->id}}</td>
-        <td data-name="{{ $employee->name }}">{{ $employee->name}}</td>
-        <td data-mname="{{ $employee->manager_id }}">{{ $employee->manager->name }}</td>
-        <td data-rname="{{ $employee->role_id }}" >{{ $employee->role->name }}</td>
-        <td data-mobile="{{ $employee->mobile }}">+998{{$employee->mobile}}</td>
-        @if($employee->status == 1 )
-        <td class="text-green status" data-status="1" >Активен</td>
-        @else
-        <td class="text-warning status" data-status="0">Неактивен</td>
-        @endif
-        <td>
-          <div class="btn-group btn-group-sm employee_actions">
-            <a href="#" data-toggle="modal" data-target="#editEmployee" class="btn btn-light">
-              <i class="icon">edit</i>
-            </a>
-          </div>
-          {!! Form::open(['method' => 'DELETE','route' => ['employees.destroy', $employee->id], 'class'=>'btn-group btn-group-sm delete']) !!}
-          {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
-          {!! Form::close() !!}
-        </td>
-      </tr>
-      @endforeach
+        @foreach($emoloyees as $employee)
+        <tr data-id="{{ $employee->id }}" data-name="{{ $employee->name }}" data-manager="{{ $employee->manager_id }}"
+            data-role="{{ $employee->role_id }}" data-mobile="{{ $employee->mobile }}" data-status="{{ $employee->status }}">
+            <td>{{ $employee->id}}</td>
+            <td><a href="#" class="text-green employee_action" data-toggle="modal" data-target="#editEmployee">{{
+                    $employee->name}}</a></td>
+            <td>{{ $employee->manager->name }}</td>
+            <td>{{ $employee->role->name }}</td>
+            <td>+998{{$employee->mobile}}</td>
+            @if($employee->status == 1 )
+            <td class="text-green status">Активен</td>
+            @else
+            <td class="text-warning status">Неактивен</td>
+            @endif
+        </tr>
+        @endforeach
     </tbody>
-  </table>
-    <div class="main-bottom d-flex align-items-center">
-      @if($emoloyees->lastPage() > 1)
-        {{ $emoloyees->appends(request()->query())->links() }}
-      @else
-        @include('admin.components.pagination')
-      @endif
-      <div class="main-bottom-info">
-        {{$emoloyees->lastItem()}} показано из {{$emoloyees->total()}} результатов
-      </div>
-    </div>
-    @include('admin.employees.edit')
+</table>
+<div class="main-bottom d-flex align-items-center">
+    @if($emoloyees->lastPage() > 1)
+    {{ $emoloyees->appends(request()->query())->links() }}
     @else
-    <div class="main-empty">
-      <i class="icon">group</i>
-      <div class="text">Список пусто</div>
+    @include('admin.components.pagination')
+    @endif
+    <div class="main-bottom-info">
+        {{$emoloyees->lastItem()}} показано из {{$emoloyees->total()}} результатов
     </div>
-  @endif
-  @include('admin.employees.add')
+</div>
+@include('admin.employees.edit')
+@else
+<div class="main-empty">
+    <i class="icon">group</i>
+    <div class="text">Список пусто</div>
+</div>
+@endif
+@include('admin.employees.add')
 @endsection
