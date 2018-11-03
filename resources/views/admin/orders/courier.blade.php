@@ -4,14 +4,14 @@
       {{ method_field('PUT') }}
       @csrf
       <div class="modal-header">
-        <h5 class="modal-title">Назначить курьер на заказ № <span class="orderIdForCourier"></span></h5>
+        <h5 class="modal-title">Назначить курьер на заказ № <span class="order_id_for_courier"></span></h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="list">
         <div class="list-item custom-control custom-radio">
-          <input type="radio" id="orderCourier_0" name="courier_id" value="0" class="custom-control-input">
+          <input type="radio" id="orderCourier_0" name="courier_id" value="0" class="custom-control-input" data-branch="">
           <label class="list-link custom-control-label" for="orderCourier_0">Неназначен</label>
         </div>
         @foreach($couriers as $courier)
@@ -24,7 +24,7 @@
       <div class="modal-footer">
         <input type="hidden" name="id" id="editOrderCourier">
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
-        <button type="sumbit" class="btn btn-green">OK</button>
+        <button type="sumbit" class="btn btn-green check_branch">OK</button>
       </div>
     </form>
   </div>

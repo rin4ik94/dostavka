@@ -58,27 +58,37 @@ Vue.filter('toCurrency', function (value) {
 });
 
 
-store.dispatch('checkLangExists')
 
-store.dispatch('setManager').then(() => {
-    store.dispatch("setCart");
-    store.dispatch('setTotal')
-})
-store.dispatch('setToken').then(() => {
-    store.dispatch('fetchUser').catch(() => {
-        store.dispatch('clearAuth')
-        router.replace({ name: 'home' })
-    }).catch(() => {
-        store.dispatch('clearAuth')
-        store.dispatch('showNavbar')
-    })
-
-}); 
 
 // Vue.component('PuRadio', require('./front/desktop/components/PuRadio/PuRadio.vue')) 
 
 const app = new Vue({
     store,
     el: '#desktop',
-    router       
+    router,
+    data: {
+        showPage: false
+    },
+    methods: {
+        pageReady() {
+            this.showPage = true
+        }
+    },
+    beforeCreate () {
+        store.dispatch('checkLangExists')
+        store.dispatch('setManager').then(() => {
+            store.dispatch("setCart");
+            store.dispatch('setTotal')
+        })
+        store.dispatch('setToken').then(() => {
+            store.dispatch('fetchUser').catch(() => {
+                store.dispatch('clearAuth')
+                router.replace({ name: 'home' })
+            }).catch(() => {
+                store.dispatch('clearAuth')
+                store.dispatch('showNavbar')
+            })
+        
+        }); 
+      }   
 })

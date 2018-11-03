@@ -3,11 +3,11 @@
     <div class="container">
     <div class="row">
       <div class="col-auto">
-        <a class="btn btn-link" href="/cart.php">
-          <i class="icon">shopping_cart</i>
+        <router-link :to="{name:'cart'}"><i class="icon">shopping_cart</i>
           <span class="text">{{$t('cart.cart')}}</span>
-          <span class="badge badge-danger">1</span>
-        </a>
+          <!-- <span class="badge badge-danger">1</span> -->
+          </router-link>
+           
       </div>
       <div class="col cart-card-center">
         <div class="item">{{$t("cart.shop")}}: <a href="/">{{manager.name}}</a></div>

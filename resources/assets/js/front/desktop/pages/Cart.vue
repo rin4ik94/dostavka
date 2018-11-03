@@ -1,6 +1,8 @@
 <template>
     <div class="content">
-  <div class="container">
+    <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+
+  <div class="container" v-else>
     <div class="main-actions">
       <router-link class="btn btn-outline-green" :to="{name:'home'}" exact>&#8592;  {{$t('pages.back')}}</router-link>
     </div>
@@ -23,10 +25,15 @@
                 <input class="form-control" type="text" :value="`${product.quantity} ${product.measure}`" disabled>
                 <div class="input-group-append"><button class="btn btn-outline-green" type="button" @click="addToCart(product)"><i class="icon">add</i></button></div>
               </div>
+              <span v-if="product.quantity > 1">
+               {{ product.new_price | toCurrency }} за 1{{product.measure}}
+              </span> 
+              
             </div>
               <div class="cart-item-column cart-item-price">
               <div class="cart-item-price-new">{{product.new_price * product.quantity | toCurrency}} сум</div>
-              <div class="cart-item-price-old" v-if="product.new_price < product.old_price">{{product.old_price | toCurrency}} сум</div>
+              
+              <div class="cart-item-price-old" v-if="product.new_price < product.old_price">{{product.old_price * product.quantity | toCurrency}} сум</div>
             </div>
           </li> 
         </ul>
@@ -110,6 +117,7 @@ export default {
       products: [],
       region: null,
       errors:[],
+      showPage:false,
       nameError:null,
       phoneError:null,
       lastNameError:null,
@@ -159,7 +167,10 @@ export default {
   },
   watch: { 
     lang(){
+      this.showPage = false;
       this.getRegions(); 
+      this.fetchRegion(this.region.slug)
+
     },
     user:{
       deep:true,
@@ -194,15 +205,16 @@ export default {
     getRegions(){
         axios.get('/api/regions').then(response => {
           this.regions = response.data.data   
+          this.showPage = true 
         }
       )
     },
-    ...mapActions({
-      setCart: "setCart",
-      setTotal: "setTotal",
-      setManager: "setManager",
-      addToTotal: "addToTotal"
-    }),
+      ...mapActions({
+        setCart: "setCart",
+        setTotal: "setTotal",
+        setManager: "setManager",
+        addToTotal: "addToTotal"
+      }),
     proceedOrder(){
         this.form.manager_id = this.manager.id
         this.form.delivery_price = this.delivery_price
@@ -221,7 +233,7 @@ export default {
         axios.post('api/orders',{params:params}).then(response=>{
           this.setEmpty()
         }).catch(error=>{
-            this.errors =error.response.data.errors
+            this.errors = error.response.data.errors
         })
     },
     order(){
@@ -340,6 +352,7 @@ localforage.removeItem("cart");
           .get(`/api/managers/${this.manager.slug}/products/cart`, {
             params: params
           }) 
+
             this.products = response.data.data;
         }
       // });
@@ -364,8 +377,10 @@ localforage.removeItem("cart");
     localforage.getItem("cartRegion").then(region => {
       if (!isEmpty("region")) {
         this.fetchRegion(region);
-      } 
-      this.getRegions()      
+      this.getRegions()
+      }else{
+         this.showPage = true        
+      }
       }) 
   }
 };

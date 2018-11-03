@@ -9,6 +9,11 @@ use App\Models\Client;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Клиенты');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +42,11 @@ class ClientController extends Controller
 			 })
 			 ->when(!is_null($blacklist), function($query) use($blacklist){
 				$query->where('blacklist',true);
-			 })
+             })
+             ->when(!is_null($search), function ($query) use ($search) {
+                $query->orwhere('first_name', 'like', '%' . $search . '%');
+                $query->orwhere('last_name', 'like', '%' . $search . '%');
+              })
 			 ->paginate(10);
     //    $regions = $clients->map(function($clients){
     //        return $clients->region;

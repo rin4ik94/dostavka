@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Events\OrderForCourier;
 use App\Http\Controllers\Controller;
-use App\Models\OrderStatus;
-use App\Models\Order;
 use App\Models\Courier;
+use App\Models\Order;
+use App\Models\OrderStatus;
 use App\Models\Region;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Заказы');
+    }
+
     public function index()
     {
         $q = request()->q ?? '';
@@ -18,16 +24,16 @@ class OrderController extends Controller
             $orders = Order::with('manager', 'branch', 'client', 'payment', 'statuses', 'products', 'courier', 'region', 'status')->ofId($q)->paginate(1);
         } elseif (in_array(request()->status, ['4', '5'])) {
             $orders = Order::with('manager', 'branch', 'client', 'payment', 'statuses', 'products', 'courier', 'region', 'status')->orderBy('id', 'desc')
-        ->whereNotIn('order_status_id', [1, 2, 3])
-        ->ofStatus(request()->status)
-        ->ofDate(request()->date, request()->status)
-        ->paginate(10);
+                ->whereNotIn('order_status_id', [1, 2, 3])
+                ->ofStatus(request()->status)
+                ->ofDate(request()->date, request()->status)
+                ->paginate(10);
         } else {
             $orders = Order::with('manager', 'branch', 'client', 'payment', 'statuses', 'courier', 'products', 'region', 'status')
-        ->orderBy('id', 'desc')
-        ->whereNotIn('order_status_id', [4, 5])
-        ->ofStatus(request()->status)
-        ->paginate(10);
+                ->orderBy('id', 'desc')
+                ->whereNotIn('order_status_id', [4, 5])
+                ->ofStatus(request()->status)
+                ->paginate(10);
         }
         $branches = $orders->map(function ($orders) {
             return $orders->getBranches();
@@ -67,7 +73,6 @@ class OrderController extends Controller
         } else {
             $order->update($request->all());
         }
-
         if ($request->productSet != null) {
             $order->products()->detach();
             $keys = ['id', 'product_name', 'product_price', 'product_measurement', 'product_count'];
@@ -78,7 +83,7 @@ class OrderController extends Controller
             }, $array);
 
             foreach ($array as $product) {
-                $total_price = (int)$product['product_count'] * (int)$product['product_price'];
+                $total_price = (int) $product['product_count'] * (int) $product['product_price'];
                 if ($product['product_measurement'] == 'шт') {
                     $product_measurement = 1;
                 } else {
@@ -96,7 +101,8 @@ class OrderController extends Controller
         if ($request->has('id') && $request->has('courier_id')) {
             $order_id = $request->id;
             $order = Order::find($order_id);
-            $order->counter_id = $request->courier_id;
+            event(new OrderForCourier($order->fresh()));
+            $order->courier_id = $request->courier_id;
             $order->save();
             return back()->with('success', 'successful');
         }

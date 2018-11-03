@@ -1,6 +1,8 @@
 <template>
 <div>
-    <ul class="products"> 
+    <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+
+    <ul   class="products"> 
               <li class="product" :key="product.id" v-for="product in products">
         <div class="product-inner" >
         <router-link v-if="$route.name == 'catalog' | $route.name == 'tp'" :to="{name: 'tp', params:{product : product.slug}}">
@@ -31,8 +33,8 @@
         </div>
         </li> 
     </ul> 
-    <Pagination :pagination="pagination" :offset="3" @paginate="allProducts"/>
-    <pu-dialog-confirm  v-if="manager"
+    <Pagination v-if="showPage" :pagination="pagination" :offset="3" @paginate="allProducts"/>
+    <pu-dialog-confirm  v-if="manager && showPage"
         :pu-active.sync="active"
         :pu-size="500"
         :pu-title="$t('cart.confirmTitle')"
@@ -46,12 +48,11 @@
 import localforage from "localforage";
 import { isEmpty } from "lodash";
 import { mapActions, mapGetters } from "vuex";
-import Pagination from "../../components/Pagination"; 
+import Pagination from "../../components/Pagination";  
 
 export default {
   props: ["price", "branch"],
-  components: { Pagination },
-
+  components: { Pagination }, 
   data() {
     return {
       pagination: {},
@@ -59,12 +60,15 @@ export default {
       productMenu: [],
       products: [],
       active: false,
+      showPage:false,
       scrolled:false
     };
   },
 
   watch: {
      lang(lang){ 
+       this.scrolled = false
+       this.showPage = false
       if (this.$route.name == "category") { 
       
         this.fetchItems();
@@ -74,12 +78,16 @@ export default {
     },
     $route(route) {
       if (route.name == "category") {
+      //  this.scrolled = false
+        
         this.fetchItems();
       } else {
         // this.allProducts();
       }
     },
     price(price) {
+       this.scrolled = false
+      
       if (this.$route.name == "catalog") {
         this.allProducts();
         return;
@@ -144,11 +152,11 @@ export default {
           params: params
         }
       );
-      this.products = await response.data.data;
-      this.pagination = await response.data.meta;  
+      this.products = response.data.data;
+      this.pagination = response.data.meta;  
+      this.showPage = await true 
       this.fetchProducts();
-    }
-    ,
+    },
     async fetchItems() {
         if(this.scrolled){
           new Promise((resolve, reject) => {
@@ -170,8 +178,11 @@ export default {
         }`,
         { params: params }
       );
+
       this.products = await response.data.data;
       this.pagination =await response.data.meta;  
+      this.showPage = await true 
+      
       this.fetchProducts();
     },
     ...mapActions({
@@ -200,9 +211,8 @@ export default {
 
       this.cartData(this.productMenu);
     },
-     fetchProducts() {
-      this.$nextTick(() => {
-       localforage.getItem("cart").then(response => {
+     async fetchProducts() { 
+      let res =  await localforage.getItem("cart").then(response => {
           if (!isEmpty(response)) {
             this.productMenu = response;
             this.products.map((v, k) => {
@@ -220,9 +230,10 @@ export default {
                 }
               });
             });
+            
           }
-        });
-      });
+        }); 
+      
     },
     decreaseQuantity(product) {
       let index = this.productMenu.findIndex(prod => {

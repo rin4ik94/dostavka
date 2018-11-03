@@ -1,15 +1,28 @@
 <template>
     <div class="content">
-  <div class="container">
-    <h1 class="main-title">Доставка и оплата</h1>
-    <div class="content-inner">
-    <main class="main">
+      <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+      <div class="container" v-else>
+        <h1 class="main-title">Доставка и оплата</h1>
+        <div class="content-inner">
+        <main class="main">
 
-    </main>
-    <aside class="aside">
+        </main>
+        <aside class="aside">
 
-    </aside>
+        </aside>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 </template>
+<script>
+export default {
+  data(){
+    return{
+      showPage:false
+    }
+  },
+  mounted(){
+    this.showPage = true
+  }
+}
+</script>

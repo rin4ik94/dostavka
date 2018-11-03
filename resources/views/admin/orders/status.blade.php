@@ -34,7 +34,7 @@
       <div class="modal-footer">
         <input type="hidden" name="id" id="editOrderStatus">
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
-        <button type="sumbit" class="btn btn-green">OK</button>
+        <button type="sumbit" class="btn btn-green check_branch_courier">OK</button>
       </div>
     </form>
   </div>

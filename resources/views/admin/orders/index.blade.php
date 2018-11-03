@@ -1,24 +1,24 @@
 @extends('admin.layouts.dashboard')
 @section('content')
-<div class="toolbar d-flex">
+<div class="toolbar">
     <form method="GET" class="form-row status-filter" data-fetch="{{ Request::get('status') ?? '' }}">
         <div class="col-auto">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-outline-green @if(request()->status < 1) active @endif">
                     <input type="radio" name="status" value="0" @if(request()->status < 1) checked @endif onchange="this.form.submit()">Все<span
-                class="badge count_all">{{ $s['total_count'] or '' }}</span>
+                            class="badge count_all">{{ $s['total_count'] or '' }}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='1') active @endif">
                     <input type="radio" name="status" value="1" @if(request()->status=='1') checked @endif
-                onchange="this.form.submit()">Новый<span class="badge new">{{ $s['data'][1] or ''}}</span>
+                    onchange="this.form.submit()">Новый<span class="badge new">{{ $s['data'][1] or ''}}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='2') active @endif">
                     <input type="radio" name="status" value="2" @if(request()->status=='2') checked @endif
-                onchange="this.form.submit()">Формируется<span class="badge is_formed">{{ $s['data'][2] or ''}}</span>
+                    onchange="this.form.submit()">Формируется<span class="badge is_formed">{{ $s['data'][2] or ''}}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='3') active @endif">
                     <input type="radio" name="status" value="3" @if(request()->status=='3') checked @endif
-                onchange="this.form.submit()">В пути<span class="badge on_way">{{ $s['data'][3] or '' }}</span>
+                    onchange="this.form.submit()">В пути<span class="badge on_way">{{ $s['data'][3] or '' }}</span>
                 </label>
                 <label class="btn btn-outline-green @if(request()->status=='4') active @endif">
                     <input type="radio" name="status" value="4" @if(request()->status=='4') checked @endif
@@ -39,6 +39,9 @@
         @include('admin.components.search')
     </div>
 </div>
+<div class="alert alert-info d-none" role="alert" id="display_new_order" onClick="window.location.reload()">
+    <span class="text-green"></span>
+</div>
 @if(count($orders) > 0)
 <table class="table table-bordered table-hover table-striped order_new_add">
     <thead>
@@ -58,7 +61,7 @@
     <tbody>
         @foreach($orders as $order)
         <tr data-id="{{ $order->id }}" data-mname="{{ $order->manager->name }}" data-omanager="{{ $order->manager_id }}"
-            data-bname="{{ $order->branch->name ?? '' }}" data-branch="{{ $order->branch_id }}" data-region="{{ $order->region_id }}"
+            data-bname="{{ $order->branch->name ?? '' }}" data-branch="{{ $order->branch_id ?? 0 }}" data-region="{{ $order->region_id }}"
             data-cname="{{ $order->client->getFullname() }}" data-cmobile="{{ $order->client->mobile }}" data-status="{{  $order->order_status_id }}"
             data-ostreet="{{  $order->delivery_address_street }}" data-ohome="{{  $order->delivery_address_home }}"
             data-ofloor="{{  $order->delivery_address_floor }}" data-oapartment="{{  $order->delivery_address_apartment }}"
@@ -69,10 +72,10 @@
             <td>{{ $order->getTime()}}</td>
             <td>{{ $order->manager->name }}</td>
             @if($order->branch_id != '')
-            <td><a class="text-green order_branch" href="#" data-toggle="modal" data-target="#orderBranch">{{
+            <td><a class="text-green order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id ?? '0' }}">{{
                     $order->branch->name }}</a></td>
             @else
-            <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch">Выбрать</a></td>
+            <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id ?? '0' }}">Выбрать</a></td>
             @endif
             <td><a class="text-green order_client" href="#" data-toggle="modal" data-target="#Client" data-client="{{ $order->client_id }}">{{
                     $order->client->getFullname() }}</a></td>
@@ -81,13 +84,13 @@
             <td><a class="text-green order_courier" href="#" data-toggle="modal" data-target="#orderCourier"
                     data-courier="{{ $order->courier_id }}">{{ $order->courier->fio }}</a></td>
             @else
-            <td><a class="text-red order_courier" href="#" data-toggle="modal" data-target="#orderCourier" data-courier="0">{{
+            <td><a class="text-red order_courier" href="#" data-toggle="modal" data-target="#orderCourier" data-courier="{{ $order->courier_id }}">{{
                     __('Назначить') }}</a></td>
             @endif
             <td>{{ number_format($order->total_price,'0',' ',' ') }}</td>
             <td>{{ $order->payment->name_ru }}</td>
-            <td><a class="{{ $order->status->color }} order_status" href="#" data-toggle="modal" data-target="#orderStatus">{{
-                    $order->status->name }} {{ $order->status_count }}</a></td>
+            <td><a class="btn {{ $order->status->color }} order_status" href="#" data-toggle="modal" data-target="#orderStatus">{{
+                    $order->status->name }}</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -115,15 +118,15 @@
 @endif
 <script>
     $(document).ready(function () {
-    
         $statusid = $('.status-filter').data('fetch');
         if ($statusid == 4 || $statusid == 5) {
-            $('.orderByDate').prop('disabled',false);
+            $('.orderByDate').prop('disabled', false);
             $('.orderByDate').removeClass('d-none');
         } else {
-            $('.orderByDate').prop('disabled',true);
+            $('.orderByDate').prop('disabled', true);
             $('.orderByDate').addClass('d-none')
         }
     });
+
 </script>
 @endsection

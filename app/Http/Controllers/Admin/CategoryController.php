@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Manager;
-use App\Models\Employee;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class CategoryController extends Controller
 {
@@ -15,7 +14,7 @@ class CategoryController extends Controller
     {
         $this->middleware('permission:Категории');
     }
-    
+
     public function index(Request $request)
     {
         $user = auth()->user();
@@ -38,7 +37,7 @@ class CategoryController extends Controller
         }
         return view('admin.categories.index', compact('categories', 'managers'));
     }
-    
+
     public function store(Request $request)
     {
         $this->validate($request, [

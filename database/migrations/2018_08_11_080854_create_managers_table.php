@@ -20,7 +20,8 @@ class CreateManagersTable extends Migration
             $table->string('logo')->nullable();
             $table->boolean('status')->defaault(1);
             $table->integer('manager_category_id')->unsigned()->index();
-            $table->foreign('manager_category_id')->references('id')->on('manager_categories')->onDelete('cascade');
+            $table->foreign('manager_category_id')->references('id')->on('manager_categories');
+            // $table->foreign('manager_category_id')->references('id')->on('manager_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

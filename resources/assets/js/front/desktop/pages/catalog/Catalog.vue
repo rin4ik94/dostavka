@@ -1,7 +1,10 @@
 <template>
 <div>
-    <div class="content" v-if="!notFound && catalog">
-      <div class="container">
+
+    <div class="content" v-if="!notFound">
+      <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+      
+      <div class="container" v-if="!notFound && catalog && showPage">
         <div class="main-actions">
           <a class="btn btn-outline-green" @click="$router.push({name:'home'})">&#8592; {{$t('pages.back')}}</a>
         </div> 
@@ -33,7 +36,7 @@
         </div>
       </div>
     </div>
-    <NotFound v-if="notFound && !catalog"/>
+    <NotFound v-if="notFound  && !catalog && showPage"/>
     </div>
 </template>
 <script>
@@ -53,6 +56,7 @@ export default {
       id: 0,
       products: [],
       categories: [],
+      showPage:false,
       branchName: null,
       sortByPrice: false
     };
@@ -69,6 +73,7 @@ export default {
       }
     },
     lang(){
+      this.showPage = false
       this.getCatalog();      
     }
     // regionSlug: {
@@ -93,15 +98,17 @@ export default {
             this.catalog = response.data.data;
             if (this.catalog.branches.length > 0) {
               this.branchName = this.catalog.branches[0].region_name;
-            } else {
+            } else { 
+            this.notFound = true;
+            this.showPage =true 
+            this.catalog = null
+            return
               // this.$router.replace({ name: "notFound" });
             }
             this.getCategories();
           })
           .catch(() => {
-            this.notFound = true;
-
-            // this.$router.push({ name: "notFound" });
+            this.$router.push({ name: "notFound" });
           });
       // }, 0);
     },
@@ -111,6 +118,7 @@ export default {
           .get(`/api/categories?withManager&manager=${this.catalog.id}`)
           // .then(response => {
             this.categories = response.data.data;
+            this.showPage = true
             this.categories.map((v, k) => {
               if (v.children.length == 0) {
                 if (this.$route.params.sluged == v.slug) {

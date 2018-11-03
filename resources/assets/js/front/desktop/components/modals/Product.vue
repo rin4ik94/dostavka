@@ -1,12 +1,16 @@
 <template>
-      <div class="modal fade" id="product" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="product" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
+
+    <div  class="modal-content">
       <div class="modal-body p-0">
+        
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <div class="row">
+   <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+        
+        <div class="row" v-else>
           <div class="col-auto f-product-image">
             <div class="f-product-image-inner">
               <img class="f-product-img" :src="product.image" alt="">
@@ -21,7 +25,7 @@
               </div>
               <div class="f-product-quantity">{{product.new_price | toCurrency}} сум за 1 шт</div>
               <div class="f-product-price">
-                <div class="f-product-price-new">{{product.new_price | toCurrency}} сум</div>
+                <div class="f-product-price-new">{{product.new_price * quantity | toCurrency}} сум</div>
                 <div class="f-product-price-old"></div>
               </div>
               <div class="row mt-auto">
@@ -68,12 +72,14 @@ export default {
       active: false,
       productMenu: [],
       quantity: 1,
-      value: null
+      value: null,
+      showPage:false
     };
   },
   watch: {
     $route() {
       if (this.$route.params.product) {
+        this.showPage = false
         this.storageCart();
         this.fetchProduct();
       }
@@ -235,7 +241,6 @@ export default {
         .get(`/api/products/${this.$route.params.product}`)
         .then(response => {
           this.product = response.data.data;
-
           let l = this.productMenu.find(p => {
             return p.id == this.product.id;
           });
@@ -246,7 +251,9 @@ export default {
             this.product.quantity = 1;
 
             this.quantity = 1;
-          }
+          } 
+          this.showPage = true 
+          
         });
     },
     storageCart() {

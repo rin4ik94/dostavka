@@ -1,6 +1,7 @@
 <template>
      <div class="content" v-if="user">
-      <div class="container">
+      <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+      <div class="container" v-else>
         <div class="content-inner">
         <main class="main">
           <h1 class="main-title">Мои данние</h1>
@@ -71,7 +72,8 @@ export default {
   components: { DatePicker },
   data() {
     return {
-      user: null
+      user: null,
+      showPage:false
       // form: {
       //   date: null,
       //   phone: this.user && this.user.data ? this.user.data.phone : null
@@ -90,14 +92,12 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
+    // setTimeout(() => {
       axios.get("api/me").then(response => {
         this.user = response.data;
-        setTimeout(() => {
-          this.$emit("ready");
-        }, 200);
+        this.showPage = true
       });
-    }, 0);
+    // }, 0);
   }
 };
 </script>

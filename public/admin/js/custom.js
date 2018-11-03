@@ -1,21 +1,30 @@
 $(function () {
-    // cheack new order added
-    setInterval(function(){
-    var count = parseInt($('.new').text());
-    var getLastOrderId = $('.table').find('tbody').children('tr:first').data('id');
-    $.ajax({
-        type: "GET",
-        url: '/api/checkNewOrder/'+count+'?lastOrderId='+getLastOrderId,
-        success: function (data) {
-            if(data['status']){
-                $('span.order_new_count').text(data['count']);
-                $('table.order_new_add').find('tbody').prepend("<tr data-id='"+data.data.id+"'><td>"+ data.data.id +"</td><td>"+ dateFormat(data.data.created_at) +"</td><td>"+data.data.manager.name+"</td><td>"+data.data.branch_id+"</td><td>"+data.data.client.first_name+"</td><td>"+data.data.delivery_address_street+"</td><td>"+data.data.courier_id+"</td><td>"+data.data.total_price+"</td><td>"+data.data.order_status_id+"</td><td>"+data['data']['id']+"</td><tr>");
-            }
-        },
-        error: function (data) {
-            console.log('error');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    // check new order added
+    setInterval(function () {
+        var default_count = $('span.new').text();
+        $.ajax({
+            type: "GET",
+            url: '/api/checkNewOrder',
+            success: function (data) {
+                console.log(data);
+                if (data['status']) {
+                    $('span.order_new_count').text(data['count']);
+                    $('#display_new_order').find('span').text('у вас есть новый заказ!!');
+                    $('#display_new_order').removeClass('d-none');
+                    // $('table.order_new_add').find('tbody').prepend("<tr><td><a class='text-red new_order_id' data-id='" + data.data.id + "' href='#' data-toggle='modal' data-target='#Order'>" + data.data.id + "</a></td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td><a class='text-red new_order_branch' href='#' data-toggle='modal' data-target='#orderBranch'>Выбрать</a></td><td><a class='text-green new_order_client' href='#' data-toggle='modal' data-target='#Client'>" + data.data.client.first_name + ' ' + data.data.client.last_name + "</a></td><td>" + data.data.delivery_address_street + "</td><td><a class='text-red new_order_courier' href='#' data-toggle='modal' data-target='#orderCourier'>Назначить</a></td><td>" + number_format(data.data.total_price) + "</td><td>" + data.data.payment.name_ru + "</td><td><a class='btn btn-info new_order_status' href='#' data-toggle='modal' data-target='#orderStatus'>Новый</td><tr>");
+                } else {
+                    $('span.order_new_count').text(data['count']);
+                }
+            },
+            error: function (data) {
+                console.log('error');
+            }
+        });
     }, 10000);
     // image preview
     $(".custom-file-input").change(function () {
@@ -51,23 +60,23 @@ $(function () {
         }
     });
     // api get managers with categories
-    $('.apiManager').on('change', function () {
+    $('.api_manager').on('change', function () {
         var id = $(this).val();
         $.ajax({
             type: "GET",
             url: '/api/categories?withManager&manager=' + id,
             success: function (data) {
-                $('.apiCategory').empty();
-                $('.apiCategory').append("<option value='' selected disabled>Не выбран</option>");
+                $('.api_category').empty();
+                $('.api_category').append("<option value='' selected disabled>Не выбран</option>");
                 $.each(data.data, function (index, dataObj) {
-                    $('.apiCategory').append("<option value=" + dataObj.id + " disabled>" + dataObj.name + "</option>");
+                    $('.api_category').append("<option value=" + dataObj.id + " disabled>" + dataObj.name + "</option>");
                     if (dataObj.children.length > 0) {
                         $.each(dataObj.children, function (index, childObj) {
-                            $('.apiCategory').append("<option value=" + childObj.id + ">" + "&nbsp;&nbsp;" + childObj.name + "</option>");
+                            $('.api_category').append("<option value=" + childObj.id + ">" + "&nbsp;&nbsp;" + childObj.name + "</option>");
                         });
                     }
                 });
-                $('.apiCategory').prop('disabled', false);
+                $('.api_category').prop('disabled', false);
             },
             error: function (data) {
                 console.log('error');
@@ -77,8 +86,10 @@ $(function () {
 
     // image close button {image Preview}
     $('.custom-image-close').on('click', function () {
-        $(this).parent().hide().prev().show();
-        $(this).parents(':eq(1)').show().find('input').val('');
+        if (confirmations('логотип')) {
+            $(this).parent().hide().prev().show();
+            $(this).parents(':eq(1)').show().find('input').val('');
+        }
     });
 
     //actions for manager
@@ -92,26 +103,19 @@ $(function () {
         $('#image_show').attr('src', "/storage/logos/" + logo);
         $('#image_show').parent().show().prevAll().hide();
         $('#edit_name').val(name);
-        $("#edit_managerCatId").val(category);
+        $("#edit_manager_cat_id").val(category);
         $('#manager_id').val(id);
         $('#edit_status').val(status);
-        $('.deleteManager').attr('data-id', id);
+        $('.delete_manager').data('destroy', id);
     });
     // delete manager via ajax
-    $(".deleteManager").click(function () {
-        var id = $(this).data('id');
-        if ($result) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    $(".delete_manager").click(function (e) {
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        if (confirmations('магазин')) {
             $.ajax({
-                url: '/admin/managers/delete',
-                type: 'post',
-                data: {
-                    id: id
-                },
+                url: '/admin/managers/' + id,
+                type: 'delete',
                 success: function (result) {
                     location.reload();
                 }
@@ -120,7 +124,7 @@ $(function () {
     });
 
     //actions for manager-group
-    $('.managergr_action').on('click', function (e) {
+    $('.manager_group_action').on('click', function (e) {
         e.preventDefault(e);
         var id = $(this).closest('tr').data('id');
         var name_ru = $(this).closest('tr').data('nameru');
@@ -128,9 +132,22 @@ $(function () {
         $('#name_ru').val(name_ru);
         $('#name_uz').val(name_uz);
         $('#editManagerGr').val(id);
-        $('.deleteManagerGroup').attr('data-id', id);
+        $('.delete_manager_group').data('destroy', id);
     });
 
+    $('.delete_manager_group').on('click', function (e) {
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        if (confirmations('категория')) {
+            $.ajax({
+                url: '/admin/managers/group/' + id,
+                type: 'delete',
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        }
+    });
     //actions for employee-group
     $('.editEmployeGroup a').on('click', function (e) {
         e.preventDefault(e);
@@ -183,7 +200,7 @@ $(function () {
         });
     });
     // edit branches
-    $('.branchs_action').on('click', function (e) {
+    $('.branch_action').on('click', function (e) {
         e.preventDefault(e);
         var arr = [];
         var uri = $(this).attr('href');
@@ -193,11 +210,13 @@ $(function () {
             url: uri,
             dataType: 'json',
             success: function (data) {
+                console.log(data);
                 $('#branchId').val(data.branch.id);
                 $('#editBranchName').val(data.branch.name);
                 $("#editManagerName").val(data.branch.manager_id);
                 $("#editRegionName").val(data.branch.region_id);
                 $("#editAddress").val(data.branch.address);
+                $('.delete_branch').data('destroy', data.branch.id);
                 $('.branCheckbox').find('.custom-control-input').each(function () {
                     var input = $(this);
                     checkboxActive(input);
@@ -217,8 +236,22 @@ $(function () {
             }
         });
     });
+    $('.delete_branch').on('click', function (e) {
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        if (confirmations('филиал')) {
+            $.ajax({
+                url: '/admin/branchs/' + id,
+                type: 'delete',
+                success: function (result) {
+                    console.log(result);
+                    location.reload();
+                }
+            });
+        }
+    });
     // actions for category
-    $('.action-edit a').on('click', function (e) {
+    $('.category_action a').on('click', function (e) {
         e.preventDefault(e);
         var cat_id = $(this).closest('a').attr('data');
         var status = $(this).closest('a').parents(':eq(1)').attr('data');
@@ -233,32 +266,54 @@ $(function () {
         $('.editCatParent').val(parent_id);
         $('.editCatManager').val(manager_id);
     });
+
+    $('.delete_category').on('click', function () {
+        confirmations('категория');
+    });
+
     // actions for products
-    $('.product_action a').on('click', function (e) {
+    $('.product_action').on('click', function (e) {
         e.preventDefault(e);
-        $(this).closest('tr').each(function () {
-            var id = $(this).children('td:first').text();
-            var image = $(this).children('td:eq(0)').attr('data-image');
-            var name_ru = $(this).children('td:eq(1)').text();
-            var name_uz = $(this).children('td:eq(1)').attr('data-name');
-            var manager_id = $(this).children('td:eq(2)').attr('data-manager');
-            var category_id = $(this).children('td:eq(3)').attr('data-category');
-            var new_price = $(this).children('td:eq(4)').attr('data-newprice');
-            var old_price = $(this).children('td:eq(5)').attr('data-oldprice');
-            var measurement = $(this).children('td:eq(6)').attr('data-measurement');
-            var status = $(this).children('td:eq(7)').attr('data-status');
-            $('#image_show').attr('src', "/storage/products/" + image);
-            $('#image_show').parent().show().prevAll().hide();
-            $('#editNameUz').val(name_uz);
-            $('#editNameRu').val(name_ru);
-            $('#editNewPrice').val(new_price);
-            $('#editOldPrice').val(old_price);
-            $('.editProduct_id').val(id);
-            $('.manager_id').val(manager_id);
-            $('.category_id').val(category_id);
-            $('.measurement').val(measurement);
-            $('.status').val(status);
+        $('.api_category').empty();
+        $('.api_category').append("<option value='' selected disabled>Не выбран</option>");
+        var id = $(this).closest('tr').data('id');
+        var image = $(this).closest('tr').data('image');
+        var name_ru = $(this).closest('tr').data('nameru');
+        var name_uz = $(this).closest('tr').data('nameuz');
+        var manager_id = $(this).closest('tr').data('manager');;
+        var category_id = $(this).closest('tr').data('category');
+        var new_price = $(this).closest('tr').data('newprice');
+        var old_price = $(this).closest('tr').data('oldprice');
+        var measurement = $(this).closest('tr').data('measurement');
+        var status = $(this).closest('tr').data('status');
+        var uri = '/admin/products/' + id;
+        $.ajax({
+            type: "GET",
+            url: '/api/categories?withManager&manager=' + manager_id,
+            success: function (data) {
+                $.each(data.data, function (index, dataObj) {
+                    $('.api_category').append("<option value=" + dataObj.id + " disabled>" + dataObj.name + "</option>");
+                    if (dataObj.children.length > 0) {
+                        $.each(dataObj.children, function (index, childObj) {
+                            $('.api_category').append("<option value=" + childObj.id + ">" + "&nbsp;&nbsp;" + childObj.name + "</option>");
+                        });
+                    }
+                });
+            },
         });
+        $('#productEdit').attr('action', uri);
+        $('#image_show').attr('src', "/storage/products/" + image);
+        $('#image_show').parent().show().prevAll().hide();
+        $('#editNameUz').val(name_uz);
+        $('#editNameRu').val(name_ru);
+        $('#editNewPrice').val(new_price);
+        $('#editOldPrice').val(old_price);
+        $('.edit_product_id').val(id);
+        $('#editManager').val(manager_id);
+        $('#editCat').val(category_id);
+        $('.measurement').val(measurement);
+        $('.status').val(status);
+        $('.delete_porduct').data('destroy', id);
     });
     // actions for orders
     $('.order_id').on('click', function (e) {
@@ -396,8 +451,26 @@ $(function () {
             }
             return;
         }
-    });
-
+		});
+		// before appointing order check status and branch to change only 2-nd if courier value has can choose 3-th status
+    $('.check_order').on('click', function (e) {
+			e.preventDefault(e);
+			var order_branch = $('#orderBranches').val();
+			var order_status = $('#statusOrder').val();
+			var order_courier = $('.order_courier').data('courier');
+			if (order_branch > 0 && order_status <= 2 || order_status == 5) {
+					$('.form-order').submit();
+			} else if(order_branch > 0 && order_status == 3 || order_status == 4) {
+				if(order_courier){
+					$('.form-order').submit();
+				}else{
+					alert('Прежде чем выбрать статус '+getStatusName(order_status)+', необходимо назначить курьера!');
+				}
+			}else{
+				alert('Перед изменением заказ необходимо проверить статус и филиал!');
+			}
+	});
+	
     $('.order_branch').on('click', function (e) {
         e.preventDefault(e);
         var branches = $(this).closest('tr').data('branches');
@@ -417,7 +490,16 @@ $(function () {
             return;
         }
     });
-
+    // before appointing courier check branch value
+    $('.check_branch').on('click', function (e) {
+        e.preventDefault(e);
+        var order_branch = parseInt($('#orderCourier_0').data('branch'));
+        if (order_branch != 0) {
+            $('.form-courier').submit();
+        } else {
+            alert('Перед выбором курьер должен быть проверен филиалом!');
+        }
+    });
     $('.order_client').on('click', function (e) {
         e.preventDefault(e);
         var clientName = $(this).closest('tr').data('cname');
@@ -430,12 +512,14 @@ $(function () {
         e.preventDefault(e);
         var orderId = $(this).closest('tr').data('id');
         var orderCourierId = $(this).data('courier');
-        if (orderCourierId == null) {
+        var branch_id = $(this).closest('tr').data('branch');
+        if (!orderCourierId) {
             orderCourierId = '0'
         }
         $(".form-courier #orderCourier_" + orderCourierId).prop("checked", true);
         $('#editOrderCourier').val(orderId);
-        $('span.orderIdForCourier').html(orderId);
+        $('#orderCourier_0').data('branch', branch_id);
+        $('span.order_id_for_courier').html(orderId);
     });
 
     $('.order_status').on('click', function (e) {
@@ -443,12 +527,25 @@ $(function () {
         var orderId = $(this).closest('tr').data('id');
         var statusId = $(this).closest('tr').data('status');
         var branchId = $(this).closest('tr').data('bname');
-
         $(".form-status input[value = " + statusId + "]").prop("checked", true);
         $('#editOrderStatus').val(orderId);
     });
+    // before appointing status check branch and courier values
+    $('.check_branch_courier').on('click', function (e) {
+				e.preventDefault(e);
+				var order_branch = $('.order_branch').data('branch');
+				var order_courier = $('.order_courier').data('courier');
+				var status_value = $('input[name=order_status_id]:checked').val();
+        if (order_branch && order_courier) {
+					$('.form-status').submit();
+				}else if(status_value == 5){
+					$('.form-status').submit();
+				}else{
+            alert('Перед изменением статуса необходимо проверить филиал и курьер!');
+        }
+    });
     // actions for couriers
-    $('.courier_action a').on('click', function (e) {
+    $('.courier_action').on('click', function (e) {
         e.preventDefault(e);
         $(this).closest('tr').each(function () {
             var id = $(this).data('id');
@@ -461,16 +558,30 @@ $(function () {
             $('#editPass').val(pass);
             $('#editMobile').val(mobile);
             $('#editStatus').val(status);
+            $('.delete_courier').data('destroy', id);
         });
     });
+    $(".delete_courier").click(function (e) {
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        if (confirmations('курьер')) {
+            $.ajax({
+                url: '/admin/couriers/' + id,
+                type: 'delete',
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        }
+    });
     // actions for clients
-    $('.client_action a').on('click', function (e) {
+    $('.client_action').on('click', function (e) {
         e.preventDefault(e);
         $(this).closest('tr').each(function () {
             var id = $(this).data('id');
             var first_name = $(this).data('fname');
             var last_name = $(this).data('lname');
-            var mobile = $(this).data('mobile');
+            var phone = $(this).data('phone');
             var birth_date = $(this).data('bdate');
             var jender = $(this).data('jender');
             var region = $(this).data('region');
@@ -479,18 +590,32 @@ $(function () {
             $('#editId').val(id);
             $('#editFirstName').val(first_name);
             $('#editLastName').val(last_name);
-            $('#editMobile').val(mobile);
+            $('#editMobile').val(phone);
             $('#editDate').val(birth_date);
             $('#editJender').val(jender);
             $('#editRegion').val(region);
             $('#editStatus').val(status);
+            $('.delete_client').data('destroy', id);
             if (blacklist == '1') {
                 $('#editBlackList').prop('checked', true);
             } else {
                 $('#editBlackList').prop('checked', false);
             }
-
         });
+    });
+
+    $(".delete_client").click(function (e) {
+        e.preventDefault(e);
+        var id = $(this).data('destroy');
+        if (confirmations('клиент')) {
+            $.ajax({
+                url: '/admin/clients/' + id,
+                type: 'delete',
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        }
     });
     // checkbox button click disable input {working_time} select
     $('.custom-control-input').click(function () {
@@ -508,9 +633,6 @@ $(function () {
         $('.myForm').submit();
     });
     // from action delete show confirmations
-    $(".delete").on("click", function () {
-        return confirm("Are you sure?");
-    });
     // modal close reset from values
     $('.modal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
@@ -520,6 +642,10 @@ $(function () {
         $(this).delay(2500).fadeOut();
     });
 }); // end main functions
+function confirmations(param = '') {
+    var result = confirm("Вы уверены, что хотите удалить " + param + "?");
+    return result;
+};
 
 // custom functions
 function disable(input) {
@@ -527,6 +653,7 @@ function disable(input) {
 };
 
 function getStatusName($status) {
+	$status = parseInt($status);
     switch ($status) {
         case 2:
             return 'Формируется';
@@ -585,7 +712,8 @@ function dateFormat($date) {
     return $d + "." + $m + "." + $y + " " + $h + ":" + $min;
 };
 
-function number_format(number, decimals = '2', dec_point = ',', thousands_sep = ' ') {
+function number_format(number, decimals = '0', dec_point = ' ', thousands_sep = ' ') {
+    number = parseInt(number);
     number = number.toFixed(decimals);
 
     var nstr = number.toString();
@@ -599,12 +727,18 @@ function number_format(number, decimals = '2', dec_point = ',', thousands_sep = 
     return x1 + x2;
 };
 
-function setCookie(name,value,days) {
+function setCookie(name, value, days) {
     var expires = "";
     if (days) {
         var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires + ";";
-    }
+    document.cookie = name + "=" + (value || "") + expires + ";";
+}
+
+function inRange(n, nStart, nEnd)
+{
+    if(n>=nStart && n<nEnd) return true;
+    else return false;
+}

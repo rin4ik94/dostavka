@@ -28,8 +28,8 @@
     <li class="nav-item"><a class="nav-link {{ Request::segment(2) === 'orders' ? 'active' : null }}" href="/admin/orders">
         <i class="icon">notifications</i>
         <span class="text">Заказы</span>
-      <span class="badge badge-red order_new_count">0</span>
-      </a></li>
+        <span class="badge badge-red order_new_count">{{ cache('order_count') }} </span>
+  </a></li>
       @endcan
       @can('Отчеты')
     <li class="nav-item"><a class="nav-link {{ Request::segment(2) === 'reports' ? 'active' : null }}" href="/admin/reports">
@@ -38,7 +38,7 @@
       </a></li>
       @endcan
       @can('Транзакции')
-    <li class="nav-item"><a class="nav-link {{ Request::segment(2) === 'transactions' ? 'active' : null }}" href="/admin/orders">
+    <li class="nav-item"><a class="nav-link {{ Request::segment(2) === 'transactions' ? 'active' : null }}" href="/admin/transactions">
         <i class="icon">attach_money</i>
         <span class="text">Транзакции</span>
       </a></li>

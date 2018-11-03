@@ -11,7 +11,7 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
-Route::get('/checkNewOrder/{count}', 'Front\OrderStatusController@count');
+Route::get('/checkNewOrder', 'Front\OrderStatusController@count');
 Route::get('/products', 'Front\ProductController@index');
 Route::post('/orders', 'Front\OrderController@store');
 Route::get('/products/search', 'Front\ProductSearchController@index');
@@ -40,3 +40,9 @@ Route::group(['middleware' => 'jwt.generate'], function () {
     Route::post('/proceed/checkout', 'Front\OrderController@store');
     Route::post('/logout', 'Front\Auth\AuthController@logout');
 });
+Route::get('/couriers/orders/done', 'Mobile\CourierController@done');
+
+Route::post('/couriers/signin', 'Mobile\CourierController@signin');
+Route::get('/couriers/orders', 'Mobile\CourierController@index');
+
+Route::get('/couriers/orders/{id}', 'Mobile\CourierController@show');

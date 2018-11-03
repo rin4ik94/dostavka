@@ -3,6 +3,7 @@
       <Navbar :regions="regions"></Navbar>
       <router-view></router-view>
       <CartInfo />
+
       <Footer></Footer> 
       <RegionModal :regions="regions"/>
       <LoginModal />
@@ -20,7 +21,9 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      regions: []
+      regions: [],
+      showPage:false,
+
     };
   },
   components: { CartInfo, Navbar, Footer },
@@ -29,7 +32,7 @@ export default {
           lang : 'locale'
     })
   },
-  methods: {
+  methods: { 
     ...mapActions({
       setRegionId : 'setRegionId',
       setRegion : 'setRegion'
@@ -37,6 +40,7 @@ export default {
     async getRegions() {
       let response = await axios.get("/api/regions");
       this.regions = response.data.data;
+      await this.$emit("ready");
     },
     async setRegionD(){  
       await localforage.getItem('region').then((region)=>{
@@ -81,11 +85,14 @@ export default {
     }
   },
   async created() {
+    this.$router.beforeEach((to, from, next) => {
+      this.showPage = false;
+      next();
+    });
     this.$nextTick(() => {
       this.getRegions();
     });  
     await this.setRegion() 
-    
     $("#Regions").on("hide.bs.modal", this.setRegionD);
 
   }

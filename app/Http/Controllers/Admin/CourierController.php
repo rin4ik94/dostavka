@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 
 class CourierController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Курьеры');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -79,8 +83,8 @@ class CourierController extends Controller
      */
     public function destroy($id)
     {
-      Courier::findOrFail($id)->delete();
-      return redirect()->route('couriers.index')
-        ->with('success', 'Courier deleted successfully');
+        Courier::findOrFail($id)->delete();
+        session()->flash('success','Courier deleted successfully!');
+        return response()->json('success',200);
     }
 }
