@@ -493,8 +493,8 @@ $(function () {
     // before appointing courier check branch value
     $('.check_branch').on('click', function (e) {
         e.preventDefault(e);
-        var order_branch = $('.order_branch').data('branch');
-        if (order_branch) {
+        var order_branch = parseInt($('#orderCourier_0').data('branch'));
+        if (order_branch != 0) {
             $('.form-courier').submit();
         } else {
             alert('Перед выбором курьер должен быть проверен филиалом!');
@@ -512,11 +512,13 @@ $(function () {
         e.preventDefault(e);
         var orderId = $(this).closest('tr').data('id');
         var orderCourierId = $(this).data('courier');
+        var branch_id = $(this).closest('tr').data('branch');
         if (!orderCourierId) {
             orderCourierId = '0'
         }
         $(".form-courier #orderCourier_" + orderCourierId).prop("checked", true);
         $('#editOrderCourier').val(orderId);
+        $('#orderCourier_0').data('branch', branch_id);
         $('span.order_id_for_courier').html(orderId);
     });
 
