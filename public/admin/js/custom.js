@@ -4,8 +4,9 @@ $(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    // cheack new order added
+    // check new order added
     setInterval(function () {
+        var default_count = $('span.new').text();
         $.ajax({
             type: "GET",
             url: '/api/checkNewOrder',
@@ -13,7 +14,9 @@ $(function () {
                 console.log(data);
                 if (data['status']) {
                     $('span.order_new_count').text(data['count']);
-                    $('table.order_new_add').find('tbody').prepend("<tr data-id='" + data.data.id + "' data-id='" + data.data.id + "' data-mname='" + data.data.manager_id + "' data-omanager='" + data.data.manager_id + "' data-bname='" + data.data.branch_id + "' data-branch='" + data.data.branch_id + "' data-region='" + data.data.region_id + "' data-cname='" + data.data.client_id + "' data-cmobile='" + data.data.client_id + "' data-status='" + data.data.order_status_id + "' data-ostreet='" + data.data.delivery_address_street + "'  data-ohome='" + data.data.delivery_address_home + "' data-ofloor='" + data.data.delivery_address_floor + "' data-oapartment='" + data.data.delivery_address_apartment + "' data-oremark='" + data.data.delivery_address_remark + "' data-odeliver='5000' data-payment='" + data.data.payment.name_ru + "' data-oprice='" + data.data.order_price + "' data-tprice='" + data.data.total_price + "' data-branches='" + data.data.getBranches + "' data-products='" + data.data.products + "' data-statuses='" + data.data.statuses + "'><td><a class='text-red' href='#' data-toggle='modal' data-target='#Order'>" + data.data.id + "</a></td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td>" + data.data.branch_id + "</td><td>" + data.data.client.first_name + "</td><td>" + data.data.delivery_address_street + "</td><td>" + data.data.courier_id + "</td><td>" + data.data.total_price + "</td><td>" + data.data.order_status_id + "</td><td>" + data['data']['id'] + "</td><tr>");
+                    $('#display_new_order').find('span').text('у вас есть новый заказ!!');
+                    $('#display_new_order').removeClass('d-none');
+                    // $('table.order_new_add').find('tbody').prepend("<tr><td><a class='text-red new_order_id' data-id='" + data.data.id + "' href='#' data-toggle='modal' data-target='#Order'>" + data.data.id + "</a></td><td>" + dateFormat(data.data.created_at) + "</td><td>" + data.data.manager.name + "</td><td><a class='text-red new_order_branch' href='#' data-toggle='modal' data-target='#orderBranch'>Выбрать</a></td><td><a class='text-green new_order_client' href='#' data-toggle='modal' data-target='#Client'>" + data.data.client.first_name + ' ' + data.data.client.last_name + "</a></td><td>" + data.data.delivery_address_street + "</td><td><a class='text-red new_order_courier' href='#' data-toggle='modal' data-target='#orderCourier'>Назначить</a></td><td>" + number_format(data.data.total_price) + "</td><td>" + data.data.payment.name_ru + "</td><td><a class='btn btn-info new_order_status' href='#' data-toggle='modal' data-target='#orderStatus'>Новый</td><tr>");
                 } else {
                     $('span.order_new_count').text(data['count']);
                 }
@@ -207,6 +210,7 @@ $(function () {
             url: uri,
             dataType: 'json',
             success: function (data) {
+                console.log(data);
                 $('#branchId').val(data.branch.id);
                 $('#editBranchName').val(data.branch.name);
                 $("#editManagerName").val(data.branch.manager_id);
@@ -447,8 +451,26 @@ $(function () {
             }
             return;
         }
-    });
-
+		});
+		// before appointing order check status and branch to change only 2-nd if courier value has can choose 3-th status
+    $('.check_order').on('click', function (e) {
+			e.preventDefault(e);
+			var order_branch = $('#orderBranches').val();
+			var order_status = $('#statusOrder').val();
+			var order_courier = $('.order_courier').data('courier');
+			if (order_branch > 0 && order_status <= 2 || order_status == 5) {
+					$('.form-order').submit();
+			} else if(order_branch > 0 && order_status == 3 || order_status == 4) {
+				if(order_courier){
+					$('.form-order').submit();
+				}else{
+					alert('Прежде чем выбрать статус '+getStatusName(order_status)+', необходимо назначить курьера!');
+				}
+			}else{
+				alert('Перед изменением заказ необходимо проверить статус и филиал!');
+			}
+	});
+	
     $('.order_branch').on('click', function (e) {
         e.preventDefault(e);
         var branches = $(this).closest('tr').data('branches');
@@ -468,7 +490,16 @@ $(function () {
             return;
         }
     });
-
+    // before appointing courier check branch value
+    $('.check_branch').on('click', function (e) {
+        e.preventDefault(e);
+        var order_branch = $('.order_branch').data('branch');
+        if (order_branch) {
+            $('.form-courier').submit();
+        } else {
+            alert('Перед выбором курьер должен быть проверен филиалом!');
+        }
+    });
     $('.order_client').on('click', function (e) {
         e.preventDefault(e);
         var clientName = $(this).closest('tr').data('cname');
@@ -481,12 +512,12 @@ $(function () {
         e.preventDefault(e);
         var orderId = $(this).closest('tr').data('id');
         var orderCourierId = $(this).data('courier');
-        if (orderCourierId == null) {
+        if (!orderCourierId) {
             orderCourierId = '0'
         }
         $(".form-courier #orderCourier_" + orderCourierId).prop("checked", true);
         $('#editOrderCourier').val(orderId);
-        $('span.orderIdForCourier').html(orderId);
+        $('span.order_id_for_courier').html(orderId);
     });
 
     $('.order_status').on('click', function (e) {
@@ -496,6 +527,20 @@ $(function () {
         var branchId = $(this).closest('tr').data('bname');
         $(".form-status input[value = " + statusId + "]").prop("checked", true);
         $('#editOrderStatus').val(orderId);
+    });
+    // before appointing status check branch and courier values
+    $('.check_branch_courier').on('click', function (e) {
+				e.preventDefault(e);
+				var order_branch = $('.order_branch').data('branch');
+				var order_courier = $('.order_courier').data('courier');
+				var status_value = $('input[name=order_status_id]:checked').val();
+        if (order_branch && order_courier) {
+					$('.form-status').submit();
+				}else if(status_value == 5){
+					$('.form-status').submit();
+				}else{
+            alert('Перед изменением статуса необходимо проверить филиал и курьер!');
+        }
     });
     // actions for couriers
     $('.courier_action').on('click', function (e) {
@@ -514,7 +559,6 @@ $(function () {
             $('.delete_courier').data('destroy', id);
         });
     });
-
     $(".delete_courier").click(function (e) {
         e.preventDefault(e);
         var id = $(this).data('destroy');
@@ -607,6 +651,7 @@ function disable(input) {
 };
 
 function getStatusName($status) {
+	$status = parseInt($status);
     switch ($status) {
         case 2:
             return 'Формируется';
@@ -665,7 +710,8 @@ function dateFormat($date) {
     return $d + "." + $m + "." + $y + " " + $h + ":" + $min;
 };
 
-function number_format(number, decimals = '2', dec_point = ',', thousands_sep = ' ') {
+function number_format(number, decimals = '0', dec_point = ' ', thousands_sep = ' ') {
+    number = parseInt(number);
     number = number.toFixed(decimals);
 
     var nstr = number.toString();
@@ -687,4 +733,10 @@ function setCookie(name, value, days) {
         expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "") + expires + ";";
+}
+
+function inRange(n, nStart, nEnd)
+{
+    if(n>=nStart && n<nEnd) return true;
+    else return false;
 }

@@ -186,7 +186,7 @@
         <input type="hidden" class="totalPrice" name="total_price">
         <input type="hidden" class="orderPrice" name="order_price">
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
-        <button type="submit" class="btn btn-green">OK</button>
+        <button type="submit" class="btn btn-green check_order">OK</button>
       </div>
       </form>
     </div>

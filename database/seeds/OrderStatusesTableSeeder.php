@@ -15,23 +15,23 @@ class OrderStatusesTableSeeder extends Seeder
             [
                 [
                     'name' => "Новый",
-                    'color' => "#007bff",
+                    'color' => "btn-info",
                 ],
                 [
                     'name' => "Формируется",
-                    'color' => "#6c757d",
+                    'color' => "btn-secondary",
                 ],
                 [
                     'name' => "В пути",
-                    'color' => "#ffc107",
+                    'color' => "btn-warning",
                 ],
                 [
                     'name' => "Доставлен",
-                    'color' => "#28a745",
+                    'color' => "btn-success",
                 ],
                 [
                     'name' => "Отменен",
-                    'color' => "#e84c3d",
+                    'color' => "btn-danger",
                 ],
             ]
         );
