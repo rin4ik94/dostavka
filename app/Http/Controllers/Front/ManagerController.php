@@ -30,7 +30,8 @@ class ManagerController extends Controller
     public function show(Request $request, Manager $manager)
     {
         if ($request->has('region')) {
-            $region = Region::whereSlug(request()->region)->firstOrFail();
+            $region = Region::whereSlug(request()->region)->firstOrFail(); 
+        
             return new ManagerResource($manager->load(['branches' => function ($query) use ($request, $region) {
                 return $query->where('region_id', $region->id)->where('status', 1);
             }]));

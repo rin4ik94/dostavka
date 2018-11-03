@@ -1,7 +1,7 @@
 <template>
 <div>
 
-    <div class="content" >
+    <div class="content" v-if="!notFound">
       <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
       
       <div class="container" v-if="!notFound && catalog && showPage">
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <NotFound v-if="notFound && !catalog && showPage"/>
+    <NotFound v-if="notFound  && !catalog && showPage"/>
     </div>
 </template>
 <script>
@@ -98,15 +98,17 @@ export default {
             this.catalog = response.data.data;
             if (this.catalog.branches.length > 0) {
               this.branchName = this.catalog.branches[0].region_name;
-            } else {
+            } else { 
+            this.notFound = true;
+            this.showPage =true 
+            this.catalog = null
+            return
               // this.$router.replace({ name: "notFound" });
             }
             this.getCategories();
           })
           .catch(() => {
-            this.notFound = true;
-
-            // this.$router.push({ name: "notFound" });
+            this.$router.push({ name: "notFound" });
           });
       // }, 0);
     },

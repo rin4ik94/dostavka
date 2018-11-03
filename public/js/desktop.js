@@ -57337,13 +57337,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   if (_this.catalog.branches.length > 0) {
                     _this.branchName = _this.catalog.branches[0].region_name;
                   } else {
+                    _this.notFound = true;
+                    _this.showPage = true;
+                    _this.catalog = null;
+                    return;
                     // this.$router.replace({ name: "notFound" });
                   }
                   _this.getCategories();
                 }).catch(function () {
-                  _this.notFound = true;
-
-                  // this.$router.push({ name: "notFound" });
+                  _this.$router.push({ name: "notFound" });
                 });
 
               case 3:
@@ -58762,165 +58764,171 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "content" }, [
-        !_vm.showPage
-          ? _c("div", { staticClass: "loader" }, [
-              _c("div", { staticClass: "loader-container" })
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        !_vm.notFound && _vm.catalog && _vm.showPage
-          ? _c("div", { staticClass: "container" }, [
-              _c("div", { staticClass: "main-actions" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-outline-green",
-                    on: {
-                      click: function($event) {
-                        _vm.$router.push({ name: "home" })
-                      }
-                    }
-                  },
-                  [_vm._v("← " + _vm._s(_vm.$t("pages.back")))]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.branchName
-                ? _c("h1", { staticClass: "main-title" }, [
-                    _vm._v(
-                      "Каталог продуктов магазина «" +
-                        _vm._s(_vm.catalog.name) +
-                        "» " +
-                        _vm._s(_vm.branchName)
-                    )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("div", { staticClass: "content-inner" }, [
-                _c(
-                  "main",
-                  { staticClass: "main" },
-                  [
+      !_vm.notFound
+        ? _c("div", { staticClass: "content" }, [
+            !_vm.showPage
+              ? _c("div", { staticClass: "loader" }, [
+                  _c("div", { staticClass: "loader-container" })
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.notFound && _vm.catalog && _vm.showPage
+              ? _c("div", { staticClass: "container" }, [
+                  _c("div", { staticClass: "main-actions" }, [
                     _c(
-                      "div",
+                      "a",
                       {
-                        staticClass:
-                          "btn-group btn-group-sm btn-group-toggle main-sorter",
-                        attrs: { "data-toggle": "buttons" }
+                        staticClass: "btn btn-outline-green",
+                        on: {
+                          click: function($event) {
+                            _vm.$router.push({ name: "home" })
+                          }
+                        }
                       },
+                      [_vm._v("← " + _vm._s(_vm.$t("pages.back")))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.branchName
+                    ? _c("h1", { staticClass: "main-title" }, [
+                        _vm._v(
+                          "Каталог продуктов магазина «" +
+                            _vm._s(_vm.catalog.name) +
+                            "» " +
+                            _vm._s(_vm.branchName)
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "content-inner" }, [
+                    _c(
+                      "main",
+                      { staticClass: "main" },
                       [
-                        _c("span", { staticClass: "main-sorter-title" }, [
-                          _vm._v("Сортировать:")
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "div",
                           {
-                            staticClass: "btn btn-outline-light",
-                            class: { active: !_vm.sortByPrice },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.sortByPrice = false
-                              }
-                            }
+                            staticClass:
+                              "btn-group btn-group-sm btn-group-toggle main-sorter",
+                            attrs: { "data-toggle": "buttons" }
                           },
                           [
-                            _vm._v(
-                              "\n                По популярности \n              "
+                            _c("span", { staticClass: "main-sorter-title" }, [
+                              _vm._v("Сортировать:")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-outline-light",
+                                class: { active: !_vm.sortByPrice },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.sortByPrice = false
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                По популярности \n              "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-outline-light",
+                                class: { active: _vm.sortByPrice },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.sortByPrice = true
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  " \n                По цене\n              "
+                                )
+                              ]
                             )
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "btn btn-outline-light",
-                            class: { active: _vm.sortByPrice },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.sortByPrice = true
+                        _vm.active != 0
+                          ? _c("router-view", {
+                              attrs: {
+                                branch: _vm.branchName,
+                                price: _vm.sortByPrice
+                              },
+                              on: { setActive: _vm.setActive }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.active == 0
+                          ? _c("Products", {
+                              attrs: {
+                                branch: _vm.branchName,
+                                price: _vm.sortByPrice
                               }
-                            }
-                          },
-                          [_vm._v(" \n                По цене\n              ")]
-                        )
-                      ]
+                            })
+                          : _vm._e()
+                      ],
+                      1
                     ),
                     _vm._v(" "),
-                    _vm.active != 0
-                      ? _c("router-view", {
-                          attrs: {
-                            branch: _vm.branchName,
-                            price: _vm.sortByPrice
-                          },
-                          on: { setActive: _vm.setActive }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.active == 0
-                      ? _c("Products", {
-                          attrs: {
-                            branch: _vm.branchName,
-                            price: _vm.sortByPrice
-                          }
-                        })
-                      : _vm._e()
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("aside", { staticClass: "aside" }, [
-                  _c("nav", { staticClass: "categories" }, [
-                    _c(
-                      "ul",
-                      { staticClass: "nav" },
-                      [
+                    _c("aside", { staticClass: "aside" }, [
+                      _c("nav", { staticClass: "categories" }, [
                         _c(
-                          "li",
-                          { staticClass: "nav-item" },
+                          "ul",
+                          { staticClass: "nav" },
                           [
                             _c(
-                              "router-link",
-                              {
-                                staticClass: "nav-link",
-                                class: { active: _vm.$route.name == "tp" },
-                                attrs: {
-                                  to: {
-                                    name: "catalog",
-                                    params: { slug: _vm.catalog.slug }
+                              "li",
+                              { staticClass: "nav-item" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "nav-link",
+                                    class: { active: _vm.$route.name == "tp" },
+                                    attrs: {
+                                      to: {
+                                        name: "catalog",
+                                        params: { slug: _vm.catalog.slug }
+                                      },
+                                      exact: ""
+                                    }
                                   },
-                                  exact: ""
-                                }
-                              },
-                              [_vm._v("Все категории")]
-                            )
+                                  [_vm._v("Все категории")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.categories, function(category, index) {
+                              return _c("SubCategories", {
+                                key: category.id,
+                                attrs: {
+                                  activeIndex: _vm.active,
+                                  index: category.id,
+                                  category: category
+                                },
+                                on: { updateActive: _vm.setActive }
+                              })
+                            })
                           ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.categories, function(category, index) {
-                          return _c("SubCategories", {
-                            key: category.id,
-                            attrs: {
-                              activeIndex: _vm.active,
-                              index: category.id,
-                              category: category
-                            },
-                            on: { updateActive: _vm.setActive }
-                          })
-                        })
-                      ],
-                      2
-                    )
+                          2
+                        )
+                      ])
+                    ])
                   ])
                 ])
-              ])
-            ])
-          : _vm._e()
-      ]),
+              : _vm._e()
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _vm.notFound && !_vm.catalog && _vm.showPage ? _c("NotFound") : _vm._e()
     ],

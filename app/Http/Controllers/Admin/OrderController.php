@@ -75,7 +75,6 @@ class OrderController extends Controller
         } else {
             $order->update($request->all());
         }
-
         if ($request->productSet != null) {
             $order->products()->detach();
             $keys = ['id', 'product_name', 'product_price', 'product_measurement', 'product_count'];
