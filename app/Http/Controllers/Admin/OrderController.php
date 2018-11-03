@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Order;
-use App\Models\Region;
-use App\Models\Courier;
-use App\Models\OrderStatus;
-use Illuminate\Http\Request;
 use App\Events\OrderForCourier;
 use App\Http\Controllers\Controller;
+use App\Models\Courier;
+use App\Models\Order;
+use App\Models\OrderStatus;
+use App\Models\Region;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -67,8 +67,6 @@ class OrderController extends Controller
     {
         $order_id = $request->id;
         $order = Order::find($order_id);
-        dd($request->all);
-        event(new OrderForCourier($order->fresh()));
         if ($order->order_status_id != $request->order_status_id) {
             $order->update($request->all());
             $order->statuses()->attach($request->order_status_id, ['client_id' => $order->client_id]);
@@ -104,6 +102,7 @@ class OrderController extends Controller
         if ($request->has('id') && $request->has('courier_id')) {
             $order_id = $request->id;
             $order = Order::find($order_id);
+            event(new OrderForCourier($order->fresh()));
             $order->counter_id = $request->courier_id;
             $order->save();
             return back()->with('success', 'successful');

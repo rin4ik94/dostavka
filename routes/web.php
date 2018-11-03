@@ -28,7 +28,7 @@ Route::group([
     Route::resource('branchs', 'BranchController')->except(['show', 'create']);
     Route::resource('orders', 'OrderController')->except(['show', 'create', 'edit']);
     Route::put('orderstatus/{order}', 'OrderStatusController@update')->name('orderstatus.update');
-    Route::put('ordercourier/{order}', 'OrderController@update')->name('ordercourier.update');
+    Route::put('ordercourier/{order}', 'OrderController@courierChange')->name('ordercourier.update');
     Route::resource('reports', 'ReportController')->except(['show', 'create', 'edit']);
     Route::resource('couriers', 'CourierController')->except(['show', 'create', 'edit']);
     Route::resource('categories', 'CategoryController')->except(['show', 'create']);
