@@ -40,5 +40,9 @@ Route::group(['middleware' => 'jwt.generate'], function () {
     Route::post('/proceed/checkout', 'Front\OrderController@store');
     Route::post('/logout', 'Front\Auth\AuthController@logout');
 });
+Route::get('/couriers/orders/done', 'Mobile\CourierController@done');
 
 Route::post('/couriers/signin', 'Mobile\CourierController@signin');
+Route::get('/couriers/orders', 'Mobile\CourierController@index');
+
+Route::get('/couriers/orders/{id}', 'Mobile\CourierController@show');
