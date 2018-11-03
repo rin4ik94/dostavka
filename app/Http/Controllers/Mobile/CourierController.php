@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Mobile;
 
+use App\Models\Order;
+use App\Models\Courier;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Courier;
 
 class CourierController extends Controller
 {
@@ -15,7 +16,12 @@ class CourierController extends Controller
      */
     public function index()
     {
-        //
+        return Order::with('status')->where('courier_id', request()->courierId)->whereIn('order_status_id', [2, 3])->get();
+    }
+
+    public function done()
+    {
+        return Order::with('status')->where('courier_id', request()->courierId)->where('order_status_id', 4)->get();
     }
 
     public function signin()
@@ -61,7 +67,8 @@ class CourierController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::find($id);
+        return $order->load('client', 'manager', 'branch', 'payment', 'status', 'region', 'products');
     }
 
     /**
