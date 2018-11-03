@@ -16,12 +16,12 @@ class CourierController extends Controller
      */
     public function index()
     {
-        return Order::with('status')->where('courier_id', request()->courierId)->whereIn('order_status_id', [2, 3])->get();
+        return Order::with('status')->ofDate(4, request()->date)->ofCourier(request()->courierId)->whereIn('order_status_id', [2, 3])->get();
     }
 
     public function done()
     {
-        return Order::with('status')->where('courier_id', request()->courierId)->where('order_status_id', 4)->get();
+        return Order::with('status')->ofCourier(request()->courierId)->ofStatus(4)->get();
     }
 
     public function signin()

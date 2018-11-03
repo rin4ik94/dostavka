@@ -67,12 +67,20 @@ class Order extends Model
         ->withPivot(['product_name', 'product_count', 'product_price', 'product_total_price', 'product_measurement']);
     }
 
-    public function scopeOfStatus($result, $status)
+    public function scopeOfStatus($result, $statusId)
     {
-        if (!$status) {
+        if (!$statusId) {
             return;
         }
-        $result->where('order_status_id', $status);
+        $result->where('order_status_id', $statusId);
+    }
+
+    public function scopeOfCourier($result, $courierId)
+    {
+        if (!$courierId) {
+            return;
+        }
+        $result->where('courier_id', $courierId);
     }
 
     public function scopeOfDate($result, $date, $status)
@@ -80,6 +88,8 @@ class Order extends Model
         if ($status == 4 || $status == 5) {
             if (!$date) {
                 $date = Carbon::now()->format('Y-m-d');
+                $result->whereDate('created_at', $date);
+            } else {
                 $result->whereDate('created_at', $date);
             }
             $result->whereDate('created_at', $date);
