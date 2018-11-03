@@ -103,7 +103,7 @@ class OrderController extends Controller
             $order_id = $request->id;
             $order = Order::find($order_id);
             event(new OrderForCourier($order->fresh()));
-            $order->counter_id = $request->courier_id;
+            $order->courier_id = $request->courier_id;
             $order->save();
             return back()->with('success', 'successful');
         }
