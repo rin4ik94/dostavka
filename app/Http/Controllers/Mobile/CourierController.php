@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mobile;
 use App\Models\Order;
 use App\Models\Courier;
 use Illuminate\Http\Request;
+use App\Events\OrderForCourier;
 use App\Http\Controllers\Controller;
 
 class CourierController extends Controller
@@ -16,12 +17,12 @@ class CourierController extends Controller
      */
     public function index()
     {
-        return Order::with('status')->ofDate(4, request()->date)->ofCourier(request()->courierId)->whereIn('order_status_id', [2, 3])->get();
+        return Order::with('status')->ofCourier(request()->courierId)->whereIn('order_status_id', [2, 3])->get();
     }
 
     public function done()
     {
-        return Order::with('status')->ofCourier(request()->courierId)->ofStatus(4)->get();
+        return Order::with('status')->ofCourier(request()->courierId)->ofStatus(4)->whereDate('created_at', request()->date)->get();
     }
 
     public function signin()
@@ -103,5 +104,18 @@ class CourierController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function statusChange(Request $request, $id)
+    {  
+        $order = Order::find($id);
+        $order->order_status_id = 4;
+        $order->save();
+        return response('fine'); 
+    }
+    public function me(Request $request, $id)
+    {  
+        $courier = Courier::findOrFail($id);
+    
+        return response($courier, 200); 
     }
 }
