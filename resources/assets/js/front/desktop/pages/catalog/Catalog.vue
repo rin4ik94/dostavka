@@ -114,7 +114,7 @@ export default {
     },
     async getCategories() {
       // this.$nextTick(() => {
-    let response =   await axios
+    let response = await axios
           .get(`/api/categories?withManager&manager=${this.catalog.id}`)
           // .then(response => {
             this.categories = response.data.data;

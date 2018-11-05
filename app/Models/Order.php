@@ -89,8 +89,6 @@ class Order extends Model
             if (!$date) {
                 $date = Carbon::now()->format('Y-m-d');
                 $result->whereDate('created_at', $date);
-            } else {
-                $result->whereDate('created_at', $date);
             }
             $result->whereDate('created_at', $date);
         }

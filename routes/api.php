@@ -44,5 +44,7 @@ Route::get('/couriers/orders/done', 'Mobile\CourierController@done');
 
 Route::post('/couriers/signin', 'Mobile\CourierController@signin');
 Route::get('/couriers/orders', 'Mobile\CourierController@index');
+Route::put('/ordercourier/{order}', 'Mobile\CourierController@statusChange');
 
 Route::get('/couriers/orders/{id}', 'Mobile\CourierController@show');
+Route::get('/couriers/me/{id}', 'Mobile\CourierController@me');
