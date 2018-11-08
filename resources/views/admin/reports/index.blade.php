@@ -1,83 +1,122 @@
 @extends('admin.layouts.dashboard')
 @section('content')
-<div class="main-top d-flex align-items-center">
-	<h1 class="main-title">Список курьеров</h1>
-	<button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
-		<svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#plus"></use></svg>
-		<span class="text">Добавить магазин</span>
-	</button>
-</div>
 
-<div class="toolbar d-flex">
-  <div class="form-row">
+<div class="toolbar">
+  <form class="form-row" method="GET">
     <div class="col-auto">
-      <div class="dropdown dropdown-select">
-        <button class="btn btn-light dropdown-toggle" data-name="group" type="button" data-toggle="dropdown">
-        Все группы
-        </button>
-        <ul class="dropdown-menu">
-          <div class="dropdown-header">
-            <input type="search" class="form-control filter" name="search">
-          </div>
-          <li class="dropdown-item" data-value="all">Все группы</li>
-          <li class="dropdown-item" data-value="1">Администратори</li>
-          <li class="dropdown-item" data-value="2">Менеджери</li>
-        </ul>
-      </div>
+      <select class="custom-select" name="section">
+        <option value="1" selected>По магазинам</option>
+        <option value="2">По филиалам</option>
+        <option value="3">По заказам</option>
+        <option value="4">По курьерам</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <input class="form-control" type="date" value="2018-11-08" name="of_date">
     </div>
     <div class="col-auto">
-      <div class="dropdown dropdown-select">
-        <button class="btn btn-light dropdown-toggle" data-name="status" type="button" data-toggle="dropdown">
-        Все статусы
-        </button>
-        <ul class="dropdown-menu">
-          <div class="dropdown-header">
-            <input type="search" class="form-control filter" name="search">
-          </div>
-          <li class="dropdown-item" data-value="all">Все статусы</li>
-          <li class="dropdown-item" data-value="1">Активен</li>
-          <li class="dropdown-item" data-value="0">Неактивен</li>
-        </ul>
+      <div class="input-group">
+        <input class="form-control" type="date" value="2018-11-09" name="to_date">
       </div>
     </div>
-  </div>
-	@include('admin.components.search')
+  </form>
 </div>
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th class="col-auto">№</th>
-      <th class="col-6">ФИО</th>
-      <th class="col-2">Телефон</th>
-      <th class="col-2">Номер ТС</th>
-      <th class="col-2">Статус</th>
-      <th class="col-auto"></th>
+      <th width="250px">№ магазина</th>
+      <th>Названия магазина</th>
+      <th width="250px">Количество заказов</th>
+      <th width="250px">Сумма покупки</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>1</td>
-      <td>Холматов Джалолиддин Рахматжон угли</td>
-      <td>+998916720193</td>
-      <td>40A777AA</td>
-      <td class="text-green">Активен</td>
-      <td>
-        <form class="btn-group btn-group-sm" role="group">
-          <button class="btn btn-light" type="submit">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#edit"></use></svg>
-          </button>
-          <button class="btn btn-light" type="submit">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#delete"></use></svg>
-          </button>
-        </form>
-      </td>
+      <td>10</td>
+      <td>Makro</td>
+      <td>15</td>
+      <td>250 000 сум</td>
+    </tr>
+  </tbody>
+</table>
+<div class="main-bottom d-flex align-items-center"> 
+  <div class="main-bottom-info"> 
+    <strong>Итого: 250 сум</strong>
+  </div>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th width="250px">№ филиала</th>
+      <th>Названия филиала</th>
+      <th width="250px">Количество заказов</th>
+      <th width="250px">Сумма покупки</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>10</td>
+      <td>Makro Фергана Сайлгох</td>
+      <td>15</td>
+      <td>250 000 сум</td>
+    </tr>
+  </tbody>
+</table>
+<div class="main-bottom d-flex align-items-center"> 
+  <div class="main-bottom-info"> 
+    <strong>Итого: 250 сум</strong>
+  </div>
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th width="250px">Статус заказа</th>
+      <th>Количество заказов</th>
+      <th width="250px">Сумма заказов</th>
+      <th width="250px">Сумма доставки</th>
+      <th width="250px">Обшая сумма</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Новый</td>
+      <td>11</td>
+      <td>15 000 cум</td>
+      <td>250 000 сум</td>
+      <td>250 000 сум</td>
     </tr>
   </tbody>
 </table>
 
-<div class="main-bottom d-flex align-items-center">
-	 @include('admin.components.pagination')
-  <div class="main-bottom-info">20 показано из 45 результатов</div>
+
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th width="250px">№ курьера</th>
+      <th>ФИО</th>
+      <th width="250px">Количество заказов</th>
+      <th width="250px">Сумма доставки</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>10</td>
+      <td>Robbie Mohr</td>
+      <td>15</td>
+      <td>250 000 сум</td>
+    </tr>
+  </tbody>
+</table>
+<div class="main-bottom d-flex align-items-center"> 
+  <div class="main-bottom-info"> 
+    <strong>Итого: 250 сум</strong>
+  </div>
 </div>
+
+
+
 @endsection
