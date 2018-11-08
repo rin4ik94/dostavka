@@ -33,7 +33,7 @@
         </div>
         </li> 
     </ul> 
-    <Pagination v-if="showPage" :pagination="pagination" :offset="3" @paginate="allProducts"/>
+    <Pagination @topGo="scrollTOP" v-if="showPage" :pagination="pagination" :offset="3" @paginate="allProducts"/>
     <pu-dialog-confirm  v-if="manager && showPage"
         :pu-active.sync="active"
         :pu-size="500"
@@ -103,7 +103,8 @@ export default {
     },
    
   }, 
-  async beforeMount() {
+ created() {
+    window.scrollTo(0,0)
     $("#product").on("hide.bs.modal", this.replacePage);
 
     if (!this.$route.params.sluged) {
@@ -119,6 +120,11 @@ export default {
     lang: "locale"
   }),
   methods: {
+    async scrollTOP(){
+new Promise((resolve, reject) => {  
+            $("html, body").animate({ scrollTop: 140 }, 600);
+          })
+    },
     replacePage() {
       if (this.$route.params.sluged) {
         this.$router.replace({
@@ -133,12 +139,12 @@ export default {
       }
     },
     async allProducts() { 
-      if(this.scrolled){
-          new Promise((resolve, reject) => {
-            $("html, body").animate({ scrollTop: 140 }, 600);
-          })
-      }
-      this.scrolled = true
+      // if(this.scrolled){
+      //     new Promise((resolve, reject) => {
+      //       $("html, body").animate({ scrollTop: 140 }, 600);
+      //     })
+      // }
+      // this.scrolled = true
       let params = {};
       if (this.price) {
         params["price"] = this.price;
@@ -158,12 +164,12 @@ export default {
       this.fetchProducts();
     },
     async fetchItems() {
-        if(this.scrolled){
-          new Promise((resolve, reject) => {
-            $("html, body").animate({ scrollTop: 140 }, 600);
-          }) 
-        }
-      this.scrolled = true
+      //   if(this.scrolled){
+      //     new Promise((resolve, reject) => {
+      //       $("html, body").animate({ scrollTop: 140 }, 600);
+      //     }) 
+      //   }
+      // this.scrolled = true
       let params = {};
       if (this.price) {
         params["price"] = this.price;
