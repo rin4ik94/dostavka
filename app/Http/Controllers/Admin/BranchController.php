@@ -59,9 +59,11 @@ class BranchController extends Controller
                 $query->orwhere('name', 'like', '%' . $search . '%');
             })
             ->paginate(10);
+            $branch = [];
         $regions = Region::all();
         $workingModes = WorkingMode::all();
         $workingTimes = WorkingTime::all();
+        // dd($branches);
         return view('admin.branchs.index', compact('regions', 'workingModes', 'branches', 'workingTimes', 'managers'));
     }
     
