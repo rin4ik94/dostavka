@@ -94,6 +94,31 @@ class Order extends Model
         }
     }
 
+    public function scopeOfDates($result, $start, $end){
+        if ($start && $end) {
+                return $result->whereBetween(\DB::raw('date(created_at)'), [$start, $end]);
+            }
+            if (!$start) {
+                if ($end) {
+                    return $result->whereDate('created_at', '<=', $end);
+                } else {
+                    return;
+                }
+            }
+            if (!$end) {
+                if ($start) {
+                    return $result->whereDate('created_at', '>=', $start);
+                } else {
+                    return;
+                }
+            }
+        }
+
+    
+    public function scopeOfAmount($query){
+        return $query->select(\DB::raw("SUM(order_price) as total_amount"));
+    }
+
     public function scopeOfId($result, $id)
     {
         if (!$id) {
