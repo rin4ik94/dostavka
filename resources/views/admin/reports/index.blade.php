@@ -20,7 +20,7 @@
         </div>
     </form>
 </div>
-{{-- managers --}}
+
 @if ($orders['order_type'] == 'manager')
 <table class="table table-bordered table-striped">
     <thead>
@@ -48,7 +48,7 @@
     </div>
 </div>
 @endif
-{{-- Branches --}}
+
 @if ($orders['order_type'] == 'branch')
 <table class="table table-bordered table-striped">
     <thead>
@@ -62,7 +62,7 @@
     <tbody>
         @foreach ($orders['orders'] as $branch)
         <tr>
-            <td>{{ $branch['order']['id'] }}</td>
+            <td>{{ $branch['order']['branch']['id'] }}</td>
             <td>{{ $branch['order']['branch']['name'].', '.$branch['order']['branch']['address'] }}</td>
             <td>{{ $branch['order_count'] }}</td>
             <td>{{ $branch['total_amount'] }} сум</td>
@@ -76,7 +76,6 @@
     </div>
 </div>
 @endif
-
 @if($orders['order_type'] == 'order')
 <table class="table table-bordered table-striped">
     <thead>
@@ -129,5 +128,4 @@
     </div>
 </div>
 @endif
-
 @endsection
