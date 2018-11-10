@@ -37,14 +37,14 @@
             <td>{{ $manager['order']['id'] }}</td>
             <td>{{ $manager['order']['manager']['name'] }}</td>
             <td>{{ $manager['order_count'] }}</td>
-            <td>{{ $manager['total_amount'] }} сум</td>
+            <td>{{ number_format($manager['total_amount'],'0',' ',' ') }} сум</td>
         </tr>
         @endforeach
     </tbody>
 </table>
 <div class="main-bottom d-flex align-items-center">
     <div class="main-bottom-info">
-        <strong>Итого: {{ $orders['order_total_price'] }} сум</strong>
+        <strong>Итого: {{ number_format($orders['order_total_price'],'0',' ',' ') }} сум</strong>
     </div>
 </div>
 @endif
@@ -65,14 +65,14 @@
             <td>{{ $branch['order']['branch']['id'] }}</td>
             <td>{{ $branch['order']['branch']['name'].', '.$branch['order']['branch']['address'] }}</td>
             <td>{{ $branch['order_count'] }}</td>
-            <td>{{ $branch['total_amount'] }} сум</td>
+            <td>{{ number_format($branch['total_amount'],'0',' ',' ') }} сум</td>
         </tr>
         @endforeach
     </tbody>
 </table>
 <div class="main-bottom d-flex align-items-center">
     <div class="main-bottom-info">
-        <strong>Итого: {{ $orders['order_total_price'] }} сум</strong>
+        <strong>Итого: {{ number_format($orders['order_total_price'],'0',' ',' ') }} сум</strong>
     </div>
 </div>
 @endif
@@ -84,7 +84,7 @@
             <th>Количество заказов</th>
             <th width="250px">Сумма заказов</th>
             <th width="250px">Сумма доставки</th>
-            <th width="250px">Обшая сумма</th>
+            <th width="250px">Общая сумма</th>
         </tr>
     </thead>
     <tbody>
@@ -92,9 +92,9 @@
         <tr>
             <td>{{ $order['order_status_name'] }}</td>
             <td>{{ $order['order_count'] }}</td>
-            <td>{{ $order['total_amount'] }} сум</td>
-            <td>{{ $order['delivery_price'] }} сум</td>
-            <td>{{ $order['total_delivery_price'] }} сум</td>
+            <td>{{ number_format($order['total_amount'],'0',' ',' ') }} сум</td>
+            <td>{{ number_format($order['delivery_price'],'0',' ',' ') }} сум</td>
+            <td>{{ number_format($order['total_delivery_price'],'0',' ',' ') }} сум</td>
         </tr>
         @endforeach
     </tbody>

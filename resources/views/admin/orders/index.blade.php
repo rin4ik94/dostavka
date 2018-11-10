@@ -67,27 +67,25 @@
             data-ofloor="{{  $order->delivery_address_floor }}" data-oapartment="{{  $order->delivery_address_apartment }}"
             data-oremark="{{  $order->delivery_address_remark }}" data-odeliver="5000" data-payment="{{ $order->payment->name_ru}}"
             data-oprice="{{$order->order_price}}" data-tprice="{{$order->total_price}}" data-branches="{{ $order->getBranches() }}"
-            data-products="{{ $order->products }}" data-statuses="{{ $order->statuses }}">
+            data-products="{{ $order->products }}" data-statuses="{{ $order->statuses }}" data-courier="{{ $order->courier_id }}">
             <td class="order_id"><a class="text-red" href="#" data-toggle="modal" data-target="#Order">{{ $order->id }}</a></td>
             <td>{{ $order->getTime()}}</td>
             <td>{{ $order->manager->name }}</td>
             @if($order->branch_id != '')
-            <td><a class="text-green order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id ?? '0' }}">{{
+            <td><a class="text-green order_branch" href="#" data-toggle="modal" data-target="#orderBranch">{{
                     $order->branch->name }}</a></td>
             @else
-            <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch" data-branch="{{ $order->branch_id ?? '0' }}">Выбрать</a></td>
+            <td><a class="text-red order_branch" href="#" data-toggle="modal" data-target="#orderBranch">Выбрать</a></td>
             @endif
             <td><a class="text-green order_client" href="#" data-toggle="modal" data-target="#Client" data-client="{{ $order->client_id }}">{{
                     $order->client->getFullname() }}</a></td>
             <td>{{ $order->delivery_address_street }}</td>
             @if($order->courier_id != '')
-            <td><a class="text-green order_courier" href="#" data-toggle="modal" data-target="#orderCourier"
-                    data-courier="{{ $order->courier_id }}">{{ $order->courier->fio }}</a></td>
+            <td><a class="text-green order_courier" href="#" data-toggle="modal" data-target="#orderCourier">{{ $order->courier->fio }}</a></td>
             @else
-            <td><a class="text-red order_courier" href="#" data-toggle="modal" data-target="#orderCourier" data-courier="{{ $order->courier_id }}">{{
-                    __('Назначить') }}</a></td>
+            <td><a class="text-red order_courier" href="#" data-toggle="modal" data-target="#orderCourier" >{{ __('Назначить') }}</a></td>
             @endif
-            <td>{{ number_format($order->total_price,'0',' ',' ') }}</td>
+            <td>{{ number_format($order->total_price,'0',' ',' ') }} сум</td>
             <td>{{ $order->payment->name_ru }}</td>
             <td><a class="btn {{ $order->status->color }} order_status" href="#" data-toggle="modal" data-target="#orderStatus">{{
                     $order->status->name }}</a></td>

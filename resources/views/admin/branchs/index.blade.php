@@ -14,7 +14,7 @@
       <select class="custom-select" name="region" onchange="this.form.submit()">
         <option value="all">Все региони</option>
         @foreach($regions as $region)
-        <option value="{{ $region->id }}" @if(request()->get('region') == $region->id) selected @endif>{{ $region->name_ru }}</option>
+        <option value="{{ $region['id'] }}" @if(request()->get('region') == $region['id']) selected @endif>{{ $region['name_ru'] }}</option>
         @endforeach
       </select>
     </div>
@@ -51,7 +51,7 @@
   </thead>
   <tbody>
     @foreach($branches as $branch)
-    <tr>
+      <tr data-id="{{ $branch->id }}" data-bname="{{ $branch->name }}" data-managerid="{{ $branch->manager->id }}" data-region="{{ $branch->region_id }}" data-address="{{ $branch->address }}" data-status="{{ $branch->status }}">
       <td>{{ $branch->id }}</td>
       <td><a class="text-green branch_action" href="/admin/branchs/{{ $branch->id }}/edit" data-toggle="modal" data-target="#editBranch">{{ $branch->name }}</a></td>
       <td>{{ $branch->manager->name }}</td>

@@ -45,7 +45,7 @@ class BranchController extends Controller
             $status = null;
         }
         $search = $request->q ?? null;
-        $branches = Branch::with('manager', 'region')
+        $branches = Branch::with('manager', 'region', 'workingModes')
             ->when(!is_null($manager), function ($query) use ($manager) {
                 $query->whereManagerId($manager);
             })
@@ -59,14 +59,31 @@ class BranchController extends Controller
                 $query->orwhere('name', 'like', '%' . $search . '%');
             })
             ->paginate(10);
-            $branch = [];
-        $regions = Region::all();
-        $workingModes = WorkingMode::all();
-        $workingTimes = WorkingTime::all();
-        // dd($branches);
+        $branch = [];
+        $regions = Region::all()->map(function ($result) {
+            return [
+                'id' => $result->id,
+                'name_ru' => $result->name_ru,
+            ];
+        });
+
+        $workingModes = WorkingMode::all()->map(function ($results) {
+            return [
+                'id' => $results->id,
+                'name_ru' => $results->name_ru,
+            ];
+        });
+
+        $workingTimes = WorkingTime::all()->map(function ($results) {
+            return [
+                'id' => $results->id,
+                'hours' => $results->hours,
+            ];
+        });
+
         return view('admin.branchs.index', compact('regions', 'workingModes', 'branches', 'workingTimes', 'managers'));
     }
-    
+
     public function store(StoreBranchRequest $request)
     {
         $input = $request->only('name', 'manager_id', 'region_id', 'address', 'status');
@@ -95,6 +112,13 @@ class BranchController extends Controller
         $branch = Branch::findOrFail($request->id);
         $input = $request->only('name', 'manager_id', 'region_id', 'address', 'status');
         $branch->update($input);
+        $branch->workingModes()->detach();
+        $workingModes = $request->input('workingModes');
+        $time_start = $request->input('time_start');
+        $time_finish = $request->input('time_finish');
+        foreach ($workingModes as $key => $value) {
+            $branch->workingModes()->attach($value, ['time_start' => $time_start[$key], 'time_finish' => $time_finish[$key]]);
+        }
         return back();
     }
 

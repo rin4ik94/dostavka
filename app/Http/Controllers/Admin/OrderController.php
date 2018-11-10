@@ -71,6 +71,7 @@ class OrderController extends Controller
             $order->update($request->all());
             $order->statuses()->attach($request->order_status_id, ['client_id' => $order->client_id]);
         } else {
+            dd($request->all());
             $order->update($request->all());
         }
         if ($request->productSet != null) {

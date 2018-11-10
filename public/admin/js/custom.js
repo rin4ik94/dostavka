@@ -204,30 +204,42 @@ $(function () {
         e.preventDefault(e);
         var arr = [];
         var uri = $(this).attr('href');
+        var branch_id = $(this).closest('tr').data('id');
+        var branch_name = $(this).closest('tr').data('bname');
+        var manager_id = $(this).closest('tr').data('managerid');
+        var region_id = $(this).closest('tr').data('region');
+        var address = $(this).closest('tr').data('address');
+        var status = $(this).closest('tr').data('status');
         $('.modal-loader').css('display', 'block');
         $.ajax({
             type: "GET",
             url: uri,
             dataType: 'json',
             success: function (data) {
-                console.log(data);
-                $('#branchId').val(data.branch.id);
-                $('#editBranchName').val(data.branch.name);
-                $("#editManagerName").val(data.branch.manager_id);
-                $("#editRegionName").val(data.branch.region_id);
-                $("#editAddress").val(data.branch.address);
-                $('.delete_branch').data('destroy', data.branch.id);
+                $('#branchId').val(branch_id);
+                $('#editBranchName').val(branch_name);
+                $("#editManagerName").val(manager_id);
+                $("#editRegionName").val(region_id);
+                $("#editAddress").val(address);
+                $("#editStatus").val(status);
+                $('.delete_branch').data('destroy', branch_id);
                 $('.branCheckbox').find('.custom-control-input').each(function () {
                     var input = $(this);
-                    checkboxActive(input);
+                    if (checkboxActive(input)) {
+                        $(input).prop('checked', true);
+                        $(input).parents(':eq(1)').next().children().find('.col').children().prop('disabled', false);
+                    }
                 });
-
+                // branchWorkdays
                 function checkboxActive(input) {
                     arr = input.val();
-                    // console.log(typeof(arr));
-                    // for (var i = arr.length - 1; i >= 0; i--) {
-                    // not finished
-                    // }
+                    for (var i = arr.length - 1; i >= 0; i--) {
+                        if (arr[i] == '1' || arr[i] == '2') {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
                 }
                 $('.modal-loader').css('display', 'none');
             },
@@ -320,6 +332,7 @@ $(function () {
         e.preventDefault(e);
         $('#orderBranches').empty();
         $('.order_products').empty();
+        $('#orderBranches').removeClass('border-danger');
         $productSet = [];
         $orderId = $(this).closest('tr').data('id');
         $status_id = $(this).closest('tr').data('status');
@@ -433,11 +446,11 @@ $(function () {
         $('#deliveryApartment').val($order_apartment);
         $('#deliveryRemark').val($order_remark);
         $('#payment').val($payment);
-        $('.orderPrice').val(calculateProductSumma());
         $('#deliveryPrice').val($deliver_price);
+        $('#editOrder').val($orderId);
+        $('.orderPrice').val(calculateProductSumma());
         $('.totalPrice').val(calculateProductTotalPrice());
-        $('#orderIdForOrder').val($orderId);
-        $('.orderIdForOrder').text($orderId);
+        $('.order_modal_title').text($orderId);
 
         function calculateProductTotalPrice() {
             $order_price = parseInt($('.orderPrice').val());
@@ -451,33 +464,27 @@ $(function () {
             }
             return;
         }
-		});
-		// before appointing order check status and branch to change only 2-nd if courier value has can choose 3-th status
+    });
+    // before appointing order check status and branch to change only 2-nd if courier value has can choose 3-th status
     $('.check_order').on('click', function (e) {
-			e.preventDefault(e);
-			var order_branch = $('#orderBranches').val();
-			var order_status = $('#statusOrder').val();
-			var order_courier = $('.order_courier').data('courier');
-			if (order_branch > 0 && order_status <= 2 || order_status == 5) {
-					$('.form-order').submit();
-			} else if(order_branch > 0 && order_status == 3 || order_status == 4) {
-				if(order_courier){
-					$('.form-order').submit();
-				}else{
-					alert('Прежде чем выбрать статус '+getStatusName(order_status)+', необходимо назначить курьера!');
-				}
-			}else{
-				alert('Перед изменением заказ необходимо проверить статус и филиал!');
-			}
-	});
-	
+        e.preventDefault(e);
+        var order_branch = $('#orderBranches').val();
+        var order_courier = $('.order_courier').data('courier');
+        if (order_branch > 0) {
+            $('.form-order').submit();
+        } else {
+            $('#orderBranches').addClass('border-danger');
+            alert('Перед изменением заказ необходимо проверить филиал!');
+        }
+    });
+
     $('.order_branch').on('click', function (e) {
         e.preventDefault(e);
         var branches = $(this).closest('tr').data('branches');
         var orderId = $(this).closest('tr').data('id');
         var orderBranchId = $(this).closest('tr').data('branch');
         $('#editOrderBranch').val(orderId);
-        $('span.orderId').text(orderId);
+        $('span.branch_modal_title').text(orderId);
         $('.branch_list').empty();
         $.each(branches, function (index, orderBranches) {
             $('.branch_list').append('<div class="list-item custom-control custom-radio"><input type="radio" id="orderBranch_' + orderBranches.id + '" name="branch_id" value="' + orderBranches.id + '" class="custom-control-input" ' + activeBranch(orderBranches.id) + '><label class="list-link custom-control-label" for="orderBranch_' + orderBranches.id + '"><div>' + orderBranches.name + '</div><small class="text-muted">Адресс: ' + orderBranches.address + '</small></label></div>');
@@ -503,9 +510,12 @@ $(function () {
     $('.order_client').on('click', function (e) {
         e.preventDefault(e);
         var clientName = $(this).closest('tr').data('cname');
+        var clientMobile = $(this).closest('tr').data('cmobile');
         var clientId = $(this).data('client');
-        $('span.orderIdForClient').text(clientId);
+
+        $('span.client_modal_title').text(clientId);
         $('.client-name').text(clientName);
+        $('.client-mobile').text('+998' + clientMobile);
     });
 
     $('.order_courier').on('click', function (e) {
@@ -519,28 +529,33 @@ $(function () {
         $(".form-courier #orderCourier_" + orderCourierId).prop("checked", true);
         $('#editOrderCourier').val(orderId);
         $('#orderCourier_0').data('branch', branch_id);
-        $('span.order_id_for_courier').html(orderId);
+        $('span.courier_modal_title').text(orderId);
     });
 
     $('.order_status').on('click', function (e) {
         e.preventDefault(e);
         var orderId = $(this).closest('tr').data('id');
         var statusId = $(this).closest('tr').data('status');
-        var branchId = $(this).closest('tr').data('bname');
-        $(".form-status input[value = " + statusId + "]").prop("checked", true);
+        var order_branch_id = $(this).closest('tr').data('branch');
+        var order_courier_id = $(this).closest('tr').data('courier');
+        $('.check_branch_courier').data('branch', order_branch_id);
+        $('.check_branch_courier').data('courier', order_courier_id);
+        $('.form-status input[value = ' + statusId + ']').prop('checked', true);
+        $('span.order_status_id').text(orderId);
         $('#editOrderStatus').val(orderId);
     });
     // before appointing status check branch and courier values
     $('.check_branch_courier').on('click', function (e) {
-				e.preventDefault(e);
-				var order_branch = $('.order_branch').data('branch');
-				var order_courier = $('.order_courier').data('courier');
-				var status_value = $('input[name=order_status_id]:checked').val();
+        e.preventDefault(e);
+        var order_branch = $(this).data('branch');
+        var order_courier = $(this).data('courier');
+        console.log(order_branch + '+' + order_courier);
+        var status_value = $('input[name=order_status_id]:checked').val();
         if (order_branch && order_courier) {
-					$('.form-status').submit();
-				}else if(status_value == 5){
-					$('.form-status').submit();
-				}else{
+            $('.form-status').submit();
+        } else if (status_value == 5) {
+            $('.form-status').submit();
+        } else {
             alert('Перед изменением статуса необходимо проверить филиал и курьер!');
         }
     });
@@ -653,7 +668,7 @@ function disable(input) {
 };
 
 function getStatusName($status) {
-	$status = parseInt($status);
+    $status = parseInt($status);
     switch ($status) {
         case 2:
             return 'Формируется';
@@ -737,8 +752,7 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + (value || "") + expires + ";";
 }
 
-function inRange(n, nStart, nEnd)
-{
-    if(n>=nStart && n<nEnd) return true;
+function inRange(n, nStart, nEnd) {
+    if (n >= nStart && n < nEnd) return true;
     else return false;
 }

@@ -4,7 +4,7 @@
       {{ method_field('PUT') }}
       @csrf
       <div class="modal-header">
-        <h5 class="modal-title">Выбрать филиал на заказ № <span class="orderId"></span></h5>
+        <h5 class="modal-title">Выбрать филиал на заказ № <span class="branch_modal_title"></span></h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

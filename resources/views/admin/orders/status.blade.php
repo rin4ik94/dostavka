@@ -4,7 +4,7 @@
       {{ method_field('PUT') }}
       @csrf
       <div class="modal-header">
-        <h5 class="modal-title">Статус заказа № <b class="orderStatusId">10</b></h5>
+        <h5 class="modal-title">Статус заказа № <span class="order_status_id"></span></h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -34,7 +34,7 @@
       <div class="modal-footer">
         <input type="hidden" name="id" id="editOrderStatus">
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
-        <button type="sumbit" class="btn btn-green check_branch_courier">OK</button>
+        <button type="sumbit" class="btn btn-green check_branch_courier" data-branch="0" data-courier="0">OK</button>
       </div>
     </form>
   </div>

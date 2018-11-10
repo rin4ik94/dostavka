@@ -41,7 +41,7 @@ class ReportController extends Controller
                 $orders = [
                     'orders' => $order->groupBy('order_status_id')->map(function ($row) {
                         return [
-                            'order_status_name' => 'Новый',
+                            'order_status_name' => 'Доставлен',
 														'order_count' => $row->count(),
 														'delivery_price' => $row->sum('delivery_price'),
 														'total_amount' => $row->sum('order_price'),

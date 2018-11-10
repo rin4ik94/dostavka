@@ -5,7 +5,7 @@
         {{ method_field('PUT') }}
         @csrf
       <div class="modal-header">
-        <h5 class="modal-title">Заказ № <span class="orderIdForOrder"></span></h5>
+        <h5 class="modal-title">Заказ № <span class="order_modal_title"></span></h5>
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -18,7 +18,7 @@
                 <label class="form-label" for="editNameUz">Статус</label>
               </div>
               <div class="col-8">
-                <select class="custom-select" id="statusOrder" name="order_status_id" required>
+                <select class="custom-select" id="statusOrder" name="order_status_id" required disabled>
                   <option value="1">Новый</option>
                   <option value="2">Формируется</option>
                   <option value="3">В пути</option>
@@ -32,12 +32,12 @@
                 <label class="form-label" for="orderStory">История</label>
               </div>
               <div class="col-8">
-                <textarea class="form-control" rows="2" id="orderStory" disabled>Тест</textarea>
+                <textarea class="form-control" rows="2" id="orderStory" disabled></textarea>
               </div>
             </div>
           </section>
           <section>
-            <h4 class="title">Клиенть</h4>
+            <h4 class="title">Клиент</h4>
             <div class="form-group form-row">
               <div class="col-4 col-form-label">
                 <label class="form-label" for="orderClientName">Имя</label>
@@ -181,7 +181,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <input type="hidden" id="orderIdForOrder" name="id">
+        <input type="hidden" id="editOrder" name="id">
         <input type="hidden" id="orderProductSet" name="productSet">
         <input type="hidden" class="totalPrice" name="total_price">
         <input type="hidden" class="orderPrice" name="order_price">

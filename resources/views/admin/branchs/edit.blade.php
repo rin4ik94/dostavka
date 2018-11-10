@@ -32,7 +32,7 @@
               <label class="form-label" for="editRegionName">Регион *</label>
               <select class="custom-select" id="editRegionName" name="region_id" required>
                 @foreach($regions as $region)
-                  <option value="{{ $region->id }}">{{ $region->name_ru }}</option>
+                  <option value="{{ $region['id'] }}">{{ $region['name_ru'] }}</option>
                 @endforeach
               </select>
             </div>
@@ -43,14 +43,15 @@
           <textarea class="form-control" id="editAddress" name="address" required></textarea>
         </div>
         <div class="form-group">
+
           <label class="form-label">Режим работи *</label>
           @foreach($workingModes as  $workingMode)
          <div class="form-group row">
          <div class="col-6">
           <div class="custom-control custom-checkbox branCheckbox">
-            <input type="checkbox" class="custom-control-input" id="branchEdit{{$workingMode->id}}" name="workingModes[]"
-            value="{{$workingMode->id}}">
-            <label class="custom-control-label" for="branchEdit{{$workingMode->id}}">{{ $workingMode->name_ru }}</label>
+            <input type="checkbox" class="custom-control-input" id="branchEdit{{$workingMode['id']}}" name="workingModes[]"
+            value="{{$workingMode['id']}}">
+            <label class="custom-control-label" for="branchEdit{{$workingMode['id']}}">{{ $workingMode['name_ru'] }}</label>
             </div>
           </div>
           <div class="col-6">
@@ -59,7 +60,7 @@
                 <select class="custom-select timeStart" name="time_start[]" disabled>
                   <option selected disabled>от</option>
                   @foreach($workingTimes as $workingTime)
-                  <option value="{{$workingTime->hours}}">{{$workingTime->hours}}</option>
+                  <option value="{{$workingTime['hours']}}">{{$workingTime['hours']}}</option>
                   @endforeach
                 </select>
               </div>
@@ -67,7 +68,7 @@
                 <select class="custom-select timeFinish" name="time_finish[]" disabled>
                   <option selected disabled>до</option>
                   @foreach($workingTimes as $workingTime)
-                  <option value="{{$workingTime->hours}}">{{$workingTime->hours}}</option>
+                  <option value="{{$workingTime['hours']}}">{{$workingTime['hours']}}</option>
                   @endforeach
                 </select>
               </div>
@@ -78,8 +79,8 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="status">Статус</label>
-          <select class="custom-select" name="status">
-            <option value="1" selected>Активен</option>
+          <select class="custom-select" name="status" id="editStatus">
+            <option value="1">Активен</option>
             <option value="0">Неактивен</option>
           </select>
         </div>
