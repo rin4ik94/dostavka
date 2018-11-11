@@ -202,7 +202,8 @@ $(function () {
     // edit branches
     $('.branch_action').on('click', function (e) {
         e.preventDefault(e);
-        var arr = [];
+        $('.timeStart').prop('disabled', true);
+        $('.timeFinish').prop('disabled', true);
         var uri = $(this).attr('href');
         var branch_id = $(this).closest('tr').data('id');
         var branch_name = $(this).closest('tr').data('bname');
@@ -216,6 +217,9 @@ $(function () {
             url: uri,
             dataType: 'json',
             success: function (data) {
+                data.branchWorkdays.forEach(function (item, key) {
+                    checkWorkingModeActive(item.working_mode_id, item.time_start, item.time_finish);
+                });
                 $('#branchId').val(branch_id);
                 $('#editBranchName').val(branch_name);
                 $("#editManagerName").val(manager_id);
@@ -223,24 +227,6 @@ $(function () {
                 $("#editAddress").val(address);
                 $("#editStatus").val(status);
                 $('.delete_branch').data('destroy', branch_id);
-                $('.branCheckbox').find('.custom-control-input').each(function () {
-                    var input = $(this);
-                    if (checkboxActive(input)) {
-                        $(input).prop('checked', true);
-                        $(input).parents(':eq(1)').next().children().find('.col').children().prop('disabled', false);
-                    }
-                });
-                // branchWorkdays
-                function checkboxActive(input) {
-                    arr = input.val();
-                    for (var i = arr.length - 1; i >= 0; i--) {
-                        if (arr[i] == '1' || arr[i] == '2') {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-                }
                 $('.modal-loader').css('display', 'none');
             },
             error: function (data) {
@@ -248,6 +234,7 @@ $(function () {
             }
         });
     });
+
     $('.delete_branch').on('click', function (e) {
         e.preventDefault(e);
         var id = $(this).data('destroy');
@@ -647,7 +634,6 @@ $(function () {
         $('.myForm').find(name).val(value);
         $('.myForm').submit();
     });
-    // from action delete show confirmations
     // modal close reset from values
     $('.modal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
@@ -657,6 +643,29 @@ $(function () {
         $(this).delay(2500).fadeOut();
     });
 }); // end main functions
+// branchWorkdays 1
+function checkWorkingModeActive(working_mode_id, time_start, time_finish) {
+    $('.branCheckbox').find('.custom-control-input').each(function () {
+        var input = $(this);
+        if (checkboxActive(input, working_mode_id)) {
+            $(input).prop('checked', true);
+            $(input).parents(':eq(1)').next().children().find('.timeStart').val(time_start).prop('disabled', false);
+            $(input).parents(':eq(1)').next().children().find('.timeFinish').val(time_finish).prop('disabled', false);
+        }
+    });
+}
+// branchWorkdays 2
+function checkboxActive(input, working_mode_id) {
+    var arr = input.val();
+    for (var i = arr.length - 1; i >= 0; i--) {
+        if (arr[i] == working_mode_id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 function confirmations(param = '') {
     var result = confirm("Вы уверены, что хотите удалить " + param + "?");
     return result;
