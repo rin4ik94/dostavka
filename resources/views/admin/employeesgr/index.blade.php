@@ -1,28 +1,25 @@
 @extends('admin.layouts.dashboard')
 @section('content')
-<div class="main-top d-flex align-items-center">
-  <h1 class="main-title">Группа сотрудников</h1>
-  <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newEmployeGroup">
-    <i class="icon">add</i>
-    <span class="text">Добавить группа сотрудников</span>
-  </button>
-</div>
-<form method="GET">
-  <div class="toolbar d-flex">
-    <div class="form-row">
-      <div class="col-auto">
-        <select class="custom-select" name="manager" onchange="this.form.submit()">
-          <option value="all">Все магазины</option>
-          @foreach($managers as $manager)
-          <option value="{{ $manager->id }}"
-            @if(request()->get('manager') == $manager->id) selected
-          @endif>{{ $manager->name }}</option>
-          @endforeach
+<div class="toolbar">
+<form method="GET" class="form-row">
+    <div class="col-auto">
+      <select class="custom-select" name="manager" onchange="this.form.submit()">
+        <option value="all">Все магазины</option>
+         @foreach($managers as $manager)
+          <option value="{{ $manager->id }}" @if(request()->get('manager') == $manager->id) selected @endif>{{ $manager->name }}</option>
+         @endforeach
         </select>
-      </div>
+     </div>
+    </form>
+    <div class="ml-auto form-row">
+    <div class="col-auto">
+    <button class="btn btn-green" data-toggle="modal" data-target="#newEmployeGroup">
+      <i class="icon">add</i>
+       <span class="text">Добавить группа сотрудников</span>
+    </button>  
     </div>
   </div>
-</form>
+</div>
 @if(count($roles) > 0)
 <table class="table table-bordered table-hover table-striped">
   <thead>
