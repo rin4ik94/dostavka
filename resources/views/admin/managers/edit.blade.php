@@ -16,7 +16,7 @@
           </div>
           <div class="col-8">
             <div class="custom-file">
-              <input type="file" class="custom-file-input file" id="editManagerImage" name="file" accept="image/jpeg">
+              <input type="file" class="custom-file-input file" id="editManagerImage" name="logo" accept="image/jpeg">
               <label class="custom-file-label" for="editManagerImage">Загрузить</label>
               <div class="custom-image">
                 <img src="#" id="image_show" alt="">

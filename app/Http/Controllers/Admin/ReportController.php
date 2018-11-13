@@ -34,18 +34,18 @@ class ReportController extends Controller
                 break;
             case '3':
                 $order = Order::where(function($query){
-									$query->where('order_status_id', 4);
-									$query->whereNotNull('courier_id');
-									$query->whereNotNull('branch_id');
-								})->with('status')->OfDates(request()->of_date, request()->to_date)->get();
+                    $query->where('order_status_id', 4);
+                    $query->whereNotNull('courier_id');
+                    $query->whereNotNull('branch_id');
+                    })->with('status')->OfDates(request()->of_date, request()->to_date)->get();
                 $orders = [
                     'orders' => $order->groupBy('order_status_id')->map(function ($row) {
                         return [
                             'order_status_name' => 'Доставлен',
-														'order_count' => $row->count(),
-														'delivery_price' => $row->sum('delivery_price'),
-														'total_amount' => $row->sum('order_price'),
-														'total_delivery_price' => $row->sum('delivery_price') + $row->sum('order_price'),
+                            'order_count' => $row->count(),
+                            'delivery_price' => $row->sum('delivery_price'),
+                            'total_amount' => $row->sum('order_price'),
+                            'total_delivery_price' => $row->sum('delivery_price') + $row->sum('order_price'),
                         ];
                     }),
                     'order_type' => 'order',

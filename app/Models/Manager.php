@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
@@ -63,5 +63,14 @@ class Manager extends Model
     public function products()
     {
         return $this->hasMany('App\Models\Product');
+    }
+
+    public function removeLogo()
+    {
+        if ($this->logo != null) {
+            Storage::delete('public/logos/' . $this->logo);
+            $this->logo = null;
+            $this->save();
+        }
     }
 }

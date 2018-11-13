@@ -93,7 +93,7 @@ class ManagerController extends Controller
     {
         $manager = Manager::find($request->id);
         $this->validate($request, [
-            'name' => 'required|unique:managers',
+            'name' => 'required',
             'manager_category_id' => 'required',
             'logo' => 'image|mimes:jpeg,png,jpg|max:2048',
             'status' => 'required',
@@ -119,6 +119,7 @@ class ManagerController extends Controller
                 $constraint->aspectRatio();
             })->fit(280, 280);
             $mainImage->save($mainimagepath);
+            $manager->removeLogo();
             $manager->logo = $filenametostore;
             $manager->save();
         }
