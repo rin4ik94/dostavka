@@ -108,9 +108,9 @@ class CourierController extends Controller
     public function statusChange(Request $request, $id)
     {  
         $order = Order::find($id);
-        $order->order_status_id = 4;
+        $order->order_status_id = $request->status;
         $order->save();
-        return response('fine'); 
+        return response($order->load('client', 'manager', 'branch', 'payment', 'status', 'region', 'products'),200); 
     }
     public function me(Request $request, $id)
     {  

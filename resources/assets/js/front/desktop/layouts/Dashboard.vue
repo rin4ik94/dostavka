@@ -1,5 +1,5 @@
 <template>
-  <div> 
+  <div :class="totalCart > 0 ? 'cart-add-class': ''"> 
       <Navbar :regions="regions"></Navbar>
       <router-view></router-view>
       <CartInfo />
@@ -29,7 +29,8 @@ export default {
   components: { CartInfo, Navbar, Footer },
   computed:{
     ...mapGetters({
-          lang : 'locale'
+          lang : 'locale',
+          totalCart:'totalCart'
     })
   },
   methods: { 
