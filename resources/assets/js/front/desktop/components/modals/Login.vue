@@ -2,8 +2,9 @@
   <div class="modal fade login" id="login" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal"><i class="icon">close</i></button>
         <form class="modal-body" v-if="step==1">
-          <h4>{{$t('login.title')}}</h4>
+          <h4 class="modal-title">{{$t('login.title')}}</h4>
           <p>{{$t('login.pre_title')}}</p>
           <div class="form-group">
             <div class="input-group">

@@ -1390,7 +1390,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-lg, .btn-group-lg > .btn {
-  padding: 10px 12px;
+  padding: 11px 12px;
   font-size: 16px;
 }
 
@@ -3655,13 +3655,15 @@ input[type="button"].btn-block {
 }
 
 .close {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
   color: #000;
-  text-shadow: 0 1px 0 #fff;
   opacity: .5;
+  border-radius: 50%;
+  z-index: 4;
 }
 
 .close:hover, .close:focus {
@@ -3676,7 +3678,7 @@ input[type="button"].btn-block {
 
 button.close {
   padding: 0;
-  background-color: transparent;
+  background-color: rgba(0,0,0,0.1);
   border: 0;
   -webkit-appearance: none;
 }
@@ -3696,28 +3698,148 @@ button.close {
   overflow: hidden;
   outline: 0;
 }
-
 .modal-open .modal {
   overflow-x: hidden;
   overflow-y: auto;
 }
-
 .modal-dialog {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
-  align-items: center;
-  min-height: calc(100% - (0.5rem * 2));
+  min-height: 100%;
   position: relative;
   width: auto;
-  margin: 0.5rem;
   pointer-events: none;
 }
 
 
-
+/*
 .order-event td {
   animation: d .1s ease-in-out 1 forwards;
+}
+*/
+
+
+
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  box-shadow: 0 4px 8px 0 rgba(34,43,52,.15);
+  outline: 0;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000;
+}
+.modal-backdrop.fade {
+  opacity: 0;
+}
+.modal-backdrop.show {
+  opacity: 0.5;
+}
+.modal-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 8px 12px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  box-shadow: 0 0 16px 0 rgba(0,0,0,.1);
+  background-color: #fff;
+  z-index: 3;
+}
+.modal-title {
+  margin-bottom: 0;
+  line-height: 40px;
+}
+.modal-title span {
+  color: #999;
+}
+.modal-body {
+  position: relative;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 12px;
+}
+.modal-body:not(:first-child) {
+  padding-top: 68px;
+}
+.modal-footer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 12px 24px;
+  border-top: 1px solid #eceae7;
+}
+.modal-footer > :not(:first-child) {
+  margin-left: 6px;
+}
+.modal-footer > :not(:last-child) {
+  margin-right: 6px;
+}
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+@media (min-width: 576px) {
+  .close {
+    top: 24px;
+    right: 24px;
+  }
+  .modal-dialog {
+    align-items: center;
+    min-height: 100%;
+    max-width: 600px;
+    margin: 24px auto;
+  }
+  .modal-content {
+    height: auto;
+    border-radius: 3px;
+  }
+  .modal-header {
+    padding: 24px 24px 0;
+  }
+  .modal-body {
+    padding: 24px;
+  }
+  .modal-sm {
+    max-width: 300px;
+  }
+  .modal.fade .modal-dialog {
+    -webkit-animation: d .1s ease-in-out 1 forwards;
+            animation: d .1s ease-in-out 1 forwards;
+  }
+
+  .modal.show .modal-dialog {
+    -webkit-animation: c .1s ease-in-out 1 forwards;
+            animation: c .1s ease-in-out 1 forwards;
+  }
+}
+
+@media (min-width: 992px) {
+  .modal-lg {
+    max-width: 800px;
+  }
 }
 @keyframes d {
  0% {
@@ -3726,17 +3848,6 @@ button.close {
  to {
   background-color: #fff;
  }
-}
-
-
-.modal.fade .modal-dialog {
-  -webkit-animation: d .1s ease-in-out 1 forwards;
-          animation: d .1s ease-in-out 1 forwards;
-}
-
-.modal.show .modal-dialog {
-  -webkit-animation: c .1s ease-in-out 1 forwards;
-          animation: c .1s ease-in-out 1 forwards;
 }
 @-webkit-keyframes d {
  0% {
@@ -3781,118 +3892,6 @@ button.close {
 @media screen and (prefers-reduced-motion: reduce) {
   .modal.fade .modal-dialog {
     transition: none;
-  }
-}
-
-
-
-.modal-content {
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  pointer-events: auto;
-  background-color: #fff;
-  background-clip: padding-box;
-  box-shadow: 0 4px 8px 0 rgba(34,43,52,.15);
-  border-radius: 3px;
-  outline: 0;
-}
-
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1040;
-  background-color: #000;
-}
-
-.modal-backdrop.fade {
-  opacity: 0;
-}
-
-.modal-backdrop.show {
-  opacity: 0.5;
-}
-
-.modal-header {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 12px 24px;
-  border-bottom: 1px solid #eceae7;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-}
-
-.modal-header .close {
-  padding: 12px;
-  margin: -12px -24px -12px auto;
-}
-
-.modal-title {
-  margin-bottom: 0;
-  line-height: 1.5;
-}
-.modal-title span {
-  color: #999;
-}
-
-.modal-body {
-  position: relative;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  padding: 24px;
-}
-
-.modal-footer {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  padding: 12px 24px;
-  border-top: 1px solid #eceae7;
-}
-
-.modal-footer > :not(:first-child) {
-  margin-left: 6px;
-}
-
-.modal-footer > :not(:last-child) {
-  margin-right: 6px;
-}
-
-.modal-scrollbar-measure {
-  position: absolute;
-  top: -9999px;
-  width: 50px;
-  height: 50px;
-  overflow: scroll;
-}
-
-@media (min-width: 576px) {
-  .modal-dialog {
-    min-height: calc(100% - ( 1.75rem * 2));
-    max-width: 600px;
-    margin: 24px auto;
-  }
-  .modal-sm {
-    max-width: 300px;
-  }
-}
-
-@media (min-width: 992px) {
-  .modal-lg {
-    max-width: 800px;
   }
 }
 
@@ -5841,7 +5840,7 @@ button.bg-dark:focus {
 
 .mb-1,
 .my-1 {
-  margin-bottom: 0.25rem !important;
+  margin-bottom: 12px !important;
 }
 
 .ml-1,
@@ -5865,7 +5864,7 @@ button.bg-dark:focus {
 
 .mb-2,
 .my-2 {
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 24px !important;
 }
 
 .ml-2,

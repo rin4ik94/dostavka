@@ -6,7 +6,7 @@
     <div class="main-actions">
       <router-link class="btn btn-outline-green" :to="{name:'home'}" exact>&#8592;  {{$t('pages.back')}}</router-link>
     </div>
-    <h1 class="main-title"   v-if="region && manager">Ваша корзина из магазина «{{manager.name}}» {{region.name}}</h1>
+    <h1 class="main-title"   v-if="region && manager">Ваша корзина «{{manager.name}}»</h1>
     <div class="content-inner">
     <main class="main" v-if="filteredProducts.length > 0">
       <ul class="cart-items"> 

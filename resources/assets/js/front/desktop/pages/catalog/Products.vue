@@ -1,37 +1,37 @@
 <template>
 <div>
     <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
-
-    <ul   class="products"> 
-              <li class="product" :key="product.id" v-for="product in products">
-        <div class="product-inner" >
-        <router-link v-if="$route.name == 'catalog' | $route.name == 'tp'" :to="{name: 'tp', params:{product : product.slug}}">
-              <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
-            <div class="product-image"><img :src="product.image"></div>
+  
+    <ul class="products"> 
+      <li class="product" :key="product.id" v-for="product in products">
+        <div class="product-inner">
+          <router-link class="product-image" v-if="$route.name == 'catalog' | $route.name == 'tp'" :to="{name: 'tp', params:{product : product.slug}}">
+            <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
+            <div class="product-img"><img :src="product.image"></div>
+          </router-link>
+          <router-link class="product-image" v-if="$route.name == 'category' | $route.name == 'pp'" :to="{name: 'pp', params:{product : product.slug}}">
+            <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
+            <div class="product-img"><img :src="product.image"></div>
+          </router-link>
+          <div class="product-info">
             <div class="product-title">{{product.name}}</div>
-        </router-link>
-         <router-link v-if="$route.name == 'category' | $route.name == 'pp'" :to="{name: 'pp', params:{product : product.slug}}">
-              <div class="product-discount" v-if="product.new_price < product.old_price">-{{getPersentage(product)}}%</div>
-            <div class="product-image"><img :src="product.image"></div>
-            <div class="product-title">{{product.name}}</div>
-        </router-link>
-        <div class="product-footer" v-if="productInCart(product)">
-                    <div class="counter-widget input-group">
-                      <div class="input-group-prepend" v-if="product.quantity == 1"><button class="btn btn-outline-red" type="button" @click="removeFromCart(product)"><i class="icon">clear</i></button></div>
-                      <div class="input-group-prepend" v-else><button class="btn btn-outline-red" type="button" @click="decreaseQuantity(product)"><i class="icon">remove</i></button></div>
-                      <input class="form-control" type="text" :value="`${product.quantity} ${product.measure}`" disabled>
-                      <div class="input-group-append"><button class="btn btn-outline-green" type="button" @click="addToCart(product)"><i class="icon">add</i></button></div>
-                    </div>
+            <div class="product-footer" v-if="productInCart(product)">
+              <div class="counter-widget input-group">
+                <div class="input-group-prepend" v-if="product.quantity == 1"><button class="btn btn-outline-red" type="button" @click="removeFromCart(product)"><i class="icon">clear</i></button></div>
+                <div class="input-group-prepend" v-else><button class="btn btn-outline-red" type="button" @click="decreaseQuantity(product)"><i class="icon">remove</i></button></div>
+                <input class="form-control" type="text" :value="`${product.quantity} ${product.measure}`" disabled>
+                <div class="input-group-append"><button class="btn btn-outline-green" type="button" @click="addToCart(product)"><i class="icon">add</i></button></div>
+              </div>
             </div>
             <div class="product-footer" v-else>
-            <div class="product-price">
+              <div class="product-price">
                 <div class="product-price-new">{{product.new_price | toCurrency }} сумов</div><div class="product-quantity">за 1 {{product.measure}}.</div>
+              </div>
+              <button class="btn btn-green product-add-button" type="submit" @click="addToCart(product)">В корзину</button>
             </div>
-            <button class="btn btn-green product-add-button" type="submit" @click="addToCart(product)">В корзину</button>
-            </div>
-            
+          </div>
         </div>
-        </li> 
+      </li> 
     </ul> 
     <Pagination @topGo="scrollTOP" v-if="showPage" :pagination="pagination" :offset="3" @paginate="allProducts"/>
     <pu-dialog-confirm  v-if="manager && showPage"

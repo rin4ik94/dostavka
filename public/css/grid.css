@@ -1,5 +1,3 @@
-
-
 @-ms-viewport {
   width: device-width;
 }
@@ -17,8 +15,8 @@ html {
 
 .container {
   width: 100%;
-  padding-right: 24px;
-  padding-left: 24px;
+  padding-right: 12px;
+  padding-left: 12px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -31,13 +29,11 @@ html {
     max-width: 960px;
   }
 }
-
-.container-fluid {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+@media (min-width: 768px) {
+  .container {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
 }
 
 .row {
