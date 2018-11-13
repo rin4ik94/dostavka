@@ -5,7 +5,7 @@
 
       <InnerHeader />
       <div class="container">   
-    <h1 class="main-title">Магазины и сети {{regionName}}</h1>
+    <h1 class="main-title">Магазины <a class="region-toggle" data-toggle="modal" data-target="#Regions">{{regionName}}</a></h1>
     <div class="content-inner">
       <main class="main">
           <div class="main-sorter btn-group btn-group-sm btn-group-toggle">
@@ -45,9 +45,9 @@ export default {
     };
   },
   watch:{
-    lang(){
-      this.getCats();      
-    },
+    // lang(){
+    //   this.getCats();      
+    // },
     regionName(){
       this.getCats()
     }
@@ -58,7 +58,7 @@ export default {
       region: "regionId",
       regionName: "regionName",
       regionSlug: "regionSlug",
-      lang: "locale"
+      // lang: "locale"
     }),
     filtered() {
       let data = [];

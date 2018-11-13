@@ -6,7 +6,7 @@
     <div class="main-actions">
       <router-link class="btn btn-outline-green" :to="{name:'home'}" exact>&#8592;  {{$t('pages.back')}}</router-link>
     </div>
-    <h1 class="main-title"   v-if="region && manager">Ваша корзина из магазина «{{manager.name}}» {{region.name}}</h1>
+    <h1 class="main-title"   v-if="region && manager">Ваша корзина «{{manager.name}}»</h1>
     <div class="content-inner">
     <main class="main" v-if="filteredProducts.length > 0">
       <ul class="cart-items"> 
@@ -38,8 +38,14 @@
           </li> 
         </ul>
     </main>
-    <main  class="main" v-else>
-      <h1>content goes here</h1>
+    <main  class="main" v-if="filteredProducts.length <! 0 && !success">
+      <div class="alert">
+        <i class="icon alert-icon">shopping_cart</i>
+        <div class="title alert-title">Ваша корзина пуста</div>
+      </div>
+    </main>
+    <main  class="main" v-if="success">
+      <h1>УСПЕШНО</h1>
     </main>
     <aside class="aside" v-if="products.length">
 
@@ -116,6 +122,7 @@ export default {
     return {
       products: [],
       region: null,
+      success:false,
       errors:[],
       showPage:false,
       nameError:null,
@@ -147,7 +154,7 @@ export default {
       cartInfo: "cart",
       delivery_price: "delivery_price",
       manager: "manager",
-      lang: "locale",
+      // lang: "locale",
     }),
     filteredProducts() {
       let d = [];
@@ -166,12 +173,12 @@ export default {
     }
   },
   watch: { 
-    lang(){
-      this.showPage = false;
-      this.getRegions(); 
-      this.fetchRegion(this.region.slug)
+    // lang(){
+    //   this.showPage = false;
+    //   this.getRegions(); 
+    //   this.fetchRegion(this.region.slug)
 
-    },
+    // },
     user:{
       deep:true,
       immediate:true,
@@ -232,6 +239,7 @@ export default {
         params["form"] = this.form;
         axios.post('api/orders',{params:params}).then(response=>{
           this.setEmpty()
+          this.success =true
         }).catch(error=>{
             this.errors = error.response.data.errors
         })

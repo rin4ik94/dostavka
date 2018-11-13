@@ -145,8 +145,16 @@ export const setRegion = ({ commit, dispatch }) => {
 
 export const checkLangExists = ({ commit, dispatch }) => {
     return localforage.getItem('lang').then((lang) => {
-        dispatch('langChange', lang)
+        dispatch('setLang', lang)
     })
+}
+export const setLang = ({ commit, dispatch }, lang) => {
+ 
+        axios.get(`/api/locale/${lang}`)
+        commit('setLang', lang)
+        localforage.setItem('lang', lang)
+        Vue.i18n.set(lang);
+  
 }
 export const langChange = ({ commit, dispatch }, lang) => {
 
@@ -156,9 +164,9 @@ export const langChange = ({ commit, dispatch }, lang) => {
         commit('setLang', 'ru')
     } else {
         axios.get(`/api/locale/${lang}`)
-        commit('setLang', lang)
+        // commit('setLang', lang)
         localforage.setItem('lang', lang)
-        Vue.i18n.set(lang);
+        // Vue.i18n.set(lang);
     }
 }
 // export const setToken = ({ commit, dispatch }, token) => {

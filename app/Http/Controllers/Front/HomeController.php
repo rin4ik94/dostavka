@@ -11,12 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $agent = new Agent();
-        if ($agent->isMobile()) {
-            return view('front.mobile.master');
-        }
-        if ($agent->isDesktop()) {
-            return view('front.desktop.master');
-        }
+        return view('front.desktop.master');
+        
     }
 }

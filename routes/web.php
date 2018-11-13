@@ -1,7 +1,9 @@
 <?php 
 use App\Models\Order;
 use App\Models\Product;
- 
+ Route::get('info',function(){
+     phpinfo();
+ });
 Route::get('/neworder', function () {
     $order = Order::create(['manager_id' => rand(1, 8), 'client_id' => 1, 'payment_type_id' => rand(1, 4), 'region_id' => 1, 'payment_type_id' => rand(1, 2), 'order_status_id' => 1, 'region_id' => 1, 'delivery_address_street' => 'Чиланзарский район, ул 2', 'order_price' => 25000, 'delivery_price' => 5000, 'total_price' => 30000]);
     $product = Product::find(1);

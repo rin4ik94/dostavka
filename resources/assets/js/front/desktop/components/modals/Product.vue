@@ -3,6 +3,7 @@
   <div class="modal-dialog modal-lg" role="document">
 
     <div  class="modal-content">
+      <button type="button" class="close" data-dismiss="modal"><i class="icon">close</i></button>
       <div class="modal-body p-0">
         
         <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
@@ -10,14 +11,12 @@
         </button>
    <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
         
-        <div class="row" v-else>
-          <div class="col-auto f-product-image">
-            <div class="f-product-image-inner">
-              <img class="f-product-img" :src="product.image" alt="">
-            </div>
+        <div class="f-product-content" v-else>
+          <div class="f-product-image">
+            <img class="f-product-img" :src="product.image" alt="">
           </div>
-          <div class="col f-product-content">
-            <div class="f-product-content-inner">
+          <div class="f-product-info">
+            
               <h1 class="title f-product-title">{{product.name}}</h1>
               <div class="f-product-segment" v-if="product.category">
                 <a @click.prevent="changeRoute(product.category.parent.slug)" v-if="product.category.parent">{{product.category.parent.name}}  / </a>
@@ -29,7 +28,7 @@
                 <div class="f-product-price-old"></div>
               </div>
               <div class="row mt-auto">
-                <div class="col">
+                <div class="col-12 mb-1 mb-lg-0 col-lg">
                   <div class="counter-widget input-group">
                      <div class="input-group-prepend" v-if="productInCart & quantity == 1"><button class="btn btn-outline-red" type="button" @click="removeFromCart"><i class="icon">clear</i></button></div>
                       <div class="input-group-prepend" v-if="!productInCart & quantity == 1"><button class="btn btn-outline-red" type="button" disabled><i class="icon">remove</i></button></div>
@@ -38,7 +37,7 @@
                       <div class="input-group-append"><button class="btn btn-outline-green" type="button" @click="increaseQuantity"><i class="icon">add</i></button></div>
                   </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-lg">
                   <button v-if="!productInCart" @click="addToCart" class="btn btn-block btn-green">Добавить в корзину</button>
                   <button v-else class="btn btn-block btn-green" @click="increaseCart">Готово</button>
                 </div>
@@ -52,7 +51,7 @@
                 :pu-cancel-text="$t('helper.no')" 
                 @pu-cancel="onCancel"
                 @pu-confirm="confirmAdd" /> 
-            </div>
+            
           </div>
         </div>
       </div>

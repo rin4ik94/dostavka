@@ -20,7 +20,7 @@ class ManagerController extends Controller
             })->get();
             return ManagerResource::collection($managers->load(['branches' => function ($query) use ($request) {
                 return $query->where('region_id', $request->region)->where('status', 1);
-            }]));
+            }, 'branches.region']));
         } else {
             $managers = Manager::get();
             return ManagerResource::collection($managers);
