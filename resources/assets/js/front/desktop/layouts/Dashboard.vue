@@ -7,6 +7,7 @@
       <Footer></Footer> 
       <RegionModal :regions="regions"/>
       <LoginModal />
+      <Drawer />
       <ProductModal/>
   </div>
 </template>

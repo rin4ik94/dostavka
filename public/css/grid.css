@@ -21,7 +21,7 @@ html {
   margin-left: auto;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1120px) {
   .container {
     max-width: 1120px;
   }

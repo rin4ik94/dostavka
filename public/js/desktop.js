@@ -52067,6 +52067,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -53721,7 +53722,7 @@ var staticRenderFns = [
       "button",
       {
         staticClass: "btn btn-link header-menu-toggle",
-        attrs: { type: "btn" }
+        attrs: { type: "btn", "data-toggle": "modal", "data-target": "#drawer" }
       },
       [_c("i", { staticClass: "icon" }, [_vm._v("menu")])]
     )
@@ -54055,6 +54056,8 @@ var render = function() {
       _c("RegionModal", { attrs: { regions: _vm.regions } }),
       _vm._v(" "),
       _c("LoginModal"),
+      _vm._v(" "),
+      _c("Drawer"),
       _vm._v(" "),
       _c("ProductModal")
     ],
@@ -58704,7 +58707,7 @@ var render = function() {
                             "button",
                             {
                               staticClass: "btn btn-green product-add-button",
-                              attrs: { type: "submit" },
+                              attrs: { type: "button" },
                               on: {
                                 click: function($event) {
                                   _vm.addToCart(product)
@@ -65538,6 +65541,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Product___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Product__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Login__ = __webpack_require__(265);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Login__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Drawer__ = __webpack_require__(304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Drawer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Drawer__);
+
 
 
 
@@ -65545,6 +65551,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Vue.component('RegionModal', __WEBPACK_IMPORTED_MODULE_0__Region___default.a);
     Vue.component('LoginModal', __WEBPACK_IMPORTED_MODULE_2__Login___default.a);
     Vue.component('ProductModal', __WEBPACK_IMPORTED_MODULE_1__Product___default.a);
+    Vue.component('Drawer', __WEBPACK_IMPORTED_MODULE_3__Drawer___default.a);
 });
 
 /***/ }),
@@ -67432,6 +67439,116 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-4c4a8a94", module.exports)
+  }
+}
+
+/***/ }),
+/* 303 */,
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(305)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/front/desktop/components/modals/Drawer.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a025f3e8", Component.options)
+  } else {
+    hotAPI.reload("data-v-a025f3e8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade drawer",
+        attrs: { id: "drawer", tabindex: "-1" }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "drawer-user" }, [
+              _vm._v("\n        user\n      ")
+            ]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "nav drawer-nav" }, [
+              _c("li", { staticClass: "nav-item" }, [
+                _c("a", { staticClass: "nav-link" }, [_vm._v("Магазины")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c("a", { staticClass: "nav-link" }, [
+                  _vm._v("Доставка и оплата")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c("a", { staticClass: "nav-link" }, [_vm._v("Мои заказы")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c("a", { staticClass: "nav-link" }, [_vm._v("Мои данние")])
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a025f3e8", module.exports)
   }
 }
 
