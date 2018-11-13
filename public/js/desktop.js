@@ -53249,7 +53249,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  /* background-color: #fd5646; */\n  color: black;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  /* background-color: #fd5646; */\n  color: black;\n}\n", ""]);
 
 // exports
 
@@ -53410,6 +53410,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     changeLocale: function changeLocale(lang) {
       if (lang != this.locale) {
         this.langChange(lang);
+        location.reload();
       }
     }
   }),
@@ -54150,9 +54151,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   },
 
   watch: {
-    lang: function lang() {
-      this.getCats();
-    },
+    // lang(){
+    //   this.getCats();      
+    // },
     regionName: function regionName() {
       this.getCats();
     }
@@ -54161,8 +54162,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapGetters */])({
     region: "regionId",
     regionName: "regionName",
-    regionSlug: "regionSlug",
-    lang: "locale"
+    regionSlug: "regionSlug"
+    // lang: "locale"
   }), {
     filtered: function filtered() {
       var data = [];
@@ -57386,17 +57387,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           this.active = 0;
         }
       }
-    },
-    lang: function lang() {
-      this.showPage = false;
-      this.getCatalog();
     }
+    // lang(){
+    //   this.showPage = false
+    //   this.getCatalog();      
+    // }
     // regionSlug: {
     //   handler(region) {
     //     this.getCatalog();
     //   }
     // }
-
   },
   methods: {
     setActive: function setActive(id) {
@@ -57503,8 +57503,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])({
     region: "regionId",
     regionName: "regionName",
-    regionSlug: "regionSlug",
-    lang: "locale"
+    regionSlug: "regionSlug"
+    // lang: "locale"
   })),
   created: function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
@@ -57728,16 +57728,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
   watch: {
-    lang: function lang(_lang) {
-      this.scrolled = false;
-      this.showPage = false;
-      if (this.$route.name == "category") {
+    //  lang(lang){ 
+    //    this.scrolled = false
+    //    this.showPage = false
+    //   if (this.$route.name == "category") { 
 
-        this.fetchItems();
-      } else {
-        this.allProducts();
-      }
-    },
+    //     this.fetchItems();
+    //   } else {
+    //     this.allProducts();
+    //   }
+    // },
     $route: function $route(route) {
       if (route.name == "category") {
         //  this.scrolled = false
@@ -59907,8 +59907,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     user: "user",
     cartInfo: "cart",
     delivery_price: "delivery_price",
-    manager: "manager",
-    lang: "locale"
+    manager: "manager"
+    // lang: "locale",
   }), {
     filteredProducts: function filteredProducts() {
       var _this = this;
@@ -59928,12 +59928,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }
   }),
   watch: {
-    lang: function lang() {
-      this.showPage = false;
-      this.getRegions();
-      this.fetchRegion(this.region.slug);
-    },
+    // lang(){
+    //   this.showPage = false;
+    //   this.getRegions(); 
+    //   this.fetchRegion(this.region.slug)
 
+    // },
     user: {
       deep: true,
       immediate: true,
@@ -63991,6 +63991,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setManager", function() { return setManager; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegion", function() { return setRegion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkLangExists", function() { return checkLangExists; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLang", function() { return setLang; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "langChange", function() { return langChange; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
@@ -64171,12 +64172,22 @@ var checkLangExists = function checkLangExists(_ref15) {
         dispatch = _ref15.dispatch;
 
     return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('lang').then(function (lang) {
-        dispatch('langChange', lang);
+        dispatch('setLang', lang);
     });
 };
-var langChange = function langChange(_ref16, lang) {
+var setLang = function setLang(_ref16, lang) {
     var commit = _ref16.commit,
         dispatch = _ref16.dispatch;
+
+
+    axios.get('/api/locale/' + lang);
+    commit('setLang', lang);
+    __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', lang);
+    Vue.i18n.set(lang);
+};
+var langChange = function langChange(_ref17, lang) {
+    var commit = _ref17.commit,
+        dispatch = _ref17.dispatch;
 
 
     if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(lang)) {
@@ -64185,9 +64196,9 @@ var langChange = function langChange(_ref16, lang) {
         commit('setLang', 'ru');
     } else {
         axios.get('/api/locale/' + lang);
-        commit('setLang', lang);
+        // commit('setLang', lang)
         __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', lang);
-        Vue.i18n.set(lang);
+        // Vue.i18n.set(lang);
     }
 };
 // export const setToken = ({ commit, dispatch }, token) => {

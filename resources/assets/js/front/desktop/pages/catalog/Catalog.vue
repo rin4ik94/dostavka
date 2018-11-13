@@ -72,10 +72,10 @@ export default {
         }
       }
     },
-    lang(){
-      this.showPage = false
-      this.getCatalog();      
-    }
+    // lang(){
+    //   this.showPage = false
+    //   this.getCatalog();      
+    // }
     // regionSlug: {
     //   handler(region) {
     //     this.getCatalog();
@@ -144,7 +144,7 @@ export default {
       region: "regionId",
       regionName: "regionName",
       regionSlug: "regionSlug",
-      lang: "locale"
+      // lang: "locale"
     })
   },
   async created(){

@@ -66,16 +66,16 @@ export default {
   },
 
   watch: {
-     lang(lang){ 
-       this.scrolled = false
-       this.showPage = false
-      if (this.$route.name == "category") { 
+    //  lang(lang){ 
+    //    this.scrolled = false
+    //    this.showPage = false
+    //   if (this.$route.name == "category") { 
       
-        this.fetchItems();
-      } else {
-        this.allProducts();
-      }
-    },
+    //     this.fetchItems();
+    //   } else {
+    //     this.allProducts();
+    //   }
+    // },
     $route(route) {
       if (route.name == "category") {
       //  this.scrolled = false

@@ -151,7 +151,7 @@ export default {
       cartInfo: "cart",
       delivery_price: "delivery_price",
       manager: "manager",
-      lang: "locale",
+      // lang: "locale",
     }),
     filteredProducts() {
       let d = [];
@@ -170,12 +170,12 @@ export default {
     }
   },
   watch: { 
-    lang(){
-      this.showPage = false;
-      this.getRegions(); 
-      this.fetchRegion(this.region.slug)
+    // lang(){
+    //   this.showPage = false;
+    //   this.getRegions(); 
+    //   this.fetchRegion(this.region.slug)
 
-    },
+    // },
     user:{
       deep:true,
       immediate:true,

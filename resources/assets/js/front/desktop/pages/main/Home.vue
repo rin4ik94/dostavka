@@ -45,9 +45,9 @@ export default {
     };
   },
   watch:{
-    lang(){
-      this.getCats();      
-    },
+    // lang(){
+    //   this.getCats();      
+    // },
     regionName(){
       this.getCats()
     }
@@ -58,7 +58,7 @@ export default {
       region: "regionId",
       regionName: "regionName",
       regionSlug: "regionSlug",
-      lang: "locale"
+      // lang: "locale"
     }),
     filtered() {
       let data = [];

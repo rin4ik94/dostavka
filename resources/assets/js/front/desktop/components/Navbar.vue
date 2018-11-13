@@ -105,6 +105,7 @@ export default {
     changeLocale(lang) {
       if (lang != this.locale) {
         this.langChange(lang)
+        location.reload()
       }
     }
   },
