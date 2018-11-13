@@ -59862,6 +59862,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
 
 
 
@@ -59873,6 +59876,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     return {
       products: [],
       region: null,
+      success: false,
       errors: [],
       showPage: false,
       nameError: null,
@@ -59994,6 +59998,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       params["form"] = this.form;
       axios.post('api/orders', { params: params }).then(function (response) {
         _this4.setEmpty();
+        _this4.success = true;
       }).catch(function (error) {
         _this4.errors = error.response.data.errors;
       });
@@ -60744,9 +60749,19 @@ var render = function() {
                       })
                     )
                   ])
-                : _c("main", { staticClass: "main" }, [
-                    _c("h1", [_vm._v("content goes here")])
-                  ]),
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.filteredProducts.length < !0 && !_vm.success
+                ? _c("main", { staticClass: "main" }, [
+                    _c("h1", [_vm._v("ПУСТОЙ КОНТЕНТ")])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.success
+                ? _c("main", { staticClass: "main" }, [
+                    _c("h1", [_vm._v("УСПЕШНО")])
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _vm.products.length
                 ? _c("aside", { staticClass: "aside" }, [

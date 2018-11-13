@@ -38,8 +38,11 @@
           </li> 
         </ul>
     </main>
-    <main  class="main" v-else>
-      <h1>content goes here</h1>
+    <main  class="main" v-if="filteredProducts.length <! 0 && !success">
+      <h1>ПУСТОЙ КОНТЕНТ</h1>
+    </main>
+    <main  class="main" v-if="success">
+      <h1>УСПЕШНО</h1>
     </main>
     <aside class="aside" v-if="products.length">
 
@@ -116,6 +119,7 @@ export default {
     return {
       products: [],
       region: null,
+      success:false,
       errors:[],
       showPage:false,
       nameError:null,
@@ -232,6 +236,7 @@ export default {
         params["form"] = this.form;
         axios.post('api/orders',{params:params}).then(response=>{
           this.setEmpty()
+          this.success =true
         }).catch(error=>{
             this.errors = error.response.data.errors
         })
