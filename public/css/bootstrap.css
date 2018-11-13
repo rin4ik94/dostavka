@@ -1664,10 +1664,10 @@ input[type="button"].btn-block {
 
 }
 .btn-group > .btn + .btn {
-  margin-left: 12px;
+  margin-left: 10px;
 }
 .btn-group-sm > .btn + .btn {
-  margin-left: 12px;
+  margin-left: 10px;
 }
 
 .btn-group > .btn,
@@ -3028,12 +3028,13 @@ input[type="button"].btn-block {
 .pagination {
   display: -ms-flexbox;
   display: flex;
+  justify-content: center;
   padding-left: 0;
   list-style: none;
   border-radius: 3px;
   margin-right: -6px;
   margin-left: -6px;
-  margin-bottom: 24px;
+  margin-top: 20px;
 }
 .page-item {
   margin-left: 6px;
@@ -3071,11 +3072,21 @@ input[type="button"].btn-block {
   background-color: #e84c3d;;
   border-color: #e84c3d;
 }
-
 .page-item.disabled .page-link {
   color: #999;
   pointer-events: none;
   cursor: auto;
+}
+.page-link .text {
+  display: none;
+}
+@media (min-width: 576px) {
+  .pagination {
+    justify-content: flex-start;
+  }
+  .page-link .text {
+    display: inline;
+  }
 }
 
 .pagination-lg .page-link {
@@ -3241,10 +3252,20 @@ input[type="button"].btn-block {
 
 .alert {
   position: relative;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
+  padding: 24px;
+  margin-bottom: 24px;
   border: 1px solid transparent;
-  border-radius: 0.25rem;
+  border-radius: 3px;
+  text-align: center;
+}
+.alert-icon {
+  font-size: 64px !important;
+  margin-bottom: 24px;
+}
+.alert-title {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 500;
 }
 
 .alert-heading {
@@ -3755,16 +3776,17 @@ button.close {
   top: 0;
   right: 0;
   left: 0;
-  padding: 8px 12px;
+  padding: 8px 10px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  box-shadow: 0 0 16px 0 rgba(0,0,0,.1);
   background-color: #fff;
+  box-shadow: 0 0 16px 0 rgba(0,0,0,.1);
   z-index: 3;
 }
 .modal-title {
-  margin-bottom: 0;
   line-height: 40px;
+  margin-bottom: 0;
+  font-size: 20px;
 }
 .modal-title span {
   color: #999;
@@ -3773,7 +3795,7 @@ button.close {
   position: relative;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 12px;
+  padding: 10px;
 }
 .modal-body:not(:first-child) {
   padding-top: 68px;
@@ -3803,24 +3825,26 @@ button.close {
 }
 @media (min-width: 576px) {
   .close {
-    top: 24px;
-    right: 24px;
+    top: 20px;
+    right: 20px;
   }
   .modal-dialog {
     align-items: center;
     min-height: 100%;
     max-width: 600px;
-    margin: 24px auto;
+    margin: 20px auto;
   }
   .modal-content {
     height: auto;
     border-radius: 3px;
   }
   .modal-header {
-    padding: 24px 24px 0;
+    position: static;
+    padding: 20px 20px 0;
+    box-shadow: none;
   }
   .modal-body {
-    padding: 24px;
+    padding: 20px !important;
   }
   .modal-sm {
     max-width: 300px;

@@ -23088,7 +23088,7 @@ module.exports = g;
 
 /* WEBPACK VAR INJECTION */(function(global) {var require;var require;/*!
     localForage -- Offline Storage, Improved
-    Version 1.7.3
+    Version 1.7.2
     https://localforage.github.io/localForage
     (c) 2013-2017 Mozilla, Apache License 2.0
 */
@@ -53125,33 +53125,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-12 col-lg-6 mb-2 mb-lg-0 text-lg-right" },
-      [
-        _c("h5", { staticClass: "footer-phone" }, [
-          _c("a", { attrs: { href: "/" } }, [_vm._v("+998 (91) 7778811")])
+    return _c("div", { staticClass: "col-12 col-lg-6 text-lg-right" }, [
+      _c("h5", { staticClass: "footer-phone" }, [
+        _c("a", { attrs: { href: "/" } }, [_vm._v("+998 (91) 7778811")])
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "nav footer-nav" }, [
+        _c("li", { staticClass: "nav-item footer-dev" }, [
+          _vm._v("Дизайн и разработка"),
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: { href: "http://prisma.uz", target: "_blank" }
+            },
+            [_vm._v("Prisma")]
+          )
         ]),
         _vm._v(" "),
-        _c("ul", { staticClass: "nav footer-nav" }, [
-          _c("li", { staticClass: "nav-item footer-dev" }, [
-            _vm._v("Дизайн и разработка"),
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { href: "http://prisma.uz", target: "_blank" }
-              },
-              [_vm._v("Prisma")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item footer-copy" }, [
-            _vm._v("© 2018 AloMarket")
-          ])
+        _c("li", { staticClass: "nav-item footer-copy" }, [
+          _vm._v("© 2018 AloMarket")
         ])
-      ]
-    )
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -53225,7 +53221,7 @@ var content = __webpack_require__(193);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("97d34a20", content, false, {});
+var update = __webpack_require__(8)("28f392f6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53249,7 +53245,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  /* background-color: #fd5646; */\n  color: black;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .dropdown-item:hover {\r\n  background-color: #4aae9b;\r\n  color: white;\r\n} */\n.highlightText {\r\n  font-weight: 600;\r\n  /* background-color: #fd5646; */\r\n  color: black;\n}\r\n", ""]);
 
 // exports
 
@@ -53844,6 +53840,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -53897,100 +53900,129 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.cartInfo.total > 0 && _vm.manager && _vm.$route.name != "cart"
-    ? _c("div", [
-        _c("div", { staticClass: "cart-card" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "div",
-                { staticClass: "col-auto" },
-                [
-                  _c("router-link", { attrs: { to: { name: "cart" } } }, [
-                    _c("i", { staticClass: "icon" }, [_vm._v("shopping_cart")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "text" }, [
-                      _vm._v(_vm._s(_vm.$t("cart.cart")))
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm.cartInfo.total > 0 && _vm.manager && _vm.$route.name != "cart"
+      ? _c("div", [
+          _c("div", { staticClass: "cart-card" }, [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-auto" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-link",
+                        attrs: { to: { name: "cart" } }
+                      },
+                      [
+                        _c("i", { staticClass: "icon" }, [
+                          _vm._v("shopping_cart")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "text" }, [
+                          _vm._v(_vm._s(_vm.$t("cart.cart")))
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col cart-card-center" }, [
+                  _c("div", { staticClass: "item" }, [
+                    _vm._v(_vm._s(_vm.$t("cart.shop")) + ": "),
+                    _c("a", { attrs: { href: "/" } }, [
+                      _vm._v(_vm._s(_vm.manager.name))
                     ])
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col cart-card-center" }, [
-                _c("div", { staticClass: "item" }, [
-                  _vm._v(_vm._s(_vm.$t("cart.shop")) + ": "),
-                  _c("a", { attrs: { href: "/" } }, [
-                    _vm._v(_vm._s(_vm.manager.name))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "item" }, [
+                    _vm._v(
+                      _vm._s(_vm.$t("cart.inCart")) +
+                        " " +
+                        _vm._s(_vm.cartInfo.prods.length)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "item" }, [
+                    _vm._v(
+                      _vm._s(_vm.$t("cart.price")) +
+                        " " +
+                        _vm._s(_vm._f("toCurrency")(_vm.cartInfo.total)) +
+                        " " +
+                        _vm._s(_vm.$t("cart.sum"))
+                    )
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "item" }, [
-                  _vm._v(
-                    _vm._s(_vm.$t("cart.inCart")) +
-                      " " +
-                      _vm._s(_vm.cartInfo.prods.length)
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "item" }, [
-                  _vm._v(
-                    _vm._s(_vm.$t("cart.price")) +
-                      " " +
-                      _vm._s(_vm._f("toCurrency")(_vm.cartInfo.total)) +
-                      " " +
-                      _vm._s(_vm.$t("cart.sum"))
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-auto" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-green",
-                      attrs: { to: { name: "cart" } }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("cart.button")))]
-                  )
-                ],
-                1
-              )
+                _c(
+                  "div",
+                  { staticClass: "col-auto" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-green",
+                        attrs: { to: { name: "cart" } }
+                      },
+                      [_vm._v(_vm._s(_vm.$t("cart.button")))]
+                    )
+                  ],
+                  1
+                )
+              ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "cart-card-mobile" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "btn btn-lg btn-block btn-green",
-                attrs: { to: { name: "cart" } }
-              },
-              [
-                _vm._v("\n      " + _vm._s(_vm.manager.name)),
-                _c("span", [
-                  _vm._v(
-                    _vm._s(_vm._f("toCurrency")(_vm.cartInfo.total)) +
-                      " " +
-                      _vm._s(_vm.$t("cart.sum"))
-                  )
-                ])
-              ]
-            )
-          ],
-          1
-        )
-      ])
-    : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "cart-card-mobile" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-lg btn-block btn-green",
+                  attrs: { to: { name: "cart" } }
+                },
+                [
+                  _vm._v("\n      " + _vm._s(_vm.$t("cart.cart"))),
+                  _c("span", [
+                    _vm._v(
+                      _vm._s(_vm._f("toCurrency")(_vm.cartInfo.total)) +
+                        " " +
+                        _vm._s(_vm.$t("cart.sum"))
+                    )
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        ])
+      : _vm._e()
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cart-card-mobile" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-lg btn-block btn-green",
+          attrs: { type: "button" }
+        },
+        [_vm._v("\n      Оформить заказ\n    ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -57129,7 +57161,9 @@ var render = function() {
       ? _c("div", { staticClass: "loader" }, [
           _c("div", { staticClass: "loader-container" })
         ])
-      : _c("div", [_vm._v("\n    HERE YOU GO REFUND\n")])
+      : _c("div", { staticClass: "container" }, [
+          _c("h1", { staticClass: "main-title" }, [_vm._v("Возврат")])
+        ])
   ])
 }
 var staticRenderFns = []
@@ -57228,7 +57262,11 @@ var render = function() {
       ? _c("div", { staticClass: "loader" }, [
           _c("div", { staticClass: "loader-container" })
         ])
-      : _c("div", [_vm._v("\n    HERE I'M PARTNER\n")])
+      : _c("div", { staticClass: "container" }, [
+          _c("h1", { staticClass: "main-title" }, [
+            _vm._v("Как начать сотрудничество")
+          ])
+        ])
   ])
 }
 var staticRenderFns = []
@@ -57313,6 +57351,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
 //
 //
 //
@@ -57541,7 +57580,7 @@ var content = __webpack_require__(231);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("5e4b8312", content, false, {});
+var update = __webpack_require__(8)("470694aa", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -57565,7 +57604,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n#notfound[data-v-4655b325] {\n  padding-top: -70px;\n\n  width: 100%;\n  background: #fff;\n\n  position: relative;\n  height: 100vh;\n}\n#notfound .notfound[data-v-4655b325] {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound[data-v-4655b325] {\n  max-width: 520px;\n  width: 100%;\n  line-height: 1.4;\n  text-align: center;\n}\n.notfound .notfound-404[data-v-4655b325] {\n  position: relative;\n  height: 200px;\n  margin: 0px auto 20px;\n  z-index: -1;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 236px !important;\n  font-weight: 100 !important;\n  margin: 0px;\n  color: #211b19;\n  text-transform: uppercase;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 28px;\n  font-weight: 400 !important;\n  text-transform: uppercase;\n  color: #211b19;\n  background: #fff;\n  padding: 10px 5px;\n  margin: auto;\n  display: inline-block;\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  right: 0;\n}\n.notfound a[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  display: inline-block;\n  font-weight: 700;\n  text-decoration: none;\n  color: #fff;\n  text-transform: uppercase;\n  padding: 13px 23px;\n  background: #27ae61;\n  font-size: 18px;\n  -webkit-transition: 0.2s all;\n  transition: 0.2s all;\n}\n.notfound a[data-v-4655b325]:hover {\n  color: #27ae61;\n  background: #211b19;\n}\n@media only screen and (max-width: 767px) {\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 148px;\n}\n}\n@media only screen and (max-width: 480px) {\n.notfound .notfound-404[data-v-4655b325] {\n    height: 148px;\n    margin: 0px auto 10px;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 86px;\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n    font-size: 16px;\n}\n.notfound a[data-v-4655b325] {\n    padding: 7px 15px;\n    font-size: 14px;\n}\n}\n", ""]);
+exports.push([module.i, "\n#notfound[data-v-4655b325] {\r\n  padding-top: -70px;\r\n\r\n  width: 100%;\r\n  background: #fff;\r\n\r\n  position: relative;\r\n  height: 100vh;\n}\n#notfound .notfound[data-v-4655b325] {\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n  transform: translate(-50%, -50%);\n}\n.notfound[data-v-4655b325] {\r\n  max-width: 520px;\r\n  width: 100%;\r\n  line-height: 1.4;\r\n  text-align: center;\n}\n.notfound .notfound-404[data-v-4655b325] {\r\n  position: relative;\r\n  height: 200px;\r\n  margin: 0px auto 20px;\r\n  z-index: -1;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\r\n  font-family: \"Montserrat\", sans-serif;\r\n  font-size: 236px !important;\r\n  font-weight: 100 !important;\r\n  margin: 0px;\r\n  color: #211b19;\r\n  text-transform: uppercase;\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n  transform: translate(-50%, -50%);\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\r\n  font-family: \"Montserrat\", sans-serif;\r\n  font-size: 28px;\r\n  font-weight: 400 !important;\r\n  text-transform: uppercase;\r\n  color: #211b19;\r\n  background: #fff;\r\n  padding: 10px 5px;\r\n  margin: auto;\r\n  display: inline-block;\r\n  position: absolute;\r\n  bottom: 0px;\r\n  left: 0;\r\n  right: 0;\n}\n.notfound a[data-v-4655b325] {\r\n  font-family: \"Montserrat\", sans-serif;\r\n  display: inline-block;\r\n  font-weight: 700;\r\n  text-decoration: none;\r\n  color: #fff;\r\n  text-transform: uppercase;\r\n  padding: 13px 23px;\r\n  background: #27ae61;\r\n  font-size: 18px;\r\n  -webkit-transition: 0.2s all;\r\n  transition: 0.2s all;\n}\n.notfound a[data-v-4655b325]:hover {\r\n  color: #27ae61;\r\n  background: #211b19;\n}\n@media only screen and (max-width: 767px) {\n.notfound .notfound-404 h1[data-v-4655b325] {\r\n    font-size: 148px;\n}\n}\n@media only screen and (max-width: 480px) {\n.notfound .notfound-404[data-v-4655b325] {\r\n    height: 148px;\r\n    margin: 0px auto 10px;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\r\n    font-size: 86px;\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\r\n    font-size: 16px;\n}\n.notfound a[data-v-4655b325] {\r\n    padding: 7px 15px;\r\n    font-size: 14px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -57659,6 +57698,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
 //
 //
 //
@@ -58198,7 +58238,7 @@ var content = __webpack_require__(237);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("59b044d7", content, false, {});
+var update = __webpack_require__(8)("2d8609dd", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -58222,7 +58262,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -58233,6 +58273,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -58360,7 +58402,12 @@ var render = function() {
                     ]
                   }
                 },
-                [_vm._v("← " + _vm._s(_vm.$t("pagination.previous")))]
+                [
+                  _vm._v("\r\n              ←"),
+                  _c("span", { staticClass: "text" }, [
+                    _vm._v(" " + _vm._s(_vm.$t("pagination.previous")))
+                  ])
+                ]
               )
             ]
           ),
@@ -58422,7 +58469,12 @@ var render = function() {
                     ]
                   }
                 },
-                [_vm._v(" " + _vm._s(_vm.$t("pagination.next")) + " →")]
+                [
+                  _c("span", { staticClass: "text" }, [
+                    _vm._v(_vm._s(_vm.$t("pagination.next")) + " ")
+                  ]),
+                  _vm._v("→")
+                ]
               )
             ]
           )
@@ -58486,9 +58538,7 @@ var render = function() {
                             ])
                           : _vm._e(),
                         _vm._v(" "),
-                        _c("div", { staticClass: "product-img" }, [
-                          _c("img", { attrs: { src: product.image } })
-                        ])
+                        _c("img", { attrs: { src: product.image } })
                       ]
                     )
                   : _vm._e(),
@@ -58511,130 +58561,162 @@ var render = function() {
                             ])
                           : _vm._e(),
                         _vm._v(" "),
-                        _c("div", { staticClass: "product-img" }, [
-                          _c("img", { attrs: { src: product.image } })
-                        ])
+                        _c("img", { attrs: { src: product.image } })
                       ]
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "product-info" }, [
-                  _c("div", { staticClass: "product-title" }, [
-                    _vm._v(_vm._s(product.name))
-                  ]),
-                  _vm._v(" "),
-                  _vm.productInCart(product)
-                    ? _c("div", { staticClass: "product-footer" }, [
-                        _c(
-                          "div",
-                          { staticClass: "counter-widget input-group" },
-                          [
-                            product.quantity == 1
-                              ? _c(
-                                  "div",
-                                  { staticClass: "input-group-prepend" },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-outline-red",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.removeFromCart(product)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", { staticClass: "icon" }, [
-                                          _vm._v("clear")
-                                        ])
-                                      ]
-                                    )
-                                  ]
-                                )
-                              : _c(
-                                  "div",
-                                  { staticClass: "input-group-prepend" },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-outline-red",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.decreaseQuantity(product)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", { staticClass: "icon" }, [
-                                          _vm._v("remove")
-                                        ])
-                                      ]
-                                    )
-                                  ]
-                                ),
-                            _vm._v(" "),
-                            _c("input", {
-                              staticClass: "form-control",
-                              attrs: { type: "text", disabled: "" },
-                              domProps: {
-                                value: product.quantity + " " + product.measure
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "input-group-append" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-green",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.addToCart(product)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", { staticClass: "icon" }, [
-                                    _vm._v("add")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      ])
-                    : _c("div", { staticClass: "product-footer" }, [
-                        _c("div", { staticClass: "product-price" }, [
-                          _c("div", { staticClass: "product-price-new" }, [
-                            _vm._v(
-                              _vm._s(_vm._f("toCurrency")(product.new_price)) +
-                                " сумов"
-                            )
-                          ]),
-                          _c("div", { staticClass: "product-quantity" }, [
-                            _vm._v("за 1 " + _vm._s(product.measure) + ".")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "button",
+                _c(
+                  "div",
+                  { staticClass: "product-info" },
+                  [
+                    (_vm.$route.name == "catalog") | (_vm.$route.name == "tp")
+                      ? _c(
+                          "router-link",
                           {
-                            staticClass: "btn btn-green product-add-button",
-                            attrs: { type: "submit" },
-                            on: {
-                              click: function($event) {
-                                _vm.addToCart(product)
+                            staticClass: "product-title",
+                            attrs: {
+                              to: {
+                                name: "tp",
+                                params: { product: product.slug }
                               }
                             }
                           },
-                          [_vm._v("В корзину")]
+                          [_vm._v(_vm._s(product.name))]
                         )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    (_vm.$route.name == "category") | (_vm.$route.name == "pp")
+                      ? _c(
+                          "router-link",
+                          {
+                            staticClass: "product-title",
+                            attrs: {
+                              to: {
+                                name: "pp",
+                                params: { product: product.slug }
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(product.name))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "product-price" }, [
+                      _c("div", { staticClass: "product-price-new" }, [
+                        _vm._v(
+                          _vm._s(_vm._f("toCurrency")(product.new_price)) +
+                            " сум"
+                        )
+                      ]),
+                      _c("div", { staticClass: "product-quantity" }, [
+                        _vm._v("1 " + _vm._s(product.measure) + ".")
                       ])
-                ])
+                    ]),
+                    _vm._v(" "),
+                    _vm.productInCart(product)
+                      ? _c("div", { staticClass: "product-footer" }, [
+                          _c(
+                            "div",
+                            { staticClass: "counter-widget input-group" },
+                            [
+                              product.quantity == 1
+                                ? _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-outline-red",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.removeFromCart(product)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", { staticClass: "icon" }, [
+                                            _vm._v("clear")
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                : _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-outline-red",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.decreaseQuantity(product)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", { staticClass: "icon" }, [
+                                            _vm._v("remove")
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: { type: "text", disabled: "" },
+                                domProps: {
+                                  value:
+                                    product.quantity + " " + product.measure
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "input-group-append" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-outline-green",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.addToCart(product)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", { staticClass: "icon" }, [
+                                      _vm._v("add")
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        ])
+                      : _c("div", { staticClass: "product-footer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-green product-add-button",
+                              attrs: { type: "submit" },
+                              on: {
+                                click: function($event) {
+                                  _vm.addToCart(product)
+                                }
+                              }
+                            },
+                            [_vm._v("В корзину")]
+                          )
+                        ])
+                  ],
+                  1
+                )
               ],
               1
             )
@@ -58920,71 +59002,64 @@ var render = function() {
                   _vm.branchName
                     ? _c("h1", { staticClass: "main-title" }, [
                         _vm._v(
-                          "Каталог продуктов магазина «" +
-                            _vm._s(_vm.catalog.name) +
-                            "» " +
-                            _vm._s(_vm.branchName)
+                          "Каталог продуктов «" + _vm._s(_vm.catalog.name) + "»"
                         )
                       ])
                     : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "btn-group btn-group-sm btn-group-toggle main-sorter",
+                      attrs: { "data-toggle": "buttons" }
+                    },
+                    [
+                      _c("span", { staticClass: "main-sorter-title" }, [
+                        _vm._v("Сортировать:")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn btn-outline-light",
+                          class: { active: !_vm.sortByPrice },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.sortByPrice = false
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\r\n            По популярности \r\n          "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn btn-outline-light",
+                          class: { active: _vm.sortByPrice },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.sortByPrice = true
+                            }
+                          }
+                        },
+                        [_vm._v(" \r\n            По цене\r\n          ")]
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "content-inner" }, [
                     _c(
                       "main",
                       { staticClass: "main" },
                       [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "btn-group btn-group-sm btn-group-toggle main-sorter",
-                            attrs: { "data-toggle": "buttons" }
-                          },
-                          [
-                            _c("span", { staticClass: "main-sorter-title" }, [
-                              _vm._v("Сортировать:")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "btn btn-outline-light",
-                                class: { active: !_vm.sortByPrice },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.sortByPrice = false
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                По популярности \n              "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "btn btn-outline-light",
-                                class: { active: _vm.sortByPrice },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.sortByPrice = true
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  " \n                По цене\n              "
-                                )
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
                         _vm.active != 0
                           ? _c("router-view", {
                               attrs: {
@@ -59755,6 +59830,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
 //
 //
 //
@@ -60752,9 +60830,7 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.filteredProducts.length < !0 && !_vm.success
-                ? _c("main", { staticClass: "main" }, [
-                    _c("h1", [_vm._v("ПУСТОЙ КОНТЕНТ")])
-                  ])
+                ? _c("main", { staticClass: "main" }, [_vm._m(0)])
                 : _vm._e(),
               _vm._v(" "),
               _vm.success
@@ -60767,7 +60843,7 @@ var render = function() {
                 ? _c("aside", { staticClass: "aside" }, [
                     _c("div", { staticClass: "card" }, [
                       _c("form", { staticClass: "card-body" }, [
-                        _vm._m(0),
+                        _vm._m(1),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
                           _c("input", {
@@ -60857,7 +60933,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(1),
+                            _vm._m(2),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -61161,6 +61237,18 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "alert" }, [
+      _c("i", { staticClass: "icon alert-icon" }, [_vm._v("shopping_cart")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "title alert-title" }, [
+        _vm._v("Ваша корзина пуста")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -66231,7 +66319,7 @@ var content = __webpack_require__(273);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("6a992cc4", content, false, {});
+var update = __webpack_require__(8)("0d653c38", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66364,7 +66452,7 @@ var content = __webpack_require__(278);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("3f3e178e", content, false, {});
+var update = __webpack_require__(8)("c674a8b0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66492,7 +66580,7 @@ var content = __webpack_require__(283);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("6c5b6afa", content, false, {});
+var update = __webpack_require__(8)("6c3a01d8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66638,7 +66726,7 @@ var content = __webpack_require__(289);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("73a702df", content, false, {});
+var update = __webpack_require__(8)("15a30ff6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66967,7 +67055,7 @@ var content = __webpack_require__(295);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("46448f8a", content, false, {});
+var update = __webpack_require__(8)("02c73f67", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags

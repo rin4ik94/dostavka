@@ -28,7 +28,7 @@
 
             </ul>
           </div>
-          <div class="col-12 col-lg-6 mb-2 mb-lg-0 text-lg-right">
+          <div class="col-12 col-lg-6 text-lg-right">
             <h5 class="footer-phone"><a href="/">+998 (91) 7778811</a></h5>
             <ul class="nav footer-nav">
               <li class="nav-item footer-dev">Дизайн и разработка<a class="nav-link"  href="http://prisma.uz" target="_blank">Prisma</a></li>
