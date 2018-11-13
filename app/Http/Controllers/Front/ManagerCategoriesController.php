@@ -17,7 +17,7 @@ class ManagerCategoriesController extends Controller
                 return $query->where('status', 1);
             }, 'managers.branches' => function ($q) {
                 return $q->where('region_id', request()->region);
-            }, 'managers.managerCategory']));
+            }, 'managers.managerCategory', 'managers.branches.region']));
         }
         $categories = ManagerCategory::get();
         return ManagerCategoriesResource::collection($categories);
