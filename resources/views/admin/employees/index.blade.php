@@ -13,6 +13,9 @@
         <div class="col-auto">
             <select class="custom-select" name="group">
                 <option value="all">Все группы</option>
+                @foreach($roles as $employeegroup)
+                <option value="{{ $employeegroup->id }}">{{ $employeegroup->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="col-auto">
@@ -26,7 +29,7 @@
     <div class="ml-auto form-row">
         @include('admin.components.search')
         <div class="col-auto">
-            <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newEmployee">
+            <button class="btn btn-green" data-toggle="modal" data-target="#newEmployee">
                 <i class="icon">add</i>
                 <span class="text">Добавить сотрудника</span>
             </button>
