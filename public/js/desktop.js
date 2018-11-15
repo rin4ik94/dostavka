@@ -51717,7 +51717,6 @@ var app = new Vue({
             __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch("setCart");
             __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setTotal');
         });
-
         __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('setToken').then(function () {
             __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('fetchUser').catch(function () {
                 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('clearAuth');

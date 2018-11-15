@@ -133,8 +133,10 @@ export const setRegion = ({ commit, dispatch }) => {
  
   localforage.getItem('region').then((regionId) => {
         if (isEmpty(regionId)) { 
-            $("#Regions").modal('show')            
-            return Promise.reject('NO_REGION_CHOOSEN');
+            commit('setRegion', '1')
+            return Promise.resolve('1')
+            // $("#Regions").modal('show')            
+            // return Promise.reject('NO_REGION_CHOOSEN');
         }else{ 
             commit('setRegion', regionId)
             return Promise.resolve(regionId)
@@ -143,30 +145,21 @@ export const setRegion = ({ commit, dispatch }) => {
     })
 }
 
-export const checkLangExists = ({ commit, dispatch }) => {
-    return localforage.getItem('lang').then((lang) => {
-        dispatch('setLang', lang)
-    })
-}
-export const setLang = ({ commit, dispatch }, lang) => {
- 
-        axios.get(`/api/locale/${lang}`)
-        commit('setLang', lang)
-        localforage.setItem('lang', lang)
-        Vue.i18n.set(lang);
-  
-}
-export const langChange = ({ commit, dispatch }, lang) => {
-
+export const checkLangExists = ({ dispatch }) => {
+    return localforage.getItem('lang').then((lang) => {  
+        dispatch('langChange', lang)
+    }) 
+} 
+export const langChange = ({ commit, dispatch }, lang) => { 
     if (isEmpty(lang)) {
         localforage.setItem('lang', 'ru')
         Vue.i18n.set('ru');
         commit('setLang', 'ru')
     } else {
         axios.get(`/api/locale/${lang}`)
-        // commit('setLang', lang)
+        commit('setLang', lang)
         localforage.setItem('lang', lang)
-        // Vue.i18n.set(lang);
+        Vue.i18n.set(lang);
     }
 }
 // export const setToken = ({ commit, dispatch }, token) => {
