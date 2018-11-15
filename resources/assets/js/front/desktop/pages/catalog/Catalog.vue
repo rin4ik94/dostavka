@@ -8,18 +8,19 @@
         <div class="main-actions">
           <a class="btn btn-outline-green" @click="$router.push({name:'home'})">&#8592; {{$t('pages.back')}}</a>
         </div> 
-        <h1 class="main-title" v-if="branchName">Каталог продуктов магазина «{{catalog.name}}» {{branchName}}</h1>
+        <h1 class="main-title" v-if="branchName">Каталог продуктов «{{catalog.name}}»</h1>
+        <div class="btn-group btn-group-sm btn-group-toggle main-sorter" data-toggle="buttons">
+          <span class="main-sorter-title">Сортировать:</span>
+          <div @click.prevent="sortByPrice = false" :class="{'active' : !sortByPrice}" class="btn btn-outline-light">
+            По популярности 
+          </div>
+          <div @click.prevent="sortByPrice = true" :class="{'active' : sortByPrice}" class="btn btn-outline-light"> 
+            По цене
+          </div>
+        </div>
         <div class="content-inner">
           <main class="main">
-            <div class="btn-group btn-group-sm btn-group-toggle main-sorter" data-toggle="buttons">
-              <span class="main-sorter-title">Сортировать:</span>
-              <div @click.prevent="sortByPrice = false" :class="{'active' : !sortByPrice}" class="btn btn-outline-light">
-                По популярности 
-              </div>
-              <div @click.prevent="sortByPrice = true" :class="{'active' : sortByPrice}" class="btn btn-outline-light"> 
-                По цене
-              </div>
-            </div>
+            
               <router-view  v-if="active != 0" :branch="branchName" :price="sortByPrice" @setActive="setActive"></router-view>
               <Products  v-if="active == 0" :branch="branchName" :price="sortByPrice" /> 
           </main>

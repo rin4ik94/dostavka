@@ -23,7 +23,7 @@
   <div class="ml-auto form-row">
     @include('admin.components.search')
     <div class="col-auto">
-     <button class="btn btn-green ml-auto" data-toggle="modal" data-target="#newStore">
+     <button class="btn btn-green" data-toggle="modal" data-target="#newStore">
         <i class="icon">add</i>
         <span class="text">Добавить магазин</span>
       </button>

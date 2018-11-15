@@ -1,10 +1,16 @@
 <template>
+  <div>
+    <div class="cart-card-mobile">
+      <button class="btn btn-lg btn-block btn-green" type="button">
+        Оформить заказ
+      </button>
+    </div>
   <div v-if="cartInfo.total > 0 && manager && $route.name != 'cart'">
     <div class="cart-card">
       <div class="container">
         <div class="row">
           <div class="col-auto">
-            <router-link :to="{name:'cart'}"><i class="icon">shopping_cart</i>
+            <router-link :to="{name:'cart'}" class="btn btn-link"><i class="icon">shopping_cart</i>
               <span class="text">{{$t('cart.cart')}}</span>
               <!-- <span class="badge badge-danger">1</span> -->
             </router-link>
@@ -22,9 +28,10 @@
     </div>
     <div class="cart-card-mobile">
       <router-link :to="{name:'cart'}" class="btn btn-lg btn-block btn-green">
-        {{manager.name}}<span>{{cartInfo.total | toCurrency}} {{$t("cart.sum")}}</span>
+        {{$t('cart.cart')}}<span>{{cartInfo.total | toCurrency}} {{$t("cart.sum")}}</span>
       </router-link>
     </div>
+  </div>
   </div>
 </template>
 <script>

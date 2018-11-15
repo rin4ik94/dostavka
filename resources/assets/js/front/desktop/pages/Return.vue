@@ -1,9 +1,9 @@
 <template>
     <div class="content">
-        <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
-    <div v-else>
-        HERE YOU GO REFUND
-    </div>
+      <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
+      <div class="container" v-else>
+        <h1 class="main-title">Возврат</h1>
+      </div>
     </div>
 </template>
 <script>

@@ -39,7 +39,10 @@
         </ul>
     </main>
     <main  class="main" v-if="filteredProducts.length <! 0 && !success">
-      <h1>ПУСТОЙ КОНТЕНТ</h1>
+      <div class="alert">
+        <i class="icon alert-icon">shopping_cart</i>
+        <div class="title alert-title">Ваша корзина пуста</div>
+      </div>
     </main>
     <main  class="main" v-if="success">
       <h1>УСПЕШНО</h1>

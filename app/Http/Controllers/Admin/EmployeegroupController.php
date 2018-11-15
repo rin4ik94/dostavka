@@ -33,9 +33,13 @@ class EmployeegroupController extends Controller
             })
             ->where('manager_id', '=', $user->manager_id)
             ->paginate(10);
-        $managers = Manager::whereHas('employee_groups', function ($query) use ($id) {
-            $query->whereManagerId($id);
-        })->get();
+        if ($user->id == '1') {
+            $managers = Manager::all();
+        } else {
+            $managers = Manager::whereHas('employee_groups', function ($query) use ($user) {
+                $query->whereManagerId($user->manager_id);
+            })->get();
+        }
         return view('admin.employeesgr.index', compact('roles', 'permission', 'managers'));
     }
 

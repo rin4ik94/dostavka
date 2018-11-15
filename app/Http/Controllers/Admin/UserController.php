@@ -19,8 +19,18 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $roles = Role::get();
-        $managers = Manager::get();
+        $user = \Auth::user();
+        
+        if($user->id == 1){
+            $roles = Role::all();
+            $managers = Manager::get();
+        }else{
+            $roles = Role::where(function($query) use($user){
+                $query->where('id','!=','1');
+                $query->whereManagerId($user->manager_id);
+            })->get();
+            $managers = Manager::whereId($user->manager_id)->get();
+        }
         $emoloyees = Employee::with('manager', 'role')->paginate(10);
         return view('admin.employees.index', compact('emoloyees', 'roles', 'managers'));
     }
