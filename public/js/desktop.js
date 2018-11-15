@@ -52124,50 +52124,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
 
       return getRegions;
-    }(),
-    setRegionD: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-        var _this = this;
-
-        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (region) {
-                  if (Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(region)) {
-                    _this.setRegionId("1");
-                  }
-                });
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function setRegionD() {
-        return _ref2.apply(this, arguments);
-      }
-
-      return setRegionD;
     }()
-    // replacePage() {
-    //   if (this.$route.params.sluged) {
-    //     this.$router.replace({
-    //       name: "category",
-    //       params: { sluged: this.$route.params.sluged }
-    //     });
-    //   } else {
-    //     this.$router.replace({
-    //       name: "catalog",
-    //       params: { slug: this.$route.params.slug }
-    //     });
-    //   }
-    // }
-
   }),
   watch: {
     $route: {
@@ -52189,36 +52146,33 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }
   },
   created: function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-      var _this2 = this;
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _this = this;
 
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               this.$router.beforeEach(function (to, from, next) {
-                _this2.showPage = false;
+                _this.showPage = false;
                 next();
               });
               this.$nextTick(function () {
-                _this2.getRegions();
+                _this.getRegions();
               });
-              _context3.next = 4;
+              _context2.next = 4;
               return this.setRegion();
 
             case 4:
-              $("#Regions").on("hide.bs.modal", this.setRegionD);
-
-            case 5:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3, this);
+      }, _callee2, this);
     }));
 
     function created() {
-      return _ref3.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     }
 
     return created;
@@ -64082,7 +64036,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setManager", function() { return setManager; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegion", function() { return setRegion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkLangExists", function() { return checkLangExists; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLang", function() { return setLang; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "langChange", function() { return langChange; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
@@ -64249,8 +64202,10 @@ var setRegion = function setRegion(_ref14) {
 
     __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (regionId) {
         if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(regionId)) {
-            $("#Regions").modal('show');
-            return Promise.reject('NO_REGION_CHOOSEN');
+            commit('setRegion', '1');
+            return Promise.resolve('1');
+            // $("#Regions").modal('show')            
+            // return Promise.reject('NO_REGION_CHOOSEN');
         } else {
             commit('setRegion', regionId);
             return Promise.resolve(regionId);
@@ -64259,27 +64214,15 @@ var setRegion = function setRegion(_ref14) {
 };
 
 var checkLangExists = function checkLangExists(_ref15) {
-    var commit = _ref15.commit,
-        dispatch = _ref15.dispatch;
+    var dispatch = _ref15.dispatch;
 
     return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('lang').then(function (lang) {
-        dispatch('setLang', lang);
+        dispatch('langChange', lang);
     });
 };
-var setLang = function setLang(_ref16, lang) {
+var langChange = function langChange(_ref16, lang) {
     var commit = _ref16.commit,
         dispatch = _ref16.dispatch;
-
-
-    axios.get('/api/locale/' + lang);
-    commit('setLang', lang);
-    __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', lang);
-    Vue.i18n.set(lang);
-};
-var langChange = function langChange(_ref17, lang) {
-    var commit = _ref17.commit,
-        dispatch = _ref17.dispatch;
-
 
     if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(lang)) {
         __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', 'ru');
@@ -64287,9 +64230,9 @@ var langChange = function langChange(_ref17, lang) {
         commit('setLang', 'ru');
     } else {
         axios.get('/api/locale/' + lang);
-        // commit('setLang', lang)
+        commit('setLang', lang);
         __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', lang);
-        // Vue.i18n.set(lang);
+        Vue.i18n.set(lang);
     }
 };
 // export const setToken = ({ commit, dispatch }, token) => {
@@ -65194,28 +65137,20 @@ var index = {
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     "ru": {
-        "login": {
-            "title": "Вход",
-            "pre_title": "Введите свой номер телефона",
-            "sms_info": "На указанный номер будет отправлено SMS с кодом подтверждения номера.",
-            "button_send": "Получить код для входа",
-            "phone_placeholder": "Телефон",
-            "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
-            "incorrect_password": "Неправильный код",
-            "send_again": "Отправить еще раз",
-            "next": "Далее",
-            "sms_code": "Код из SMS",
-            "change_number": "Изменить номер"
+        "helper": {
+            "yes": "Да",
+            "no": "Нет"
         },
-        "header": {
-            "title": "Быстрая доставка продуктов",
-            "step1": "Выберите свой любимый магазин в своем регионе",
-            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
-            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
-            "delivery": "Доставка",
-            "login": "Вход",
-            "logout": "Выйти",
-            "shops": "Магазины"
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "auth": {
+            "failed": "These credentials do not match our records.",
+            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -65298,7 +65233,7 @@ var index = {
             "numeric": "The {attribute} must be a number.",
             "present": "The {attribute} field must be present.",
             "regex": "The {attribute} format is invalid.",
-            "required": "Заполните это поле.",
+            "required": "Поле {attribute} требуется.",
             "required_if": "The {attribute} field is required when {other} is {value}.",
             "required_unless": "The {attribute} field is required unless {other} is in {values}.",
             "required_with": "The {attribute} field is required when {values} is present.",
@@ -65312,24 +65247,59 @@ var index = {
                 "string": "The {attribute} must be {size} characters.",
                 "array": "The {attribute} must contain {size} items."
             },
-            "string": "The {attribute} must be a string.",
-            "timezone": "The {attribute} must be a valid zone.",
-            "unique": "The {attribute} has already been taken.",
-            "uploaded": "The {attribute} failed to upload.",
-            "url": "The {attribute} format is invalid.",
-            "nameError": "Заполните это поле.",
-            "lastNameError": "Заполните это поле.",
-            "phoneError": "Заполните это поле.",
+            "string": "{attribute} должен быть строкой.",
+            "timezone": "{attribute}должен быть допустимой зоной.",
+            "unique": "{attribute} уже сделан.",
+            "uploaded": "{attribute} удалось загрузить.",
+            "url": "Формат {attribute} недействителен.",
+            "nameError": "Поле {attribute} требуется.",
+            "lastNameError": "Поле {attribute} требуется.",
+            "phoneError": "Поле {attribute} требуется.",
             "custom": {
                 "attribute-name": {
                     "rule-name": "custom-message"
                 }
             },
-            "attributes": []
+            "attributes": {
+                "name": "name",
+                "manager_category_id": "manager_category_id",
+                "logo": "logo",
+                "status": "Status",
+                "name_uz": "Name_uz",
+                "name_ru": "Name_ru",
+                "manager_id": "Manager_id",
+                "category_id": "Category_id",
+                "new_price": "New_price",
+                "old_price": "Old_price",
+                "measurement": "Measurement"
+            }
         },
-        "helper": {
-            "yes": "Да",
-            "no": "Нет"
+        "header": {
+            "title": "Быстрая доставка продуктов",
+            "step1": "Выберите свой любимый магазин в своем регионе",
+            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
+            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
+            "delivery": "Доставка",
+            "login": "Вход",
+            "logout": "Выйти",
+            "shops": "Магазины"
+        },
+        "pagination": {
+            "previous": "Назад",
+            "next": "Вперед"
+        },
+        "login": {
+            "title": "Вход",
+            "pre_title": "Введите свой номер телефона",
+            "sms_info": "На указанный номер будет отправлено SMS с кодом подтверждения номера.",
+            "button_send": "Получить код для входа",
+            "phone_placeholder": "Телефон",
+            "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
+            "incorrect_password": "Неправильный код",
+            "send_again": "Отправить еще раз",
+            "next": "Далее",
+            "sms_code": "Код из SMS",
+            "change_number": "Изменить номер"
         },
         "cart": {
             "shop": "Магазин",
@@ -65341,6 +65311,15 @@ var index = {
             "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
             "confirmTitle": "Подтвердите действие:"
         },
+        "pages": {
+            "back": "Назад к списку магазинов"
+        }
+    },
+    "uz": {
+        "helper": {
+            "yes": "Xa",
+            "no": "Yo'q"
+        },
         "passwords": {
             "password": "Passwords must be at least six characters and match the confirmation.",
             "reset": "Your password has been reset!",
@@ -65351,38 +65330,6 @@ var index = {
         "auth": {
             "failed": "These credentials do not match our records.",
             "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-        },
-        "pagination": {
-            "previous": "Назад",
-            "next": "Вперед"
-        },
-        "pages": {
-            "back": "Назад к списку магазинов"
-        }
-    },
-    "uz": {
-        "login": {
-            "title": "Kirish",
-            "pre_title": "Telefon raqamingizni kiriting",
-            "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
-            "button_send": "Kodni jo'natish",
-            "phone_placeholder": "Telefon",
-            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik",
-            "incorrect_password": "Noto'gri kod",
-            "send_again": "Yana bir maratoba jo'natish",
-            "next": "Tasdiqlash",
-            "sms_code": "SMS da kelgan kodni kiriting",
-            "change_number": "Raqamni o'zgartirish"
-        },
-        "header": {
-            "title": "Mahsulotlarni tezda yetkazib beramiz",
-            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
-            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
-            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
-            "delivery": "Buyurtma",
-            "login": "Kirish",
-            "logout": "Chiqish",
-            "shops": "Do'konlar"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -65494,9 +65441,32 @@ var index = {
             },
             "attributes": []
         },
-        "helper": {
-            "yes": "Xa",
-            "no": "Yo'q"
+        "header": {
+            "title": "Mahsulotlarni tezda yetkazib beramiz",
+            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
+            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
+            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
+            "delivery": "Buyurtma",
+            "login": "Kirish",
+            "logout": "Chiqish",
+            "shops": "Do'konlar"
+        },
+        "pagination": {
+            "previous": "Orqaga",
+            "next": "Oldinga"
+        },
+        "login": {
+            "title": "Kirish",
+            "pre_title": "Telefon raqamingizni kiriting",
+            "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
+            "button_send": "Kodni jo'natish",
+            "phone_placeholder": "Telefon",
+            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik",
+            "incorrect_password": "Noto'gri kod",
+            "send_again": "Yana bir maratoba jo'natish",
+            "next": "Tasdiqlash",
+            "sms_code": "SMS da kelgan kodni kiriting",
+            "change_number": "Raqamni o'zgartirish"
         },
         "cart": {
             "shop": "Do'kon",
@@ -65507,21 +65477,6 @@ var index = {
             "button": "Buyurtma qilish",
             "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
             "confirmTitle": "Amalni tasdiqlang:"
-        },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
-        },
-        "auth": {
-            "failed": "These credentials do not match our records.",
-            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-        },
-        "pagination": {
-            "previous": "Orqaga",
-            "next": "Oldinga"
         },
         "pages": {
             "back": "Orqaga, do'konlar ro'yhati"
