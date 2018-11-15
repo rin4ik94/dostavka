@@ -23088,7 +23088,7 @@ module.exports = g;
 
 /* WEBPACK VAR INJECTION */(function(global) {var require;var require;/*!
     localForage -- Offline Storage, Improved
-    Version 1.7.2
+    Version 1.7.3
     https://localforage.github.io/localForage
     (c) 2013-2017 Mozilla, Apache License 2.0
 */
@@ -53176,7 +53176,7 @@ var content = __webpack_require__(193);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("28f392f6", content, false, {});
+var update = __webpack_require__(8)("97d34a20", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53200,7 +53200,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .dropdown-item:hover {\r\n  background-color: #4aae9b;\r\n  color: white;\r\n} */\n.highlightText {\r\n  font-weight: 600;\r\n  /* background-color: #fd5646; */\r\n  color: black;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  /* background-color: #fd5646; */\n  color: black;\n}\n", ""]);
 
 // exports
 
@@ -57537,7 +57537,7 @@ var content = __webpack_require__(231);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("470694aa", content, false, {});
+var update = __webpack_require__(8)("5e4b8312", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -57561,7 +57561,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n#notfound[data-v-4655b325] {\r\n  padding-top: -70px;\r\n\r\n  width: 100%;\r\n  background: #fff;\r\n\r\n  position: relative;\r\n  height: 100vh;\n}\n#notfound .notfound[data-v-4655b325] {\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n  transform: translate(-50%, -50%);\n}\n.notfound[data-v-4655b325] {\r\n  max-width: 520px;\r\n  width: 100%;\r\n  line-height: 1.4;\r\n  text-align: center;\n}\n.notfound .notfound-404[data-v-4655b325] {\r\n  position: relative;\r\n  height: 200px;\r\n  margin: 0px auto 20px;\r\n  z-index: -1;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\r\n  font-family: \"Montserrat\", sans-serif;\r\n  font-size: 236px !important;\r\n  font-weight: 100 !important;\r\n  margin: 0px;\r\n  color: #211b19;\r\n  text-transform: uppercase;\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n  transform: translate(-50%, -50%);\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\r\n  font-family: \"Montserrat\", sans-serif;\r\n  font-size: 28px;\r\n  font-weight: 400 !important;\r\n  text-transform: uppercase;\r\n  color: #211b19;\r\n  background: #fff;\r\n  padding: 10px 5px;\r\n  margin: auto;\r\n  display: inline-block;\r\n  position: absolute;\r\n  bottom: 0px;\r\n  left: 0;\r\n  right: 0;\n}\n.notfound a[data-v-4655b325] {\r\n  font-family: \"Montserrat\", sans-serif;\r\n  display: inline-block;\r\n  font-weight: 700;\r\n  text-decoration: none;\r\n  color: #fff;\r\n  text-transform: uppercase;\r\n  padding: 13px 23px;\r\n  background: #27ae61;\r\n  font-size: 18px;\r\n  -webkit-transition: 0.2s all;\r\n  transition: 0.2s all;\n}\n.notfound a[data-v-4655b325]:hover {\r\n  color: #27ae61;\r\n  background: #211b19;\n}\n@media only screen and (max-width: 767px) {\n.notfound .notfound-404 h1[data-v-4655b325] {\r\n    font-size: 148px;\n}\n}\n@media only screen and (max-width: 480px) {\n.notfound .notfound-404[data-v-4655b325] {\r\n    height: 148px;\r\n    margin: 0px auto 10px;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\r\n    font-size: 86px;\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\r\n    font-size: 16px;\n}\n.notfound a[data-v-4655b325] {\r\n    padding: 7px 15px;\r\n    font-size: 14px;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n#notfound[data-v-4655b325] {\n  padding-top: -70px;\n\n  width: 100%;\n  background: #fff;\n\n  position: relative;\n  height: 100vh;\n}\n#notfound .notfound[data-v-4655b325] {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound[data-v-4655b325] {\n  max-width: 520px;\n  width: 100%;\n  line-height: 1.4;\n  text-align: center;\n}\n.notfound .notfound-404[data-v-4655b325] {\n  position: relative;\n  height: 200px;\n  margin: 0px auto 20px;\n  z-index: -1;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 236px !important;\n  font-weight: 100 !important;\n  margin: 0px;\n  color: #211b19;\n  text-transform: uppercase;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 28px;\n  font-weight: 400 !important;\n  text-transform: uppercase;\n  color: #211b19;\n  background: #fff;\n  padding: 10px 5px;\n  margin: auto;\n  display: inline-block;\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  right: 0;\n}\n.notfound a[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  display: inline-block;\n  font-weight: 700;\n  text-decoration: none;\n  color: #fff;\n  text-transform: uppercase;\n  padding: 13px 23px;\n  background: #27ae61;\n  font-size: 18px;\n  -webkit-transition: 0.2s all;\n  transition: 0.2s all;\n}\n.notfound a[data-v-4655b325]:hover {\n  color: #27ae61;\n  background: #211b19;\n}\n@media only screen and (max-width: 767px) {\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 148px;\n}\n}\n@media only screen and (max-width: 480px) {\n.notfound .notfound-404[data-v-4655b325] {\n    height: 148px;\n    margin: 0px auto 10px;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 86px;\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n    font-size: 16px;\n}\n.notfound a[data-v-4655b325] {\n    padding: 7px 15px;\n    font-size: 14px;\n}\n}\n", ""]);
 
 // exports
 
@@ -58195,7 +58195,7 @@ var content = __webpack_require__(237);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("2d8609dd", content, false, {});
+var update = __webpack_require__(8)("59b044d7", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -58360,7 +58360,7 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v("\r\n              ←"),
+                  _vm._v("\n              ←"),
                   _c("span", { staticClass: "text" }, [
                     _vm._v(" " + _vm._s(_vm.$t("pagination.previous")))
                   ])
@@ -58988,11 +58988,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\r\n            По популярности \r\n          "
-                          )
-                        ]
+                        [_vm._v("\n            По популярности \n          ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -59007,7 +59003,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v(" \r\n            По цене\r\n          ")]
+                        [_vm._v(" \n            По цене\n          ")]
                       )
                     ]
                   ),
@@ -66281,7 +66277,7 @@ var content = __webpack_require__(273);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("0d653c38", content, false, {});
+var update = __webpack_require__(8)("6a992cc4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66414,7 +66410,7 @@ var content = __webpack_require__(278);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("c674a8b0", content, false, {});
+var update = __webpack_require__(8)("3f3e178e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66542,7 +66538,7 @@ var content = __webpack_require__(283);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("6c3a01d8", content, false, {});
+var update = __webpack_require__(8)("6c5b6afa", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66688,7 +66684,7 @@ var content = __webpack_require__(289);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("15a30ff6", content, false, {});
+var update = __webpack_require__(8)("73a702df", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67017,7 +67013,7 @@ var content = __webpack_require__(295);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("02c73f67", content, false, {});
+var update = __webpack_require__(8)("46448f8a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
