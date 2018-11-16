@@ -45,4 +45,7 @@ Route::group([
     Route::get('settings/gateway', 'SettingController@gateway')->name('settings.gateway');
     Route::get('settings/regions', 'SettingController@regions')->name('settings.regions');
 });
+
+Route::get('set-hook', 'Admin\TelegramController@setWebHook');
+Route::post(env('TELEGRAM_BOT_TOKEN','757827713:AAE56ntnp5cf-NNGI8vMcsTsC0ycwGGu_h4') . '/webhook', 'Admin\TelegramController@handleRequest');
 Route::get('/{any?}', 'Front\HomeController@index')->where('any', '^(?!api).*$');
