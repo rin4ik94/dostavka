@@ -36,7 +36,7 @@ return [
             'username'            => 'TelegramBot',
             'token'               => env('TELEGRAM_BOT_TOKEN', '757827713:AAE56ntnp5cf-NNGI8vMcsTsC0ycwGGu_h4'),
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
-            'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'https://alomarket.uz/757827713:AAE56ntnp5cf-NNGI8vMcsTsC0ycwGGu_h4/webhook'),
+            'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'https://alomarket.uz'),
             'commands'            => [
                 //Acme\Project\Commands\MyTelegramBot\BotCommand::class
             ],
