@@ -32,11 +32,11 @@
 
         <div class="dropdown" v-if="user.data && user.data.phone">
           <button class="btn btn-link header-profile-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="icon">person</i><span class="text">Mening profilim</span>
+            <i class="icon">person</i><span class="text">{{$t('header.profile')}}</span>
           </button>
           <div class="dropdown-menu dropdown-menu-right">
-              <router-link class="dropdown-item" :to="{name: 'profile'}">Мои данные</router-link> 
-              <router-link class="dropdown-item" :to="{name: 'orders'}">Мои Заказы</router-link> 
+              <router-link class="dropdown-item" :to="{name: 'profile'}">{{$t('header.mydata')}}</router-link> 
+              <router-link class="dropdown-item" :to="{name: 'orders'}">{{$t('header.orders')}}</router-link> 
               <div class="dropdown-divider"></div>
             <a class="dropdown-item" @click.prevent="signout">{{$t('header.logout')}}</a>
           </div>

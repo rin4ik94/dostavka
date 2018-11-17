@@ -28,7 +28,7 @@
               </div>
             </div>
             <div class="product-footer" v-else>
-              <button class="btn btn-green product-add-button" type="button" @click="addToCart(product)">В корзину</button>
+              <button class="btn btn-green product-add-button" type="button" @click="addToCart(product)">{{$t('file.addtocart')}}</button>
             </div>
           </div>
         </div>

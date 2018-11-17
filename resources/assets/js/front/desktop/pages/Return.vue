@@ -2,7 +2,7 @@
     <div class="content">
       <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
       <div class="container" v-else>
-        <h1 class="main-title">Возврат</h1>
+        <h1 class="main-title">{{$t('file.refund')}}</h1>
       </div>
     </div>
 </template>

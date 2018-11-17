@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Illuminate\Support\Facades\URL::forceScheme('https');
         Schema::defaultStringLength(191);
         if (!Collection::hasMacro('paginate')) {
 

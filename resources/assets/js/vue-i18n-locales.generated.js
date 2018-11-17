@@ -15,6 +15,29 @@ export default {
             "failed": "These credentials do not match our records.",
             "throttle": "Too many login attempts. Please try again in {seconds} seconds."
         },
+        "file": {
+            "add": "Добавить в корзину",
+            "refund": "Возврат",
+            "shop": "Магазинам",
+            "cart": "Ваша корзина",
+            "currency": "сум",
+            "for": "сум за 1",
+            "region": "Ваш регион",
+            "login": "Войти в личный кабинет",
+            "design": "Дизайн и разработка",
+            "cartempty": "Ваша корзина пуста",
+            "buyers": "Покупателям",
+            "checkout": "Оформление",
+            "payment": "Наличными",
+            "req": "Заказать",
+            "name": "Имя",
+            "last": "Фамилия",
+            "phone": "Телефон",
+            "street": "Улица",
+            "home": "Дом",
+            "entr": "Корпус",
+            "apart": "Квартира"
+        },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
             "active_url": "The {attribute} is not a valid URL.",
@@ -145,11 +168,20 @@ export default {
             "delivery": "Доставка",
             "login": "Вход",
             "logout": "Выйти",
-            "shops": "Магазины"
+            "shops": "Магазины",
+            "profile": "Мой профиль",
+            "mydata": "Мои данные",
+            "orders": "Мои Заказы"
         },
         "pagination": {
             "previous": "Назад",
             "next": "Вперед"
+        },
+        "drawer": {
+            "shops": "Магазины",
+            "order": "Доставка и оплата",
+            "orders": "Мои заказы",
+            "data": "Мои данние"
         },
         "login": {
             "title": "Вход",
@@ -173,6 +205,12 @@ export default {
             "button": "Оформить заказ",
             "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
             "confirmTitle": "Подтвердите действие:"
+        },
+        "footer": {
+            "delivery": "Доставка и оплата",
+            "ready": "Готово",
+            "design": "Дизайн и разработка",
+            "buyers": "Покупателям"
         },
         "pages": {
             "back": "Назад к списку магазинов"

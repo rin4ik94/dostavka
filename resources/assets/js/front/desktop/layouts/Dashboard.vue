@@ -44,13 +44,7 @@ export default {
       this.regions = response.data.data;
       await this.$emit("ready");
     },
-    // async setRegionD(){  
-    //   await localforage.getItem('region').then((region)=>{
-    //     if(isEmpty(region)){
-    //       this.setRegionId("1")
-    //     }
-    //   })
-    // }
+    // 
     // replacePage() {
     //   if (this.$route.params.sluged) {
     //     this.$router.replace({

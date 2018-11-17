@@ -5,7 +5,7 @@
     <div class="modal-content" v-else>
       
       <div class="modal-header">
-        <h4 class="modal-title">Ваш регион</h4>
+        <h4 class="modal-title">{{$t('file.region')}}</h4>
         <button type="button" class="close" data-dismiss="modal"><i class="icon">close</i></button>
       </div>
       <div class="modal-body">

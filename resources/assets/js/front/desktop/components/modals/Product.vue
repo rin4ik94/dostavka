@@ -22,9 +22,9 @@
                 <a @click.prevent="changeRoute(product.category.parent.slug)" v-if="product.category.parent">{{product.category.parent.name}}  / </a>
                 <a @click.prevent="changeRoute(product.category.slug)">{{product.category.name}}</a>
               </div>
-              <div class="f-product-quantity">{{product.new_price | toCurrency}} сум за 1 шт</div>
+              <div class="f-product-quantity">{{product.new_price | toCurrency}} {{$t('file.for')}} {{product.measure}}</div>
               <div class="f-product-price">
-                <div class="f-product-price-new">{{product.new_price * quantity | toCurrency}} сум</div>
+                <div class="f-product-price-new">{{product.new_price * quantity | toCurrency}} {{$t('file.currency')}}</div>
                 <div class="f-product-price-old"></div>
               </div>
               <div class="row mt-auto">
@@ -38,8 +38,8 @@
                   </div>
                 </div>
                 <div class="col-12 col-lg">
-                  <button v-if="!productInCart" @click="addToCart" class="btn btn-block btn-green">Добавить в корзину</button>
-                  <button v-else class="btn btn-block btn-green" @click="increaseCart">Готово</button>
+                  <button v-if="!productInCart" @click="addToCart" class="btn btn-block btn-green">{{$t('file.add')}}</button>
+                  <button v-else class="btn btn-block btn-green" @click="increaseCart">{{$t('file.ready')}}</button>
                 </div>
               </div>
                <pu-dialog-confirm v-if="manager"
