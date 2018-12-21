@@ -2,7 +2,7 @@
     <footer class="footer">
       <div class="container">
         <div class="row">
-          <div class="col-12 col-lg-3 mb-2 mb-lg-0">
+          <div class="col-6 col-lg-3 mb-2 mb-lg-0">
             <h5 class="title">Покупателям</h5>
             <ul class="nav footer-nav">
               <li class="nav-item">
@@ -18,7 +18,7 @@
 
             </ul>
           </div>
-          <div class="col-12 col-lg-3 mb-2 mb-lg-0">
+          <div class="col-6 col-lg-3 mb-2 mb-lg-0">
             <h5 class="title">Магазинам</h5>
             <ul class="nav footer-nav">
               <li class="nav-item"><router-link :to="{name: 'partners'}">

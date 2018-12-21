@@ -173,6 +173,7 @@
   .partners {
     margin-left: -10px;
     margin-right: -10px;
+    margin-bottom: -20px;
   }
   .partner {
     padding-left: 10px;
@@ -394,8 +395,8 @@
 
 
 .footer {
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background: #efecea;
   border-top: 1px solid #d4d4d4;
 }
@@ -403,7 +404,7 @@
   flex-direction: column;
 }
 .footer-nav .nav-item {
-    margin-top: 8px;
+  margin-top: 5px;
   line-height: 24px;
   font-size: 14px;
 }
@@ -421,8 +422,8 @@
 }
 @media (min-width: 768px) {
   .footer {
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 }
 
@@ -533,7 +534,7 @@
   justify-content: flex-start;
   margin-left: -5px;
   margin-right: -5px;
-  margin-bottom: 5px;
+  margin-bottom: -5px;
 }
 .product {
   position: relative;
@@ -651,6 +652,7 @@
   .products {
     margin-left: -10px;
     margin-right: -10px;
+    margin-bottom: -20px;
   }
   .product {
     padding-left: 10px;
@@ -691,7 +693,7 @@
 }
 .f-product-title {
   line-height: 40px;
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 12px;
 }
 .f-product-price-new {
