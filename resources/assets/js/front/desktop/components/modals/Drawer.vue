@@ -7,16 +7,16 @@
         </div>
         <ul class="nav drawer-nav">
           <li class="nav-item">
-            <a class="nav-link">Магазины</a>
+            <a class="nav-link">{{$t('drawer.shops')}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">Доставка и оплата</a>
+            <a class="nav-link">{{$t('drawer.order')}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">Мои заказы</a>
+            <a class="nav-link">{{$t('drawer.orders')}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">Мои данние</a>
+            <a class="nav-link">{{$t('drawer.data')}}</a>
           </li>
         </ul>
       </div>

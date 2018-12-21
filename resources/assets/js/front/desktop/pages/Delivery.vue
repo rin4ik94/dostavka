@@ -2,7 +2,7 @@
     <div class="content">
       <div v-if="!showPage" class="loader"><div class="loader-container"></div></div>
       <div class="container" v-else>
-        <h1 class="main-title">Доставка и оплата</h1>
+        <h1 class="main-title">{{$t('file.delivery')}}</h1>
         <div class="content-inner">
         <main class="main">
 

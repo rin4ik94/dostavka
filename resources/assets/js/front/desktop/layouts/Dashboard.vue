@@ -44,13 +44,7 @@ export default {
       this.regions = response.data.data;
       await this.$emit("ready");
     },
-    async setRegionD(){  
-      await localforage.getItem('region').then((region)=>{
-        if(isEmpty(region)){
-          this.setRegionId("1")
-        }
-      })
-    }
+    // 
     // replacePage() {
     //   if (this.$route.params.sluged) {
     //     this.$router.replace({
@@ -86,7 +80,7 @@ export default {
       this.getRegions();
     }
   },
-  async created() {
+  async created() { 
     this.$router.beforeEach((to, from, next) => {
       this.showPage = false;
       next();
@@ -95,7 +89,7 @@ export default {
       this.getRegions();
     });  
     await this.setRegion() 
-    $("#Regions").on("hide.bs.modal", this.setRegionD);
+    // $("#Regions").on("hide.bs.modal", this.setRegionD);
 
   }
 };

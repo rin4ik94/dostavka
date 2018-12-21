@@ -1,27 +1,42 @@
 export default {
     "ru": {
-        "login": {
-            "title": "Вход",
-            "pre_title": "Введите свой номер телефона",
-            "sms_info": "На указанный номер будет отправлено SMS с кодом подтверждения номера.",
-            "button_send": "Получить код для входа",
-            "phone_placeholder": "Телефон",
-            "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
-            "incorrect_password": "Неправильный код",
-            "send_again": "Отправить еще раз",
-            "next": "Далее",
-            "sms_code": "Код из SMS",
-            "change_number": "Изменить номер"
+        "helper": {
+            "yes": "Да",
+            "no": "Нет"
         },
-        "header": {
-            "title": "Быстрая доставка продуктов",
-            "step1": "Выберите свой любимый магазин в своем регионе",
-            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
-            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
-            "delivery": "Доставка",
-            "login": "Вход",
-            "logout": "Выйти",
-            "shops": "Магазины"
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "auth": {
+            "failed": "These credentials do not match our records.",
+            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
+        },
+        "file": {
+            "add": "Добавить в корзину",
+            "refund": "Возврат",
+            "shop": "Магазинам",
+            "cart": "Ваша корзина",
+            "currency": "сум",
+            "for": "сум за 1",
+            "region": "Ваш регион",
+            "login": "Войти в личный кабинет",
+            "design": "Дизайн и разработка",
+            "cartempty": "Ваша корзина пуста",
+            "buyers": "Покупателям",
+            "checkout": "Оформление",
+            "payment": "Наличными",
+            "req": "Заказать",
+            "name": "Имя",
+            "last": "Фамилия",
+            "phone": "Телефон",
+            "street": "Улица",
+            "home": "Дом",
+            "entr": "Корпус",
+            "apart": "Квартира"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -104,7 +119,7 @@ export default {
             "numeric": "The {attribute} must be a number.",
             "present": "The {attribute} field must be present.",
             "regex": "The {attribute} format is invalid.",
-            "required": "Заполните это поле.",
+            "required": "Поле {attribute} требуется.",
             "required_if": "The {attribute} field is required when {other} is {value}.",
             "required_unless": "The {attribute} field is required unless {other} is in {values}.",
             "required_with": "The {attribute} field is required when {values} is present.",
@@ -118,24 +133,68 @@ export default {
                 "string": "The {attribute} must be {size} characters.",
                 "array": "The {attribute} must contain {size} items."
             },
-            "string": "The {attribute} must be a string.",
-            "timezone": "The {attribute} must be a valid zone.",
-            "unique": "The {attribute} has already been taken.",
-            "uploaded": "The {attribute} failed to upload.",
-            "url": "The {attribute} format is invalid.",
-            "nameError": "Заполните это поле.",
-            "lastNameError": "Заполните это поле.",
-            "phoneError": "Заполните это поле.",
+            "string": "{attribute} должен быть строкой.",
+            "timezone": "{attribute}должен быть допустимой зоной.",
+            "unique": "{attribute} уже сделан.",
+            "uploaded": "{attribute} удалось загрузить.",
+            "url": "Формат {attribute} недействителен.",
+            "nameError": "Поле {attribute} требуется.",
+            "lastNameError": "Поле {attribute} требуется.",
+            "phoneError": "Поле {attribute} требуется.",
             "custom": {
                 "attribute-name": {
                     "rule-name": "custom-message"
                 }
             },
-            "attributes": []
+            "attributes": {
+                "name": "name",
+                "manager_category_id": "manager_category_id",
+                "logo": "logo",
+                "status": "Status",
+                "name_uz": "Name_uz",
+                "name_ru": "Name_ru",
+                "manager_id": "Manager_id",
+                "category_id": "Category_id",
+                "new_price": "New_price",
+                "old_price": "Old_price",
+                "measurement": "Measurement"
+            }
         },
-        "helper": {
-            "yes": "Да",
-            "no": "Нет"
+        "header": {
+            "title": "Быстрая доставка продуктов",
+            "step1": "Выберите свой любимый магазин в своем регионе",
+            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
+            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
+            "delivery": "Доставка",
+            "login": "Вход",
+            "logout": "Выйти",
+            "shops": "Магазины",
+            "profile": "Мой профиль",
+            "mydata": "Мои данные",
+            "orders": "Мои Заказы"
+        },
+        "pagination": {
+            "previous": "Назад",
+            "next": "Вперед"
+        },
+        "drawer": {
+            "shops": "Магазины",
+            "order": "Доставка и оплата",
+            "orders": "Мои заказы",
+            "data": "Мои данние"
+        },
+        "login": {
+            "title": "Вход",
+            "pre_title": "Введите свой номер телефона",
+            "sms_info": "На указанный номер будет отправлено SMS с кодом подтверждения номера.",
+            "button_send": "Получить код для входа",
+            "phone_placeholder": "Телефон",
+            "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
+            "incorrect_password": "Неправильный код",
+            "send_again": "Отправить еще раз",
+            "next": "Далее",
+            "sms_code": "Код из SMS",
+            "change_number": "Изменить номер"
         },
         "cart": {
             "shop": "Магазин",
@@ -147,6 +206,21 @@ export default {
             "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
             "confirmTitle": "Подтвердите действие:"
         },
+        "footer": {
+            "delivery": "Доставка и оплата",
+            "ready": "Готово",
+            "design": "Дизайн и разработка",
+            "buyers": "Покупателям"
+        },
+        "pages": {
+            "back": "Назад к списку магазинов"
+        }
+    },
+    "uz": {
+        "helper": {
+            "yes": "Xa",
+            "no": "Yo'q"
+        },
         "passwords": {
             "password": "Passwords must be at least six characters and match the confirmation.",
             "reset": "Your password has been reset!",
@@ -157,38 +231,6 @@ export default {
         "auth": {
             "failed": "These credentials do not match our records.",
             "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-        },
-        "pagination": {
-            "previous": "Назад",
-            "next": "Вперед"
-        },
-        "pages": {
-            "back": "Назад к списку магазинов"
-        }
-    },
-    "uz": {
-        "login": {
-            "title": "Kirish",
-            "pre_title": "Telefon raqamingizni kiriting",
-            "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
-            "button_send": "Kodni jo'natish",
-            "phone_placeholder": "Telefon",
-            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik",
-            "incorrect_password": "Noto'gri kod",
-            "send_again": "Yana bir maratoba jo'natish",
-            "next": "Tasdiqlash",
-            "sms_code": "SMS da kelgan kodni kiriting",
-            "change_number": "Raqamni o'zgartirish"
-        },
-        "header": {
-            "title": "Mahsulotlarni tezda yetkazib beramiz",
-            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
-            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
-            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
-            "delivery": "Buyurtma",
-            "login": "Kirish",
-            "logout": "Chiqish",
-            "shops": "Do'konlar"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -300,9 +342,32 @@ export default {
             },
             "attributes": []
         },
-        "helper": {
-            "yes": "Xa",
-            "no": "Yo'q"
+        "header": {
+            "title": "Mahsulotlarni tezda yetkazib beramiz",
+            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
+            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
+            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
+            "delivery": "Buyurtma",
+            "login": "Kirish",
+            "logout": "Chiqish",
+            "shops": "Do'konlar"
+        },
+        "pagination": {
+            "previous": "Orqaga",
+            "next": "Oldinga"
+        },
+        "login": {
+            "title": "Kirish",
+            "pre_title": "Telefon raqamingizni kiriting",
+            "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
+            "button_send": "Kodni jo'natish",
+            "phone_placeholder": "Telefon",
+            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik",
+            "incorrect_password": "Noto'gri kod",
+            "send_again": "Yana bir maratoba jo'natish",
+            "next": "Tasdiqlash",
+            "sms_code": "SMS da kelgan kodni kiriting",
+            "change_number": "Raqamni o'zgartirish"
         },
         "cart": {
             "shop": "Do'kon",
@@ -313,21 +378,6 @@ export default {
             "button": "Buyurtma qilish",
             "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
             "confirmTitle": "Amalni tasdiqlang:"
-        },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
-        },
-        "auth": {
-            "failed": "These credentials do not match our records.",
-            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-        },
-        "pagination": {
-            "previous": "Orqaga",
-            "next": "Oldinga"
         },
         "pages": {
             "back": "Orqaga, do'konlar ro'yhati"

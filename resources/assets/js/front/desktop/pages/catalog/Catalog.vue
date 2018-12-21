@@ -8,14 +8,14 @@
         <div class="main-actions">
           <a class="btn btn-outline-green" @click="$router.push({name:'home'})">&#8592; {{$t('pages.back')}}</a>
         </div> 
-        <h1 class="main-title" v-if="branchName">Каталог продуктов «{{catalog.name}}»</h1>
+        <h1 class="main-title" v-if="branchName">{{$t('file.catalog')}} «{{catalog.name}}»</h1>
         <div class="btn-group btn-group-sm btn-group-toggle main-sorter" data-toggle="buttons">
-          <span class="main-sorter-title">Сортировать:</span>
+          <span class="main-sorter-title">{{$t('file.sort')}}:</span>
           <div @click.prevent="sortByPrice = false" :class="{'active' : !sortByPrice}" class="btn btn-outline-light">
-            По популярности 
+            {{$t('file.popular')}} 
           </div>
           <div @click.prevent="sortByPrice = true" :class="{'active' : sortByPrice}" class="btn btn-outline-light"> 
-            По цене
+            {{$t('file.price')}}
           </div>
         </div>
         <div class="content-inner">
@@ -28,7 +28,7 @@
           <nav class="categories">
             <ul class="nav">
               <li class="nav-item">
-                <router-link class="nav-link" :to="{name: 'catalog', params:{slug : catalog.slug}}" exact :class="{'active': $route.name == 'tp'}">Все категории</router-link>
+                <router-link class="nav-link" :to="{name: 'catalog', params:{slug : catalog.slug}}" exact :class="{'active': $route.name == 'tp'}">{{$t('file.allcats')}}</router-link>
               </li>
               <SubCategories :activeIndex="active" :key="category.id"  @updateActive="setActive" :index="category.id" v-for="(category,index) in categories" :category="category" />
             </ul>

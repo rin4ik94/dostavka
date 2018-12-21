@@ -52124,50 +52124,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
 
       return getRegions;
-    }(),
-    setRegionD: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-        var _this = this;
-
-        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (region) {
-                  if (Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(region)) {
-                    _this.setRegionId("1");
-                  }
-                });
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function setRegionD() {
-        return _ref2.apply(this, arguments);
-      }
-
-      return setRegionD;
     }()
-    // replacePage() {
-    //   if (this.$route.params.sluged) {
-    //     this.$router.replace({
-    //       name: "category",
-    //       params: { sluged: this.$route.params.sluged }
-    //     });
-    //   } else {
-    //     this.$router.replace({
-    //       name: "catalog",
-    //       params: { slug: this.$route.params.slug }
-    //     });
-    //   }
-    // }
-
   }),
   watch: {
     $route: {
@@ -52189,36 +52146,33 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }
   },
   created: function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-      var _this2 = this;
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _this = this;
 
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               this.$router.beforeEach(function (to, from, next) {
-                _this2.showPage = false;
+                _this.showPage = false;
                 next();
               });
               this.$nextTick(function () {
-                _this2.getRegions();
+                _this.getRegions();
               });
-              _context3.next = 4;
+              _context2.next = 4;
               return this.setRegion();
 
             case 4:
-              $("#Regions").on("hide.bs.modal", this.setRegionD);
-
-            case 5:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3, this);
+      }, _callee2, this);
     }));
 
     function created() {
-      return _ref3.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     }
 
     return created;
@@ -53060,97 +53014,49 @@ var render = function() {
         _c("div", { staticClass: "col-6 col-lg-3 mb-2 mb-lg-0" }, [
           _c("h5", { staticClass: "title" }, [_vm._v("Покупателям")]),
           _vm._v(" "),
-          _c("ul", { staticClass: "nav footer-nav" }, [
-            _c(
-              "li",
-              { staticClass: "nav-item" },
-              [
-                _c("router-link", { attrs: { to: { name: "delivery" } } }, [
-                  _vm._v("\n              Доставка и оплата\n            ")
-                ])
-              ],
-              1
-            ),
+          _c("div", { staticClass: "col-12 col-lg-3 mb-2 mb-lg-0" }, [
+            _c("h5", { staticClass: "title" }, [
+              _vm._v(_vm._s(_vm.$t("footer.buyers")))
+            ]),
             _vm._v(" "),
-            _c(
-              "li",
-              { staticClass: "nav-item" },
-              [
-                _c("router-link", { attrs: { to: { name: "return" } } }, [
-                  _vm._v("\n              Возврат \n            ")
-                ])
-              ],
-              1
-            )
+            _c("ul", { staticClass: "nav footer-nav" }, [
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c("router-link", { attrs: { to: { name: "delivery" } } }, [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.$t("footer.delivery")) +
+                        "\n            "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c("router-link", { attrs: { to: { name: "return" } } }, [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.$t("footer.refund")) +
+                        " \n            "
+                    )
+                  ])
+                ],
+                1
+              )
+            ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6 col-lg-3 mb-2 mb-lg-0" }, [
-          _c("h5", { staticClass: "title" }, [_vm._v("Магазинам")]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "nav footer-nav" }, [
-            _c(
-              "li",
-              { staticClass: "nav-item" },
-              [
-                _c("router-link", { attrs: { to: { name: "partners" } } }, [
-                  _vm._v(
-                    "\n            Как начать сотрудничество\n            "
-                  )
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(1)
+        ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "/cp" } }, [
-        _vm._v("Войти в личный кабинет")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-6 text-lg-right" }, [
-      _c("h5", { staticClass: "footer-phone" }, [
-        _c("a", { attrs: { href: "/" } }, [_vm._v("+998 (91) 7778811")])
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "nav footer-nav" }, [
-        _c("li", { staticClass: "nav-item footer-dev" }, [
-          _vm._v("Дизайн и разработка"),
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: { href: "http://prisma.uz", target: "_blank" }
-            },
-            [_vm._v("Prisma")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item footer-copy" }, [
-          _vm._v("© 2018 AloMarket")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -53646,7 +53552,24 @@ var render = function() {
             _vm._v(" "),
             _vm.user.data && _vm.user.data.phone
               ? _c("div", { staticClass: "dropdown" }, [
-                  _vm._m(1),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-link header-profile-toggle",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "dropdown",
+                        "aria-haspopup": "true",
+                        "aria-expanded": "false"
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "icon" }, [_vm._v("person")]),
+                      _c("span", { staticClass: "text" }, [
+                        _vm._v(_vm._s(_vm.$t("header.profile")))
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -53658,7 +53581,7 @@ var render = function() {
                           staticClass: "dropdown-item",
                           attrs: { to: { name: "profile" } }
                         },
-                        [_vm._v("Мои данные")]
+                        [_vm._v(_vm._s(_vm.$t("header.mydata")))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -53667,7 +53590,7 @@ var render = function() {
                           staticClass: "dropdown-item",
                           attrs: { to: { name: "orders" } }
                         },
-                        [_vm._v("Мои Заказы")]
+                        [_vm._v(_vm._s(_vm.$t("header.orders")))]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "dropdown-divider" }),
@@ -53725,27 +53648,6 @@ var staticRenderFns = [
         attrs: { type: "btn", "data-toggle": "modal", "data-target": "#drawer" }
       },
       [_c("i", { staticClass: "icon" }, [_vm._v("menu")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-link header-profile-toggle",
-        attrs: {
-          type: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("i", { staticClass: "icon" }, [_vm._v("person")]),
-        _c("span", { staticClass: "text" }, [_vm._v("Mening profilim")])
-      ]
     )
   }
 ]
@@ -54442,7 +54344,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "container" }, [
               _c("h1", { staticClass: "main-title" }, [
-                _vm._v("Магазины "),
+                _vm._v(_vm._s(_vm.$t("drawer.shops")) + " "),
                 _c(
                   "a",
                   {
@@ -56436,7 +56338,7 @@ var render = function() {
               _c("div", { staticClass: "content-inner" }, [
                 _c("main", { staticClass: "main" }, [
                   _c("h1", { staticClass: "main-title" }, [
-                    _vm._v("Мои данние")
+                    _vm._v(_vm._s(_vm.$t("mydata")))
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "card" }, [
@@ -56454,7 +56356,7 @@ var render = function() {
                               staticClass: "col-3 col-form-label",
                               attrs: { for: "profile_firstname" }
                             },
-                            [_vm._v("Имя")]
+                            [_vm._v(_vm._s(_vm.$t("file.name")))]
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-9" }, [
@@ -56472,7 +56374,7 @@ var render = function() {
                                 id: "profile_firstname",
                                 name: "profile_firstname",
                                 type: "text",
-                                placeholder: "Заполните это поле",
+                                placeholder: _vm.$t("file.fill"),
                                 required: ""
                               },
                               domProps: { value: _vm.user.data.first_name },
@@ -56491,7 +56393,7 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v("Пожалуйста заполните поле")
+                              _vm._v(_vm._s(_vm.$t("file.fill")))
                             ])
                           ])
                         ]),
@@ -56503,7 +56405,7 @@ var render = function() {
                               staticClass: "col-3 col-form-label",
                               attrs: { for: "profile_lastname" }
                             },
-                            [_vm._v("Фамилия")]
+                            [_vm._v(_vm._s(_vm.$t("file.last")))]
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-9" }, [
@@ -56521,7 +56423,7 @@ var render = function() {
                                 id: "profile_lastname",
                                 name: "profile_lastname",
                                 type: "text",
-                                placeholder: "Заполните это поле",
+                                placeholder: _vm.$t("file.fill"),
                                 required: ""
                               },
                               domProps: { value: _vm.user.data.last_name },
@@ -56540,7 +56442,7 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v("Пожалуйста заполните поле")
+                              _vm._v(_vm._s(_vm.$t("file.fill")))
                             ])
                           ])
                         ]),
@@ -56552,7 +56454,7 @@ var render = function() {
                               staticClass: "col-3 col-form-label",
                               attrs: { for: "profile_birthday" }
                             },
-                            [_vm._v("Дата рождения")]
+                            [_vm._v(_vm._s(_vm.$t("file.datebirth")))]
                           ),
                           _vm._v(" "),
                           _c(
@@ -56575,7 +56477,7 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v("Пожалуйста заполните поле")
+                                _vm._v(_vm._s(_vm.$t("file.fill")))
                               ])
                             ],
                             1
@@ -56589,7 +56491,7 @@ var render = function() {
                               staticClass: "col-3",
                               attrs: { for: "profile_gender" }
                             },
-                            [_vm._v("Пол")]
+                            [_vm._v(_vm._s(_vm.$t("file.gender")))]
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-9" }, [
@@ -56634,7 +56536,7 @@ var render = function() {
                                     staticClass: "custom-control-label",
                                     attrs: { for: "profile_gender1" }
                                   },
-                                  [_vm._v("Мужской")]
+                                  [_vm._v(_vm._s(_vm.$t("file.man")))]
                                 )
                               ]
                             ),
@@ -56679,13 +56581,13 @@ var render = function() {
                                     staticClass: "custom-control-label",
                                     attrs: { for: "profile_gender2" }
                                   },
-                                  [_vm._v("Женский")]
+                                  [_vm._v(_vm._s(_vm.$t("file.woman")))]
                                 )
                               ]
                             ),
                             _vm._v(" "),
                             _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v("Пожалуйста заполните поле")
+                              _vm._v(_vm._s(_vm.$t("file.fill")))
                             ])
                           ])
                         ]),
@@ -56697,7 +56599,7 @@ var render = function() {
                               staticClass: "col-3 col-form-label",
                               attrs: { for: "profile_phone" }
                             },
-                            [_vm._v("Телефон")]
+                            [_vm._v(_vm._s(_vm.$t("file.phone")))]
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-9" }, [
@@ -56748,7 +56650,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("Редактировать")]
+                              [_vm._v(_vm._s(_vm.$t("file.edit")))]
                             )
                           ])
                         ])
@@ -56891,9 +56793,49 @@ var render = function() {
           _c("div", { staticClass: "loader-container" })
         ])
       : _c("div", { staticClass: "container" }, [
-          _c("h1", { staticClass: "main-title" }, [_vm._v("Мои заказы")]),
+          _c("h1", { staticClass: "main-title" }, [
+            _vm._v(_vm._s(_vm.$t("file.myorders")))
+          ]),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "content-inner" }, [
+            _c("main", { staticClass: "main" }, [
+              _c("ul", { staticClass: "orders" }, [
+                _c("li", { staticClass: "order" }, [
+                  _c("div", { staticClass: "order-inner" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "order-column order-info" }, [
+                      _c("div", [_vm._v(_vm._s(_vm.$t("file.orderid")))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(_vm.$t("file.orderdate")))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(_vm.$t("file.orderstatus")))])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "order-column order-products" }, [
+                      _c("a", { attrs: { href: "/order.php" } }, [
+                        _c("div", [_vm._v("15")]),
+                        _vm._v(" "),
+                        _c("div", [_vm._v(_vm._s(_vm.$t("file.products")))])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "order-column order-sum" }, [
+                      _c("div", { staticClass: "order-sum-number" }, [
+                        _vm._v("5 2000 сум")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "order-sum-text" }, [
+                        _vm._v(_vm._s(_vm.$t("file.allprice")))
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("aside", { staticClass: "aside" })
+          ])
         ])
   ])
 }
@@ -56902,46 +56844,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-inner" }, [
-      _c("main", { staticClass: "main" }, [
-        _c("ul", { staticClass: "orders" }, [
-          _c("li", { staticClass: "order" }, [
-            _c("div", { staticClass: "order-inner" }, [
-              _c("div", { staticClass: "order-column order-store" }, [
-                _c("img", { attrs: { src: "/desktop/img/makrologo.jpg" } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "order-column order-info" }, [
-                _c("div", [_vm._v("Номер заказа")]),
-                _vm._v(" "),
-                _c("div", [_vm._v("Дата и время заказа")]),
-                _vm._v(" "),
-                _c("div", [_vm._v("Статус заказа")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "order-column order-products" }, [
-                _c("a", { attrs: { href: "/order.php" } }, [
-                  _c("div", [_vm._v("15")]),
-                  _vm._v(" "),
-                  _c("div", [_vm._v("Товаров")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "order-column order-sum" }, [
-                _c("div", { staticClass: "order-sum-number" }, [
-                  _vm._v("5 2000 сум")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "order-sum-text" }, [
-                  _vm._v("Общая сумма")
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("aside", { staticClass: "aside" })
+    return _c("div", { staticClass: "order-column order-store" }, [
+      _c("img", { attrs: { src: "/desktop/img/makrologo.jpg" } })
     ])
   }
 ]
@@ -57050,7 +56954,7 @@ var render = function() {
         ])
       : _c("div", { staticClass: "container" }, [
           _c("h1", { staticClass: "main-title" }, [
-            _vm._v("Доставка и оплата")
+            _vm._v(_vm._s(_vm.$t("file.delivery")))
           ]),
           _vm._v(" "),
           _vm._m(0)
@@ -57165,7 +57069,9 @@ var render = function() {
           _c("div", { staticClass: "loader-container" })
         ])
       : _c("div", { staticClass: "container" }, [
-          _c("h1", { staticClass: "main-title" }, [_vm._v("Возврат")])
+          _c("h1", { staticClass: "main-title" }, [
+            _vm._v(_vm._s(_vm.$t("file.refund")))
+          ])
         ])
   ])
 }
@@ -57267,7 +57173,7 @@ var render = function() {
         ])
       : _c("div", { staticClass: "container" }, [
           _c("h1", { staticClass: "main-title" }, [
-            _vm._v("Как начать сотрудничество")
+            _vm._v(_vm._s(_vm.$t("file.start")))
           ])
         ])
   ])
@@ -57649,28 +57555,21 @@ var render = function() {
       "div",
       { staticClass: "notfound" },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "notfound-404" }, [
+          _c("h1", [_vm._v("Oops!")]),
+          _vm._v(" "),
+          _c("h2", [_vm._v("404 - " + _vm._s(_vm.$t("file.notfound")))])
+        ]),
         _vm._v(" "),
         _c("router-link", { attrs: { to: { name: "home" } } }, [
-          _vm._v("Домашняя страница")
+          _vm._v(_vm._s(_vm.$t("file.home")))
         ])
       ],
       1
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notfound-404" }, [
-      _c("h1", [_vm._v("Oops!")]),
-      _vm._v(" "),
-      _c("h2", [_vm._v("404 - Запращиваемая страница не найдена")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -58714,7 +58613,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("В корзину")]
+                            [_vm._v(_vm._s(_vm.$t("file.addtocart")))]
                           )
                         ])
                   ],
@@ -59005,7 +58904,10 @@ var render = function() {
                   _vm.branchName
                     ? _c("h1", { staticClass: "main-title" }, [
                         _vm._v(
-                          "Каталог продуктов «" + _vm._s(_vm.catalog.name) + "»"
+                          _vm._s(_vm.$t("file.catalog")) +
+                            " «" +
+                            _vm._s(_vm.catalog.name) +
+                            "»"
                         )
                       ])
                     : _vm._e(),
@@ -59019,7 +58921,7 @@ var render = function() {
                     },
                     [
                       _c("span", { staticClass: "main-sorter-title" }, [
-                        _vm._v("Сортировать:")
+                        _vm._v(_vm._s(_vm.$t("file.sort")) + ":")
                       ]),
                       _vm._v(" "),
                       _c(
@@ -59036,7 +58938,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n            По популярности \r\n          "
+                            "\r\n            " +
+                              _vm._s(_vm.$t("file.popular")) +
+                              " \r\n          "
                           )
                         ]
                       ),
@@ -59053,7 +58957,13 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v(" \r\n            По цене\r\n          ")]
+                        [
+                          _vm._v(
+                            " \r\n            " +
+                              _vm._s(_vm.$t("file.price")) +
+                              "\r\n          "
+                          )
+                        ]
                       )
                     ]
                   ),
@@ -59108,7 +59018,7 @@ var render = function() {
                                       exact: ""
                                     }
                                   },
-                                  [_vm._v("Все категории")]
+                                  [_vm._v(_vm._s(_vm.$t("file.allcats")))]
                                 )
                               ],
                               1
@@ -59540,7 +59450,11 @@ var render = function() {
                           _vm._v(
                             _vm._s(
                               _vm._f("toCurrency")(_vm.product.new_price)
-                            ) + " сум за 1 шт"
+                            ) +
+                              " " +
+                              _vm._s(_vm.$t("file.for")) +
+                              " " +
+                              _vm._s(_vm.product.measure)
                           )
                         ]),
                         _vm._v(" "),
@@ -59551,7 +59465,9 @@ var render = function() {
                                 _vm._f("toCurrency")(
                                   _vm.product.new_price * _vm.quantity
                                 )
-                              ) + " сум"
+                              ) +
+                                " " +
+                                _vm._s(_vm.$t("file.currency"))
                             )
                           ]),
                           _vm._v(" "),
@@ -59664,7 +59580,7 @@ var render = function() {
                                     staticClass: "btn btn-block btn-green",
                                     on: { click: _vm.addToCart }
                                   },
-                                  [_vm._v("Добавить в корзину")]
+                                  [_vm._v(_vm._s(_vm.$t("file.add")))]
                                 )
                               : _c(
                                   "button",
@@ -59672,7 +59588,7 @@ var render = function() {
                                     staticClass: "btn btn-block btn-green",
                                     on: { click: _vm.increaseCart }
                                   },
-                                  [_vm._v("Готово")]
+                                  [_vm._v(_vm._s(_vm.$t("file.ready")))]
                                 )
                           ])
                         ]),
@@ -60626,7 +60542,12 @@ var render = function() {
             _vm._v(" "),
             _vm.region && _vm.manager
               ? _c("h1", { staticClass: "main-title" }, [
-                  _vm._v("Ваша корзина «" + _vm._s(_vm.manager.name) + "»")
+                  _vm._v(
+                    _vm._s(_vm.$t("file.cart")) +
+                      " «" +
+                      _vm._s(_vm.manager.name) +
+                      "»"
+                  )
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -60802,7 +60723,9 @@ var render = function() {
                                         _vm._f("toCurrency")(
                                           product.new_price * product.quantity
                                         )
-                                      ) + " сум"
+                                      ) +
+                                        " " +
+                                        _vm._s(_vm.$t("file.currency"))
                                     )
                                   ]
                                 ),
@@ -60818,7 +60741,9 @@ var render = function() {
                                               product.old_price *
                                                 product.quantity
                                             )
-                                          ) + " сум"
+                                          ) +
+                                            " " +
+                                            _vm._s(_vm.$t("file.currency"))
                                         )
                                       ]
                                     )
@@ -60833,7 +60758,17 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.filteredProducts.length < !0 && !_vm.success
-                ? _c("main", { staticClass: "main" }, [_vm._m(0)])
+                ? _c("main", { staticClass: "main" }, [
+                    _c("div", { staticClass: "alert" }, [
+                      _c("i", { staticClass: "icon alert-icon" }, [
+                        _vm._v("shopping_cart")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "title alert-title" }, [
+                        _vm._v(_vm._s(_vm.$t("file.cartempty")))
+                      ])
+                    ])
+                  ])
                 : _vm._e(),
               _vm._v(" "),
               _vm.success
@@ -60846,7 +60781,11 @@ var render = function() {
                 ? _c("aside", { staticClass: "aside" }, [
                     _c("div", { staticClass: "card" }, [
                       _c("form", { staticClass: "card-body" }, [
-                        _vm._m(1),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("div", { staticClass: "card-title" }, [
+                            _vm._v(_vm._s(_vm.$t("file.checkout")))
+                          ])
+                        ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
                           _c("input", {
@@ -60860,7 +60799,10 @@ var render = function() {
                             ],
                             staticClass: "form-control",
                             class: _vm.nameError ? "is-invalid" : "",
-                            attrs: { type: "text", placeholder: "Имя" },
+                            attrs: {
+                              type: "text",
+                              placeholder: _vm.$t("file.name")
+                            },
                             domProps: { value: _vm.form.user.first_name },
                             on: {
                               input: [
@@ -60902,7 +60844,10 @@ var render = function() {
                             ],
                             staticClass: "form-control",
                             class: _vm.lastNameError ? "is-invalid" : "",
-                            attrs: { type: "text", placeholder: "Фамилия" },
+                            attrs: {
+                              type: "text",
+                              placeholder: _vm.$t("file.last")
+                            },
                             domProps: { value: _vm.form.user.last_name },
                             on: {
                               input: [
@@ -60936,7 +60881,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(2),
+                            _vm._m(0),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -60953,7 +60898,7 @@ var render = function() {
                                 disabled: _vm.user.data && _vm.user.data.phone,
                                 maxlength: 9,
                                 type: "text",
-                                placeholder: "Телефон"
+                                placeholder: _vm.$t("file.phone")
                               },
                               domProps: { value: _vm.form.user.phone },
                               on: {
@@ -61048,7 +60993,10 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
-                            attrs: { type: "text", placeholder: "Улица" },
+                            attrs: {
+                              type: "text",
+                              placeholder: _vm.$t("file.street")
+                            },
                             domProps: {
                               value: _vm.form.delivery_address_street
                             },
@@ -61079,7 +61027,10 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: { type: "text", placeholder: "Дом" },
+                              attrs: {
+                                type: "text",
+                                placeholder: _vm.$t("file.home")
+                              },
                               domProps: {
                                 value: _vm.form.delivery_address_home
                               },
@@ -61109,7 +61060,10 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: { type: "text", placeholder: "Корп." },
+                              attrs: {
+                                type: "text",
+                                placeholder: _vm.$t("file.entr")
+                              },
                               domProps: {
                                 value: _vm.form.delivery_address_floor
                               },
@@ -61139,7 +61093,10 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: { type: "text", placeholder: "Кв." },
+                              attrs: {
+                                type: "text",
+                                placeholder: _vm.$t("file.apart")
+                              },
                               domProps: {
                                 value: _vm.form.delivery_address_apartment
                               },
@@ -61200,7 +61157,7 @@ var render = function() {
                                   staticClass: "custom-control-label",
                                   attrs: { for: "cart_payment_1" }
                                 },
-                                [_vm._v("Наличными")]
+                                [_vm._v(_vm._s(_vm.$t("file.payment")))]
                               )
                             ]
                           )
@@ -61218,7 +61175,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Заказать")]
+                          [_vm._v(_vm._s(_vm.$t("file.req")))]
                         )
                       ])
                     ])
@@ -61240,26 +61197,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "alert" }, [
-      _c("i", { staticClass: "icon alert-icon" }, [_vm._v("shopping_cart")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "title alert-title" }, [
-        _vm._v("Ваша корзина пуста")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "card-title" }, [_vm._v("Оформление")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -64082,7 +64019,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setManager", function() { return setManager; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegion", function() { return setRegion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkLangExists", function() { return checkLangExists; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLang", function() { return setLang; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "langChange", function() { return langChange; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
@@ -64249,8 +64185,10 @@ var setRegion = function setRegion(_ref14) {
 
     __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('region').then(function (regionId) {
         if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(regionId)) {
-            $("#Regions").modal('show');
-            return Promise.reject('NO_REGION_CHOOSEN');
+            commit('setRegion', '1');
+            return Promise.resolve('1');
+            // $("#Regions").modal('show')            
+            // return Promise.reject('NO_REGION_CHOOSEN');
         } else {
             commit('setRegion', regionId);
             return Promise.resolve(regionId);
@@ -64259,27 +64197,15 @@ var setRegion = function setRegion(_ref14) {
 };
 
 var checkLangExists = function checkLangExists(_ref15) {
-    var commit = _ref15.commit,
-        dispatch = _ref15.dispatch;
+    var dispatch = _ref15.dispatch;
 
     return __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.getItem('lang').then(function (lang) {
-        dispatch('setLang', lang);
+        dispatch('langChange', lang);
     });
 };
-var setLang = function setLang(_ref16, lang) {
+var langChange = function langChange(_ref16, lang) {
     var commit = _ref16.commit,
         dispatch = _ref16.dispatch;
-
-
-    axios.get('/api/locale/' + lang);
-    commit('setLang', lang);
-    __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', lang);
-    Vue.i18n.set(lang);
-};
-var langChange = function langChange(_ref17, lang) {
-    var commit = _ref17.commit,
-        dispatch = _ref17.dispatch;
-
 
     if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(lang)) {
         __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', 'ru');
@@ -64287,9 +64213,9 @@ var langChange = function langChange(_ref17, lang) {
         commit('setLang', 'ru');
     } else {
         axios.get('/api/locale/' + lang);
-        // commit('setLang', lang)
+        commit('setLang', lang);
         __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', lang);
-        // Vue.i18n.set(lang);
+        Vue.i18n.set(lang);
     }
 };
 // export const setToken = ({ commit, dispatch }, token) => {
@@ -65194,28 +65120,43 @@ var index = {
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     "ru": {
-        "login": {
-            "title": "Вход",
-            "pre_title": "Введите свой номер телефона",
-            "sms_info": "На указанный номер будет отправлено SMS с кодом подтверждения номера.",
-            "button_send": "Получить код для входа",
-            "phone_placeholder": "Телефон",
-            "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
-            "incorrect_password": "Неправильный код",
-            "send_again": "Отправить еще раз",
-            "next": "Далее",
-            "sms_code": "Код из SMS",
-            "change_number": "Изменить номер"
+        "helper": {
+            "yes": "Да",
+            "no": "Нет"
         },
-        "header": {
-            "title": "Быстрая доставка продуктов",
-            "step1": "Выберите свой любимый магазин в своем регионе",
-            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
-            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
-            "delivery": "Доставка",
-            "login": "Вход",
-            "logout": "Выйти",
-            "shops": "Магазины"
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "auth": {
+            "failed": "These credentials do not match our records.",
+            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
+        },
+        "file": {
+            "add": "Добавить в корзину",
+            "refund": "Возврат",
+            "shop": "Магазинам",
+            "cart": "Ваша корзина",
+            "currency": "сум",
+            "for": "сум за 1",
+            "region": "Ваш регион",
+            "login": "Войти в личный кабинет",
+            "design": "Дизайн и разработка",
+            "cartempty": "Ваша корзина пуста",
+            "buyers": "Покупателям",
+            "checkout": "Оформление",
+            "payment": "Наличными",
+            "req": "Заказать",
+            "name": "Имя",
+            "last": "Фамилия",
+            "phone": "Телефон",
+            "street": "Улица",
+            "home": "Дом",
+            "entr": "Корпус",
+            "apart": "Квартира"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -65298,7 +65239,7 @@ var index = {
             "numeric": "The {attribute} must be a number.",
             "present": "The {attribute} field must be present.",
             "regex": "The {attribute} format is invalid.",
-            "required": "Заполните это поле.",
+            "required": "Поле {attribute} требуется.",
             "required_if": "The {attribute} field is required when {other} is {value}.",
             "required_unless": "The {attribute} field is required unless {other} is in {values}.",
             "required_with": "The {attribute} field is required when {values} is present.",
@@ -65312,24 +65253,68 @@ var index = {
                 "string": "The {attribute} must be {size} characters.",
                 "array": "The {attribute} must contain {size} items."
             },
-            "string": "The {attribute} must be a string.",
-            "timezone": "The {attribute} must be a valid zone.",
-            "unique": "The {attribute} has already been taken.",
-            "uploaded": "The {attribute} failed to upload.",
-            "url": "The {attribute} format is invalid.",
-            "nameError": "Заполните это поле.",
-            "lastNameError": "Заполните это поле.",
-            "phoneError": "Заполните это поле.",
+            "string": "{attribute} должен быть строкой.",
+            "timezone": "{attribute}должен быть допустимой зоной.",
+            "unique": "{attribute} уже сделан.",
+            "uploaded": "{attribute} удалось загрузить.",
+            "url": "Формат {attribute} недействителен.",
+            "nameError": "Поле {attribute} требуется.",
+            "lastNameError": "Поле {attribute} требуется.",
+            "phoneError": "Поле {attribute} требуется.",
             "custom": {
                 "attribute-name": {
                     "rule-name": "custom-message"
                 }
             },
-            "attributes": []
+            "attributes": {
+                "name": "name",
+                "manager_category_id": "manager_category_id",
+                "logo": "logo",
+                "status": "Status",
+                "name_uz": "Name_uz",
+                "name_ru": "Name_ru",
+                "manager_id": "Manager_id",
+                "category_id": "Category_id",
+                "new_price": "New_price",
+                "old_price": "Old_price",
+                "measurement": "Measurement"
+            }
         },
-        "helper": {
-            "yes": "Да",
-            "no": "Нет"
+        "header": {
+            "title": "Быстрая доставка продуктов",
+            "step1": "Выберите свой любимый магазин в своем регионе",
+            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
+            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
+            "delivery": "Доставка",
+            "login": "Вход",
+            "logout": "Выйти",
+            "shops": "Магазины",
+            "profile": "Мой профиль",
+            "mydata": "Мои данные",
+            "orders": "Мои Заказы"
+        },
+        "pagination": {
+            "previous": "Назад",
+            "next": "Вперед"
+        },
+        "drawer": {
+            "shops": "Магазины",
+            "order": "Доставка и оплата",
+            "orders": "Мои заказы",
+            "data": "Мои данние"
+        },
+        "login": {
+            "title": "Вход",
+            "pre_title": "Введите свой номер телефона",
+            "sms_info": "На указанный номер будет отправлено SMS с кодом подтверждения номера.",
+            "button_send": "Получить код для входа",
+            "phone_placeholder": "Телефон",
+            "sms_sent_info": "Мы отправили вам SMS с кодом. Пожалуйста, введите его в поле ниже",
+            "incorrect_password": "Неправильный код",
+            "send_again": "Отправить еще раз",
+            "next": "Далее",
+            "sms_code": "Код из SMS",
+            "change_number": "Изменить номер"
         },
         "cart": {
             "shop": "Магазин",
@@ -65341,6 +65326,21 @@ var index = {
             "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
             "confirmTitle": "Подтвердите действие:"
         },
+        "footer": {
+            "delivery": "Доставка и оплата",
+            "ready": "Готово",
+            "design": "Дизайн и разработка",
+            "buyers": "Покупателям"
+        },
+        "pages": {
+            "back": "Назад к списку магазинов"
+        }
+    },
+    "uz": {
+        "helper": {
+            "yes": "Xa",
+            "no": "Yo'q"
+        },
         "passwords": {
             "password": "Passwords must be at least six characters and match the confirmation.",
             "reset": "Your password has been reset!",
@@ -65351,38 +65351,6 @@ var index = {
         "auth": {
             "failed": "These credentials do not match our records.",
             "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-        },
-        "pagination": {
-            "previous": "Назад",
-            "next": "Вперед"
-        },
-        "pages": {
-            "back": "Назад к списку магазинов"
-        }
-    },
-    "uz": {
-        "login": {
-            "title": "Kirish",
-            "pre_title": "Telefon raqamingizni kiriting",
-            "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
-            "button_send": "Kodni jo'natish",
-            "phone_placeholder": "Telefon",
-            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik",
-            "incorrect_password": "Noto'gri kod",
-            "send_again": "Yana bir maratoba jo'natish",
-            "next": "Tasdiqlash",
-            "sms_code": "SMS da kelgan kodni kiriting",
-            "change_number": "Raqamni o'zgartirish"
-        },
-        "header": {
-            "title": "Mahsulotlarni tezda yetkazib beramiz",
-            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
-            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
-            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
-            "delivery": "Buyurtma",
-            "login": "Kirish",
-            "logout": "Chiqish",
-            "shops": "Do'konlar"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -65494,9 +65462,32 @@ var index = {
             },
             "attributes": []
         },
-        "helper": {
-            "yes": "Xa",
-            "no": "Yo'q"
+        "header": {
+            "title": "Mahsulotlarni tezda yetkazib beramiz",
+            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
+            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
+            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
+            "delivery": "Buyurtma",
+            "login": "Kirish",
+            "logout": "Chiqish",
+            "shops": "Do'konlar"
+        },
+        "pagination": {
+            "previous": "Orqaga",
+            "next": "Oldinga"
+        },
+        "login": {
+            "title": "Kirish",
+            "pre_title": "Telefon raqamingizni kiriting",
+            "sms_info": "Siz ko'rstagan raqamga sms yuboriladi",
+            "button_send": "Kodni jo'natish",
+            "phone_placeholder": "Telefon",
+            "sms_sent_info": "Sizga kodni SMS orqali jo'natdik",
+            "incorrect_password": "Noto'gri kod",
+            "send_again": "Yana bir maratoba jo'natish",
+            "next": "Tasdiqlash",
+            "sms_code": "SMS da kelgan kodni kiriting",
+            "change_number": "Raqamni o'zgartirish"
         },
         "cart": {
             "shop": "Do'kon",
@@ -65507,21 +65498,6 @@ var index = {
             "button": "Buyurtma qilish",
             "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
             "confirmTitle": "Amalni tasdiqlang:"
-        },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
-        },
-        "auth": {
-            "failed": "These credentials do not match our records.",
-            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-        },
-        "pagination": {
-            "previous": "Orqaga",
-            "next": "Oldinga"
         },
         "pages": {
             "back": "Orqaga, do'konlar ro'yhati"
@@ -65682,7 +65658,13 @@ var render = function() {
               _c("div", { staticClass: "loader-container" })
             ])
           : _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h4", { staticClass: "modal-title" }, [
+                  _vm._v(_vm._s(_vm.$t("file.region")))
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -65721,18 +65703,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Ваш регион")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_c("i", { staticClass: "icon" }, [_vm._v("close")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: { type: "button", "data-dismiss": "modal" }
+      },
+      [_c("i", { staticClass: "icon" }, [_vm._v("close")])]
+    )
   }
 ]
 render._withStripped = true
@@ -66264,51 +66242,50 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade drawer",
-        attrs: { id: "drawer", tabindex: "-1" }
-      },
-      [
-        _c("div", { staticClass: "modal-dialog" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "drawer-user" }, [
-              _vm._v("\n        user\n      ")
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade drawer",
+      attrs: { id: "drawer", tabindex: "-1" }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "drawer-user" }, [
+            _vm._v("\n        user\n      ")
+          ]),
+          _vm._v(" "),
+          _c("ul", { staticClass: "nav drawer-nav" }, [
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link" }, [
+                _vm._v(_vm._s(_vm.$t("drawer.shops")))
+              ])
             ]),
             _vm._v(" "),
-            _c("ul", { staticClass: "nav drawer-nav" }, [
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link" }, [_vm._v("Магазины")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link" }, [
-                  _vm._v("Доставка и оплата")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link" }, [_vm._v("Мои заказы")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link" }, [_vm._v("Мои данние")])
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link" }, [
+                _vm._v(_vm._s(_vm.$t("drawer.order")))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link" }, [
+                _vm._v(_vm._s(_vm.$t("drawer.orders")))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link" }, [
+                _vm._v(_vm._s(_vm.$t("drawer.data")))
               ])
             ])
           ])
         ])
-      ]
-    )
-  }
-]
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

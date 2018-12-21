@@ -3,9 +3,9 @@
 		<div class="notfound">
 			<div class="notfound-404">
 				<h1>Oops!</h1>
-				<h2>404 - Запращиваемая страница не найдена</h2>
+				<h2>404 - {{$t('file.notfound')}}</h2>
 			</div>
-			<router-link :to="{name: 'home'}">Домашняя страница</router-link>
+			<router-link :to="{name: 'home'}">{{$t('file.home')}}</router-link>
 		</div>
 	</div>
 </template>
