@@ -28,11 +28,13 @@
         </div>
     </form>
     <div class="form-row ml-auto">
-        @include('admin.components.search')
+      @include('admin.components.search')
+      <div class="col-auto">
         <button class="btn btn-green" data-toggle="modal" data-target="#newStore">
-            <i class="icon">add</i>
-            <span class="text">Добавить клиент</span>
+          <i class="icon">add</i>
+          <span class="text">Добавить клиент</span>
         </button>
+      </div>
     </div>
 </div>
 @if(count($clients) > 0)

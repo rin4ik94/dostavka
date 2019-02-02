@@ -1,8 +1,5 @@
 @extends('admin.layouts.dashboard')
 @section('content')
-<div class="main-top">
-  <h1 class="main-title">Настройки шлюза SMS</h1>
-</div>
 <form action="/admin/settings/update" method="POST">
   @method('PATCH')
   @csrf

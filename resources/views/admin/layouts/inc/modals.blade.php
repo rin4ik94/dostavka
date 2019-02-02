@@ -24,17 +24,13 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Профиль № {{Auth::user()->id}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <i class="icon">close</i>
         </button>
       </div>
       <div class="modal-body">
         <div>ФИО: {{Auth::user()->name}}</div>
         <div>Телефон: +998{{Auth::user()->mobile}}</div>
         <div>Группа: {{Auth::user()->roles[0]->name ?? ''}}</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-green">Save changes</button>
       </div>
     </div>
   </div>

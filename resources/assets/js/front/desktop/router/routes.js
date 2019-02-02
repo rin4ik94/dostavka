@@ -11,6 +11,10 @@ import Products from '../pages/catalog/Products'
 import ProductModal from '../components/modals/Product'
 import Cart from '../pages/Cart'
 import NotFound from '../pages/NotFound'
+
+
+
+
 // import store from '../vuex'
 
 export default [

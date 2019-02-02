@@ -20,6 +20,16 @@
   -moz-font-feature-settings: 'liga';
   -moz-osx-font-smoothing: grayscale;
 }
+.svg {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  pointer-events: none;
+  fill: currentColor;
+  border: 0;
+  overflow: hidden;
+  -moz-transform: translateX(0);
+}
 .loader {
   position: absolute;
   left: 50%;
@@ -65,39 +75,7 @@
   padding: 12px 20px;
 }
 
-.partners-intro {
-  height: 266px;
-  background: #745ed7 linear-gradient(to right, #745ed7 , #8970df);
-  color: #fff;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 0;
-  display: none;
-  margin-top: -20px;
-  margin-bottom: 20px;
-}
-.intro-title {
-  font-size: 36px;
-  text-align: center;
-  margin-bottom: 36px;
-}
-.intro-item {
-  display: flex;
-  align-items: center;
-}
-.intro-item-text {
-  padding-left: 12px;
-  font-size: 16px;
-}
-.intro-item-icon {
-  width: 123px;
-  height: 123px;
-}
-@media (min-width: 992px) {
-  .partners-intro {
-    display: flex;
-  }
-}
+
 
 /* Partners */
 .partners {
@@ -352,7 +330,7 @@
 }
 .main-title {
   line-height: 24px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   font-size: 20px;
   margin: 0;
   white-space: nowrap;
@@ -997,9 +975,25 @@
   width: 33.3333%;
 }
 /* Home intro */
+.partners-intro {
+
+  background: #745ed7 linear-gradient(to right, #745ed7 , #8970df);
+  color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0;
+  display: none;
+  margin-top: -20px;
+  margin-bottom: 40px;
+  padding: 32px 0;
+}
+.intro-title {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 20px;
+}
 .intro-item {
-  display: flex;
-  align-items: center;
+
 }
 .intro-item-text {
   padding-left: 12px;
@@ -1007,26 +1001,20 @@
 }
 .intro-item-icon {
   position: relative;
+  width: 200px;
+  height: 200px;
 }
-.intro-item-icon .icon-number {
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  color: #3A0299;
-  font-size: 80px;
-  font-weight: 700;
-  line-height: 80px;
-}
-.intro-item-icon .icon-shadow {
-  width: 92px;
-  height: 92px;
-  background-color: #fff;
-  border-radius: 50%;
-}
-.intro-item-icon .icon-shadow .icon {
+.intro-item-icon .svg {
   position: relative;
   z-index: 3;
   margin: 22px;
-  font-size: 48px;
+  width: 100%;
   color: #267af2;
+}
+
+
+@media (min-width: 992px) {
+  .partners-intro {
+    display: flex;
+  }
 }
