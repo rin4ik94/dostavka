@@ -53128,7 +53128,7 @@ var content = __webpack_require__(193);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("28f392f6", content, false, {});
+var update = __webpack_require__(8)("97d34a20", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53152,7 +53152,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .dropdown-item:hover {\r\n  background-color: #4aae9b;\r\n  color: white;\r\n} */\n.highlightText {\r\n  font-weight: 600;\r\n  /* background-color: #fd5646; */\r\n  color: black;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  /* background-color: #fd5646; */\n  color: black;\n}\n", ""]);
 
 // exports
 
@@ -57489,7 +57489,7 @@ var content = __webpack_require__(231);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("470694aa", content, false, {});
+var update = __webpack_require__(8)("5e4b8312", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -57513,7 +57513,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n#notfound[data-v-4655b325] {\r\n  padding-top: -70px;\r\n\r\n  width: 100%;\r\n  background: #fff;\r\n\r\n  position: relative;\r\n  height: 100vh;\n}\n#notfound .notfound[data-v-4655b325] {\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n  transform: translate(-50%, -50%);\n}\n.notfound[data-v-4655b325] {\r\n  max-width: 520px;\r\n  width: 100%;\r\n  line-height: 1.4;\r\n  text-align: center;\n}\n.notfound .notfound-404[data-v-4655b325] {\r\n  position: relative;\r\n  height: 200px;\r\n  margin: 0px auto 20px;\r\n  z-index: -1;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\r\n  font-family: \"Montserrat\", sans-serif;\r\n  font-size: 236px !important;\r\n  font-weight: 100 !important;\r\n  margin: 0px;\r\n  color: #211b19;\r\n  text-transform: uppercase;\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n  transform: translate(-50%, -50%);\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\r\n  font-family: \"Montserrat\", sans-serif;\r\n  font-size: 28px;\r\n  font-weight: 400 !important;\r\n  text-transform: uppercase;\r\n  color: #211b19;\r\n  background: #fff;\r\n  padding: 10px 5px;\r\n  margin: auto;\r\n  display: inline-block;\r\n  position: absolute;\r\n  bottom: 0px;\r\n  left: 0;\r\n  right: 0;\n}\n.notfound a[data-v-4655b325] {\r\n  font-family: \"Montserrat\", sans-serif;\r\n  display: inline-block;\r\n  font-weight: 700;\r\n  text-decoration: none;\r\n  color: #fff;\r\n  text-transform: uppercase;\r\n  padding: 13px 23px;\r\n  background: #27ae61;\r\n  font-size: 18px;\r\n  -webkit-transition: 0.2s all;\r\n  transition: 0.2s all;\n}\n.notfound a[data-v-4655b325]:hover {\r\n  color: #27ae61;\r\n  background: #211b19;\n}\n@media only screen and (max-width: 767px) {\n.notfound .notfound-404 h1[data-v-4655b325] {\r\n    font-size: 148px;\n}\n}\n@media only screen and (max-width: 480px) {\n.notfound .notfound-404[data-v-4655b325] {\r\n    height: 148px;\r\n    margin: 0px auto 10px;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\r\n    font-size: 86px;\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\r\n    font-size: 16px;\n}\n.notfound a[data-v-4655b325] {\r\n    padding: 7px 15px;\r\n    font-size: 14px;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n#notfound[data-v-4655b325] {\n  padding-top: -70px;\n\n  width: 100%;\n  background: #fff;\n\n  position: relative;\n  height: 100vh;\n}\n#notfound .notfound[data-v-4655b325] {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound[data-v-4655b325] {\n  max-width: 520px;\n  width: 100%;\n  line-height: 1.4;\n  text-align: center;\n}\n.notfound .notfound-404[data-v-4655b325] {\n  position: relative;\n  height: 200px;\n  margin: 0px auto 20px;\n  z-index: -1;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 236px !important;\n  font-weight: 100 !important;\n  margin: 0px;\n  color: #211b19;\n  text-transform: uppercase;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 28px;\n  font-weight: 400 !important;\n  text-transform: uppercase;\n  color: #211b19;\n  background: #fff;\n  padding: 10px 5px;\n  margin: auto;\n  display: inline-block;\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  right: 0;\n}\n.notfound a[data-v-4655b325] {\n  font-family: \"Montserrat\", sans-serif;\n  display: inline-block;\n  font-weight: 700;\n  text-decoration: none;\n  color: #fff;\n  text-transform: uppercase;\n  padding: 13px 23px;\n  background: #27ae61;\n  font-size: 18px;\n  -webkit-transition: 0.2s all;\n  transition: 0.2s all;\n}\n.notfound a[data-v-4655b325]:hover {\n  color: #27ae61;\n  background: #211b19;\n}\n@media only screen and (max-width: 767px) {\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 148px;\n}\n}\n@media only screen and (max-width: 480px) {\n.notfound .notfound-404[data-v-4655b325] {\n    height: 148px;\n    margin: 0px auto 10px;\n}\n.notfound .notfound-404 h1[data-v-4655b325] {\n    font-size: 86px;\n}\n.notfound .notfound-404 h2[data-v-4655b325] {\n    font-size: 16px;\n}\n.notfound a[data-v-4655b325] {\n    padding: 7px 15px;\n    font-size: 14px;\n}\n}\n", ""]);
 
 // exports
 
@@ -58140,7 +58140,7 @@ var content = __webpack_require__(237);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("2d8609dd", content, false, {});
+var update = __webpack_require__(8)("59b044d7", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -58305,7 +58305,7 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v("\r\n              ←"),
+                  _vm._v("\n              ←"),
                   _c("span", { staticClass: "text" }, [
                     _vm._v(" " + _vm._s(_vm.$t("pagination.previous")))
                   ])
@@ -58938,9 +58938,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n            " +
+                            "\n            " +
                               _vm._s(_vm.$t("file.popular")) +
-                              " \r\n          "
+                              " \n          "
                           )
                         ]
                       ),
@@ -58959,9 +58959,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            " \r\n            " +
+                            " \n            " +
                               _vm._s(_vm.$t("file.price")) +
-                              "\r\n          "
+                              "\n          "
                           )
                         ]
                       )
@@ -65124,39 +65124,15 @@ var index = {
             "yes": "Да",
             "no": "Нет"
         },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
-        },
         "auth": {
             "failed": "These credentials do not match our records.",
             "throttle": "Too many login attempts. Please try again in {seconds} seconds."
         },
-        "file": {
-            "add": "Добавить в корзину",
-            "refund": "Возврат",
-            "shop": "Магазинам",
-            "cart": "Ваша корзина",
-            "currency": "сум",
-            "for": "сум за 1",
-            "region": "Ваш регион",
-            "login": "Войти в личный кабинет",
-            "design": "Дизайн и разработка",
-            "cartempty": "Ваша корзина пуста",
-            "buyers": "Покупателям",
-            "checkout": "Оформление",
-            "payment": "Наличными",
-            "req": "Заказать",
-            "name": "Имя",
-            "last": "Фамилия",
-            "phone": "Телефон",
-            "street": "Улица",
-            "home": "Дом",
-            "entr": "Корпус",
-            "apart": "Квартира"
+        "drawer": {
+            "shops": "Магазины",
+            "order": "Доставка и оплата",
+            "orders": "Мои заказы",
+            "data": "Мои данние"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -65280,28 +65256,11 @@ var index = {
                 "measurement": "Measurement"
             }
         },
-        "header": {
-            "title": "Быстрая доставка продуктов",
-            "step1": "Выберите свой любимый магазин в своем регионе",
-            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
-            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
-            "delivery": "Доставка",
-            "login": "Вход",
-            "logout": "Выйти",
-            "shops": "Магазины",
-            "profile": "Мой профиль",
-            "mydata": "Мои данные",
-            "orders": "Мои Заказы"
-        },
-        "pagination": {
-            "previous": "Назад",
-            "next": "Вперед"
-        },
-        "drawer": {
-            "shops": "Магазины",
-            "order": "Доставка и оплата",
-            "orders": "Мои заказы",
-            "data": "Мои данние"
+        "footer": {
+            "delivery": "Доставка и оплата",
+            "ready": "Готово",
+            "design": "Дизайн и разработка",
+            "buyers": "Покупателям"
         },
         "login": {
             "title": "Вход",
@@ -65316,6 +65275,10 @@ var index = {
             "sms_code": "Код из SMS",
             "change_number": "Изменить номер"
         },
+        "pagination": {
+            "previous": "Назад",
+            "next": "Вперед"
+        },
         "cart": {
             "shop": "Магазин",
             "inCart": "Товаров в корзине",
@@ -65326,11 +65289,70 @@ var index = {
             "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
             "confirmTitle": "Подтвердите действие:"
         },
-        "footer": {
+        "header": {
+            "title": "Быстрая доставка продуктов",
+            "step1": "Выберите свой любимый магазин в своем регионе",
+            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
+            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
+            "delivery": "Доставка",
+            "login": "Вход",
+            "logout": "Выйти",
+            "shops": "Магазины",
+            "profile": "Мой профиль",
+            "mydata": "Мои данные",
+            "orders": "Мои Заказы"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "file": {
+            "add": "Добавить в корзину",
+            "refund": "Возврат",
             "delivery": "Доставка и оплата",
-            "ready": "Готово",
+            "shop": "Магазинам",
+            "cart": "Ваша корзина",
+            "currency": "сум",
+            "myorders": "Мои заказы",
+            "mydata": "Мои данние",
+            "fill": "Заполните это поле",
+            "for": "сум за 1",
+            "region": "Ваш регион",
+            "login": "Войти в личный кабинет",
             "design": "Дизайн и разработка",
-            "buyers": "Покупателям"
+            "cartempty": "Ваша корзина пуста",
+            "buyers": "Покупателям",
+            "checkout": "Оформление",
+            "payment": "Наличными",
+            "req": "Заказать",
+            "name": "Имя",
+            "last": "Фамилия",
+            "datebirth": "Дата рождения",
+            "gender": "Пол",
+            "phone": "Телефон",
+            "street": "Улица",
+            "home": "Домашняя страница",
+            "entr": "Корпус",
+            "apart": "Квартира",
+            "orderid": "Номер заказа",
+            "orderdate": "Дата и время заказа",
+            "start": "Как начать сотрудничество",
+            "orderstatus": "Статус заказа",
+            "products": "Товаров",
+            "allprice": "Общая сумма",
+            "edit": "Редактировать",
+            "man": "Мужской",
+            "woman": "Женский",
+            "notfound": "Запращиваемая страница не найдена",
+            "catalog": "Каталог продуктов",
+            "sort": "Сортировать",
+            "popular": "По популярности",
+            "price": "По цене",
+            "allcats": "Все категории",
+            "addtocart": "В корзину"
         },
         "pages": {
             "back": "Назад к списку магазинов"
@@ -65340,13 +65362,6 @@ var index = {
         "helper": {
             "yes": "Xa",
             "no": "Yo'q"
-        },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
         },
         "auth": {
             "failed": "These credentials do not match our records.",
@@ -65462,20 +65477,6 @@ var index = {
             },
             "attributes": []
         },
-        "header": {
-            "title": "Mahsulotlarni tezda yetkazib beramiz",
-            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
-            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
-            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
-            "delivery": "Buyurtma",
-            "login": "Kirish",
-            "logout": "Chiqish",
-            "shops": "Do'konlar"
-        },
-        "pagination": {
-            "previous": "Orqaga",
-            "next": "Oldinga"
-        },
         "login": {
             "title": "Kirish",
             "pre_title": "Telefon raqamingizni kiriting",
@@ -65489,6 +65490,10 @@ var index = {
             "sms_code": "SMS da kelgan kodni kiriting",
             "change_number": "Raqamni o'zgartirish"
         },
+        "pagination": {
+            "previous": "Orqaga",
+            "next": "Oldinga"
+        },
         "cart": {
             "shop": "Do'kon",
             "inCart": "Savatchadagi maxsulotlar",
@@ -65498,6 +65503,23 @@ var index = {
             "button": "Buyurtma qilish",
             "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
             "confirmTitle": "Amalni tasdiqlang:"
+        },
+        "header": {
+            "title": "Mahsulotlarni tezda yetkazib beramiz",
+            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
+            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
+            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
+            "delivery": "Buyurtma",
+            "login": "Kirish",
+            "logout": "Chiqish",
+            "shops": "Do'konlar"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
         },
         "pages": {
             "back": "Orqaga, do'konlar ro'yhati"
@@ -66412,7 +66434,7 @@ var content = __webpack_require__(275);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("0d653c38", content, false, {});
+var update = __webpack_require__(8)("6a992cc4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66545,7 +66567,7 @@ var content = __webpack_require__(280);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("c674a8b0", content, false, {});
+var update = __webpack_require__(8)("3f3e178e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66673,7 +66695,7 @@ var content = __webpack_require__(285);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("6c3a01d8", content, false, {});
+var update = __webpack_require__(8)("6c5b6afa", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66819,7 +66841,7 @@ var content = __webpack_require__(291);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("15a30ff6", content, false, {});
+var update = __webpack_require__(8)("73a702df", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -67148,7 +67170,7 @@ var content = __webpack_require__(297);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("02c73f67", content, false, {});
+var update = __webpack_require__(8)("46448f8a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags

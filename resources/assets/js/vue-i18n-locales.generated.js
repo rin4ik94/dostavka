@@ -4,39 +4,15 @@ export default {
             "yes": "Да",
             "no": "Нет"
         },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
-        },
         "auth": {
             "failed": "These credentials do not match our records.",
             "throttle": "Too many login attempts. Please try again in {seconds} seconds."
         },
-        "file": {
-            "add": "Добавить в корзину",
-            "refund": "Возврат",
-            "shop": "Магазинам",
-            "cart": "Ваша корзина",
-            "currency": "сум",
-            "for": "сум за 1",
-            "region": "Ваш регион",
-            "login": "Войти в личный кабинет",
-            "design": "Дизайн и разработка",
-            "cartempty": "Ваша корзина пуста",
-            "buyers": "Покупателям",
-            "checkout": "Оформление",
-            "payment": "Наличными",
-            "req": "Заказать",
-            "name": "Имя",
-            "last": "Фамилия",
-            "phone": "Телефон",
-            "street": "Улица",
-            "home": "Дом",
-            "entr": "Корпус",
-            "apart": "Квартира"
+        "drawer": {
+            "shops": "Магазины",
+            "order": "Доставка и оплата",
+            "orders": "Мои заказы",
+            "data": "Мои данние"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -160,28 +136,11 @@ export default {
                 "measurement": "Measurement"
             }
         },
-        "header": {
-            "title": "Быстрая доставка продуктов",
-            "step1": "Выберите свой любимый магазин в своем регионе",
-            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
-            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
-            "delivery": "Доставка",
-            "login": "Вход",
-            "logout": "Выйти",
-            "shops": "Магазины",
-            "profile": "Мой профиль",
-            "mydata": "Мои данные",
-            "orders": "Мои Заказы"
-        },
-        "pagination": {
-            "previous": "Назад",
-            "next": "Вперед"
-        },
-        "drawer": {
-            "shops": "Магазины",
-            "order": "Доставка и оплата",
-            "orders": "Мои заказы",
-            "data": "Мои данние"
+        "footer": {
+            "delivery": "Доставка и оплата",
+            "ready": "Готово",
+            "design": "Дизайн и разработка",
+            "buyers": "Покупателям"
         },
         "login": {
             "title": "Вход",
@@ -196,6 +155,10 @@ export default {
             "sms_code": "Код из SMS",
             "change_number": "Изменить номер"
         },
+        "pagination": {
+            "previous": "Назад",
+            "next": "Вперед"
+        },
         "cart": {
             "shop": "Магазин",
             "inCart": "Товаров в корзине",
@@ -206,11 +169,70 @@ export default {
             "confirmContent": "В вашей корзине продукты из магазина <b>{shop}<\/b> вы действительно хотите удалить их?",
             "confirmTitle": "Подтвердите действие:"
         },
-        "footer": {
+        "header": {
+            "title": "Быстрая доставка продуктов",
+            "step1": "Выберите свой любимый магазин в своем регионе",
+            "step2": "Собирайте нужные продукты в корзину и оформляйте заказ",
+            "step3": "Наш курьер доставит Ваш заказ по указанному адресу и времени",
+            "delivery": "Доставка",
+            "login": "Вход",
+            "logout": "Выйти",
+            "shops": "Магазины",
+            "profile": "Мой профиль",
+            "mydata": "Мои данные",
+            "orders": "Мои Заказы"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "file": {
+            "add": "Добавить в корзину",
+            "refund": "Возврат",
             "delivery": "Доставка и оплата",
-            "ready": "Готово",
+            "shop": "Магазинам",
+            "cart": "Ваша корзина",
+            "currency": "сум",
+            "myorders": "Мои заказы",
+            "mydata": "Мои данние",
+            "fill": "Заполните это поле",
+            "for": "сум за 1",
+            "region": "Ваш регион",
+            "login": "Войти в личный кабинет",
             "design": "Дизайн и разработка",
-            "buyers": "Покупателям"
+            "cartempty": "Ваша корзина пуста",
+            "buyers": "Покупателям",
+            "checkout": "Оформление",
+            "payment": "Наличными",
+            "req": "Заказать",
+            "name": "Имя",
+            "last": "Фамилия",
+            "datebirth": "Дата рождения",
+            "gender": "Пол",
+            "phone": "Телефон",
+            "street": "Улица",
+            "home": "Домашняя страница",
+            "entr": "Корпус",
+            "apart": "Квартира",
+            "orderid": "Номер заказа",
+            "orderdate": "Дата и время заказа",
+            "start": "Как начать сотрудничество",
+            "orderstatus": "Статус заказа",
+            "products": "Товаров",
+            "allprice": "Общая сумма",
+            "edit": "Редактировать",
+            "man": "Мужской",
+            "woman": "Женский",
+            "notfound": "Запращиваемая страница не найдена",
+            "catalog": "Каталог продуктов",
+            "sort": "Сортировать",
+            "popular": "По популярности",
+            "price": "По цене",
+            "allcats": "Все категории",
+            "addtocart": "В корзину"
         },
         "pages": {
             "back": "Назад к списку магазинов"
@@ -220,13 +242,6 @@ export default {
         "helper": {
             "yes": "Xa",
             "no": "Yo'q"
-        },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
         },
         "auth": {
             "failed": "These credentials do not match our records.",
@@ -342,20 +357,6 @@ export default {
             },
             "attributes": []
         },
-        "header": {
-            "title": "Mahsulotlarni tezda yetkazib beramiz",
-            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
-            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
-            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
-            "delivery": "Buyurtma",
-            "login": "Kirish",
-            "logout": "Chiqish",
-            "shops": "Do'konlar"
-        },
-        "pagination": {
-            "previous": "Orqaga",
-            "next": "Oldinga"
-        },
         "login": {
             "title": "Kirish",
             "pre_title": "Telefon raqamingizni kiriting",
@@ -369,6 +370,10 @@ export default {
             "sms_code": "SMS da kelgan kodni kiriting",
             "change_number": "Raqamni o'zgartirish"
         },
+        "pagination": {
+            "previous": "Orqaga",
+            "next": "Oldinga"
+        },
         "cart": {
             "shop": "Do'kon",
             "inCart": "Savatchadagi maxsulotlar",
@@ -378,6 +383,23 @@ export default {
             "button": "Buyurtma qilish",
             "confirmContent": "Sizning savatingizda <b>{shop}<\/b> do'konidan maxsulotlar bor, siz rostdan xam ularni ochirishga rozimisiz?",
             "confirmTitle": "Amalni tasdiqlang:"
+        },
+        "header": {
+            "title": "Mahsulotlarni tezda yetkazib beramiz",
+            "step1": "O'z regioningizdagi sevimli do'koningizni tanlang",
+            "step2": "Kerakli maxsulotlarni savatchaga to'ldiring va buyurtma qiling",
+            "step3": "Sizning kureringiz buyurtmangizni aytilgan manzilga aytilgan vaqtda yetkazadi",
+            "delivery": "Buyurtma",
+            "login": "Kirish",
+            "logout": "Chiqish",
+            "shops": "Do'konlar"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
         },
         "pages": {
             "back": "Orqaga, do'konlar ro'yhati"
