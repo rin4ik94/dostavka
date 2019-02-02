@@ -130,7 +130,9 @@ class ManagerController extends Controller
 
     public function destroy($id)
     {
-        $manager = Manager::find($id)->delete();
+        $manager = Manager::find($id);
+        $manager->removeLogo();
+        $manager->delete();
         session()->flash('success', 'Магазин удален успешно!');
         return response()->json('success', 200);
     }
