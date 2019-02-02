@@ -130,27 +130,30 @@ export const setManager = ({ commit, dispatch }, manager) => {
     commit('setManager', manager)
 }
 export const setRegion = ({ commit, dispatch }) => {
- 
-  localforage.getItem('region').then((regionId) => {
-        if (isEmpty(regionId)) { 
+
+    localforage.getItem('region').then((regionId) => {
+        if (isEmpty(regionId)) {
             commit('setRegion', '1')
             return Promise.resolve('1')
             // $("#Regions").modal('show')            
             // return Promise.reject('NO_REGION_CHOOSEN');
-        }else{ 
+        } else {
             commit('setRegion', regionId)
             return Promise.resolve(regionId)
         }
-     
+
     })
 }
 
 export const checkLangExists = ({ dispatch }) => {
-    return localforage.getItem('lang').then((lang) => {  
+    return localforage.getItem('lang').then((lang) => {
         dispatch('langChange', lang)
-    }) 
-} 
-export const langChange = ({ commit, dispatch }, lang) => { 
+    })
+}
+export const setLang = ({ commit, dispatch }, lang) => {
+    localforage.setItem('lang', lang)
+};
+export const langChange = ({ commit, dispatch }, lang) => {
     if (isEmpty(lang)) {
         localforage.setItem('lang', 'ru')
         Vue.i18n.set('ru');

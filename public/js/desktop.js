@@ -53167,7 +53167,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  /* background-color: #fd5646; */\n  color: black;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .dropdown-item:hover {\n  background-color: #4aae9b;\n  color: white;\n} */\n.highlightText {\n  font-weight: 600;\n  /* background-color: #fd5646; */\n  color: black;\n}\n", ""]);
 
 // exports
 
@@ -53267,6 +53267,56 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -53303,7 +53353,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     logout: "logout",
     setRegion: "setRegionId",
     setRegionName: "setRegionName",
-    langChange: "langChange"
+    langChange: "langChange",
+    setLang: "setLang"
   }), {
     regionData: function regionData() {
       var _this = this;
@@ -53327,8 +53378,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     changeLocale: function changeLocale(lang) {
       if (lang != this.locale) {
-        this.langChange(lang);
         location.reload();
+        this.setLang(lang);
       }
     }
   }),
@@ -53489,7 +53540,7 @@ var render = function() {
                         expression: "products.length && show"
                       }
                     ],
-                    staticClass: "dropdown-menu w-100  ",
+                    staticClass: "dropdown-menu w-100",
                     staticStyle: { display: "block" }
                   },
                   _vm._l(_vm.products, function(product) {
@@ -53580,6 +53631,7 @@ var render = function() {
                     },
                     [
                       _c("i", { staticClass: "icon" }, [_vm._v("person")]),
+                      _vm._v(" "),
                       _c("span", { staticClass: "text" }, [
                         _vm._v(_vm._s(_vm.$t("header.profile")))
                       ])
@@ -53639,6 +53691,7 @@ var render = function() {
                   },
                   [
                     _c("i", { staticClass: "icon" }, [_vm._v("person")]),
+                    _vm._v(" "),
                     _c("span", { staticClass: "text" }, [
                       _vm._v(_vm._s(_vm.$t("header.login")))
                     ])
@@ -59898,6 +59951,114 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -59918,19 +60079,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       regions: [],
       form: {
         user: {
-          first_name: '',
-          last_name: '',
-          phone: '',
+          first_name: "",
+          last_name: "",
+          phone: "",
           region_id: 1,
           total: 0
         },
         // delivery_price: this.$store.getters('delivery_price'),
         manager_id: null,
         payment_type_id: 1,
-        delivery_address_home: '',
-        delivery_address_street: '',
-        delivery_address_floor: '',
-        delivery_address_apartment: ''
+        delivery_address_home: "",
+        delivery_address_street: "",
+        delivery_address_floor: "",
+        delivery_address_apartment: ""
       }
     };
   },
@@ -59963,7 +60124,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   watch: {
     // lang(){
     //   this.showPage = false;
-    //   this.getRegions(); 
+    //   this.getRegions();
     //   this.fetchRegion(this.region.slug)
 
     // },
@@ -60001,7 +60162,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     getRegions: function getRegions() {
       var _this3 = this;
 
-      axios.get('/api/regions').then(function (response) {
+      axios.get("/api/regions").then(function (response) {
         _this3.regions = response.data.data;
         _this3.showPage = true;
       });
@@ -60017,19 +60178,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       this.form.manager_id = this.manager.id;
       this.form.delivery_price = this.delivery_price;
-      this.form.user.phone = '+998' + this.form.user.phone;
+      this.form.user.phone = "+998" + this.form.user.phone;
       var params = {};
       var p = void 0;
       this.products.map(function (v, k) {
         if (!p) {
-          return p = v.id + '-' + v.quantity;
+          return p = v.id + "-" + v.quantity;
         }
-        p = p + "," + v.id + '-' + v.quantity;
+        p = p + "," + v.id + "-" + v.quantity;
       });
       params["phone"] = this.form.user.phone;
       params["products"] = p;
       params["form"] = this.form;
-      axios.post('api/orders', { params: params }).then(function (response) {
+      axios.post("api/orders", { params: params }).then(function (response) {
         _this4.setEmpty();
         _this4.success = true;
       }).catch(function (error) {
@@ -60040,13 +60201,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       if (this.products.length) {
         if (!this.user.data | !this.form.user.phone | !this.form.user.last_name | !this.form.user.first_name) {
           if (!this.form.user.first_name) {
-            this.nameError = 'error';
+            this.nameError = "error";
           }
           if (!this.form.user.last_name) {
-            this.lastNameError = 'error';
+            this.lastNameError = "error";
           }
           if (!this.form.user.phone) {
-            this.phoneError = 'error';
+            this.phoneError = "error";
           }
           if (!this.form.user.phone | !this.form.user.last_name | !this.form.user.first_name) {
             return;
@@ -60054,7 +60215,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }
 
         if (!this.user.data.phone && 9 == this.form.user.phone.length) {
-          $('#modalstep').modal('show');
+          $("#modalstep").modal("show");
           return;
         }
         this.proceedOrder();
@@ -60570,7 +60731,7 @@ var render = function() {
                     staticClass: "btn btn-outline-green",
                     attrs: { to: { name: "home" }, exact: "" }
                   },
-                  [_vm._v("←  " + _vm._s(_vm.$t("pages.back")))]
+                  [_vm._v("← " + _vm._s(_vm.$t("pages.back")))]
                 )
               ],
               1
@@ -60583,6 +60744,16 @@ var render = function() {
                       " «" +
                       _vm._s(_vm.manager.name) +
                       "»"
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.filteredProducts.length
+              ? _c("div", [
+                  _vm._v(
+                    _vm._s(_vm.filteredProducts.length) +
+                      " продуктов на сумму " +
+                      _vm._s(_vm.cartInfo.total)
                   )
                 ])
               : _vm._e(),
@@ -60729,15 +60900,13 @@ var render = function() {
                                 product.quantity > 1
                                   ? _c("span", [
                                       _vm._v(
-                                        "\n               " +
-                                          _vm._s(
-                                            _vm._f("toCurrency")(
-                                              product.new_price
-                                            )
-                                          ) +
+                                        _vm._s(
+                                          _vm._f("toCurrency")(
+                                            product.new_price
+                                          )
+                                        ) +
                                           " за 1" +
-                                          _vm._s(product.measure) +
-                                          "\n              "
+                                          _vm._s(product.measure)
                                       )
                                     ])
                                   : _vm._e()
@@ -64055,6 +64224,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setManager", function() { return setManager; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRegion", function() { return setRegion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkLangExists", function() { return checkLangExists; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLang", function() { return setLang; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "langChange", function() { return langChange; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
@@ -64239,9 +64409,15 @@ var checkLangExists = function checkLangExists(_ref15) {
         dispatch('langChange', lang);
     });
 };
-var langChange = function langChange(_ref16, lang) {
+var setLang = function setLang(_ref16, lang) {
     var commit = _ref16.commit,
         dispatch = _ref16.dispatch;
+
+    __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', lang);
+};
+var langChange = function langChange(_ref17, lang) {
+    var commit = _ref17.commit,
+        dispatch = _ref17.dispatch;
 
     if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(lang)) {
         __WEBPACK_IMPORTED_MODULE_1_localforage___default.a.setItem('lang', 'ru');
