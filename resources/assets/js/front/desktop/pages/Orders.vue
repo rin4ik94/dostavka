@@ -11,7 +11,7 @@
             <li class="order" v-for="order in orders">
               <div class="order-inner">
                 <div class="order-column order-store">
-                  <img :src=" order.manager.logo ">
+                  <img :src="order.manager.logo">
                 </div>
                 <div class="order-column order-info">
                   <div>{{$t('file.orderid')}}: {{order.id}}</div>
