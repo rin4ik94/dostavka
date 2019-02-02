@@ -28,7 +28,8 @@
         </div>
       </div>
         <div class="modal-footer">
-          <a href="#" class="deleteManagerGroup delete btn btn-outline-red mr-auto" data-id="" data-token="{{ csrf_token() }}" >Удалить</a>
+          <input type="hidden" name="id" id="editManagerGr" value="">
+          <a href="#" class="delete_manager_group btn btn-outline-red mr-auto" data-id="" data-token="{{ csrf_token() }}" >Удалить</a>
           <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
           <button type="submit" class="btn btn-green">OK</button>
         </div>
