@@ -7,7 +7,7 @@
         'token' => 'qwerty',
     ],
     'sms' => [
-        'login' => env('SMS_LOGIN', null),
-        'password' => env('SMS_PASSWORD', null),
+        'login' => env('SMS_LOGIN'),
+        'password' => env('SMS_PASSWORD'),
     ],
 ];

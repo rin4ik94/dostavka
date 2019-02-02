@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Mobile;
 use App\Models\Order;
 use App\Models\Courier;
 use Illuminate\Http\Request;
-use App\Events\OrderForCourier;
 use App\Http\Controllers\Controller;
 
 class CourierController extends Controller
@@ -63,7 +62,7 @@ class CourierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int                       $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -75,7 +74,7 @@ class CourierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int                       $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,7 +86,7 @@ class CourierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int                       $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -98,24 +97,26 @@ class CourierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int                       $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
+
     public function statusChange(Request $request, $id)
-    {  
+    {
         $order = Order::find($id);
         $order->order_status_id = $request->status;
         $order->save();
-        return response($order->load('client', 'manager', 'branch', 'payment', 'status', 'region', 'products'),200); 
+        return response($order->load('client', 'manager', 'branch', 'payment', 'status', 'region', 'products'), 200);
     }
+
     public function me(Request $request, $id)
-    {  
+    {
         $courier = Courier::findOrFail($id);
-    
-        return response($courier, 200); 
+
+        return response($courier, 200);
     }
 }

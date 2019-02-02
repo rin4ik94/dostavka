@@ -53818,6 +53818,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -53872,7 +53881,18 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "cart-card-mobile" }, [
+      _vm.cartInfo.total > 0
+        ? _c(
+            "button",
+            {
+              staticClass: "btn btn-lg btn-block btn-green",
+              attrs: { type: "button" }
+            },
+            [_vm._v("Оформить заказ")]
+          )
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _vm.cartInfo.total > 0 && _vm.manager && _vm.$route.name != "cart"
       ? _c("div", [
@@ -53905,7 +53925,11 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col cart-card-center" }, [
                   _c("div", { staticClass: "item" }, [
-                    _vm._v(_vm._s(_vm.$t("cart.shop")) + ": "),
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.$t("cart.shop")) +
+                        ":\n              "
+                    ),
                     _c("a", { attrs: { href: "/" } }, [
                       _vm._v(_vm._s(_vm.manager.name))
                     ])
@@ -53960,7 +53984,9 @@ var render = function() {
                   attrs: { to: { name: "cart" } }
                 },
                 [
-                  _vm._v("\n      " + _vm._s(_vm.$t("cart.cart"))),
+                  _vm._v(
+                    "\n        " + _vm._s(_vm.$t("cart.cart")) + "\n        "
+                  ),
                   _c("span", [
                     _vm._v(
                       _vm._s(_vm._f("toCurrency")(_vm.cartInfo.total)) +
@@ -53977,23 +54003,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cart-card-mobile" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-lg btn-block btn-green",
-          attrs: { type: "button" }
-        },
-        [_vm._v("\n      Оформить заказ\n    ")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

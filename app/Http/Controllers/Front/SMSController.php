@@ -28,7 +28,7 @@ class SMSController extends Controller
             'exceptions' => true,
             'stream_context' => stream_context_create([
                 'ssl' => [
-                // set some SSL/TLS specific options
+                    // set some SSL/TLS specific options
                     'verify_peer' => false,
                     'verify_peer_name' => false,
                     'allow_self_signed' => true
