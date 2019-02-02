@@ -52,12 +52,12 @@
         @foreach ($clients as $client)
         <tr data-id="{{ $client->id }}" data-fname="{{ $client->first_name }}" data-lname="{{ $client->last_name }}"
             data-phone="{{ $client->phone }}" data-bdate={{ $client->birth_date }} data-jender="{{ $client->jender }}"
-            data-status="{{ $client->status }}" data-region="{{ $client->region->id }}" data-blist="{{ $client->blacklist }}">
+            data-status="{{ $client->status }}" data-region="{{ $client->region->id or ''}}" data-blist="{{ $client->blacklist }}">
             <td>{{ $client->id }}</td>
             <td><a href="#" class="text-green client_action" data-toggle="modal" data-target="#editClient">{{ $client->getFullname() }}</a></td>
-            <td> {{ $client->region->name_ru }} </td>
-            <td>+998{{ $client->phone }}</td>
-            <td>{{ $client->birth_date }}</td>
+            <td>{{ $client->region->name_ru or ''}} </td>
+            <td>{{ $client->phone }}</td>
+            <td>{{ $client->birth_date}}</td>
         </tr>
         @endforeach
     </tbody>
