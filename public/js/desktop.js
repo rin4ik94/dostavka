@@ -57000,6 +57000,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+//
+//
 //
 //
 //
@@ -57017,12 +57020,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       showPage: false
     };
   },
+
+  computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
+    locale: "locale"
+  }),
   mounted: function mounted() {
     this.showPage = true;
   }
@@ -57046,22 +57055,27 @@ var render = function() {
             _vm._v(_vm._s(_vm.$t("file.delivery")))
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _vm.locale == "ru"
+            ? _c("div", { staticClass: "content-inner" }, [
+                _c("main", { staticClass: "main" }, [_vm._v("НА РУССКОМ")]),
+                _vm._v(" "),
+                _c("aside", { staticClass: "aside" }, [
+                  _vm._v("РУССКАЯ СТОРОНА")
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.locale == "uz"
+            ? _c("div", { staticClass: "content-inner" }, [
+                _c("main", { staticClass: "main" }, [_vm._v("OZBEKCHA ICHI")]),
+                _vm._v(" "),
+                _c("aside", { staticClass: "aside" }, [_vm._v("YONI")])
+              ])
+            : _vm._e()
         ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-inner" }, [
-      _c("main", { staticClass: "main" }),
-      _vm._v(" "),
-      _c("aside", { staticClass: "aside" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -57124,6 +57138,15 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -57133,12 +57156,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       showPage: false
     };
   },
+
+  computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
+    locale: "locale"
+  }),
   mounted: function mounted() {
     this.showPage = true;
   }
@@ -57160,7 +57189,19 @@ var render = function() {
       : _c("div", { staticClass: "container" }, [
           _c("h1", { staticClass: "main-title" }, [
             _vm._v(_vm._s(_vm.$t("file.refund")))
-          ])
+          ]),
+          _vm._v(" "),
+          _vm.locale == "ru"
+            ? _c("div", { staticClass: "content-inner" }, [
+                _c("main", { staticClass: "main" }, [_vm._v("НА РУССКОМ")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.locale == "uz"
+            ? _c("div", { staticClass: "content-inner" }, [
+                _c("main", { staticClass: "main" }, [_vm._v("OZBEKCHA ICHI")])
+              ])
+            : _vm._e()
         ])
   ])
 }
@@ -65472,7 +65513,8 @@ var index = {
             "delivery": "Доставка и оплата",
             "ready": "Готово",
             "design": "Дизайн и разработка",
-            "buyers": "Покупателям"
+            "buyers": "Покупателям",
+            "refund": "Возврат"
         },
         "login": {
             "title": "Вход",
@@ -65530,6 +65572,7 @@ var index = {
             "currency": "сум",
             "myorders": "Мои заказы",
             "mydata": "Мои данние",
+            "ready": "Готово",
             "fill": "Заполните это поле",
             "for": "сум за 1",
             "region": "Ваш регион",
@@ -65689,6 +65732,13 @@ var index = {
             },
             "attributes": []
         },
+        "footer": {
+            "delivery": "Yetkazib berish va tolash",
+            "ready": "Tayyor",
+            "design": "Dizayn va razrabotka",
+            "buyers": "Sotib oluvchilar uchun",
+            "refund": "Qaytarish"
+        },
         "login": {
             "title": "Kirish",
             "pre_title": "Telefon raqamingizni kiriting",
@@ -65732,6 +65782,52 @@ var index = {
             "sent": "We have e-mailed your password reset link!",
             "token": "This password reset token is invalid.",
             "user": "We can't find a user with that e-mail address."
+        },
+        "file": {
+            "add": "Qoshish savatchaga",
+            "refund": "Qaytarish",
+            "delivery": "Yetkazib berish va tolov",
+            "shop": "Dokonlarga",
+            "cart": "Sizning savatingiz",
+            "currency": "sum",
+            "myorders": "Mening buyurtmalarim",
+            "mydata": "Mening malumatlarim",
+            "fill": "Bu yerni toldiring",
+            "for": "sum 1 dona uchun",
+            "ready": "Tayyor",
+            "region": "Sizning regioningiz",
+            "login": "Shaxsiy kabinetga kirish",
+            "design": "Dizayn va razrabotka",
+            "cartempty": "Sizning savatingiz bosh",
+            "buyers": "Sotuvchilar",
+            "checkout": "Oformlenie",
+            "payment": "Naxd",
+            "req": "Buyurtma qilish",
+            "name": "Ism",
+            "last": "Familiya",
+            "datebirth": "Tugilgan yil",
+            "gender": "Jins",
+            "phone": "Telefon",
+            "street": "Kocha",
+            "home": "Uy",
+            "entr": "Korpus",
+            "apart": "Kvartira",
+            "orderid": "Buyurtma raqami",
+            "orderdate": "Buyurtma vaqti va soati",
+            "start": "Как начать сотрудничество",
+            "orderstatus": "Статус заказа",
+            "products": "Товаров",
+            "allprice": "Общая сумма",
+            "edit": "Редактировать",
+            "man": "Мужской",
+            "woman": "Женский",
+            "notfound": "Siz qidirgan saxifa topilmadi",
+            "catalog": "Maxsulotlar katalogi",
+            "sort": "Saralash",
+            "popular": "Populyarnost",
+            "price": "Narx",
+            "allcats": "Barcha kategoriyalar",
+            "addtocart": "Savatga qoshish"
         },
         "pages": {
             "back": "Orqaga, do'konlar ro'yhati"
