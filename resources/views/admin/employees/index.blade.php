@@ -53,8 +53,9 @@
         <tr data-id="{{ $employee->id }}" data-name="{{ $employee->name }}" data-manager="{{ $employee->manager_id }}"
             data-role="{{ $employee->role_id }}" data-mobile="{{ $employee->mobile }}" data-status="{{ $employee->status }}">
             <td>{{ $employee->id}}</td>
-            <td><a href="#" class="text-green employee_action" data-toggle="modal" data-target="#editEmployee">{{
-                    $employee->name}}</a></td>
+            <td>
+              <a href="#" class="text-green employee_action" data-toggle="modal" data-target="#editEmployee">{{$employee->name}}</a>
+            </td>
             <td>{{ $employee->manager->name }}</td>
             <td>{{ $employee->role->name }}</td>
             <td>+998{{$employee->mobile}}</td>

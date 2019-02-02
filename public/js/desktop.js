@@ -54283,11 +54283,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "intro-item-icon" }, [
-      _c("div", { staticClass: "icon-number" }, [_vm._v("1")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "icon-shadow" }, [
-        _c("i", { staticClass: "icon" }, [_vm._v("store")])
-      ])
+      _c("img", {
+        staticClass: "svg",
+        attrs: { src: "/img/intro_icon_001.svg" }
+      })
     ])
   },
   function() {
@@ -54295,11 +54294,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "intro-item-icon" }, [
-      _c("div", { staticClass: "icon-number" }, [_vm._v("2")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "icon-shadow" }, [
-        _c("i", { staticClass: "icon" }, [_vm._v("shopping_cart")])
-      ])
+      _c("img", {
+        staticClass: "svg",
+        attrs: { src: "/img/intro_icon_002.svg" }
+      })
     ])
   },
   function() {
@@ -54307,11 +54305,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "intro-item-icon" }, [
-      _c("div", { staticClass: "icon-number" }, [_vm._v("3")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "icon-shadow" }, [
-        _c("i", { staticClass: "icon" }, [_vm._v("local_shipping")])
-      ])
+      _c("img", {
+        staticClass: "svg",
+        attrs: { src: "/img/intro_icon_003.svg" }
+      })
     ])
   }
 ]

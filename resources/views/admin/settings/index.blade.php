@@ -1,8 +1,5 @@
 @extends('admin.layouts.dashboard')
 @section('content')
-<div class="main-top">
-  <h1 class="main-title">Общие настройки</h1>
-</div>
 <form class="needs-validation" action="/admin/settings/update" method="POST" novalidate>
     @method('PATCH')
     @csrf
@@ -39,5 +36,4 @@
     </div>
   </div>
 </form>
-
 @endsection

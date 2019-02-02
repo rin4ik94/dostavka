@@ -47,7 +47,7 @@
     @endif
   </ul>
   <ul class="nav header-profile-nav">
-    <li class="nav-item" data-toggle="modal" data-target="#Chat">
+    <li class="nav-item d-none" data-toggle="modal" data-target="#Chat">
       <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Чат">
         <div >
           <i class="icon">forum</i>

@@ -22,7 +22,9 @@
         @foreach($managerCategories as $managerCategorie)
         <tr data-id="{{ $managerCategorie->id }}" data-nameuz="{{ $managerCategorie->name_uz }}" data-nameru="{{ $managerCategorie->name_ru }}">
             <td>{{$managerCategorie->id}}</td>
-            <td><a class="text-green manager_group_action" href="#" data-toggle="modal" data-target="#editCategory">{{$managerCategorie->name_ru}}</a></td>
+            <td>
+              <a class="text-green manager_group_action" href="#" data-toggle="modal" data-target="#editCategory">{{$managerCategorie->name_ru}}</a>
+          </td>
         </tr>
         @endforeach
     </tbody>

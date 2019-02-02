@@ -27,25 +27,14 @@
       <th class="col-auto">№</th>
       <th class="col-6">Название</th>
       <th class="col-6">Магазин</th>
-      <th class="col-auto"></th>
     </tr>
   </thead>
 <tbody>
   @foreach($roles as $employeegroup)
     <tr>
       <td>{{ $employeegroup->id }}</td>
-        <td><a href="/" target="_blank">{{ $employeegroup->name }}</a></td>
+        <td><a class="text-green" href="#" data-toggle="modal" data-target="#editEmployeGroup" data="{{$employeegroup->id}}">{{ $employeegroup->name }}</a></td>
         <td>{{ $employeegroup->manager->name}}</td>
-      <td>
-        <div class="btn-group btn-group-sm editEmployeGroup">
-          <a href="{{ route('employees.group.edit',$employeegroup->id) }}" data-toggle="modal" data-target="#editEmployeGroup" class="btn btn-light" data="{{$employeegroup->id}}">
-            <i class="icon">edit</i>
-          </a>
-        </div>
-        {!! Form::open(['method' => 'DELETE','route' => ['employees.group.destroy', $employeegroup->id], 'class'=>'btn-group btn-group-sm delete']) !!}
-        {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] ) !!}
-        {!! Form::close() !!}
-      </td>
     </tr>
     @endforeach
   </tbody>

@@ -3025,7 +3025,6 @@ input[type="button"].btn-block {
   border-radius: 3px;
   margin-right: -6px;
   margin-left: -6px;
-  margin-top: 20px;
 }
 .page-item {
   margin-left: 6px;
@@ -3788,9 +3787,6 @@ button.close {
   flex: 1 1 auto;
   padding: 10px;
 }
-.modal-body:not(:first-child) {
-  padding-top: 68px;
-}
 .modal-footer {
   display: -ms-flexbox;
   display: flex;
@@ -3835,7 +3831,7 @@ button.close {
     box-shadow: none;
   }
   .modal-body {
-    padding: 20px !important;
+    padding: 20px;
   }
   .modal-sm {
     max-width: 300px;

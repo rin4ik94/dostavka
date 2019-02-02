@@ -4,7 +4,7 @@
     <form class="form-row" method="GET">
         <div class="col-auto">
             <select class="custom-select" action="/admin/categories" name="manager" onchange="this.form.submit()">
-                <option value="all">Все магазины</option>
+                <option value="0" selected disabled>Выберите магазин</option>
                 @foreach($managers as $manager)
                 <option value="{{$manager->id}}" @if(request()->get('manager') == $manager->id) selected
                     @endif>{{ $manager->name }}</option>
@@ -29,49 +29,20 @@
             <div class="category-column category-move" data="{{$category->parent_id}}">
                 <i class="icon">swap_vert</i>
             </div>
-            <div class="category-column category-title" data="{{$category->name_uz}}"><a href="/">{{ $category->name_ru
-                    }}</a></div>
-            <div class="category-column category-action" data="{{$category->status}}">
-                <div class="btn-group btn-group-sm category_action">
-                    <a href="{{ route('categories.edit',$category->id) }}" data-toggle="modal" data-target="#categoryEdit"
-                        class="btn btn-light" data="{{ $category->id }}">
-                        <i class="icon">edit</i>
-                    </a>
-                </div>
-                @if(count($category->children) < 1) {!! Form::open(['method'=> 'DELETE','route' =>
-                    ['categories.destroy',$category->id], 'class'=>'btn-group btn-group-sm delete_category']) !!}
-                    {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light'] )
-                    !!}
-                    {!! Form::close() !!}
-                    @else
-                    <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-light" disabled><i class="icon">delete</i></button>
-                    </div>
-                    @endif
-            </div>
+            <div class="category-column category-title" data="{{$category->name_uz}}">
+              <a href="#" data-toggle="modal" data-target="#categoryEdit" data="{{ $category->id }}">{{ $category->name_ru}}</a>
+          </div>
         </div>
         @foreach($category->children as $child)
         <ul class="categories">
             <li class="category">
                 <div class="category-content" data="{{$child->manager_id}}">
-                    <div class="category-column category-move" data="{{$child->parent_id}}">
-                        <i class="icon">swap_vert</i>
-                    </div>
-                    <div class="category-column category-title" data="{{$child->name_uz}}">
-                        <a href="/">{{ $child->name_ru }}</a></div>
-                    <div class="category-column  category-action" data="{{$child->status}}">
-                        <div class="btn-group btn-group-sm category_action">
-                            <a href="{{ route('categories.edit',$child->id) }}" data-toggle="modal" data-target="#categoryEdit"
-                                class="btn btn-light" data="{{ $child->id }}">
-                                <i class="icon">edit</i>
-                            </a>
-                        </div>
-                        {!! Form::open(['method' => 'DELETE','route' => ['categories.destroy',$child->id],
-                        'class'=>'btn-group btn-group-sm delete_category']) !!}
-                        {!! Form::button('<i class="icon">delete</i>', ['type' => 'submit', 'class' => 'btn btn-light']
-                        ) !!}
-                        {!! Form::close() !!}
-                    </div>
+                  <div class="category-column category-move" data="{{$child->parent_id}}">
+                    <i class="icon">swap_vert</i>
+                  </div>
+                  <div class="category-column category-title" data="{{$child->name_uz}}">
+                    <a href="#" data-toggle="modal" data-target="#categoryEdit" data="{{ $category->id }}">{{ $child->name_ru }}</a>
+                  </div>
                 </div>
             </li>
         </ul>
