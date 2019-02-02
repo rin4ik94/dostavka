@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +13,7 @@
 Route::get('/checkNewOrder', 'Front\OrderStatusController@count');
 Route::get('/products', 'Front\ProductController@index');
 Route::post('/orders', 'Front\OrderController@store');
+Route::get('/orders', 'Front\OrderController@index');
 Route::get('/products/search', 'Front\ProductSearchController@index');
 Route::get('/products/{product}', 'Front\ProductController@show');
 Route::get('/categories_managers', 'Front\ManagerCategoriesController@index');

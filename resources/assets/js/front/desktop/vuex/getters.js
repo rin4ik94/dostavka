@@ -1,6 +1,9 @@
 export const user = (state) => {
     return state.user
 }
+export const userId = (state) => {
+    return state.user.id
+}
 export const regionId = (state) => {
     return state.user.region
 }
@@ -19,7 +22,7 @@ export const cart = (state) => {
 export const delivery_price = (state) => {
     return state.delivery_price
 }
-export const totalCart = (state) => state.cart.total 
+export const totalCart = (state) => state.cart.total
 export const manager = (state) => {
     return state.cart.manager
 }

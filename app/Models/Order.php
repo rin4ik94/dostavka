@@ -10,9 +10,9 @@ class Order extends Model
     protected $fillable = ['manager_id', 'branch_id', 'client_id', 'courier_id', 'payment_type_id', 'order_status_id', 'region_id', 'delivery_address_street', 'delivery_address_home', 'delivery_address_floor', 'delivery_address_apartment', 'delivery_address_remark', 'comment', 'delivery_price', 'order_price', 'total_price'];
 
     protected $casts = [
-    'delivery_price' => 'decimal',
-    'order_price' => 'decimal',
-    'total_price' => 'decimal',
+        'delivery_price' => 'decimal',
+        'order_price' => 'decimal',
+        'total_price' => 'decimal',
     ];
 
     public function getTime()
@@ -94,29 +94,30 @@ class Order extends Model
         }
     }
 
-    public function scopeOfDates($result, $start, $end){
+    public function scopeOfDates($result, $start, $end)
+    {
         if ($start && $end) {
-                return $result->whereBetween(\DB::raw('date(created_at)'), [$start, $end]);
-            }
-            if (!$start) {
-                if ($end) {
-                    return $result->whereDate('created_at', '<=', $end);
-                } else {
-                    return;
-                }
-            }
-            if (!$end) {
-                if ($start) {
-                    return $result->whereDate('created_at', '>=', $start);
-                } else {
-                    return;
-                }
+            return $result->whereBetween(\DB::raw('date(created_at)'), [$start, $end]);
+        }
+        if (!$start) {
+            if ($end) {
+                return $result->whereDate('created_at', '<=', $end);
+            } else {
+                return;
             }
         }
+        if (!$end) {
+            if ($start) {
+                return $result->whereDate('created_at', '>=', $start);
+            } else {
+                return;
+            }
+        }
+    }
 
-    
-    public function scopeOfAmount($query){
-        return $query->select(\DB::raw("SUM(order_price) as total_amount"));
+    public function scopeOfAmount($query)
+    {
+        return $query->select(\DB::raw('SUM(order_price) as total_amount'));
     }
 
     public function scopeOfId($result, $id)
@@ -143,7 +144,7 @@ class Order extends Model
     public function attachProducts($quantity, $product, $productId)
     {
         $this->products()->attach($productId, ['product_count' => $quantity, 'product_name' => $product->name_ru, 'product_name_uz' => $product->name_uz, 'product_price' => $product->new_price, 'product_total_price' => $product->new_price * $quantity,
-        'product_measurement' => $product->measurement
+            'product_measurement' => $product->measurement
         ]);
         return;
     }

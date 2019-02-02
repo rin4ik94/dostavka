@@ -5,11 +5,18 @@ namespace App\Http\Controllers\Front;
 use App\Models\Order;
 use App\Models\Client;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ClientResource;
+use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends Controller
 {
+    public function index(Request $request)
+    {
+        $client = Client::with('orders.products', 'orders.status', 'orders.manager')->findOrFail($request->get('userId'));
+        return new ClientResource($client);
+    }
+
     public function store(Request $request)
     {
         $products = $request->params['products'];

@@ -50936,6 +50936,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userId", function() { return userId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "regionId", function() { return regionId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "regionName", function() { return regionName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "locale", function() { return locale; });
@@ -50946,6 +50947,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "manager", function() { return manager; });
 var user = function user(state) {
     return state.user;
+};
+var userId = function userId(state) {
+    return state.user.id;
 };
 var regionId = function regionId(state) {
     return state.user.region;
@@ -56827,6 +56831,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
 //
 //
 //
@@ -56867,13 +56875,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      showPage: false
+      showPage: false,
+      orders: []
     };
   },
-  mounted: function mounted() {
+
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])({
+    userId: "userId"
+  })),
+  watch: {
+    userId: function userId() {
+      this.getOrders();
+    }
+  },
+  methods: {
+    getOrders: function getOrders() {
+      var _this = this;
+
+      if (this.userId) {
+        axios.get("api/orders?userId=" + this.userId).then(function (response) {
+          _this.orders = response.data.data.orders;
+        });
+      }
+    }
+  },
+  created: function created() {
+    this.getOrders();
     this.showPage = true;
   }
 });
@@ -56898,39 +56929,80 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "content-inner" }, [
             _c("main", { staticClass: "main" }, [
-              _c("ul", { staticClass: "orders" }, [
-                _c("li", { staticClass: "order" }, [
-                  _c("div", { staticClass: "order-inner" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "order-column order-info" }, [
-                      _c("div", [_vm._v(_vm._s(_vm.$t("file.orderid")))]),
-                      _vm._v(" "),
-                      _c("div", [_vm._v(_vm._s(_vm.$t("file.orderdate")))]),
-                      _vm._v(" "),
-                      _c("div", [_vm._v(_vm._s(_vm.$t("file.orderstatus")))])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "order-column order-products" }, [
-                      _c("a", { attrs: { href: "/order.php" } }, [
-                        _c("div", [_vm._v("15")]),
-                        _vm._v(" "),
-                        _c("div", [_vm._v(_vm._s(_vm.$t("file.products")))])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "order-column order-sum" }, [
-                      _c("div", { staticClass: "order-sum-number" }, [
-                        _vm._v("5 2000 сум")
+              _c(
+                "ul",
+                { staticClass: "orders" },
+                _vm._l(_vm.orders, function(order) {
+                  return _c("li", { staticClass: "order" }, [
+                    _c("div", { staticClass: "order-inner" }, [
+                      _c("div", { staticClass: "order-column order-store" }, [
+                        _c("img", { attrs: { src: order.manager.logo } })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "order-sum-text" }, [
-                        _vm._v(_vm._s(_vm.$t("file.allprice")))
+                      _c("div", { staticClass: "order-column order-info" }, [
+                        _c("div", [
+                          _vm._v(
+                            _vm._s(_vm.$t("file.orderid")) +
+                              ": " +
+                              _vm._s(order.id)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v(
+                            _vm._s(_vm.$t("file.orderdate")) +
+                              ": " +
+                              _vm._s(order.created_at)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v(
+                            _vm._s(_vm.$t("file.orderstatus")) +
+                              ": " +
+                              _vm._s(order.status.name)
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "order-column order-products" },
+                        [
+                          _c("a", { attrs: { href: "/order.php" } }, [
+                            _c("div", [_vm._v(_vm._s(order.products.length))]),
+                            _vm._v(" "),
+                            _c("div", [_vm._v(_vm._s(_vm.$t("file.products")))])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "order-column order-sum" }, [
+                        _c("div", [
+                          _vm._v(
+                            "dostavka " + _vm._s(order.delivery_price) + " сум"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v(
+                            "summa zakaza " + _vm._s(order.order_price) + " сум"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "order-sum-text" }, [
+                          _vm._v(
+                            _vm._s(_vm.$t("file.allprice")) +
+                              " " +
+                              _vm._s(order.total_price) +
+                              " сум"
+                          )
+                        ])
                       ])
                     ])
                   ])
-                ])
-              ])
+                })
+              )
             ]),
             _vm._v(" "),
             _c("aside", { staticClass: "aside" })
@@ -56938,16 +57010,7 @@ var render = function() {
         ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "order-column order-store" }, [
-      _c("img", { attrs: { src: "/desktop/img/makrologo.jpg" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -64143,6 +64206,7 @@ var beforeEach = function beforeEach(to, from, next) {
     user: {
         authenticated: false,
         total: 0,
+        id: '',
         region: '',
         regionName: '',
         regionSlug: '',
@@ -64202,6 +64266,7 @@ var setAuthenticated = function setAuthenticated(state, trueOrFalse) {
 };
 var setUserData = function setUserData(state, user) {
     state.user.data = user;
+    state.user.id = user.id;
 };
 var setRegion = function setRegion(state, regionId) {
     state.user.region = regionId;

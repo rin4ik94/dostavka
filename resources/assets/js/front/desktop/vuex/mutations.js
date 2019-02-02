@@ -20,6 +20,7 @@ export const setAuthenticated = (state, trueOrFalse) => {
 }
 export const setUserData = (state, user) => {
     state.user.data = user
+    state.user.id = user.id
 }
 export const setRegion = (state, regionId) => {
     state.user.region = regionId;

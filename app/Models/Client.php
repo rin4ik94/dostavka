@@ -32,6 +32,11 @@ class Client extends Authenticatable
         return $this->belongsToMany(OrderStatus::class, 'order_status_dates')->withTimestamps();
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function updateClient($form)
     {
         $this->update(['first_name' => $form['first_name'], 'last_name' => $form['last_name']]);

@@ -23,7 +23,7 @@ class Branches extends JsonResource
             'id' => (string)$this->id,
             'name' => $this->name,
             'region_id' => $this->region_id,
-          'region_name' => $name,
+            'region_name' => $name,
             'address' => $this->address,
         ];
     }

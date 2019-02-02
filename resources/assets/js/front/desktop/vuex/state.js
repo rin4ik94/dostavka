@@ -3,6 +3,7 @@ export default {
     user: {
         authenticated: false,
         total: 0,
+        id: '',
         region: '',
         regionName: '',
         regionSlug: '',
