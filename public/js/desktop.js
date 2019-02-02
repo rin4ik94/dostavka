@@ -51815,6 +51815,7 @@ router.beforeEach(__WEBPACK_IMPORTED_MODULE_3__beforeEach__["a" /* default */]);
 
 
 
+
 // import store from '../vuex'
 
 /* harmony default export */ __webpack_exports__["a"] = ([{
@@ -52081,18 +52082,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     return {
       regions: [],
       showPage: false
-
     };
   },
 
   components: { CartInfo: __WEBPACK_IMPORTED_MODULE_5__components_CartInfo___default.a, Navbar: __WEBPACK_IMPORTED_MODULE_4__components_Navbar___default.a, Footer: __WEBPACK_IMPORTED_MODULE_3__components_Footer___default.a },
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_6_vuex__["c" /* mapGetters */])({
-    lang: 'locale',
-    totalCart: 'totalCart'
+    lang: "locale",
+    totalCart: "totalCart"
   })),
   methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_6_vuex__["b" /* mapActions */])({
-    setRegionId: 'setRegionId',
-    setRegion: 'setRegion'
+    setRegionId: "setRegionId",
+    setRegion: "setRegion"
   }), {
     getRegions: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -52125,6 +52125,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       return getRegions;
     }()
+    //
+    // replacePage() {
+    //   if (this.$route.params.sluged) {
+    //     this.$router.replace({
+    //       name: "category",
+    //       params: { sluged: this.$route.params.sluged }
+    //     });
+    //   } else {
+    //     this.$router.replace({
+    //       name: "catalog",
+    //       params: { slug: this.$route.params.slug }
+    //     });
+    //   }
+    // }
+
   }),
   watch: {
     $route: {
@@ -54073,7 +54088,29 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -54089,7 +54126,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
   watch: {
     // lang(){
-    //   this.getCats();      
+    //   this.getCats();
     // },
     regionName: function regionName() {
       this.getCats();
@@ -54341,7 +54378,9 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "container" }, [
               _c("h1", { staticClass: "main-title" }, [
-                _vm._v(_vm._s(_vm.$t("drawer.shops")) + " "),
+                _vm._v(
+                  "\n        " + _vm._s(_vm.$t("drawer.shops")) + "\n        "
+                ),
                 _c(
                   "a",
                   {
@@ -54445,7 +54484,7 @@ var render = function() {
                           )
                         })
                       )
-                    : _vm._e()
+                    : _c("div", [_vm._v("no items")])
                 ])
               ])
             ])
