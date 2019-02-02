@@ -56901,11 +56901,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           _this.orders = response.data.data.orders;
         });
       }
+      this.showPage = true;
     }
   },
   created: function created() {
     this.getOrders();
-    this.showPage = true;
   }
 });
 

@@ -64,11 +64,11 @@ export default {
           this.orders = response.data.data.orders;
         });
       }
+      this.showPage = true;
     }
   },
   created() {
     this.getOrders();
-    this.showPage = true;
   }
 };
 </script>

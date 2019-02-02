@@ -18,6 +18,7 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'delivery_price' => $this->delivery_price,
             'order_price' => $this->order_price,
+            'created_at' => $this->getTime(),
             'total_price' => $this->total_price,
             'products' => Product::collection($this->whenLoaded('products')),
             'manager' => new Manager($this->whenLoaded('manager')),
