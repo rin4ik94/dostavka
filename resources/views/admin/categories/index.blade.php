@@ -25,23 +25,25 @@
 <ul class="categories">
     @foreach($categories as $category)
     <li class="category">
-        <div class="category-content" data="{{$category->manager_id}}">
-            <div class="category-column category-move" data="{{$category->parent_id}}">
+        <div class="category-content">
+            <div class="category-column category-move">
                 <i class="icon">swap_vert</i>
             </div>
-            <div class="category-column category-title" data="{{$category->name_uz}}">
-              <a href="#" data-toggle="modal" data-target="#categoryEdit" data="{{ $category->id }}">{{ $category->name_ru}}</a>
+            <div class="category-column category-title" data-name-uz="{{ $category->name_uz ?? ''}}" data-name-ru="{{ $category->name_ru ?? ''}}" data-status="{{ $category->status }}" data-parent="{{ $category->parent_id ?? ''}}" data-manager="{{ $category->manager_id ?? '' }}"
+                data-has-child="@if(count($category->children)> 0)true @endif">
+              <a href="#" class="category_action" data-toggle="modal" data-target="#categoryEdit" data-cat-id="{{ $category->id }}">{{ $category->name_ru}}</a>
           </div>
         </div>
         @foreach($category->children as $child)
         <ul class="categories">
             <li class="category">
-                <div class="category-content" data="{{$child->manager_id}}">
-                  <div class="category-column category-move" data="{{$child->parent_id}}">
+                <div class="category-content">
+                  <div class="category-column category-move">
                     <i class="icon">swap_vert</i>
                   </div>
-                  <div class="category-column category-title" data="{{$child->name_uz}}">
-                    <a href="#" data-toggle="modal" data-target="#categoryEdit" data="{{ $category->id }}">{{ $child->name_ru }}</a>
+                  <div class="category-column category-title" data-name-uz="{{ $child->name_uz ?? ''}}" data-name-ru="{{ $child->name_ru ?? ''}}" data-status="{{ $child->status }}" data-parent="{{ $child->parent_id ?? ''}}" data-manager="{{ $child->manager_id ?? '' }}"
+                      data-has-child="">
+                    <a href="#" class="category_action" data-toggle="modal" data-target="#categoryEdit" data-cat-id="{{ $child->id }}">{{ $child->name_ru }}</a>
                   </div>
                 </div>
             </li>

@@ -57,6 +57,7 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="delete_category btn btn-outline-red mr-auto" data-destroy="" disabled>Удалить</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-green">OK</button>
       </div>

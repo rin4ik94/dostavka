@@ -26,8 +26,9 @@
             <select class="custom-select" name="manager_id" id="manager_id" required>
             <option value="" selected disabled>Не выбран</option>
               @foreach($managers as $manager)
-                <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                <option value="{{ $manager->id }}" @if(request()->has('manager') && request()->get('manager') == $manager->id) selected @endif>{{ $manager->name }}</option>
               @endforeach
+              
             </select>
           </div>
         </div>

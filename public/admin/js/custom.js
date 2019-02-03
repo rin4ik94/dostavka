@@ -250,24 +250,44 @@ $(function () {
         }
     });
     // actions for category
-    $('.category_action a').on('click', function (e) {
+    $('.category_action').on('click', function (e) {
         e.preventDefault(e);
-        var cat_id = $(this).closest('a').attr('data');
-        var status = $(this).closest('a').parents(':eq(1)').attr('data');
-        var name_uz = $(this).closest('a').parents(':eq(1)').prev().attr('data');
-        var name_ru = $(this).closest('a').parents(':eq(1)').prev().children().text();
-        var parent_id = $(this).closest('a').parents(':eq(1)').prevAll(':eq(1)').attr('data');
-        var manager_id = $(this).closest('a').parents(':eq(2)').attr('data');
+        var cat_id = $(this).data('cat-id');
+        var has_child = $(this).parent().data('has-child');
+        var status = $(this).parent().data('status');
+        var name_uz = $(this).parent().data('name-uz');
+        var name_ru = $(this).parent().data('name-ru');
+        var parent_id = $(this).parent().data('parent');
+        var manager_id = $(this).parent().data('manager');
         $('.editCatId').val(cat_id);
         $('.editCatStatus').val(status);
         $('.editCatNameUz').val(name_uz);
         $('.editCatNameRu').val(name_ru);
         $('.editCatParent').val(parent_id);
         $('.editCatManager').val(manager_id);
+        $('.delete_category').data('destroy', cat_id);
+        $('.delete_category').prop('disabled', false);
+        if(has_child){
+            $('.delete_category').prop('disabled', true);    
+        }
     });
 
     $('.delete_category').on('click', function () {
-        confirmations('категория');
+        var category_id = $(this).data('destroy');
+        if(confirmations('категория')){
+            $.ajax({
+                url: '/admin/categories/' + category_id,
+                type: 'delete',
+                success: function(result){
+                    console.log(result);
+                    location.reload();
+                },
+                error: function(error){
+                    res = $.parseJSON(error.responseText);
+                    alert(res);
+                }
+            });
+        }
     });
 
     // actions for products
@@ -502,7 +522,7 @@ $(function () {
 
         $('span.client_modal_title').text(clientId);
         $('.client-name').text(clientName);
-        $('.client-mobile').text('+998' + clientMobile);
+        $('.client-mobile').text(clientMobile);
     });
 
     $('.order_courier').on('click', function (e) {
@@ -624,7 +644,7 @@ $(function () {
         if ($(this).is(':checked')) {
             $(this).parents(':eq(1)').next().children().find('.col').children().prop('disabled', false);
         } else {
-            $(this).parents(':eq(1)').next().children().find('.col').children().prop('disabled', true);
+            $(this).parents(':eq(1)').next().children().find('.col').children().prop('disabled', true).prop("selectedIndex", 0);
         }
     });
     // form-sumbit while changing dropdown button

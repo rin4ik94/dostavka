@@ -74,10 +74,11 @@ class CategoryController extends Controller
             $query->where('category_id', $id);
         })->get();
         if ($category->count() > 0) {
-            return back()->with('warning', 'В этой категории есть продукт!');
+            return response()->json('В этой категории есть продукт!', 400);
         } else {
             Category::findOrFail($id)->delete();
-            return back()->with('success', 'Категория удалена.');
+            session()->flash('success', 'Категория удалена.');
+            return response()->json('success', 200);
         }
     }
 }
