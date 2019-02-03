@@ -53,7 +53,7 @@
           <div class="col-8">
             <div class="form-row">
               <div class="col">
-                <select class="custom-select timeStart" name="time_start[]" disabled>
+                <select class="custom-select timeStart" name="time_start[]" disabled required>
                   <option selected disabled>от</option>
                   @foreach($workingTimes as $workingTime)
                   <option value="{{$workingTime['hours']}}">{{$workingTime['hours']}}</option>
@@ -61,7 +61,7 @@
                 </select>
               </div>
               <div class="col">
-                <select class="custom-select timeFinish" name="time_finish[]" disabled>
+                <select class="custom-select timeFinish" name="time_finish[]" disabled required>
                   <option selected disabled>до</option>
                   @foreach($workingTimes as $workingTime)
                   <option value="{{$workingTime['hours']}}">{{$workingTime['hours']}}</option>
