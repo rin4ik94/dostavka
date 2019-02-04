@@ -289,6 +289,23 @@ $(function () {
             });
         }
     });
+    //category add & edit modal category_change get parent categories
+    $('.get_category_parents').on('change', function(){
+        $('.get_cat_parent').prop('disabled', true).prop('selectedIndex', 0);
+        $manager_id = $(this).val();
+        $.ajax({
+            url: '/admin/categories/get-parents?manager_id='+ $manager_id,
+            type: 'get',
+            success: function(data){
+                $('.get_cat_parent').empty();
+                $('.get_cat_parent').append("<option value='' selected disabled>Не выбран</option>");
+                data.forEach(function(item) {
+                    $('.get_cat_parent').append("<option value=" + item.id + ">" + item.name_ru + "</option>");
+                });
+            }
+        });
+    });
+
 
     // actions for products
     $('.product_action').on('click', function (e) {
@@ -310,7 +327,8 @@ $(function () {
             type: "GET",
             url: '/api/categories?withManager&manager=' + manager_id,
             success: function (data) {
-                $.each(data.data, function (index, dataObj) {
+                $.each(data, function (index, dataObj) {
+                    console.log(index + " " + dataObj);
                     $('.api_category').append("<option value=" + dataObj.id + " disabled>" + dataObj.name + "</option>");
                     if (dataObj.children.length > 0) {
                         $.each(dataObj.children, function (index, childObj) {

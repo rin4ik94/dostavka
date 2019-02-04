@@ -23,7 +23,7 @@
         <div class="form-group row">
           <label class="col-4 col-form-label" for="manager_id">Магазин *</label>
           <div class="col-8">
-            <select class="custom-select" name="manager_id" id="manager_id" required>
+            <select class="custom-select get_category_parents" name="manager_id" id="manager_id" required>
             <option value="" selected disabled>Не выбран</option>
               @foreach($managers as $manager)
                 <option value="{{ $manager->id }}" @if(request()->has('manager') && request()->get('manager') == $manager->id) selected @endif>{{ $manager->name }}</option>
@@ -35,7 +35,7 @@
         <div class="form-group row">
           <label class="col-4 col-form-label" for="store_parent">Основная категория</label>
           <div class="col-8">
-            <select class="custom-select" id="store_parent" name="parent_id">
+            <select class="custom-select get_cat_parent" id="store_parent" name="parent_id">
               <option value="" selected>Не выбран</option>
               @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name_ru }}</option>

@@ -34,6 +34,7 @@ Route::group([
     Route::get('reports', 'ReportController@index')->name('reports');
     Route::resource('couriers', 'CourierController')->except(['show', 'create', 'edit']);
     Route::resource('categories', 'CategoryController')->except(['show', 'create']);
+    Route::get('categories/get-parents', 'CategoryController@getParentCat')->name('categories.getparents');
     Route::resource('clients', 'ClientController')->except(['show', 'create', 'edit']);
     Route::resource('products', 'ProductController')->except(['show', 'create', 'edit']);
     Route::resource('transactions', 'TransactionController')->except(['show', 'create', 'edit']);

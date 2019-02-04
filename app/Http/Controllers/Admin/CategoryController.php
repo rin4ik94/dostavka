@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         $this->middleware('permission:Категории');
     }
-
+    
     public function index(Request $request)
     {
         $user = auth()->user();
@@ -37,7 +37,16 @@ class CategoryController extends Controller
         }
         return view('admin.categories.index', compact('categories', 'managers'));
     }
-
+   
+    public function getParentCat(Request $request){
+        $manager_id = $request->manager_id;
+        $categories = Category::where(function ($query) use ($manager_id) {
+            $query->whereManagerId($manager_id);
+            $query->whereNull('parent_id');
+        })->get();
+        return response()->json($categories);
+    }
+    
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -52,7 +61,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        return $response->json($category);
+        return response()->json($category);
     }
 
     public function update(Request $request, $id)

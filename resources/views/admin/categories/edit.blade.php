@@ -38,7 +38,7 @@
         <div class="form-group row">
           <label class="col-4 col-form-label" for="editCatParent">Основная категория</label>
           <div class="col-8">
-            <select class="custom-select editCatParent" name="parent_id">
+            <select class="custom-select editCatParent get_cat_parent" name="parent_id">
               <option value="">Не выбран</option>
                 @foreach($categories as $category)
                   <option value="{{ $category->id }}">{{ $category->name_ru }}</option>
