@@ -44,7 +44,7 @@ class CourierController extends Controller
     {
         $this->validate($request,[
             'fio' => 'required',
-            'mobile' => 'required',
+            'mobile' => 'required|numeric|phone|unique:couriers,mobile',
             'password' => 'required'
         ]);
         $input = $request->all();
@@ -64,7 +64,7 @@ class CourierController extends Controller
         $this->validate($request,[
             'id' => 'required',
             'fio' => 'required|max:25',
-            'mobile' => 'required|min:9|max:9',
+            'mobile' => 'required|numeric|phone',
             'password' => 'required|min:5|max:10'
         ]);
         $uri = $request->redirect_uri;

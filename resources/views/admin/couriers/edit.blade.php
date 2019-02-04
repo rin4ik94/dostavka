@@ -29,9 +29,6 @@
           <label class="col-4 col-form-label" for="editPass">Пароль <span class="text-red">*</span></label>
           <div class="col-8">
             <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">+998</span>
-              </div>
               <input class="form-control" type="text" id="editPass" name="password" required>
             </div>
           </div>
