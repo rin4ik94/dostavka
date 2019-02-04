@@ -43,8 +43,10 @@ Route::group([
     Route::get('settings/orders', 'SettingController@orders')->name('settings.orders');
     Route::get('settings/goto', 'SettingController@goto')->name('settings.goto');
     Route::get('settings/payment', 'SettingController@payment')->name('settings.payment');
-    Route::get('settings/gateway', 'SettingController@gateway')->name('settings.gateway');
     Route::get('settings/regions', 'SettingController@regions')->name('settings.regions');
+    Route::post('settings/regions', 'SettingController@storeRegion')->name('settings.region.store');
+    Route::delete('settings/regions/{id}', 'SettingController@destroyRegion');
+    Route::put('settings/regions/{id}', 'SettingController@updateRegion');
 });
 
 Route::get('set-hook', 'Admin\TelegramController@setWebHook');

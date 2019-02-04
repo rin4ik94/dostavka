@@ -657,6 +657,39 @@ $(function () {
             });
         }
     });
+// action for regions
+    $('.region_action').on('click', function (e) {
+        e.preventDefault(e);
+        var region_id = $(this).closest('tr').data('id');
+        var region_name_ru = $(this).closest('tr').data('name-ru');
+        var region_name_uz = $(this).closest('tr').data('name-uz');
+        $('#editRegionNameRu').val(region_name_ru);
+        $('#editRegionNameUz').val(region_name_uz);
+        $('#editRegionId').val(region_id);
+        $('.delete_region').data('destroy', region_id);
+    });
+    // delete region via ajax
+    $(".delete_region").click(function (e) {
+        e.preventDefault(e);
+        var region_id = $(this).data('destroy');
+        if(!region_id) alert('no id');
+        if (confirmations('регион')) {
+            $.ajax({
+                url: '/admin/settings/regions/' + region_id,
+                type: 'delete',
+                success: function (result) {
+                    location.reload();
+                },
+                error: function (error){
+                    console.log(error);
+                    res = $.parseJSON(error.responseText);
+                    alert(res);
+                }
+            });
+        }
+    });
+
+
     // checkbox button click disable input {working_time} select
     $('.custom-control-input').click(function () {
         if ($(this).is(':checked')) {

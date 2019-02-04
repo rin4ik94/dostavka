@@ -4,9 +4,9 @@
   @method('PATCH')
   @csrf
   <div class="form-group form-row">
-    <label class="col-3 col-form-label" for="settings_delivery_price">Сумма минимальгоно заказа</label>
+    <label class="col-3 col-form-label" for="delivery_min_price">Сумма минимальгоно заказа</label>
     <div class="col-9">
-    <input class="form-control" id="settings_delivery_price" name="delivery_price" value="" type="text">
+    <input class="form-control" id="delivery_min_price" name="delivery_min_price" value="{{ $delivery_min_price ?? '' }}" type="text">
     </div>
   </div>
   <div class="form-row">
