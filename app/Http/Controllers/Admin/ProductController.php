@@ -138,6 +138,10 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->removeProductImage();
+        $product->delete();
+        session()->flash('success', 'Продукт удален успешно!');
+        return response()->json('success', 200);
     }
 }

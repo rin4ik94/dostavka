@@ -291,7 +291,7 @@ $(function () {
     });
     //category add & edit modal category_change get parent categories
     $('.get_category_parents').on('change', function(){
-        $('.get_cat_parent').prop('disabled', true).prop('selectedIndex', 0);
+        $('.get_cat_parent').prop('selectedIndex', 0);
         $manager_id = $(this).val();
         $.ajax({
             url: '/admin/categories/get-parents?manager_id='+ $manager_id,
@@ -305,8 +305,6 @@ $(function () {
             }
         });
     });
-
-
     // actions for products
     $('.product_action').on('click', function (e) {
         e.preventDefault(e);
@@ -327,12 +325,11 @@ $(function () {
             type: "GET",
             url: '/api/categories?withManager&manager=' + manager_id,
             success: function (data) {
-                $.each(data, function (index, dataObj) {
-                    console.log(index + " " + dataObj);
+                $.each(data.data, function (index, dataObj) {
                     $('.api_category').append("<option value=" + dataObj.id + " disabled>" + dataObj.name + "</option>");
                     if (dataObj.children.length > 0) {
                         $.each(dataObj.children, function (index, childObj) {
-                            $('.api_category').append("<option value=" + childObj.id + ">" + "&nbsp;&nbsp;" + childObj.name + "</option>");
+                            $('.api_category').append("<option value=" + childObj.id +" "+ setactive(childObj.id,category_id)+">" + "&nbsp;&nbsp;" + childObj.name + "</option>");
                         });
                     }
                 });
@@ -352,6 +349,28 @@ $(function () {
         $('.status').val(status);
         $('.delete_porduct').data('destroy', id);
     });
+    function setactive($param1,$param2){
+        if($param1 == $param2){
+            return 'selected';
+        }
+        return '';
+    }
+    // delete prduct
+    $(".delete_porduct").click(function (e) {
+        e.preventDefault(e);
+        var product_id = $(this).data('destroy');
+        alert(product_id);
+        if (confirmations('продукт')) {
+            $.ajax({
+                url: '/admin/products/' + product_id,
+                type: 'delete',
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    
     // actions for orders
     $('.order_id').on('click', function (e) {
         e.preventDefault(e);

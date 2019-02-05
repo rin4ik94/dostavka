@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Storage;
 use App\Traits\ManagerCheck;
 
 class Product extends Model
@@ -79,5 +80,14 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class)
             ->withPivot(['product_name', 'product_count', 'product_price', 'product_total_price', 'product_measurement']);
+    }
+
+    public function removeProductImage()
+    {
+        if ($this->image != null) {
+            Storage::delete('public/products/' . $this->image);
+            $this->image = null;
+            $this->save();
+        }
     }
 }
