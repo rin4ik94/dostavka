@@ -57,7 +57,7 @@
             <td><a href="#" class="text-green client_action" data-toggle="modal" data-target="#editClient">{{ $client->getFullname() }}</a></td>
             <td>{{ $client->region->name_ru or ''}} </td>
             <td>{{ $client->phone }}</td>
-            <td>{{ $client->birth_date}}</td>
+            <td>{{ $client->orders_count}} раз(a)</td>
         </tr>
         @endforeach
     </tbody>

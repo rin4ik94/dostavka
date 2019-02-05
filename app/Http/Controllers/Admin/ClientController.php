@@ -33,7 +33,7 @@ class ClientController extends Controller
 			 $search = $request->q ?? null;
 			 
 			 $regions = Region::all();
-			 $clients = Client::with('region')
+			 $clients = Client::with('region')->withCount('orders')
 			 ->when(!is_null($region), function($query) use($region){
 				$query->whereRegionId($region);
 			 })
@@ -47,7 +47,7 @@ class ClientController extends Controller
                 $query->orwhere('first_name', 'like', '%' . $search . '%');
                 $query->orwhere('last_name', 'like', '%' . $search . '%');
               })
-			 ->paginate(10);
+             ->paginate(10);
     //    $regions = $clients->map(function($clients){
     //        return $clients->region;
     //    });
@@ -73,7 +73,7 @@ class ClientController extends Controller
             'region_id' => 'required',
         ]);
         $client = Client::create($request->all());
-        return back();
+        return back()->with('success', 'Клиент добавлен!');;
     }
     /**
      * Update the specified resource in storage.
@@ -100,8 +100,8 @@ class ClientController extends Controller
 				$input = array_merge($input, ['blacklist' => 0]);
 			}
 			$client = Client::find($input['id'])
-			->update($input);
-			return back();
+            ->update($input);
+            return back()->with('success', 'Клиент отредактирован!');
     }
 
     /**
